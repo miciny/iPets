@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "95A8FC6B114F37EB2696FAAA27C0FD0986337683",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "95A8FC6B114F37EB2696FAAA27C0FD0986337683" : 0,
+    "009D6D5317368DC84429B825DBD4BD6B7B15C164" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "CA68C6A1-AE8F-493B-A7A4-3FAB752DC56B",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "95A8FC6B114F37EB2696FAAA27C0FD0986337683" : "iPets\/",
+    "009D6D5317368DC84429B825DBD4BD6B7B15C164" : ""
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "iPets",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "iPets.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/miciny\/Mechanical-Watches.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "009D6D5317368DC84429B825DBD4BD6B7B15C164"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/miciny\/iPets.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "95A8FC6B114F37EB2696FAAA27C0FD0986337683"
+    }
+  ]
+}
