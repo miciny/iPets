@@ -54,7 +54,6 @@ class SaveCacheDataModel: NSObject {
                 print(error)
             }
         }
-        
     }
     
     //创建一个聊天的子文件夹，每个人都不同

@@ -1,15 +1,15 @@
 {
-  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "95A8FC6B114F37EB2696FAAA27C0FD0986337683",
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "A59F5C3C296E1AD6E5C866E68284EC5409A2A4B0",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
 
   },
   "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
-    "95A8FC6B114F37EB2696FAAA27C0FD0986337683" : 0,
+    "A59F5C3C296E1AD6E5C866E68284EC5409A2A4B0" : 0,
     "009D6D5317368DC84429B825DBD4BD6B7B15C164" : 0
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "CA68C6A1-AE8F-493B-A7A4-3FAB752DC56B",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
-    "95A8FC6B114F37EB2696FAAA27C0FD0986337683" : "iPets\/",
+    "A59F5C3C296E1AD6E5C866E68284EC5409A2A4B0" : "iPets\/",
     "009D6D5317368DC84429B825DBD4BD6B7B15C164" : ""
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "iPets",
@@ -24,7 +24,7 @@
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/miciny\/iPets.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "95A8FC6B114F37EB2696FAAA27C0FD0986337683"
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "A59F5C3C296E1AD6E5C866E68284EC5409A2A4B0"
     }
   ]
 }
