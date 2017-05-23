@@ -80,7 +80,6 @@
 		E17528C81ED4091D00269EDF /* Chat.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E17528C71ED4091D00269EDF /* Chat.xcassets */; };
 		E17528CA1ED4092B00269EDF /* FindPets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E17528C91ED4092B00269EDF /* FindPets.xcassets */; };
 		E17528CD1ED4094700269EDF /* SellBuy.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E17528CB1ED4094700269EDF /* SellBuy.xcassets */; };
-		E17528CE1ED4094700269EDF /* SellBuyTempImages in Resources */ = {isa = PBXBuildFile; fileRef = E17528CC1ED4094700269EDF /* SellBuyTempImages */; };
 		E17528D11ED409B100269EDF /* iPets.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E17528CF1ED409B100269EDF /* iPets.xcdatamodeld */; };
 		E17528D51ED40A5A00269EDF /* InternetExplorerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17528D31ED40A5A00269EDF /* InternetExplorerViewController.swift */; };
 		E17528D61ED40A5A00269EDF /* TDCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17528D41ED40A5A00269EDF /* TDCodeViewController.swift */; };
@@ -103,6 +102,7 @@
 		E17528FD1ED40B7600269EDF /* CustomPresentAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17528FA1ED40B7600269EDF /* CustomPresentAnimationController.swift */; };
 		E17528FE1ED40B7600269EDF /* PushAndPopAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17528FB1ED40B7600269EDF /* PushAndPopAnimation.swift */; };
 		E17529001ED40CE900269EDF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E17528FF1ED40CE900269EDF /* Assets.xcassets */; };
+		E17529021ED43A4700269EDF /* SellBuyTempImages in Resources */ = {isa = PBXBuildFile; fileRef = E17529011ED43A4700269EDF /* SellBuyTempImages */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -194,7 +194,6 @@
 		E17528C71ED4091D00269EDF /* Chat.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Chat.xcassets; sourceTree = "<group>"; };
 		E17528C91ED4092B00269EDF /* FindPets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = FindPets.xcassets; sourceTree = "<group>"; };
 		E17528CB1ED4094700269EDF /* SellBuy.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = SellBuy.xcassets; sourceTree = "<group>"; };
-		E17528CC1ED4094700269EDF /* SellBuyTempImages */ = {isa = PBXFileReference; lastKnownFileType = folder; path = SellBuyTempImages; sourceTree = "<group>"; };
 		E17528D01ED409B100269EDF /* iPets.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = iPets.xcdatamodel; sourceTree = "<group>"; };
 		E17528D31ED40A5A00269EDF /* InternetExplorerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InternetExplorerViewController.swift; sourceTree = "<group>"; };
 		E17528D41ED40A5A00269EDF /* TDCodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TDCodeViewController.swift; sourceTree = "<group>"; };
@@ -217,6 +216,7 @@
 		E17528FA1ED40B7600269EDF /* CustomPresentAnimationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomPresentAnimationController.swift; sourceTree = "<group>"; };
 		E17528FB1ED40B7600269EDF /* PushAndPopAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushAndPopAnimation.swift; sourceTree = "<group>"; };
 		E17528FF1ED40CE900269EDF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		E17529011ED43A4700269EDF /* SellBuyTempImages */ = {isa = PBXFileReference; lastKnownFileType = folder; path = SellBuyTempImages; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -276,6 +276,7 @@
 		E14197E11CA1A81300EDD443 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				E17529011ED43A4700269EDF /* SellBuyTempImages */,
 				E17528FF1ED40CE900269EDF /* Assets.xcassets */,
 				E17528CF1ED409B100269EDF /* iPets.xcdatamodeld */,
 				E10E445F1CC62B0900D9992A /* resources */,
@@ -603,7 +604,6 @@
 			isa = PBXGroup;
 			children = (
 				E17528CB1ED4094700269EDF /* SellBuy.xcassets */,
-				E17528CC1ED4094700269EDF /* SellBuyTempImages */,
 			);
 			name = Resources;
 			path = ../../../../Users/miciny/ToGitHub/iPets/iPets/Main/Resources;
@@ -743,6 +743,7 @@
 				E10E446D1CC62BA700D9992A /* Navigation.xcassets in Resources */,
 				E17528CD1ED4094700269EDF /* SellBuy.xcassets in Resources */,
 				E10E44651CC62B3500D9992A /* Contacts.xcassets in Resources */,
+				E17529021ED43A4700269EDF /* SellBuyTempImages in Resources */,
 				E17529001ED40CE900269EDF /* Assets.xcassets in Resources */,
 				E10E44671CC62B3500D9992A /* Home.xcassets in Resources */,
 				E17528C61ED4090B00269EDF /* Setting.xcassets in Resources */,
@@ -751,7 +752,6 @@
 				E10E44681CC62B3500D9992A /* Images.xcassets in Resources */,
 				E14197D51CA1A6BE00EDD443 /* LaunchScreen.storyboard in Resources */,
 				E10E44661CC62B3500D9992A /* Discover.xcassets in Resources */,
-				E17528CE1ED4094700269EDF /* SellBuyTempImages in Resources */,
 				E14197D01CA1A6BE00EDD443 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
