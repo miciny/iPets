@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Photos
 
 class ImageCollectionViewCell: UICollectionViewCell {
     
@@ -20,6 +21,7 @@ class ImageCollectionViewCell: UICollectionViewCell {
         super.init(frame: frame)
         
         dataPic = UIImageView(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height))
+        dataPic!.contentMode = .scaleToFill
         self.addSubview(dataPic!)
         
         checkPic = UIImageView(frame: CGRect(x: self.frame.width-21, y: self.frame.height-21, width: 20, height: 20))
@@ -32,11 +34,12 @@ class ImageCollectionViewCell: UICollectionViewCell {
     
     //如果太高清 如意造成内存崩溃？ 显示缩略图
     func update(_ image: ImageCollectionModel){
-        self.dataPic!.image = image.asset
-//            .aspectRatioThumbnail().takeRetainedValue()) 
+        getThumbnailImage(asset: image.asset, imageResult: { (image) in
+            self.dataPic!.image = image
+        })
+        
         isCheck(image.isSelect)
         isSelect = image.isSelect
-
     }
     
     func isCheck(_ isCheck: Bool) {

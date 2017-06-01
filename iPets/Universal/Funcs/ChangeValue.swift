@@ -20,9 +20,20 @@ class ChangeValue: NSObject {
     }
     
     //image转为nsdata
-    class func imageToData(_ image: UIImage) -> Data {
-        let imageData = UIImagePNGRepresentation(image)
-        return imageData!
+    class func imageToData(_ image: UIImage) -> Data? {
+        
+        if let imageData = UIImageJPEGRepresentation(image, 1.0){
+            print("图片转为DATA成功")
+            return imageData
+        }else{
+            if let imageData = UIImagePNGRepresentation(image){
+                print("图片转为DATA成功")
+                return imageData
+            }else{
+                print("图片转为DATA失败")
+                return nil
+            }
+        }
     }
     
 }

@@ -2,10 +2,10 @@ import UIKit
 
 class BubbleItem: NSObject{
     
-    var bubble:UIImageView
-    var mtype:ChatType
-    var frame:CGRect
-    var view:UIView
+    var bubble: UIImageView
+    var mtype: ChatType
+    var frame: CGRect
+    var view: UIView
     
     init(mtype: ChatType, frame: CGRect, bubble: UIImageView, view: UIView){
         self.mtype = mtype

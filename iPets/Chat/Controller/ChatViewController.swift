@@ -11,6 +11,8 @@ import AssetsLibrary
 
 class ChatViewController: UIViewController, ChatDataSource, UITextViewDelegate, PassPhotosDelegate{
     
+    var youInfo:  UserInfo! //传入对方信息
+    
     fileprivate var Chats: NSMutableArray!  //用于显示的数据
     fileprivate var tableView: ChatTableView!
     fileprivate var txtMsg: UITextView!
@@ -26,8 +28,6 @@ class ChatViewController: UIViewController, ChatDataSource, UITextViewDelegate, 
     //17.895
     fileprivate var singgleLineSize = CGSize()
     fileprivate var gap = CGFloat()
-
-    var youInfo:  UserInfo! //传入对方信息
     fileprivate var yourNickname: String!
     fileprivate var isOut = true //如果是进入的选择图片界面，就置成false，就不删除数据库了
     
@@ -126,6 +126,7 @@ class ChatViewController: UIViewController, ChatDataSource, UITextViewDelegate, 
         
     }
     
+//============================================发送和接受图片消息＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊
     //进入选择图片页面
     func goToImageCollectionView(){
         isOut = false
@@ -149,12 +150,13 @@ class ChatViewController: UIViewController, ChatDataSource, UITextViewDelegate, 
             let timeStr = DateToToString.dateToStringBySelf(timeDate, format: "yyyyMMddHHmmss\(i)")
             
             //先显示全屏图
-            let image = selected[i].asset
-            sendPic(image!, imageName: timeStr+".png")
+            getBigThumbnailImage(asset: selected[i].asset, imageResult: { (image) in
+                self.sendPic(image, imageName: timeStr, sendDate: timeDate)
+                picArray.append(image)
+            })
             
             timeArray.append(timeDate)
             timestrArray.append(timeStr)
-            picArray.append(image!)
             
             time = timeDate
             lable = "[图片]"
@@ -165,31 +167,34 @@ class ChatViewController: UIViewController, ChatDataSource, UITextViewDelegate, 
             let saveCache = SaveCacheDataModel()
             
             for j in 0 ..< selected.count{
-                //let representation =  selected[j].asset.defaultRepresentation()
-                //let imageBuffer = UnsafeMutablePointer<UInt8>.allocate(capacity: Int((representation?.size())!))
-                //let bufferSize = representation?.getBytes(imageBuffer, fromOffset: Int64(0),
-                  //  length: Int((representation?.size())!), error: nil)
-                //let data = Data(bytesNoCopy: UnsafeMutablePointer<UInt8>(imageBuffer) ,count: bufferSize!, deallocator: .free)
-
-                //保存图片到本地沙盒
-                //let _ = saveCache.savaImageToChatCacheDir(self.yourNickname, image: picArray[j], imageName: timestrArray[j], imageType: "png")
-//                let _ = saveCache.savaImageToChatCacheDir(self.yourNickname, imageData: data, imageName: "H"+timestrArray[j]+".png")
+                if saveCache.savaImageToChatCacheDir(self.yourNickname, image: picArray[j], imageName: timestrArray[j]){
+                    print("保存普清图缓存成功！")
+                }else{
+                    print("保存普清图缓存失败！")
+                }
                 
-  //              let sendedImage = ChatData(chatType: 1, chatBody: "", time: timeArray[j], chatImage: timestrArray[j])
-    //            self.chatDataArray?.append(sendedImage)
+                getRetainImage(asset: selected[j].asset, imageResult: { (image) in
+                    if saveCache.savaImageToChatCacheDir(self.yourNickname, image: image, imageName: "H"+timestrArray[j]){
+                        print("保存高清图缓存成功！")
+                    }else{
+                        print("保存高清图缓存失败！")
+                    }
+                })
+                
+                let sendedImage = ChatData(chatType: ChatType.mine.rawValue, chatBody: "", time: timeArray[j], chatImage: timestrArray[j])
+                self.chatDataArray?.append(sendedImage)
             }
             
-            mainQueue.async(execute: {
-        //        print("saved Pic")
-      //          self.saveChatData()
+            mainQueue.async(execute: {          
+                self.saveChatData()
             })
         })
     }
     
     //发送图片
-    func sendPic(_ image: UIImage, imageName: String){
+    func sendPic(_ image: UIImage, imageName: String, sendDate: Date){
         
-        let thisChat =  MessageItem(image: image, imageName: imageName, user: myInfo, date: Date(), mtype: ChatType.mine)
+        let thisChat = MessageItem(image: image, imageName: imageName, user: myInfo, date: sendDate, mtype: ChatType.mine)
         self.Chats.add(thisChat)
         
         self.tableView.chatDataSource = self
@@ -199,11 +204,11 @@ class ChatViewController: UIViewController, ChatDataSource, UITextViewDelegate, 
         isOut = true
     }
     
-//＊＊＊＊＊＊＊＊＊＊＊＊发送和接受消息＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊
+//============================================发送和接受文字消息＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊
     //发送信息
     func sendMessage(){
-        let time1 = Date()
-        time = Date()
+        let time1 = Date().addingTimeInterval(-0.01)
+        self.time = Date()
         //去掉首位空格和换行符
         let msg = txtMsg.text!.trimmingCharacters(in: CharacterSet.whitespaces)
 //        whitespaceAndNewlineCharacterSet
@@ -214,8 +219,8 @@ class ChatViewController: UIViewController, ChatDataSource, UITextViewDelegate, 
         }
         
         //MessageItem格式的 就可以展示了
-        let thisChat =  MessageItem(body: msg as NSString, user: myInfo, date: time1, mtype: ChatType.mine)
-        let thatChat =  MessageItem(body: "你说的是：\(msg)" as NSString, user: youInfo, date: self.time!, mtype: ChatType.someone)
+        let thisChat = MessageItem(body: msg as NSString, user: myInfo, date: time1, mtype: ChatType.mine)
+        let thatChat = MessageItem(body: "你说的是：\(msg)" as NSString, user: youInfo, date: self.time!, mtype: ChatType.someone)
         Chats.add(thisChat)
         Chats.add(thatChat)
         
@@ -229,8 +234,8 @@ class ChatViewController: UIViewController, ChatDataSource, UITextViewDelegate, 
         globalQueue.async(execute: {
             
             //同步保存数据
-            let first1 = ChatData(chatType: 1, chatBody: msg, time: time1, chatImage: "")
-            let first2 = ChatData(chatType: 0, chatBody: "你说的是：\(msg)", time: self.time!, chatImage: "")
+            let first1 = ChatData(chatType: ChatType.mine.rawValue, chatBody: msg, time: time1, chatImage: "")
+            let first2 = ChatData(chatType: ChatType.someone.rawValue, chatBody: "你说的是：\(msg)", time: self.time!, chatImage: "")
             self.chatDataArray?.append(first1)
             self.chatDataArray?.append(first2)
             
@@ -258,7 +263,7 @@ class ChatViewController: UIViewController, ChatDataSource, UITextViewDelegate, 
             in: range.toRange(string: textView.text!), with: text)
 //        print(newText)
         
-        let textViewSize = sizeWithText(newText as NSString, font: chatPageInputTextFont, maxSize: CGSize(width: sendView.frame.width-130, height: 1000))
+        let textViewSize = sizeWithText(newText, font: chatPageInputTextFont, maxSize: CGSize(width: sendView.frame.width-130, height: 1000))
         let singgleLineSize1 = sizeWithText("我爱你！", font: chatPageInputTextFont, maxSize: CGSize(width: sendView.frame.width-130, height: 1000))
         //获取行数，可能不是很准
         let i = textViewSize.height/singgleLineSize1.height
@@ -351,12 +356,12 @@ class ChatViewController: UIViewController, ChatDataSource, UITextViewDelegate, 
     func initData(){
         
         myInfo = UserInfo(name: myInfo.username ,icon: myInfo.icon, nickname: myInfo.nickname)
-        yourNickname = youInfo.nickname! as String
+        yourNickname = youInfo.nickname
         isOut = true
         
         //读取数据
         let chatsData = SaveDataModel() //保存聊天记录的方法
-        let chatData = chatsData.loadChatsDataFromTempDirectory("\(yourNickname).plist", key: yourNickname)
+        let chatData = chatsData.loadChatsDataFromTempDirectory(yourNickname+".plist", key: yourNickname)
         //先把原来的数据保存起来
         chatDataArray = chatData
         
@@ -366,27 +371,27 @@ class ChatViewController: UIViewController, ChatDataSource, UITextViewDelegate, 
         for i in 0 ..< chatData.count {
             switch chatData[i].chatType {
                 //0 代表对方信息
-            case 0:
+            case ChatType.someone.rawValue:
                 if chatData[i].chatImage == "" {
                     let mesy = MessageItem(body: chatData[i].chatBody as NSString, user: youInfo,  date: chatData[i].chatDate, mtype:ChatType.someone)
                     Chats.add(mesy)
                 }else{
-                    let imageData = chatCacheImages.loadImageFromChatCacheDir(yourNickname, imageName: chatData[i].chatImage+".png")
+                    let imageData = chatCacheImages.loadImageFromChatCacheDir(yourNickname, imageName: chatData[i].chatImage)
                     let image = ChangeValue.dataToImage(imageData)
                     
-                    let mesy = MessageItem(image: image, imageName: chatData[i].chatImage+".png", user: youInfo, date: chatData[i].chatDate, mtype: ChatType.someone )
+                    let mesy = MessageItem(image: image, imageName: chatData[i].chatImage, user: youInfo, date: chatData[i].chatDate, mtype: ChatType.someone )
                     Chats.add(mesy)
                 }
                 //1代表我的信息
-            case 1:
+            case ChatType.mine.rawValue:
                 if chatData[i].chatImage == "" {
                     let mesy = MessageItem(body: chatData[i].chatBody as NSString, user: myInfo,  date: chatData[i].chatDate, mtype:ChatType.mine)
                     Chats.add(mesy)
                 }else{
-                    let imageData = chatCacheImages.loadImageFromChatCacheDir(yourNickname, imageName: chatData[i].chatImage+".png")
+                    let imageData = chatCacheImages.loadImageFromChatCacheDir(yourNickname, imageName: chatData[i].chatImage)
                     let image = ChangeValue.dataToImage(imageData)
                     
-                    let mesy = MessageItem(image: image, imageName: chatData[i].chatImage+".png" ,user: myInfo, date: chatData[i].chatDate, mtype: ChatType.mine)
+                    let mesy = MessageItem(image: image, imageName: chatData[i].chatImage, user: myInfo, date: chatData[i].chatDate, mtype: ChatType.mine)
                     Chats.add(mesy)
                 }
                 
@@ -405,12 +410,12 @@ class ChatViewController: UIViewController, ChatDataSource, UITextViewDelegate, 
         
         //如果没有消息，就删除它，同时删除plist文件
         let chatsData = SaveDataModel() //保存聊天记录的方法
+        
         if(chatDataArray?.count == 0){
-            chatsData.deleteChatsPListFile("\(yourNickname).plist") //删除plist文件
+            chatsData.deleteChatsPListFile(yourNickname+".plist") //删除plist文件
             return
         }
-        chatsData.saveChatsToTempDirectory(chatDataArray! ,fileName: "\(yourNickname).plist", key: yourNickname) //保存时，以对方名字命名，如果名字不一样就不会出错了
-//        print("saveChatData")
+        chatsData.saveChatsToTempDirectory(chatData: chatDataArray! ,fileName: yourNickname+".plist", key: yourNickname) //保存时，以对方名字命名，如果名字不一样就不会出错了
     }
     
     //同步数据到chatlist

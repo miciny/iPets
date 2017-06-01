@@ -100,7 +100,7 @@ func createQRForString(_ qrString: String?, qrImage: UIImage?) -> UIImage?{
 
 
 //根据文字获得大小
-func sizeWithText(_ text: NSString, font: UIFont, maxSize: CGSize) -> CGSize{
+func sizeWithText(_ text: String, font: UIFont, maxSize: CGSize) -> CGSize{
     let attrs : NSDictionary = [NSFontAttributeName:font]
     return text.boundingRect(with: maxSize, options: .usesLineFragmentOrigin,
                              attributes: attrs as? [String : AnyObject], context: nil).size

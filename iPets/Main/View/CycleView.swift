@@ -26,19 +26,18 @@ class HeaderCycleView: UIView, UIScrollViewDelegate{
     fileprivate var rightImageView: UIImageView!
     fileprivate var isAutoScrolling: Bool = false
     
-    var time = TimeInterval(3)
+    var time = TimeInterval(3) //自动滑动的时间
     
     //MARK:- 公共属性<##>
     var currentIndex = 0{
+        
         didSet{
-            
             if currentIndex < 0{//判断currentIndex应该为最后一张
                 currentIndex = delegate!.numbersOfPages() - 1
             }else if currentIndex > delegate!.numbersOfPages() - 1{//判断currentIndex是否应该是第一张
                 currentIndex = 0
             }
-            reloadImage()
-            
+            reloadImage()    
         }
     }
     

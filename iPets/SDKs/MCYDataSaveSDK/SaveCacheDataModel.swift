@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class SaveCacheDataModel: NSObject {
     
@@ -74,61 +75,27 @@ class SaveCacheDataModel: NSObject {
         return singleChatDir as AnyObject
     }
     
-    //保存图片到chat目录
-    func savaImageToChatCacheDir(_ dirName: String, image: UIImage, imageName: String, imageType: String) -> Bool {
-        
-        let chatDirPath = createDirInChatCache(dirName)
-        
-        let imageName = imageName
-        var isSaved = Bool()
-        let type = imageType.lowercased()
-        
-        if (type == "png"){
-            do{
-                try
-                    UIImagePNGRepresentation(image)?.write(to: URL(fileURLWithPath: chatDirPath.appendingPathComponent("\(imageName).png")), options: .atomicWrite)
-                isSaved = true
-            }catch let error as NSError{
-                print(error)
-                isSaved = false
-            }
-            
-        }else if(type == "jpg" || type == "jpeg")
-        {
-            do{
-                try
-                    UIImageJPEGRepresentation(image, 1.0)?.write(to: URL(fileURLWithPath: chatDirPath.appendingPathComponent("\(imageName).jpg")), options: .atomicWrite)
-                isSaved = true
-            }catch let error as NSError{
-                print(error)
-                isSaved = false
-            }
-        }else{
-            print("图片后缀不支持！")
-        }
-        
-        print(chatDirPath.strings(byAppendingPaths: ["\(imageName).png"])[0])
-        
-        return isSaved
-    }
+//===================================chat============
     
     //保存图片到chat目录
-    func savaImageToChatCacheDir(_ dirName: String, imageData: Data, imageName: String) -> Bool {
+    func savaImageToChatCacheDir(_ dirName: String, image: UIImage, imageName: String) -> Bool {
         
-        let chatDirPath = createDirInChatCache(dirName)
-        
-        let imageName = imageName
         var isSaved = Bool()
+        let imageData = ChangeValue.imageToData(image)
         
-        do{
-            try
-                imageData.write(to: URL(fileURLWithPath: chatDirPath.appendingPathComponent(imageName)), options: .atomicWrite)
-            isSaved = true
-        }catch let error as NSError{
-            print(error)
-            isSaved = false
+        if let imageData = imageData{
+            
+            let chatDirPath = createDirInChatCache(dirName)
+            let imageName = imageName
+            
+            do{
+                try imageData.write(to: URL(fileURLWithPath: chatDirPath.appendingPathComponent(imageName)), options: .atomicWrite)
+                isSaved = true
+            }catch let error as NSError{
+                print(error)
+                isSaved = false
+            }
         }
-        
 //        print(chatDirPath.stringByAppendingPathComponent(imageName))
         return isSaved
     }
@@ -145,52 +112,25 @@ class SaveCacheDataModel: NSObject {
         return imageData
     }
     
-    //保存图片到findPets目录
-    func savaImageToFindPetsCacheDir(_ image: UIImage, imageName: String, imageType: String) -> Bool {
-        let imagePath = createDirInCache(findPetsImageDataSaveFolderName)
-        let imageName = imageName
-        var isSaved = Bool()
-        let type = imageType.lowercased()
-        
-        if (type == "png"){
-            do{
-                try
-                    UIImagePNGRepresentation(image)?.write(to: URL(fileURLWithPath: imagePath.appendingPathComponent("\(imageName).png")), options: .atomicWrite)
-                isSaved = true
-            }catch let error as NSError{
-                print(error)
-                isSaved = false
-            }
-            
-        }else if(type == "jpg" || type == "jpeg"){
-            do{
-                try
-                    UIImageJPEGRepresentation(image, 1.0)?.write(to: URL(fileURLWithPath: imagePath.appendingPathComponent("\(imageName).jpg")), options: .atomicWrite)
-                isSaved = true
-            }catch let error as NSError{
-                print(error)
-                isSaved = false
-            }
-        }else{
-            print("图片后缀不支持！")
-        }
-//        print(imagePath.stringByAppendingPathComponent("\(imageName).png"))
-        return isSaved
-    }
     
+//===================================find pets============
     //保存图片到findPets目录
-    func savaImageToFindPetsCacheDir(_ imageData: Data, imageName: String) -> Bool {
-        let imagePath = createDirInCache(findPetsImageDataSaveFolderName)
-        let imageName = imageName
-        var isSaved = Bool()
+    func savaImageToFindPetsCacheDir(_ image: UIImage, imageName: String) -> Bool {
         
-        do{
-            try
-            imageData.write(to: URL(fileURLWithPath: imagePath.appendingPathComponent(imageName)), options: .atomicWrite)
-            isSaved = true
-        }catch let error as NSError{
-            print(error)
-            isSaved = false
+        var isSaved = Bool()
+        let imageData = ChangeValue.imageToData(image)
+        
+        if let imageData = imageData{
+            let imagePath = createDirInCache(findPetsImageDataSaveFolderName)
+            let imageName = imageName
+            
+            do{
+                try imageData.write(to: URL(fileURLWithPath: imagePath.appendingPathComponent(imageName)), options: .atomicWrite)
+                isSaved = true
+            }catch let error as NSError{
+                print(error)
+                isSaved = false
+            }
         }
         
 //        print(imagePath.stringByAppendingPathComponent(imageName))

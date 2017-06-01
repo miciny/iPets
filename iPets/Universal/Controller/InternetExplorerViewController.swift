@@ -6,6 +6,10 @@
 //  Copyright © 2016年 maocaiyuan. All rights reserved.
 //
 
+
+//1，在Info.plist中添加 NSAppTransportSecurity 类型 Dictionary ;
+//2，在 NSAppTransportSecurity 下添加 NSAllowsArbitraryLoads 类型Boolean ,值设为 YES;
+
 import UIKit
 
 class InternetExplorerViewController: UIViewController {

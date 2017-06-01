@@ -1,8 +1,8 @@
 import UIKit
 
-enum ChatType{
-    case mine
-    case someone
+enum ChatType: String{
+    case mine = "1"
+    case someone = "0"
 }
 
 class MessageItem: NSObject{
@@ -44,7 +44,7 @@ class MessageItem: NSObject{
     convenience init(body: NSString, user: UserInfo, date: Date, mtype: ChatType){
         let width =  Width-104-MessageItem.getTextInsetsMine().left-MessageItem.getTextInsetsMine().right
         let height : CGFloat = 10000.0
-        let size =  sizeWithText(body, font: chatPageTextFont, maxSize: CGSize(width: width, height: height))
+        let size =  sizeWithText(body as String, font: chatPageTextFont, maxSize: CGSize(width: width, height: height))
         
         let label =  UILabel(frame:CGRect(x: 0, y: 0, width: size.width, height: size.height))
         label.numberOfLines = 0

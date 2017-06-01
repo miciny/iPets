@@ -35,10 +35,10 @@ class FindPetsCellFrameModel: NSObject {
         
         //name
         var nameSize = CGSize()
-        if myCellModel!.nickname == myInfo.nickname! && myCellModel?.name != myInfo.username{
-            nameSize = sizeWithText(myInfo.username! as NSString, font: nameFont, maxSize: CGSize(width: CGFloat(MAXFLOAT), height: CGFloat(MAXFLOAT)))
+        if myCellModel!.nickname == myInfo.nickname! && myCellModel!.name != myInfo.username{
+            nameSize = sizeWithText(myInfo.username!, font: nameFont, maxSize: CGSize(width: CGFloat(MAXFLOAT), height: CGFloat(MAXFLOAT)))
         }else{
-            nameSize = sizeWithText(myCellModel!.name as NSString, font: nameFont, maxSize: CGSize(width: CGFloat(MAXFLOAT), height: CGFloat(MAXFLOAT)))
+            nameSize = sizeWithText(myCellModel!.name, font: nameFont, maxSize: CGSize(width: CGFloat(MAXFLOAT), height: CGFloat(MAXFLOAT)))
         }
         let nameX = iconF.maxX + padding
         let nameY = iconY
@@ -47,7 +47,10 @@ class FindPetsCellFrameModel: NSObject {
         // text
         let textX = nameX
         let textY = nameF.maxY + padding/2
-        let textSize = sizeWithText(myCellModel!.text as NSString, font: textFont, maxSize: CGSize(width: Width-textX-10, height: CGFloat(MAXFLOAT)))
+        var textSize = CGSize(width: 0, height: 0)
+        if let text = myCellModel!.text{
+            textSize = sizeWithText(text, font: textFont, maxSize: CGSize(width: Width-textX-10, height: CGFloat(MAXFLOAT)))
+        }
         textF = CGRect(x: textX, y: textY, width: textSize.width, height: textSize.height)
         
         //hide
@@ -57,29 +60,28 @@ class FindPetsCellFrameModel: NSObject {
         hideBtnF = CGRect(x: hideX, y: hideY, width: hideSize.width, height: hideSize.height)
         
         var timeY = textY
-        
         //picture
-        if (myCellModel!.picture != nil) {
-            let picCount = (myCellModel?.picture?.count)! as Int
+        if let pic = myCellModel!.picture{
+            let picCount = pic.count
+            let pictureX = nameX
+            let pictureY = textF.maxY + padding/2
+            
             //一张图
             if picCount == 1{
                 let saveCache = SaveCacheDataModel()
-                let imageData = saveCache.loadImageFromFindPetsCacheDir(myCellModel!.picture![0])
+                let imageData = saveCache.loadImageFromFindPetsCacheDir(pic[0])
                 let image = ChangeValue.dataToImage(imageData)
                 let imageSize = image.size
-                
-                let pictureX = nameX
-                let pictureY = (myCellModel!.text == "" ? nameF : textF).maxY + padding
                 let pictureW = (imageSize.width > 170 ? 170 : imageSize.width)
                 let pictureH = imageSize.height/(imageSize.width/170)
+                
                 pictureF.append(CGRect(x: pictureX, y: pictureY, width: CGFloat(pictureW), height: CGFloat(pictureH)))
                 timeY = pictureF[0].maxY + padding
             }else{  //多张图
                 let pictureW = (Width-nameX*2)/3
                 let pictureH = (Width-nameX*2)/3
-                let pictureX = nameX
-                let pictureY = (myCellModel!.text == "" ? nameF : textF).maxY + padding
                 let gap = CGFloat(5)
+                
                 if picCount == 4{ //四张图
                     for j in 0 ..< picCount {
                         pictureF.append(CGRect(
@@ -109,9 +111,9 @@ class FindPetsCellFrameModel: NSObject {
         
         //time
         let dateStr = DateToToString.getFindPetsTimeFormat(myCellModel!.date)
-        let timeSize = sizeWithText(dateStr as NSString, font: timeFont, maxSize: CGSize(width: CGFloat(MAXFLOAT), height: CGFloat(MAXFLOAT)))
+        let timeSize = sizeWithText(dateStr, font: timeFont, maxSize: CGSize(width: CGFloat(MAXFLOAT), height: CGFloat(MAXFLOAT)))
         let timeX = nameX
-        timeF = CGRect(x: timeX, y: timeY, width: timeSize.width, height: timeSize.height)
+        timeF = CGRect(x: timeX, y: timeY, width: timeSize.width+4, height: timeSize.height)
         
         //deleteF
         let deleteBtnX = timeF.maxX+padding
@@ -128,6 +130,4 @@ class FindPetsCellFrameModel: NSObject {
         
         cellHeight = timeF.maxY + padding*2
     }
-    
-
 }

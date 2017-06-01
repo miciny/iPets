@@ -107,6 +107,8 @@ class FindPetsPicView: UIView, UIScrollViewDelegate{
         
         self.view.backgroundColor = UIColor.clear
         self.mainView.backgroundColor = UIColor.clear
+        self.pageControl.isHidden = true
+        
         var tempFrame = originFrame
         tempFrame?.origin.x = originFrame.origin.x + view.frame.width*CGFloat((sender.view?.tag)!)
         let toFrame = tempFrame

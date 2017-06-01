@@ -89,7 +89,7 @@ class SingleChatPicView: UIView, UIScrollViewDelegate{
         countLable.textAlignment = .center
         countLable.backgroundColor = UIColor.clear
         countLable.textColor = UIColor.white
-        countLable.text = "\(index+1)/\(imageCount)"
+        countLable.text = String(index+1)+"/"+String(imageCount)
         self.mainView.addSubview(countLable)
         
         //显示时间的lable
@@ -106,7 +106,7 @@ class SingleChatPicView: UIView, UIScrollViewDelegate{
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         let offsetX = scrollView.contentOffset.x
         curentPage = Int(offsetX / Width)
-        countLable.text = "\(curentPage+1)/\(imageCount)"
+        countLable.text = String(curentPage+1)+"/"+String(imageCount)
         
         let timeStr = DateToToString.dateToStringBySelf(self.imageDate[curentPage], format: "yyyy/MM/dd HH:mm")
         timeLable.text = timeStr

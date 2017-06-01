@@ -10,14 +10,14 @@ import UIKit
 
 class MainChatTableViewCell: UITableViewCell {
     
-    var mainChatItem: MainChatModel!
+    var mainChatItem: MainChatListViewDataModel!
     let chatIcon = UIImageView()
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
-    init(data: MainChatModel, reuseIdentifier cellId:String){
+    init(data: MainChatListViewDataModel, reuseIdentifier cellId:String){
         self.mainChatItem = data
         super.init(style: UITableViewCellStyle.default, reuseIdentifier:cellId)
         rebuildCell()
@@ -29,11 +29,13 @@ class MainChatTableViewCell: UITableViewCell {
         chatIcon.backgroundColor = UIColor.gray
         chatIcon.layer.masksToBounds = true //不然设置边角没用
         chatIcon.layer.cornerRadius = 5
-        self.chatIcon.image = self.mainChatItem.pic
+        if let pic = self.mainChatItem.pic{
+            self.chatIcon.image = pic
+        }
         self.addSubview(chatIcon)
         
         //聊天栏，名字
-        let nameSize = sizeWithText(self.mainChatItem.name as NSString, font: chatListPageTitleFont, maxSize: CGSize(width: Width*2/3, height: chatIcon.frame.height/2))
+        let nameSize = sizeWithText(self.mainChatItem.name, font: chatListPageTitleFont, maxSize: CGSize(width: Width*2/3, height: chatIcon.frame.height/2))
         let chatName = UILabel(frame: CGRect(x: chatIcon.frame.maxX+10, y: chatIcon.frame.origin.y,
             width: nameSize.width, height: chatIcon.frame.height/2))
         chatName.backgroundColor = UIColor.white
@@ -44,27 +46,30 @@ class MainChatTableViewCell: UITableViewCell {
         self.addSubview(chatName)
         
         //聊天栏，文字
-        let textSize = sizeWithText(self.mainChatItem.lable as NSString, font: chatListPageTextFont, maxSize: CGSize(width: self.frame.width, height: chatIcon.frame.height/2))
-        let chatLb = UILabel(frame: CGRect(x: chatIcon.frame.maxX+10, y: chatIcon.frame.origin.y+chatIcon.frame.height/2,
-            width: textSize.width, height: chatIcon.frame.height/2))
-        chatLb.backgroundColor = UIColor.white
-        chatLb.font = chatListPageTextFont
-        chatLb.textColor = UIColor.gray
-        chatLb.textAlignment = .left
-        chatLb.text = mainChatItem.lable
-        self.addSubview(chatLb)
-        
-        //聊天栏，时间
-        let str = DateToToString.getChatListTimeFormat(mainChatItem.time)
-        let timeSize = sizeWithText(str as NSString, font: chatListPageTimeFont, maxSize: CGSize(width: Width-chatName.frame.maxX-10, height: chatIcon.frame.height/2))
-        let chatTimeLb = UILabel(frame: CGRect(x: Width-timeSize.width-10, y: chatIcon.frame.origin.y,
-            width: timeSize.width, height: chatIcon.frame.height/2))
-        chatTimeLb.backgroundColor = UIColor.white
-        chatTimeLb.font = chatListPageTimeFont
-        chatTimeLb.textColor = UIColor.gray
-        chatTimeLb.textAlignment = .right
-        chatTimeLb.text = str
-        self.addSubview(chatTimeLb)
+        if let labelStr = self.mainChatItem.lable{
+            
+            let textSize = sizeWithText(labelStr, font: chatListPageTextFont, maxSize: CGSize(width: self.frame.width, height: chatIcon.frame.height/2))
+            let chatLb = UILabel(frame: CGRect(x: chatIcon.frame.maxX+10, y: chatIcon.frame.origin.y+chatIcon.frame.height/2,
+                                               width: textSize.width, height: chatIcon.frame.height/2))
+            chatLb.backgroundColor = UIColor.white
+            chatLb.font = chatListPageTextFont
+            chatLb.textColor = UIColor.gray
+            chatLb.textAlignment = .left
+            chatLb.text = labelStr
+            self.addSubview(chatLb)
+            
+            //聊天栏，时间
+            let str = DateToToString.getChatListTimeFormat(mainChatItem.time)
+            let timeSize = sizeWithText(str, font: chatListPageTimeFont, maxSize: CGSize(width: Width-chatName.frame.maxX-10, height: chatIcon.frame.height/2))
+            let chatTimeLb = UILabel(frame: CGRect(x: Width-timeSize.width-10, y: chatIcon.frame.origin.y,
+                                                   width: timeSize.width, height: chatIcon.frame.height/2))
+            chatTimeLb.backgroundColor = UIColor.white
+            chatTimeLb.font = chatListPageTimeFont
+            chatTimeLb.textColor = UIColor.gray
+            chatTimeLb.textAlignment = .right
+            chatTimeLb.text = str
+            self.addSubview(chatTimeLb)
+        }
     }
 
     override func awakeFromNib() {

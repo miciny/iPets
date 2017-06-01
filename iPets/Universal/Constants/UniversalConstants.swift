@@ -41,8 +41,7 @@ let sendPageNameFont = UIFont.systemFont(ofSize: standardFontNo) //发送状态�
 let sendPageLableFont = UIFont.systemFont(ofSize: standardFontNo-1) //发送状态页的name大小
 let sendPageInputTextFont = UIFont.systemFont(ofSize: standardFontNo) //发送状态页的输入框文字字体大小
 
-let settingPageNameFont = UIFont.systemFont(ofSize: standardFontNo+2) //设置页字体大小
-let settingPageLableFont = UIFont.systemFont(ofSize: standardFontNo) //设置页lable字体大小
+
 
 let contectorListPageLableFont = UIFont.systemFont(ofSize: standardFontNo) //联系人页名字字体大小
 
@@ -55,6 +54,11 @@ let recordListDicName = "搜索历史"
 let recordTitleFont = UIFont.systemFont(ofSize: standardFontNo-3)//搜索界面的text字体大小
 let recordLabelFont = UIFont.systemFont(ofSize: standardFontNo+1) //搜索标签字体大小
 let sellBuyLabelFont = UIFont.systemFont(ofSize: standardFontNo) //首页的文字大小
+
+
+//==================Me Setting页的字体==========================
+let settingPageNameFont = UIFont.systemFont(ofSize: standardFontNo+2) //设置页字体大小
+let settingPageLabelFont = UIFont.systemFont(ofSize: standardFontNo) //设置页lable字体大小
 
 
 var myInfo = UserInfo(name: nil, icon: nil, nickname: nil)   //我的名字，头像，昵称 ，规则是昵称不能为空，且不能重复

@@ -277,7 +277,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDe
         let headerView = UIView()
         let gap = CGFloat(20)
         
-        let hotTitleSize = sizeWithText(hotListDicName as NSString, font: recordTitleFont, maxSize: CGSize(width: Width, height: 44))
+        let hotTitleSize = sizeWithText(hotListDicName, font: recordTitleFont, maxSize: CGSize(width: Width, height: 44))
         let hotTitle = UILabel(frame: CGRect(x: 10, y: 5, width: hotTitleSize.width, height: 30))
         hotTitle.backgroundColor = UIColor.clear
         hotTitle.text = hotListDicName
@@ -288,7 +288,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDe
         var lastX = gap
         var lastY = hotTitle.frame.maxY
         for i in 0 ..< hotList.count {
-            let hotSize = sizeWithText(hotList[i] as NSString, font: recordTitleFont, maxSize: CGSize(width: Width, height: 44))
+            let hotSize = sizeWithText(hotList[i], font: recordTitleFont, maxSize: CGSize(width: Width, height: 44))
             
             var x = lastX
             var y = lastY

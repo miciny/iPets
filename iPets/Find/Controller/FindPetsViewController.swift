@@ -7,41 +7,6 @@
 //
 
 import UIKit
-// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
-// Consider refactoring the code to use the non-optional operators.
-fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l < r
-  case (nil, _?):
-    return true
-  default:
-    return false
-  }
-}
-
-// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
-// Consider refactoring the code to use the non-optional operators.
-fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l > r
-  default:
-    return rhs < lhs
-  }
-}
-
-// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
-// Consider refactoring the code to use the non-optional operators.
-fileprivate func <= <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l <= r
-  default:
-    return !(rhs < lhs)
-  }
-}
-
 
 class FindPetsViewController: UIViewController, isRefreshingDelegate, UIAlertViewDelegate, isLoadMoreingDelegate, actionMenuViewDelegate, UITableViewDataSource, UITableViewDelegate{
     
@@ -54,7 +19,9 @@ class FindPetsViewController: UIViewController, isRefreshingDelegate, UIAlertVie
     fileprivate let picView = FindPetsPicView() //展示图片的
     
     //右上角添加按钮的事件
-    fileprivate let addArray : NSDictionary = ["我要寻宠":"FindPets", "发布宠物踪迹":"PetsClue","只看朋友":"OnlyFriends"]
+    fileprivate let addArray : NSDictionary = ["我要寻宠": "FindPets",
+                                               "发布宠物踪迹": "PetsClue",
+                                               "只看朋友": "OnlyFriends"]
     fileprivate var addActionView: ActionMenuView?  //此处定义，方便显示和消失的判断
     fileprivate let limited = 10 //每次加载的数量
     fileprivate var deledeIndex = -1 //删除的index
@@ -87,7 +54,7 @@ class FindPetsViewController: UIViewController, isRefreshingDelegate, UIAlertVie
         self.view.backgroundColor = UIColor.white //背景色
         
         //右上角添加按钮
-        let addItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(FindPetsViewController.addButtonClicked))
+        let addItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(self.addButtonClicked))
         self.navigationItem.rightBarButtonItem = addItem
     }
     
@@ -126,7 +93,6 @@ class FindPetsViewController: UIViewController, isRefreshingDelegate, UIAlertVie
     
     //isLoadMore中的代理方法
     func loadMore(){
-        
         mainTableView!.setContentOffset(CGPoint(x: 0, y: mainTableView!.contentSize.height - mainTableView!.frame.size.height+tabBarHeight+RefreshHeaderHeight), animated: true)
         //这里做你想做的事
         let _ = delay(0.3){
@@ -148,7 +114,7 @@ class FindPetsViewController: UIViewController, isRefreshingDelegate, UIAlertVie
         let _ = delay(0.5){
             self.mainTableView!.isScrollEnabled = true
             self.refreshData()
-            if(self.cellData?.count > 0){
+            if(self.cellData!.count > 0){
                self.mainTableView!.scrollToRow(at: IndexPath(row: 0, section: 0), at:UITableViewScrollPosition.top, animated:true)
             }else{
                 self.mainTableView!.setContentOffset(CGPoint(x: 0, y: -RefreshHeaderHeight), animated: true)
@@ -175,7 +141,7 @@ class FindPetsViewController: UIViewController, isRefreshingDelegate, UIAlertVie
         self.view.addSubview(mainTableView!)
         
         //注册cell
-        let cell = FindPetsCellTableViewCell.self
+        let cell = FindPetsTableViewCell.self
         mainTableView!.register(cell, forCellReuseIdentifier: cellID)
         
         headerView =  RefreshHeaderView(frame: mainTableView!.frame, subView: mainTableView!, target: self)  //添加下拉刷新
@@ -185,7 +151,7 @@ class FindPetsViewController: UIViewController, isRefreshingDelegate, UIAlertVie
     func loadMoreData(){
         
         let cellDataTemp = NSMutableArray() //保存从数据库读取的［FindPetsCellModel］
-        let cellDataCount = cellData?.count
+        let cellDataCount = cellData!.count
         //读取数据
         let findMyPetsData = SaveDataModel()
         cellDataTemp.addObjects(from: findMyPetsData.loadFindMyPetsDataFromTempDirectory())
@@ -194,11 +160,11 @@ class FindPetsViewController: UIViewController, isRefreshingDelegate, UIAlertVie
         if cellDataTemp.count <= cellDataCount{
             ToastView().showToast("无更多数据")
             mainTableView!.setContentOffset(CGPoint(x: 0, y: mainTableView!.contentSize.height - mainTableView!.frame.size.height+tabBarHeight), animated: true)
-        }else if cellDataTemp.count-cellDataCount! > limited{
+        }else if cellDataTemp.count-cellDataCount > limited{
             self.sortDate(data: cellDataTemp)  //那 mutableArray用这个方法
             
             //将FindPetsCellModel 转为FindPetsCellFrameModel
-            for i in cellDataCount! ..< cellDataCount!+limited{
+            for i in cellDataCount ..< cellDataCount+limited{
                 let frame = FindPetsCellFrameModel()
                 frame.setCellModel(cellDataTemp[i] as! FindPetsCellModel)
                 cellData?.add(frame)
@@ -208,7 +174,7 @@ class FindPetsViewController: UIViewController, isRefreshingDelegate, UIAlertVie
             self.sortDate(data: cellDataTemp)  //那 mutableArray用这个方法
             
             //将FindPetsCellModel 转为FindPetsCellFrameModel
-            for i in cellDataCount! ..< cellDataTemp.count{
+            for i in cellDataCount ..< cellDataTemp.count{
                 let frame = FindPetsCellFrameModel()
                 frame.setCellModel(cellDataTemp[i] as! FindPetsCellModel)
                 cellData?.add(frame)
@@ -302,7 +268,7 @@ class FindPetsViewController: UIViewController, isRefreshingDelegate, UIAlertVie
     
     //cell显示的内容
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! FindPetsCellTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! FindPetsTableViewCell
         cell.delegate = self
         cell.isAll = true //
         //清空

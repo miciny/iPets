@@ -12,11 +12,9 @@ class SaveDataModel: NSObject {
     
 //＊＊＊＊＊＊＊＊＊＊＊＊＊聊天数据＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊
     //聊天保存数据
-    func saveChatsToTempDirectory(_ chatData: [ChatData], fileName: String, key: String){
-        
+    func saveChatsToTempDirectory(chatData: [ChatData], fileName: String, key: String){
         let data = NSMutableData()
         let archiver = NSKeyedArchiver(forWritingWith: data)  //申明一个归档处理对象
-        
         //这里的key每个都要不相同，不然会有很大的问题
         archiver.encode(chatData, forKey: key)
         archiver.finishEncoding()  //编码结束
@@ -46,7 +44,7 @@ class SaveDataModel: NSObject {
     }
     
     //聊天读取数据
-    func loadChatsDataFromTempDirectory(_ fileName: String, key : String) -> [ChatData] {
+    func loadChatsDataFromTempDirectory(_ fileName: String, key: String) -> [ChatData] {
         var dataChatData = [ChatData]()
         
         //获取本地数据文件地址

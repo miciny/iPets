@@ -27,8 +27,9 @@ class ChatTableHeaderViewCell: UITableViewCell{
             self.label.text = text
             return
         }
+        
         self.selectionStyle = UITableViewCellSelectionStyle.none
-        let timeSize = sizeWithText(text as NSString, font: chatPageTimeFont, maxSize: CGSize(width: Width, height: cellHeight))
+        let timeSize = sizeWithText(text, font: chatPageTimeFont, maxSize: CGSize(width: Width, height: cellHeight))
         
         let padding = CGFloat(10)
         let viewWidth = timeSize.width+padding*2

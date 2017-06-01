@@ -39,19 +39,18 @@ class ImageCollectionViewController: UIViewController, UICollectionViewDelegate,
         
         //取消按钮
         let leftBarBtn = UIBarButtonItem(title: "取消", style: .plain, target: self,
-                                         action: #selector(ImageCollectionViewController.backToPrevious))
+                                         action: #selector(self.backToPrevious))
         self.navigationItem.leftBarButtonItem = leftBarBtn
         
         //保存按钮
         let rightBarBtn = UIBarButtonItem(title: pageTitle, style: .plain, target: self,
-                                              action: #selector(ImageCollectionViewController.sendPics))
+                                              action: #selector(self.sendPics))
         self.navigationItem.rightBarButtonItem = rightBarBtn
         self.navigationItem.rightBarButtonItem?.isEnabled = false
         
         //collection
         let layout = UICollectionViewFlowLayout()
         collectionView = UICollectionView(frame: CGRect(x: 5, y: 5, width: Width-10, height: Height-10), collectionViewLayout: layout)
-        
         //注册一个cell
         collectionView!.register(ImageCollectionViewCell.self, forCellWithReuseIdentifier:imageCellReuseIdentifier)
         
@@ -73,17 +72,18 @@ class ImageCollectionViewController: UIViewController, UICollectionViewDelegate,
 ///////////////////////////////////////////////////// 很好的获取图片的方法
     //  MARK:- 获取全部图片
     private func getAllPhotos() {
-        //  注意点！！-这里必须注册通知，不然第一次运行程序时获取不到图片，以后运行会正常显示。体验方式：每次运行项目时修改一下 Bundle Identifier，就可以看到效果。
-        photosArray = PHFetchResult<PHAsset>()
         
-        //  获取所有系统图片信息集合体
-        let allOptions = PHFetchOptions()
-        //  对内部元素排序，按照时间由远到近排序
-        allOptions.sortDescriptors = [NSSortDescriptor.init(key: "creationDate", ascending: true)]
-        //  将元素集合拆解开，此时 allResults 内部是一个个的PHAsset单元
-        let allResults = PHAsset.fetchAssets(with: allOptions)
-        
-        photosArray = allResults
+        //则获取所有资源
+        let allPhotosOptions = PHFetchOptions()
+        //按照创建时间倒序排列
+        allPhotosOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate",
+                                                             ascending: false)]
+        //只获取图片
+        allPhotosOptions.predicate = NSPredicate(format: "mediaType = %d",
+                                                 PHAssetMediaType.image.rawValue)
+        let assetsFetchResults = PHAsset.fetchAssets(with: PHAssetMediaType.image,
+                                                              options: allPhotosOptions)
+        photosArray = assetsFetchResults
     }
     
     //  PHPhotoLibraryChangeObserver  第一次获取相册信息，这个方法只会进入一次
@@ -100,19 +100,14 @@ class ImageCollectionViewController: UIViewController, UICollectionViewDelegate,
             return
         }
         
-        let CGSizeZero = CGSize(width: 0, height: 0)
         let myQueue = DispatchQueue(label: "myQueue")  //
         myQueue.async {
             for i in 0 ..< self.photosArray.count {
-                PHCachingImageManager.default().requestImage(for: self.photosArray[i] , targetSize: CGSizeZero, contentMode: .aspectFit, options: nil) { (result: UIImage?, dictionry: Dictionary?) in
-                    
-                    if let image = result{
-                        let imageCollectionModel = ImageCollectionModel()
-                        imageCollectionModel.asset = image
-                        imageCollectionModel.isSelect = false
-                        self.assetsImage.append(imageCollectionModel)
-                    }
-                }
+                
+                let imageCollectionModel = ImageCollectionModel()
+                imageCollectionModel.asset = self.photosArray[i]
+                imageCollectionModel.isSelect = false
+                self.assetsImage.append(imageCollectionModel)
             }
             mainQueue.async {
                 self.collectionView!.reloadData()
@@ -133,7 +128,7 @@ class ImageCollectionViewController: UIViewController, UICollectionViewDelegate,
     //发送图片，聊天页
     func sendPics(){
         selectedImage = []
-        for  item in assetsImage{
+        for item in assetsImage{
             if item.isSelect {
                 selectedImage.append(item)
             }

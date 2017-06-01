@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		928E05F83569019CD74BDCEB /* Pods_iPets.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C0F66AE3DDCC948CA07F7880 /* Pods_iPets.framework */; };
 		E10E44651CC62B3500D9992A /* Contacts.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E10E44601CC62B3500D9992A /* Contacts.xcassets */; };
 		E10E44661CC62B3500D9992A /* Discover.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E10E44611CC62B3500D9992A /* Discover.xcassets */; };
 		E10E44671CC62B3500D9992A /* Home.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E10E44621CC62B3500D9992A /* Home.xcassets */; };
@@ -38,43 +39,43 @@
 		E17528671ED4034D00269EDF /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17528641ED4034D00269EDF /* SearchViewController.swift */; };
 		E17528681ED4034D00269EDF /* SellBuyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17528651ED4034D00269EDF /* SellBuyViewController.swift */; };
 		E175286D1ED4045800269EDF /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = E175286C1ED4045800269EDF /* Cache.swift */; };
-		E17528711ED4048E00269EDF /* PersonInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E175286E1ED4048E00269EDF /* PersonInfoModel.swift */; };
-		E17528721ED4048E00269EDF /* SettingDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E175286F1ED4048E00269EDF /* SettingDataModel.swift */; };
-		E17528731ED4048E00269EDF /* SettingPageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17528701ED4048E00269EDF /* SettingPageModel.swift */; };
+		E17528711ED4048E00269EDF /* PersonInfoDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E175286E1ED4048E00269EDF /* PersonInfoDataModel.swift */; };
+		E17528721ED4048E00269EDF /* MeDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E175286F1ED4048E00269EDF /* MeDataModel.swift */; };
+		E17528731ED4048E00269EDF /* SettingDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17528701ED4048E00269EDF /* SettingDataModel.swift */; };
 		E17528771ED4049900269EDF /* PersonInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17528741ED4049900269EDF /* PersonInfoTableViewCell.swift */; };
-		E17528781ED4049900269EDF /* SettingPageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17528751ED4049900269EDF /* SettingPageTableViewCell.swift */; };
-		E17528791ED4049900269EDF /* SettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17528761ED4049900269EDF /* SettingTableViewCell.swift */; };
-		E17528801ED404A400269EDF /* CommonFuncViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E175287A1ED404A400269EDF /* CommonFuncViewController.swift */; };
-		E17528811ED404A400269EDF /* MyIconViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E175287B1ED404A400269EDF /* MyIconViewController.swift */; };
-		E17528821ED404A400269EDF /* MyTDCodeImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E175287C1ED404A400269EDF /* MyTDCodeImageViewController.swift */; };
-		E17528831ED404A400269EDF /* PersonInfoChangeNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E175287D1ED404A400269EDF /* PersonInfoChangeNameViewController.swift */; };
+		E17528781ED4049900269EDF /* SettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17528751ED4049900269EDF /* SettingTableViewCell.swift */; };
+		E17528791ED4049900269EDF /* MeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17528761ED4049900269EDF /* MeViewCell.swift */; };
+		E17528801ED404A400269EDF /* Setting_CommonFuncViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E175287A1ED404A400269EDF /* Setting_CommonFuncViewController.swift */; };
+		E17528811ED404A400269EDF /* PersonInfo_IconViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E175287B1ED404A400269EDF /* PersonInfo_IconViewController.swift */; };
+		E17528821ED404A400269EDF /* PersonInfo_TDCodeImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E175287C1ED404A400269EDF /* PersonInfo_TDCodeImageViewController.swift */; };
+		E17528831ED404A400269EDF /* PersonInfo_ChangeNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E175287D1ED404A400269EDF /* PersonInfo_ChangeNameViewController.swift */; };
 		E17528841ED404A400269EDF /* PersonInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E175287E1ED404A400269EDF /* PersonInfoViewController.swift */; };
-		E17528851ED404A400269EDF /* SettingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E175287F1ED404A400269EDF /* SettingPageViewController.swift */; };
-		E17528871ED404FB00269EDF /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17528861ED404FB00269EDF /* SettingViewController.swift */; };
+		E17528851ED404A400269EDF /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E175287F1ED404A400269EDF /* SettingViewController.swift */; };
+		E17528871ED404FB00269EDF /* MeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17528861ED404FB00269EDF /* MeViewController.swift */; };
 		E17528901ED406A500269EDF /* FindPetsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E175288E1ED406A500269EDF /* FindPetsViewController.swift */; };
 		E17528911ED406A500269EDF /* SendFindMyPetsInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E175288F1ED406A500269EDF /* SendFindMyPetsInfoViewController.swift */; };
 		E17528951ED406AD00269EDF /* FindPetsCellFrameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17528921ED406AD00269EDF /* FindPetsCellFrameModel.swift */; };
 		E17528961ED406AD00269EDF /* FindPetsCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17528931ED406AD00269EDF /* FindPetsCellModel.swift */; };
-		E17528971ED406AD00269EDF /* SendFindMyPetInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17528941ED406AD00269EDF /* SendFindMyPetInfoModel.swift */; };
-		E175289A1ED406BB00269EDF /* FindPetsCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17528981ED406BB00269EDF /* FindPetsCellTableViewCell.swift */; };
+		E17528971ED406AD00269EDF /* SendFindMyPetsInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17528941ED406AD00269EDF /* SendFindMyPetsInfoModel.swift */; };
+		E175289A1ED406BB00269EDF /* FindPetsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17528981ED406BB00269EDF /* FindPetsTableViewCell.swift */; };
 		E175289B1ED406BB00269EDF /* SendFindMyPetsInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17528991ED406BB00269EDF /* SendFindMyPetsInfoTableViewCell.swift */; };
 		E17528A01ED406C600269EDF /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E175289C1ED406C600269EDF /* ChatViewController.swift */; };
 		E17528A11ED406C600269EDF /* ContectorListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E175289D1ED406C600269EDF /* ContectorListViewController.swift */; };
-		E17528A21ED406C600269EDF /* ContectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E175289E1ED406C600269EDF /* ContectViewController.swift */; };
-		E17528A31ED406C600269EDF /* GuestContectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E175289F1ED406C600269EDF /* GuestContectorViewController.swift */; };
+		E17528A21ED406C600269EDF /* MainChatListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E175289E1ED406C600269EDF /* MainChatListViewController.swift */; };
+		E17528A31ED406C600269EDF /* ContectorInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E175289F1ED406C600269EDF /* ContectorInfoViewController.swift */; };
 		E17528AC1ED406D000269EDF /* BubbleItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17528A41ED406D000269EDF /* BubbleItem.swift */; };
 		E17528AD1ED406D000269EDF /* ChatData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17528A51ED406D000269EDF /* ChatData.swift */; };
-		E17528AE1ED406D000269EDF /* ContectorListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17528A61ED406D000269EDF /* ContectorListModel.swift */; };
+		E17528AE1ED406D000269EDF /* ContectorListViewDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17528A61ED406D000269EDF /* ContectorListViewDataModel.swift */; };
 		E17528AF1ED406D000269EDF /* ContectorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17528A71ED406D000269EDF /* ContectorModel.swift */; };
-		E17528B01ED406D000269EDF /* GuestContectorInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17528A81ED406D000269EDF /* GuestContectorInfoModel.swift */; };
-		E17528B11ED406D000269EDF /* MainChatModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17528A91ED406D000269EDF /* MainChatModel.swift */; };
+		E17528B01ED406D000269EDF /* ContectorInfoViewDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17528A81ED406D000269EDF /* ContectorInfoViewDataModel.swift */; };
+		E17528B11ED406D000269EDF /* MainChatListViewDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17528A91ED406D000269EDF /* MainChatListViewDataModel.swift */; };
 		E17528B21ED406D000269EDF /* MessageItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17528AA1ED406D000269EDF /* MessageItem.swift */; };
 		E17528B31ED406D000269EDF /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17528AB1ED406D000269EDF /* UserInfo.swift */; };
 		E17528BA1ED406DC00269EDF /* ChatTableHeaderViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17528B41ED406DC00269EDF /* ChatTableHeaderViewCell.swift */; };
 		E17528BB1ED406DC00269EDF /* ChatTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17528B51ED406DC00269EDF /* ChatTableView.swift */; };
 		E17528BC1ED406DC00269EDF /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17528B61ED406DC00269EDF /* ChatTableViewCell.swift */; };
 		E17528BD1ED406DC00269EDF /* ContectorListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17528B71ED406DC00269EDF /* ContectorListTableViewCell.swift */; };
-		E17528BE1ED406DC00269EDF /* GuestContectorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17528B81ED406DC00269EDF /* GuestContectorTableViewCell.swift */; };
+		E17528BE1ED406DC00269EDF /* ContectorInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17528B81ED406DC00269EDF /* ContectorInfoTableViewCell.swift */; };
 		E17528BF1ED406DC00269EDF /* MainChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17528B91ED406DC00269EDF /* MainChatTableViewCell.swift */; };
 		E17528C61ED4090B00269EDF /* Setting.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E17528C51ED4090B00269EDF /* Setting.xcassets */; };
 		E17528C81ED4091D00269EDF /* Chat.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E17528C71ED4091D00269EDF /* Chat.xcassets */; };
@@ -82,7 +83,7 @@
 		E17528CD1ED4094700269EDF /* SellBuy.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E17528CB1ED4094700269EDF /* SellBuy.xcassets */; };
 		E17528D11ED409B100269EDF /* iPets.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E17528CF1ED409B100269EDF /* iPets.xcdatamodeld */; };
 		E17528D51ED40A5A00269EDF /* InternetExplorerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17528D31ED40A5A00269EDF /* InternetExplorerViewController.swift */; };
-		E17528D61ED40A5A00269EDF /* TDCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17528D41ED40A5A00269EDF /* TDCodeViewController.swift */; };
+		E17528D61ED40A5A00269EDF /* RichScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17528D41ED40A5A00269EDF /* RichScanViewController.swift */; };
 		E17528DE1ED40A9300269EDF /* ActionMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17528D81ED40A9300269EDF /* ActionMenuView.swift */; };
 		E17528DF1ED40A9300269EDF /* LoadMoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17528D91ED40A9300269EDF /* LoadMoreView.swift */; };
 		E17528E01ED40A9300269EDF /* MyBottomMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17528DA1ED40A9300269EDF /* MyBottomMenuView.swift */; };
@@ -102,7 +103,9 @@
 		E17528FD1ED40B7600269EDF /* CustomPresentAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17528FA1ED40B7600269EDF /* CustomPresentAnimationController.swift */; };
 		E17528FE1ED40B7600269EDF /* PushAndPopAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17528FB1ED40B7600269EDF /* PushAndPopAnimation.swift */; };
 		E17529001ED40CE900269EDF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E17528FF1ED40CE900269EDF /* Assets.xcassets */; };
-		E17529021ED43A4700269EDF /* SellBuyTempImages in Resources */ = {isa = PBXBuildFile; fileRef = E17529011ED43A4700269EDF /* SellBuyTempImages */; };
+		E1ADD75B1ED6ADCF000BCBC4 /* ImageChooseFuncs.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1ADD75A1ED6ADCF000BCBC4 /* ImageChooseFuncs.swift */; };
+		E1ADD75D1ED6CD29000BCBC4 /* MyTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1ADD75C1ED6CD29000BCBC4 /* MyTimer.swift */; };
+		E1ADD75F1EDFE899000BCBC4 /* Temp.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E1ADD75E1EDFE899000BCBC4 /* Temp.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -119,6 +122,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1E5E34788EAF7E5842AB3455 /* Pods-iPets.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iPets.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iPets/Pods-iPets.debug.xcconfig"; sourceTree = "<group>"; };
+		626BBE37DA2AA08F813BF74C /* Pods-iPets.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iPets.release.xcconfig"; path = "Pods/Target Support Files/Pods-iPets/Pods-iPets.release.xcconfig"; sourceTree = "<group>"; };
+		C0F66AE3DDCC948CA07F7880 /* Pods_iPets.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iPets.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E10E44601CC62B3500D9992A /* Contacts.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Contacts.xcassets; sourceTree = "<group>"; };
 		E10E44611CC62B3500D9992A /* Discover.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Discover.xcassets; sourceTree = "<group>"; };
 		E10E44621CC62B3500D9992A /* Home.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Home.xcassets; sourceTree = "<group>"; };
@@ -152,43 +158,43 @@
 		E17528641ED4034D00269EDF /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		E17528651ED4034D00269EDF /* SellBuyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SellBuyViewController.swift; sourceTree = "<group>"; };
 		E175286C1ED4045800269EDF /* Cache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
-		E175286E1ED4048E00269EDF /* PersonInfoModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonInfoModel.swift; sourceTree = "<group>"; };
-		E175286F1ED4048E00269EDF /* SettingDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingDataModel.swift; sourceTree = "<group>"; };
-		E17528701ED4048E00269EDF /* SettingPageModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingPageModel.swift; sourceTree = "<group>"; };
+		E175286E1ED4048E00269EDF /* PersonInfoDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonInfoDataModel.swift; sourceTree = "<group>"; };
+		E175286F1ED4048E00269EDF /* MeDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeDataModel.swift; sourceTree = "<group>"; };
+		E17528701ED4048E00269EDF /* SettingDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingDataModel.swift; sourceTree = "<group>"; };
 		E17528741ED4049900269EDF /* PersonInfoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonInfoTableViewCell.swift; sourceTree = "<group>"; };
-		E17528751ED4049900269EDF /* SettingPageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingPageTableViewCell.swift; sourceTree = "<group>"; };
-		E17528761ED4049900269EDF /* SettingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingTableViewCell.swift; sourceTree = "<group>"; };
-		E175287A1ED404A400269EDF /* CommonFuncViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonFuncViewController.swift; sourceTree = "<group>"; };
-		E175287B1ED404A400269EDF /* MyIconViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyIconViewController.swift; sourceTree = "<group>"; };
-		E175287C1ED404A400269EDF /* MyTDCodeImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyTDCodeImageViewController.swift; sourceTree = "<group>"; };
-		E175287D1ED404A400269EDF /* PersonInfoChangeNameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonInfoChangeNameViewController.swift; sourceTree = "<group>"; };
+		E17528751ED4049900269EDF /* SettingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingTableViewCell.swift; sourceTree = "<group>"; };
+		E17528761ED4049900269EDF /* MeViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeViewCell.swift; sourceTree = "<group>"; };
+		E175287A1ED404A400269EDF /* Setting_CommonFuncViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Setting_CommonFuncViewController.swift; sourceTree = "<group>"; };
+		E175287B1ED404A400269EDF /* PersonInfo_IconViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonInfo_IconViewController.swift; sourceTree = "<group>"; };
+		E175287C1ED404A400269EDF /* PersonInfo_TDCodeImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonInfo_TDCodeImageViewController.swift; sourceTree = "<group>"; };
+		E175287D1ED404A400269EDF /* PersonInfo_ChangeNameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonInfo_ChangeNameViewController.swift; sourceTree = "<group>"; };
 		E175287E1ED404A400269EDF /* PersonInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonInfoViewController.swift; sourceTree = "<group>"; };
-		E175287F1ED404A400269EDF /* SettingPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingPageViewController.swift; sourceTree = "<group>"; };
-		E17528861ED404FB00269EDF /* SettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		E175287F1ED404A400269EDF /* SettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		E17528861ED404FB00269EDF /* MeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeViewController.swift; sourceTree = "<group>"; };
 		E175288E1ED406A500269EDF /* FindPetsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindPetsViewController.swift; sourceTree = "<group>"; };
 		E175288F1ED406A500269EDF /* SendFindMyPetsInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendFindMyPetsInfoViewController.swift; sourceTree = "<group>"; };
 		E17528921ED406AD00269EDF /* FindPetsCellFrameModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindPetsCellFrameModel.swift; sourceTree = "<group>"; };
 		E17528931ED406AD00269EDF /* FindPetsCellModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindPetsCellModel.swift; sourceTree = "<group>"; };
-		E17528941ED406AD00269EDF /* SendFindMyPetInfoModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendFindMyPetInfoModel.swift; sourceTree = "<group>"; };
-		E17528981ED406BB00269EDF /* FindPetsCellTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindPetsCellTableViewCell.swift; sourceTree = "<group>"; };
+		E17528941ED406AD00269EDF /* SendFindMyPetsInfoModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendFindMyPetsInfoModel.swift; sourceTree = "<group>"; };
+		E17528981ED406BB00269EDF /* FindPetsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindPetsTableViewCell.swift; sourceTree = "<group>"; };
 		E17528991ED406BB00269EDF /* SendFindMyPetsInfoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendFindMyPetsInfoTableViewCell.swift; sourceTree = "<group>"; };
 		E175289C1ED406C600269EDF /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		E175289D1ED406C600269EDF /* ContectorListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContectorListViewController.swift; sourceTree = "<group>"; };
-		E175289E1ED406C600269EDF /* ContectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContectViewController.swift; sourceTree = "<group>"; };
-		E175289F1ED406C600269EDF /* GuestContectorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuestContectorViewController.swift; sourceTree = "<group>"; };
+		E175289E1ED406C600269EDF /* MainChatListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainChatListViewController.swift; sourceTree = "<group>"; };
+		E175289F1ED406C600269EDF /* ContectorInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContectorInfoViewController.swift; sourceTree = "<group>"; };
 		E17528A41ED406D000269EDF /* BubbleItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BubbleItem.swift; sourceTree = "<group>"; };
 		E17528A51ED406D000269EDF /* ChatData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatData.swift; sourceTree = "<group>"; };
-		E17528A61ED406D000269EDF /* ContectorListModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContectorListModel.swift; sourceTree = "<group>"; };
+		E17528A61ED406D000269EDF /* ContectorListViewDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContectorListViewDataModel.swift; sourceTree = "<group>"; };
 		E17528A71ED406D000269EDF /* ContectorModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContectorModel.swift; sourceTree = "<group>"; };
-		E17528A81ED406D000269EDF /* GuestContectorInfoModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuestContectorInfoModel.swift; sourceTree = "<group>"; };
-		E17528A91ED406D000269EDF /* MainChatModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainChatModel.swift; sourceTree = "<group>"; };
+		E17528A81ED406D000269EDF /* ContectorInfoViewDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContectorInfoViewDataModel.swift; sourceTree = "<group>"; };
+		E17528A91ED406D000269EDF /* MainChatListViewDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainChatListViewDataModel.swift; sourceTree = "<group>"; };
 		E17528AA1ED406D000269EDF /* MessageItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageItem.swift; sourceTree = "<group>"; };
 		E17528AB1ED406D000269EDF /* UserInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		E17528B41ED406DC00269EDF /* ChatTableHeaderViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatTableHeaderViewCell.swift; sourceTree = "<group>"; };
 		E17528B51ED406DC00269EDF /* ChatTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatTableView.swift; sourceTree = "<group>"; };
 		E17528B61ED406DC00269EDF /* ChatTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
 		E17528B71ED406DC00269EDF /* ContectorListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContectorListTableViewCell.swift; sourceTree = "<group>"; };
-		E17528B81ED406DC00269EDF /* GuestContectorTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuestContectorTableViewCell.swift; sourceTree = "<group>"; };
+		E17528B81ED406DC00269EDF /* ContectorInfoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContectorInfoTableViewCell.swift; sourceTree = "<group>"; };
 		E17528B91ED406DC00269EDF /* MainChatTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainChatTableViewCell.swift; sourceTree = "<group>"; };
 		E17528C51ED4090B00269EDF /* Setting.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Setting.xcassets; sourceTree = "<group>"; };
 		E17528C71ED4091D00269EDF /* Chat.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Chat.xcassets; sourceTree = "<group>"; };
@@ -196,7 +202,7 @@
 		E17528CB1ED4094700269EDF /* SellBuy.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = SellBuy.xcassets; sourceTree = "<group>"; };
 		E17528D01ED409B100269EDF /* iPets.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = iPets.xcdatamodel; sourceTree = "<group>"; };
 		E17528D31ED40A5A00269EDF /* InternetExplorerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InternetExplorerViewController.swift; sourceTree = "<group>"; };
-		E17528D41ED40A5A00269EDF /* TDCodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TDCodeViewController.swift; sourceTree = "<group>"; };
+		E17528D41ED40A5A00269EDF /* RichScanViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RichScanViewController.swift; sourceTree = "<group>"; };
 		E17528D81ED40A9300269EDF /* ActionMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionMenuView.swift; sourceTree = "<group>"; };
 		E17528D91ED40A9300269EDF /* LoadMoreView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadMoreView.swift; sourceTree = "<group>"; };
 		E17528DA1ED40A9300269EDF /* MyBottomMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyBottomMenuView.swift; sourceTree = "<group>"; };
@@ -216,7 +222,9 @@
 		E17528FA1ED40B7600269EDF /* CustomPresentAnimationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomPresentAnimationController.swift; sourceTree = "<group>"; };
 		E17528FB1ED40B7600269EDF /* PushAndPopAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushAndPopAnimation.swift; sourceTree = "<group>"; };
 		E17528FF1ED40CE900269EDF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		E17529011ED43A4700269EDF /* SellBuyTempImages */ = {isa = PBXFileReference; lastKnownFileType = folder; path = SellBuyTempImages; sourceTree = "<group>"; };
+		E1ADD75A1ED6ADCF000BCBC4 /* ImageChooseFuncs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageChooseFuncs.swift; sourceTree = "<group>"; };
+		E1ADD75C1ED6CD29000BCBC4 /* MyTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyTimer.swift; sourceTree = "<group>"; };
+		E1ADD75E1EDFE899000BCBC4 /* Temp.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Temp.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -224,12 +232,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				928E05F83569019CD74BDCEB /* Pods_iPets.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9B8070BA3FD5144A5566614C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C0F66AE3DDCC948CA07F7880 /* Pods_iPets.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DF40E67B22E5FF87B12251D8 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				1E5E34788EAF7E5842AB3455 /* Pods-iPets.debug.xcconfig */,
+				626BBE37DA2AA08F813BF74C /* Pods-iPets.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		E10E445F1CC62B0900D9992A /* resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -247,6 +273,8 @@
 			children = (
 				E14197C91CA1A6BE00EDD443 /* iPets */,
 				E14197C81CA1A6BE00EDD443 /* Products */,
+				DF40E67B22E5FF87B12251D8 /* Pods */,
+				9B8070BA3FD5144A5566614C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -276,7 +304,6 @@
 		E14197E11CA1A81300EDD443 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				E17529011ED43A4700269EDF /* SellBuyTempImages */,
 				E17528FF1ED40CE900269EDF /* Assets.xcassets */,
 				E17528CF1ED409B100269EDF /* iPets.xcdatamodeld */,
 				E10E445F1CC62B0900D9992A /* resources */,
@@ -329,6 +356,7 @@
 				E175282F1ED3E42600269EDF /* ImageCollectionModel.swift */,
 				E17528301ED3E42600269EDF /* ImageCollectionViewCell.swift */,
 				E17528311ED3E42600269EDF /* ImageCollectionViewController.swift */,
+				E1ADD75A1ED6ADCF000BCBC4 /* ImageChooseFuncs.swift */,
 			);
 			name = MCYPicChooseSDK;
 			path = ../../../../Users/miciny/ToGitHub/iPets/iPets/SDKs/MCYPicChooseSDK;
@@ -441,11 +469,11 @@
 		E175284E1ED3E86600269EDF /* View */ = {
 			isa = PBXGroup;
 			children = (
-				E175284F1ED3E8AE00269EDF /* CycleView.swift */,
-				E17528501ED3E8AE00269EDF /* SearchTableViewCell.swift */,
+				E17528531ED3E8AE00269EDF /* SellBuyCollectionViewCell.swift */,
 				E17528511ED3E8AE00269EDF /* SellBuyCollectionFooterView.swift */,
 				E17528521ED3E8AE00269EDF /* SellBuyCollectionHeaderView.swift */,
-				E17528531ED3E8AE00269EDF /* SellBuyCollectionViewCell.swift */,
+				E175284F1ED3E8AE00269EDF /* CycleView.swift */,
+				E17528501ED3E8AE00269EDF /* SearchTableViewCell.swift */,
 			);
 			name = View;
 			path = ../../../../Users/miciny/ToGitHub/iPets/iPets/Main/View;
@@ -454,8 +482,8 @@
 		E175285D1ED3E91700269EDF /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				E175285E1ED3E95300269EDF /* SearchRecordModel.swift */,
 				E175285F1ED3E95300269EDF /* SellBuyCollectionModel.swift */,
+				E175285E1ED3E95300269EDF /* SearchRecordModel.swift */,
 			);
 			name = Model;
 			path = ../../../../Users/miciny/ToGitHub/iPets/iPets/Main/Model;
@@ -464,9 +492,9 @@
 		E17528621ED4033600269EDF /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				E17528651ED4034D00269EDF /* SellBuyViewController.swift */,
 				E17528631ED4034D00269EDF /* SearchResultViewController.swift */,
 				E17528641ED4034D00269EDF /* SearchViewController.swift */,
-				E17528651ED4034D00269EDF /* SellBuyViewController.swift */,
 			);
 			name = Controller;
 			path = ../../../../Users/miciny/ToGitHub/iPets/iPets/Main/Controller;
@@ -475,13 +503,13 @@
 		E17528691ED4039D00269EDF /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				E17528861ED404FB00269EDF /* SettingViewController.swift */,
-				E175287A1ED404A400269EDF /* CommonFuncViewController.swift */,
-				E175287B1ED404A400269EDF /* MyIconViewController.swift */,
-				E175287C1ED404A400269EDF /* MyTDCodeImageViewController.swift */,
-				E175287D1ED404A400269EDF /* PersonInfoChangeNameViewController.swift */,
+				E17528861ED404FB00269EDF /* MeViewController.swift */,
 				E175287E1ED404A400269EDF /* PersonInfoViewController.swift */,
-				E175287F1ED404A400269EDF /* SettingPageViewController.swift */,
+				E175287C1ED404A400269EDF /* PersonInfo_TDCodeImageViewController.swift */,
+				E175287D1ED404A400269EDF /* PersonInfo_ChangeNameViewController.swift */,
+				E175287B1ED404A400269EDF /* PersonInfo_IconViewController.swift */,
+				E175287F1ED404A400269EDF /* SettingViewController.swift */,
+				E175287A1ED404A400269EDF /* Setting_CommonFuncViewController.swift */,
 			);
 			name = Controller;
 			path = ../../../../Users/miciny/ToGitHub/iPets/iPets/Me/Controller;
@@ -490,9 +518,9 @@
 		E175286A1ED403A700269EDF /* View */ = {
 			isa = PBXGroup;
 			children = (
+				E17528761ED4049900269EDF /* MeViewCell.swift */,
 				E17528741ED4049900269EDF /* PersonInfoTableViewCell.swift */,
-				E17528751ED4049900269EDF /* SettingPageTableViewCell.swift */,
-				E17528761ED4049900269EDF /* SettingTableViewCell.swift */,
+				E17528751ED4049900269EDF /* SettingTableViewCell.swift */,
 			);
 			name = View;
 			path = ../../../../Users/miciny/ToGitHub/iPets/iPets/Me/View;
@@ -501,9 +529,9 @@
 		E175286B1ED403AF00269EDF /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				E175286E1ED4048E00269EDF /* PersonInfoModel.swift */,
-				E175286F1ED4048E00269EDF /* SettingDataModel.swift */,
-				E17528701ED4048E00269EDF /* SettingPageModel.swift */,
+				E175286E1ED4048E00269EDF /* PersonInfoDataModel.swift */,
+				E175286F1ED4048E00269EDF /* MeDataModel.swift */,
+				E17528701ED4048E00269EDF /* SettingDataModel.swift */,
 			);
 			name = Model;
 			path = ../../../../Users/miciny/ToGitHub/iPets/iPets/Me/Model;
@@ -522,7 +550,7 @@
 		E17528891ED4052600269EDF /* View */ = {
 			isa = PBXGroup;
 			children = (
-				E17528981ED406BB00269EDF /* FindPetsCellTableViewCell.swift */,
+				E17528981ED406BB00269EDF /* FindPetsTableViewCell.swift */,
 				E17528991ED406BB00269EDF /* SendFindMyPetsInfoTableViewCell.swift */,
 			);
 			name = View;
@@ -532,9 +560,9 @@
 		E175288A1ED4052B00269EDF /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				E17528921ED406AD00269EDF /* FindPetsCellFrameModel.swift */,
 				E17528931ED406AD00269EDF /* FindPetsCellModel.swift */,
-				E17528941ED406AD00269EDF /* SendFindMyPetInfoModel.swift */,
+				E17528921ED406AD00269EDF /* FindPetsCellFrameModel.swift */,
+				E17528941ED406AD00269EDF /* SendFindMyPetsInfoModel.swift */,
 			);
 			name = Model;
 			path = ../../../../Users/miciny/ToGitHub/iPets/iPets/Find/Model;
@@ -543,14 +571,14 @@
 		E175288B1ED4057B00269EDF /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				E17528A41ED406D000269EDF /* BubbleItem.swift */,
-				E17528A51ED406D000269EDF /* ChatData.swift */,
-				E17528A61ED406D000269EDF /* ContectorListModel.swift */,
-				E17528A71ED406D000269EDF /* ContectorModel.swift */,
-				E17528A81ED406D000269EDF /* GuestContectorInfoModel.swift */,
-				E17528A91ED406D000269EDF /* MainChatModel.swift */,
-				E17528AA1ED406D000269EDF /* MessageItem.swift */,
 				E17528AB1ED406D000269EDF /* UserInfo.swift */,
+				E17528A91ED406D000269EDF /* MainChatListViewDataModel.swift */,
+				E17528A51ED406D000269EDF /* ChatData.swift */,
+				E17528A61ED406D000269EDF /* ContectorListViewDataModel.swift */,
+				E17528A71ED406D000269EDF /* ContectorModel.swift */,
+				E17528A81ED406D000269EDF /* ContectorInfoViewDataModel.swift */,
+				E17528A41ED406D000269EDF /* BubbleItem.swift */,
+				E17528AA1ED406D000269EDF /* MessageItem.swift */,
 			);
 			name = Model;
 			path = ../../../../Users/miciny/ToGitHub/iPets/iPets/Chat/Model;
@@ -559,12 +587,12 @@
 		E175288C1ED4058000269EDF /* View */ = {
 			isa = PBXGroup;
 			children = (
+				E17528B91ED406DC00269EDF /* MainChatTableViewCell.swift */,
+				E17528B71ED406DC00269EDF /* ContectorListTableViewCell.swift */,
 				E17528B41ED406DC00269EDF /* ChatTableHeaderViewCell.swift */,
 				E17528B51ED406DC00269EDF /* ChatTableView.swift */,
 				E17528B61ED406DC00269EDF /* ChatTableViewCell.swift */,
-				E17528B71ED406DC00269EDF /* ContectorListTableViewCell.swift */,
-				E17528B81ED406DC00269EDF /* GuestContectorTableViewCell.swift */,
-				E17528B91ED406DC00269EDF /* MainChatTableViewCell.swift */,
+				E17528B81ED406DC00269EDF /* ContectorInfoTableViewCell.swift */,
 			);
 			name = View;
 			path = ../../../../Users/miciny/ToGitHub/iPets/iPets/Chat/View;
@@ -573,10 +601,10 @@
 		E175288D1ED4058500269EDF /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				E175289E1ED406C600269EDF /* MainChatListViewController.swift */,
 				E175289C1ED406C600269EDF /* ChatViewController.swift */,
 				E175289D1ED406C600269EDF /* ContectorListViewController.swift */,
-				E175289E1ED406C600269EDF /* ContectViewController.swift */,
-				E175289F1ED406C600269EDF /* GuestContectorViewController.swift */,
+				E175289F1ED406C600269EDF /* ContectorInfoViewController.swift */,
 			);
 			name = Controller;
 			path = ../../../../Users/miciny/ToGitHub/iPets/iPets/Chat/Controller;
@@ -604,6 +632,7 @@
 			isa = PBXGroup;
 			children = (
 				E17528CB1ED4094700269EDF /* SellBuy.xcassets */,
+				E1ADD75E1EDFE899000BCBC4 /* Temp.xcassets */,
 			);
 			name = Resources;
 			path = ../../../../Users/miciny/ToGitHub/iPets/iPets/Main/Resources;
@@ -622,7 +651,7 @@
 			isa = PBXGroup;
 			children = (
 				E17528D31ED40A5A00269EDF /* InternetExplorerViewController.swift */,
-				E17528D41ED40A5A00269EDF /* TDCodeViewController.swift */,
+				E17528D41ED40A5A00269EDF /* RichScanViewController.swift */,
 			);
 			name = Controller;
 			path = ../../../../Users/miciny/ToGitHub/iPets/iPets/Universal/Controller;
@@ -662,6 +691,7 @@
 				E17528EE1ED40B1800269EDF /* GetMyInfo.swift */,
 				E17528EF1ED40B1800269EDF /* PinYinString.swift */,
 				E17528F01ED40B1800269EDF /* UniversalFuncs.swift */,
+				E1ADD75C1ED6CD29000BCBC4 /* MyTimer.swift */,
 			);
 			name = Funcs;
 			path = ../../../../Users/miciny/ToGitHub/iPets/iPets/Universal/Funcs;
@@ -685,10 +715,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E14197D91CA1A6BE00EDD443 /* Build configuration list for PBXNativeTarget "iPets" */;
 			buildPhases = (
+				5B1BEC6D2E0E2EF614904DA9 /* [CP] Check Pods Manifest.lock */,
 				E14197C31CA1A6BE00EDD443 /* Sources */,
 				E14197C41CA1A6BE00EDD443 /* Frameworks */,
 				E14197C51CA1A6BE00EDD443 /* Resources */,
 				E1A6A7291D11B7F600A334B5 /* Embed Frameworks */,
+				08DB8AFEB529C036EDF8400C /* [CP] Embed Pods Frameworks */,
+				63D6FA484313A2D2FF0184F0 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -743,7 +776,6 @@
 				E10E446D1CC62BA700D9992A /* Navigation.xcassets in Resources */,
 				E17528CD1ED4094700269EDF /* SellBuy.xcassets in Resources */,
 				E10E44651CC62B3500D9992A /* Contacts.xcassets in Resources */,
-				E17529021ED43A4700269EDF /* SellBuyTempImages in Resources */,
 				E17529001ED40CE900269EDF /* Assets.xcassets in Resources */,
 				E10E44671CC62B3500D9992A /* Home.xcassets in Resources */,
 				E17528C61ED4090B00269EDF /* Setting.xcassets in Resources */,
@@ -751,12 +783,61 @@
 				E17528CA1ED4092B00269EDF /* FindPets.xcassets in Resources */,
 				E10E44681CC62B3500D9992A /* Images.xcassets in Resources */,
 				E14197D51CA1A6BE00EDD443 /* LaunchScreen.storyboard in Resources */,
+				E1ADD75F1EDFE899000BCBC4 /* Temp.xcassets in Resources */,
 				E10E44661CC62B3500D9992A /* Discover.xcassets in Resources */,
 				E14197D01CA1A6BE00EDD443 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		08DB8AFEB529C036EDF8400C /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-iPets/Pods-iPets-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5B1BEC6D2E0E2EF614904DA9 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		63D6FA484313A2D2FF0184F0 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-iPets/Pods-iPets-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		E14197C31CA1A6BE00EDD443 /* Sources */ = {
@@ -769,20 +850,20 @@
 				E17528D51ED40A5A00269EDF /* InternetExplorerViewController.swift in Sources */,
 				E17528F71ED40B1800269EDF /* UniversalFuncs.swift in Sources */,
 				E17528571ED3E8AE00269EDF /* SellBuyCollectionHeaderView.swift in Sources */,
-				E175289A1ED406BB00269EDF /* FindPetsCellTableViewCell.swift in Sources */,
+				E175289A1ED406BB00269EDF /* FindPetsTableViewCell.swift in Sources */,
 				E17528E31ED40A9300269EDF /* WaitView.swift in Sources */,
 				E17528901ED406A500269EDF /* FindPetsViewController.swift in Sources */,
 				E17528B21ED406D000269EDF /* MessageItem.swift in Sources */,
 				E17528F11ED40B1800269EDF /* AutoLayout.swift in Sources */,
-				E17528D61ED40A5A00269EDF /* TDCodeViewController.swift in Sources */,
-				E17528831ED404A400269EDF /* PersonInfoChangeNameViewController.swift in Sources */,
+				E17528D61ED40A5A00269EDF /* RichScanViewController.swift in Sources */,
+				E17528831ED404A400269EDF /* PersonInfo_ChangeNameViewController.swift in Sources */,
 				E17528961ED406AD00269EDF /* FindPetsCellModel.swift in Sources */,
-				E17528871ED404FB00269EDF /* SettingViewController.swift in Sources */,
+				E17528871ED404FB00269EDF /* MeViewController.swift in Sources */,
 				E17528AF1ED406D000269EDF /* ContectorModel.swift in Sources */,
 				E17528431ED3E64600269EDF /* CacheConstants.swift in Sources */,
 				E126FD151CFD6E7700DAFF84 /* TabbarViewController.swift in Sources */,
 				E17528DE1ED40A9300269EDF /* ActionMenuView.swift in Sources */,
-				E17528781ED4049900269EDF /* SettingPageTableViewCell.swift in Sources */,
+				E17528781ED4049900269EDF /* SettingTableViewCell.swift in Sources */,
 				E17528661ED4034D00269EDF /* SearchResultViewController.swift in Sources */,
 				E17528AC1ED406D000269EDF /* BubbleItem.swift in Sources */,
 				E17528DF1ED40A9300269EDF /* LoadMoreView.swift in Sources */,
@@ -794,7 +875,7 @@
 				E17528401ED3E63E00269EDF /* DBConstants.swift in Sources */,
 				E17528771ED4049900269EDF /* PersonInfoTableViewCell.swift in Sources */,
 				E17528B31ED406D000269EDF /* UserInfo.swift in Sources */,
-				E17528B01ED406D000269EDF /* GuestContectorInfoModel.swift in Sources */,
+				E17528B01ED406D000269EDF /* ContectorInfoViewDataModel.swift in Sources */,
 				E126FD101CFD6E7700DAFF84 /* AppDelegate.swift in Sources */,
 				E17528951ED406AD00269EDF /* FindPetsCellFrameModel.swift in Sources */,
 				E17528541ED3E8AE00269EDF /* CycleView.swift in Sources */,
@@ -803,45 +884,47 @@
 				E17528F21ED40B1800269EDF /* ChangeValue.swift in Sources */,
 				E17528F41ED40B1800269EDF /* Extension.swift in Sources */,
 				E17528471ED3E6DC00269EDF /* SaveDataModel.swift in Sources */,
-				E17528A21ED406C600269EDF /* ContectViewController.swift in Sources */,
+				E17528A21ED406C600269EDF /* MainChatListViewController.swift in Sources */,
 				E17528E21ED40A9300269EDF /* ToastView.swift in Sources */,
 				E175283A1ED3E52600269EDF /* SingleChatPicView.swift in Sources */,
+				E1ADD75D1ED6CD29000BCBC4 /* MyTimer.swift in Sources */,
 				E17528F31ED40B1800269EDF /* DateToToString.swift in Sources */,
 				E17528F51ED40B1800269EDF /* GetMyInfo.swift in Sources */,
 				E17528681ED4034D00269EDF /* SellBuyViewController.swift in Sources */,
-				E17528791ED4049900269EDF /* SettingTableViewCell.swift in Sources */,
+				E17528791ED4049900269EDF /* MeViewCell.swift in Sources */,
 				E17528341ED3E42600269EDF /* ImageCollectionViewController.swift in Sources */,
 				E17528A01ED406C600269EDF /* ChatViewController.swift in Sources */,
-				E17528801ED404A400269EDF /* CommonFuncViewController.swift in Sources */,
+				E17528801ED404A400269EDF /* Setting_CommonFuncViewController.swift in Sources */,
 				E17528BA1ED406DC00269EDF /* ChatTableHeaderViewCell.swift in Sources */,
 				E17528331ED3E42600269EDF /* ImageCollectionViewCell.swift in Sources */,
 				E17528841ED404A400269EDF /* PersonInfoViewController.swift in Sources */,
-				E17528971ED406AD00269EDF /* SendFindMyPetInfoModel.swift in Sources */,
-				E17528811ED404A400269EDF /* MyIconViewController.swift in Sources */,
+				E17528971ED406AD00269EDF /* SendFindMyPetsInfoModel.swift in Sources */,
+				E17528811ED404A400269EDF /* PersonInfo_IconViewController.swift in Sources */,
 				E17528561ED3E8AE00269EDF /* SellBuyCollectionFooterView.swift in Sources */,
-				E17528821ED404A400269EDF /* MyTDCodeImageViewController.swift in Sources */,
+				E17528821ED404A400269EDF /* PersonInfo_TDCodeImageViewController.swift in Sources */,
 				E17528551ED3E8AE00269EDF /* SearchTableViewCell.swift in Sources */,
 				E17528E81ED40B0F00269EDF /* Protocol.swift in Sources */,
-				E17528731ED4048E00269EDF /* SettingPageModel.swift in Sources */,
+				E17528731ED4048E00269EDF /* SettingDataModel.swift in Sources */,
 				E17528F61ED40B1800269EDF /* PinYinString.swift in Sources */,
-				E17528BE1ED406DC00269EDF /* GuestContectorTableViewCell.swift in Sources */,
-				E17528721ED4048E00269EDF /* SettingDataModel.swift in Sources */,
+				E17528BE1ED406DC00269EDF /* ContectorInfoTableViewCell.swift in Sources */,
+				E17528721ED4048E00269EDF /* MeDataModel.swift in Sources */,
 				E17528461ED3E6DC00269EDF /* SaveCacheDataModel.swift in Sources */,
+				E1ADD75B1ED6ADCF000BCBC4 /* ImageChooseFuncs.swift in Sources */,
 				E17528E01ED40A9300269EDF /* MyBottomMenuView.swift in Sources */,
-				E17528AE1ED406D000269EDF /* ContectorListModel.swift in Sources */,
+				E17528AE1ED406D000269EDF /* ContectorListViewDataModel.swift in Sources */,
 				E17528FD1ED40B7600269EDF /* CustomPresentAnimationController.swift in Sources */,
 				E17528601ED3E95300269EDF /* SearchRecordModel.swift in Sources */,
 				E17528A11ED406C600269EDF /* ContectorListViewController.swift in Sources */,
-				E17528851ED404A400269EDF /* SettingPageViewController.swift in Sources */,
+				E17528851ED404A400269EDF /* SettingViewController.swift in Sources */,
 				E17528BF1ED406DC00269EDF /* MainChatTableViewCell.swift in Sources */,
-				E17528A31ED406C600269EDF /* GuestContectorViewController.swift in Sources */,
-				E17528711ED4048E00269EDF /* PersonInfoModel.swift in Sources */,
+				E17528A31ED406C600269EDF /* ContectorInfoViewController.swift in Sources */,
+				E17528711ED4048E00269EDF /* PersonInfoDataModel.swift in Sources */,
 				E17528D11ED409B100269EDF /* iPets.xcdatamodeld in Sources */,
 				E17528E11ED40A9300269EDF /* RefreshHeaderView.swift in Sources */,
 				E17528671ED4034D00269EDF /* SearchViewController.swift in Sources */,
 				E17528FE1ED40B7600269EDF /* PushAndPopAnimation.swift in Sources */,
 				E17528411ED3E63E00269EDF /* SQLLine.swift in Sources */,
-				E17528B11ED406D000269EDF /* MainChatModel.swift in Sources */,
+				E17528B11ED406D000269EDF /* MainChatListViewDataModel.swift in Sources */,
 				E17528321ED3E42600269EDF /* ImageCollectionModel.swift in Sources */,
 				E17528BD1ED406DC00269EDF /* ContectorListTableViewCell.swift in Sources */,
 				E17528581ED3E8AE00269EDF /* SellBuyCollectionViewCell.swift in Sources */,
@@ -960,11 +1043,13 @@
 		};
 		E14197DA1CA1A6BE00EDD443 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1E5E34788EAF7E5842AB3455 /* Pods-iPets.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 4AB7FQ4W8L;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/iPets/DisplaySwitcher-master/Example/build/Debug-iphoneos",
@@ -981,11 +1066,13 @@
 		};
 		E14197DB1CA1A6BE00EDD443 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 626BBE37DA2AA08F813BF74C /* Pods-iPets.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 4AB7FQ4W8L;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/iPets/DisplaySwitcher-master/Example/build/Debug-iphoneos",

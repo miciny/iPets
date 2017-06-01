@@ -63,7 +63,7 @@ class ContectorListViewController: UIViewController, UITableViewDelegate, UITabl
             let icon = ChangeValue.dataToImage(iconData)
             
             let nameC = PinYinString.firstCharactor(name)  //获取首字母,这个函数比较慢，放这儿，到时候直接获取首字母，不用计算了
-            let singleContect = ContectorListModel(name: name, icon: icon)
+            let singleContect = ContectorListViewDataModel(name: name, icon: icon)
             
             contectorsList!.add([singleContect, nameC])
             allC.add(nameC)
@@ -181,13 +181,13 @@ class ContectorListViewController: UIViewController, UITableViewDelegate, UITabl
         if searchBar.isActive {
             let contectorsList = contectorsDataDicSearch?.value(forKey: "$") as! NSArray
             let data = contectorsList[indexPath.row]
-            let cell =  ContectorListTableViewCell(data: data as! ContectorListModel, reuseIdentifier:cellId)
+            let cell =  ContectorListTableViewCell(data: data as! ContectorListViewDataModel, reuseIdentifier:cellId)
             
             return cell
         }
         let contectorsList = contectorsDataDic?.value(forKey: allKeys[indexPath.section]) as! NSArray
         let data = contectorsList[indexPath.row]
-        let cell =  ContectorListTableViewCell(data: data as! ContectorListModel, reuseIdentifier:cellId)
+        let cell =  ContectorListTableViewCell(data: data as! ContectorListViewDataModel, reuseIdentifier:cellId)
         
         return cell
     }
@@ -201,15 +201,15 @@ class ContectorListViewController: UIViewController, UITableViewDelegate, UITabl
             searchBar.isActive = false
             
             let contectorsList = contectorsDataDicSearch?.value(forKey: "$") as! NSArray
-            let data = contectorsList[indexPath.row] as! ContectorListModel
-            let guestContectorVC = GuestContectorViewController()
+            let data = contectorsList[indexPath.row] as! ContectorListViewDataModel
+            let guestContectorVC = ContectorInfoViewController()
             guestContectorVC.contectorName = data.name
             self.navigationController?.pushViewController(guestContectorVC, animated: true)
         }else{
             let contectorsList = contectorsDataDic?.value(forKey: allKeys[indexPath.section]) as! NSArray
             
-            let data = contectorsList[indexPath.row] as! ContectorListModel
-            let guestContectorVC = GuestContectorViewController()
+            let data = contectorsList[indexPath.row] as! ContectorListViewDataModel
+            let guestContectorVC = ContectorInfoViewController()
             guestContectorVC.contectorName = data.name
             self.navigationController?.pushViewController(guestContectorVC, animated: true)
         }
@@ -251,7 +251,7 @@ class ContectorListViewController: UIViewController, UITableViewDelegate, UITabl
         //获得所有名字组
         let contectorArray = contectorsDataDicSearch?.value(forKey: "$") as! NSArray
         for i in 0 ..< contectorArray.count {
-            let item = (contectorArray[i] as! ContectorListModel)
+            let item = (contectorArray[i] as! ContectorListViewDataModel)
             allNameArray.append(item.name)
         }
         //获得搜索到的名字组
@@ -261,7 +261,7 @@ class ContectorListViewController: UIViewController, UITableViewDelegate, UITabl
         let tempArray = NSMutableArray()
         for i in 0 ..< searchNameArray.count {
             for j in 0 ..< contectorArray.count {
-                let item = (contectorArray[j] as! ContectorListModel)
+                let item = (contectorArray[j] as! ContectorListViewDataModel)
                 if(item.name == searchNameArray[i] as! String){
                     tempArray.add(item)
                     break

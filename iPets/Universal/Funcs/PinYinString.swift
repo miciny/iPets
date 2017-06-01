@@ -47,8 +47,8 @@ class PinYinString: NSObject {
     
     //按首字母排序方法
     func sortPinYin(_ m1: AnyObject!, m2: AnyObject!) -> ComparisonResult {
-        let c1 = PinYinString.firstCharactor((m1 as! ContectorListModel).name)
-        let c2 = PinYinString.firstCharactor((m2 as! ContectorListModel).name)
+        let c1 = PinYinString.firstCharactor((m1 as! ContectorListViewDataModel).name)
+        let c2 = PinYinString.firstCharactor((m2 as! ContectorListViewDataModel).name)
         if( c1 < c2){
             return ComparisonResult.orderedAscending
         }else{

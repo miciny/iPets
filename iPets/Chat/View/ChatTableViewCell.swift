@@ -100,7 +100,6 @@ class ChatTableViewCell: UITableViewCell{
         
         let frame = sender.view?.superview?.convert((sender.view?.frame)!, to: sender.view?.superview?.superview?.superview?.superview)
         
-        
         let imageNameH = "H" + self.msgItem.imageName!
         var imageArray = [UIImage]()
         var imageDate = [Date]()
@@ -110,10 +109,10 @@ class ChatTableViewCell: UITableViewCell{
         let chatsData = SaveDataModel()
         let chatCacheImages = SaveCacheDataModel()
         
-        let singleChatData = chatsData.loadChatsDataFromTempDirectory("\(chatName).plist", key: chatName)
+        let singleChatData = chatsData.loadChatsDataFromTempDirectory(chatName+".plist", key: chatName)
         for i in 0 ..< singleChatData.count {
             if singleChatData[i].chatImage != "" {
-                let imageName = "H"+singleChatData[i].chatImage+".png"
+                let imageName = "H"+singleChatData[i].chatImage
                 let imageData = chatCacheImages.loadImageFromChatCacheDir(chatName, imageName: imageName)
                 let image = ChangeValue.dataToImage(imageData)
                 imageArray.append(image)

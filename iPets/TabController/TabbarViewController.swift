@@ -27,7 +27,7 @@ class TabbarViewController: UITabBarController, UITabBarControllerDelegate {
     firstNav.tabBarItem.selectedImage=UIImage(named: "SellBuy_Selected")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal) //设置工具栏选中后的图片
     
     //添加第二个试图，联系人，主要好友联系人
-    let secVC = ContectViewController()
+    let secVC = MainChatListViewController()
     let secNav = UINavigationController(rootViewController: secVC)
     secNav.tabBarItem.title = "聊天"
     secNav.tabBarItem.image=UIImage(named: "Chat")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal)
@@ -41,7 +41,7 @@ class TabbarViewController: UITabBarController, UITabBarControllerDelegate {
     thirdNav.tabBarItem.selectedImage=UIImage(named: "Find_Selected")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal)
     
     //添加第四个试图，一些个人设置
-    let fourthVC = SettingViewController()
+    let fourthVC = MeViewController()
     let fouthNav = UINavigationController(rootViewController: fourthVC)
     fouthNav.tabBarItem.title = "我"
     fouthNav.tabBarItem.image=UIImage(named: "Me")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal)

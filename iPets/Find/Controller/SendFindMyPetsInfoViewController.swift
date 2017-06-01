@@ -7,13 +7,20 @@
 //
 
 import UIKit
+import Photos
 
 class SendFindMyPetsInfoViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SendFindMyPetsInfoCellViewDelegate, PassPhotosDelegate, UITextViewDelegate{
     
+    var images = [UIImage]() //保存选择的图片的缩略图
+    
+    
     fileprivate var mainTabelView: UITableView? //整个table
     fileprivate var tableData : NSMutableArray? //数据
-    var images = [UIImage]() //保存选择的图片的缩略图
-    fileprivate var imagesHighQData = [Data]() //高清图的nsdata
+    fileprivate var imagesHighQ = [UIImage]() //高清图的
+    
+    fileprivate let timer = MyTimer()
+    fileprivate var picIndex = 0
+    fileprivate var selectedModel = [ImageCollectionModel]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,12 +37,12 @@ class SendFindMyPetsInfoViewController: UIViewController, UITableViewDelegate, U
         
         //取消按钮
         let leftBarBtn = UIBarButtonItem(title: "取消", style: .plain, target: self,
-                                         action: #selector(SendFindMyPetsInfoViewController.backToPrevious))
+                                         action: #selector(self.backToPrevious))
         self.navigationItem.leftBarButtonItem = leftBarBtn
         
         //发送按钮
         let rightBarBtn = UIBarButtonItem(title: "发送", style: .plain, target: self,
-                                          action: #selector(SendFindMyPetsInfoViewController.sendFindMyPetsInfo))
+                                          action: #selector(self.sendFindMyPetsInfo))
         rightBarBtn.tintColor = getMainColor()
         self.navigationItem.rightBarButtonItem = rightBarBtn
         self.navigationItem.rightBarButtonItem?.isEnabled = false
@@ -52,6 +59,8 @@ class SendFindMyPetsInfoViewController: UIViewController, UITableViewDelegate, U
         let waitView = WaitView()
         waitView.showWait("发布中")
         
+        let textStr = (self.myText.text != "") ? self.myText.text : nil
+        
         globalQueue.async(execute: {
             let time = Date()
             
@@ -59,32 +68,32 @@ class SendFindMyPetsInfoViewController: UIViewController, UITableViewDelegate, U
             let findMyPetsData = SaveDataModel()
             var oldData = findMyPetsData.loadFindMyPetsDataFromTempDirectory()
             
-            if(self.imagesHighQData.count > 0){
+            if(self.imagesHighQ.count > 0){
                 let timeStr = DateToToString.dateToStringBySelf(time, format: "yyyyMMddHHmmss")
                 //保存图片到本地沙盒
                 let saveCache = SaveCacheDataModel()
                 var nameArray = [String]() //保存名字数组
                 
-                for j in 0 ..<  self.imagesHighQData.count{
-                    if saveCache.savaImageToFindPetsCacheDir(self.imagesHighQData[j], imageName: "H\(timeStr)\(j).png"){
-                        print("保存缓存成功！")
+                for j in 0 ..<  self.imagesHighQ.count{
+                    if saveCache.savaImageToFindPetsCacheDir(self.imagesHighQ[j], imageName: "H\(timeStr)\(j).png"){
+                        print("保存高清图缓存成功！")
                     }else{
-                        print("保存缓存失败！")
+                        print("保存高清图缓存失败！")
                     }
                     
-                    if saveCache.savaImageToFindPetsCacheDir(self.images[j], imageName: "\(timeStr)\(j)", imageType: "png"){
-                       print("保存缓存成功！")
+                    if saveCache.savaImageToFindPetsCacheDir(self.images[j], imageName: "\(timeStr)\(j).png"){
+                       print("保存普通图缓存成功！")
                     }else{
-                        print("保存缓存失败！")
+                        print("保存普通图缓存失败！")
                     }
                     
                     nameArray.append("\(timeStr)\(j).png")
                 }
                 
-                let myFindPetsInfo = FindPetsCellModel(name: myInfo.username!, text: self.myText.text, picture: nameArray, date: time, nickname: myInfo.nickname!)
+                let myFindPetsInfo = FindPetsCellModel(name: myInfo.username!, text: textStr, picture: nameArray, date: time, nickname: myInfo.nickname!)
                 oldData.append(myFindPetsInfo)
             }else{
-                let myFindPetsInfo = FindPetsCellModel(name: myInfo.username!, text: self.myText.text, picture: nil, date: time, nickname: myInfo.nickname!)
+                let myFindPetsInfo = FindPetsCellModel(name: myInfo.username!, text: textStr, picture: nil, date: time, nickname: myInfo.nickname!)
                 oldData.append(myFindPetsInfo)
             }
             
@@ -92,7 +101,6 @@ class SendFindMyPetsInfoViewController: UIViewController, UITableViewDelegate, U
             findMyPetsData.saveFindMyPetsToTempDirectory(oldData)
             
             mainQueue.async(execute: {
-                
                 waitView.hideView()
                 self.backToPrevious()
             })
@@ -103,25 +111,19 @@ class SendFindMyPetsInfoViewController: UIViewController, UITableViewDelegate, U
     func setData(){
         tableData = NSMutableArray()
         
-        let tableOne = SendFindMyPetInfoModel(pics: [])
-        let tableOneTwo = SendFindMyPetInfoModel(name: "所在位置", lable: "", icon: "Location")
-        let tableTwo = SendFindMyPetInfoModel(name: "谁可以看", lable: "公开", icon: "WhoCanSee")
-        let tableTwoTwo = SendFindMyPetInfoModel(name: "提醒谁看", lable: "", icon: "MindWhoSee")
+        let tableOne = SendFindMyPetsInfoModel(pics: [])
+        let tableOneTwo = SendFindMyPetsInfoModel(name: "所在位置", lable: "", icon: "Location")
+        let tableTwo = SendFindMyPetsInfoModel(name: "谁可以看", lable: "公开", icon: "WhoCanSee")
+        let tableTwoTwo = SendFindMyPetsInfoModel(name: "提醒谁看", lable: "", icon: "MindWhoSee")
         
         tableData?.add([tableOne, tableOneTwo])
         tableData?.add([tableTwo, tableTwoTwo])
         
         mainTabelView?.reloadData()
-        
-        //有图片时，可点
-        if tableOne.pics.count == 0{
-            self.navigationItem.rightBarButtonItem?.isEnabled = false
-        }else{
-            self.navigationItem.rightBarButtonItem?.isEnabled = true
-        }
+        self.navigationItem.rightBarButtonItem?.isEnabled = false
     }
     
-//设置tableView
+//================================设置tableView
     func setUpTable(){
         mainTabelView = UITableView(frame: self.view.frame, style: .grouped)  //为group模式
         mainTabelView?.backgroundColor = UIColor(red: 230/255, green: 230/255, blue: 230/255, alpha: 1)
@@ -149,10 +151,10 @@ class SendFindMyPetsInfoViewController: UIViewController, UITableViewDelegate, U
     
     //计算每个cell高度
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let section: [AnyObject]  =  self.tableData![indexPath.section] as! [AnyObject] //获取section里的对象
+        let section: [AnyObject] = self.tableData![indexPath.section] as! [AnyObject] //获取section里的对象
         let data = section[indexPath.row]
-        let item =  data as! SendFindMyPetInfoModel
-        let height  = item.view.frame.height
+        let item =  data as! SendFindMyPetsInfoModel
+        let height  = item.height
         
         return height
     }
@@ -163,7 +165,7 @@ class SendFindMyPetsInfoViewController: UIViewController, UITableViewDelegate, U
         let cellId = "InfoCell"
         let section : NSArray =  self.tableData![indexPath.section] as! NSArray
         let data = section[indexPath.row]
-        let cell =  SendFindMyPetsInfoTableViewCell(data:data as! SendFindMyPetInfoModel, reuseIdentifier:cellId)
+        let cell =  SendFindMyPetsInfoTableViewCell(data:data as! SendFindMyPetsInfoModel, reuseIdentifier:cellId)
         cell.delegate = self
         
         if(indexPath.section != 0 || indexPath.row != 0){
@@ -201,146 +203,51 @@ class SendFindMyPetsInfoViewController: UIViewController, UITableViewDelegate, U
         self.navigationController?.pushViewController(imagePickVc, animated: true)
     }
     
+    
     //选择图片界面的代理方法
     func passPhotos(_ selected: [ImageCollectionModel]) {
+        self.navigationItem.rightBarButtonItem?.isEnabled = false
         images = [] //清空
-        imagesHighQData = []
+        imagesHighQ = []
+        picIndex = 0
+        selectedModel = selected
         
-        for i in 0 ..< selected.count {
-            //在列表页显示缩略图
-            if selected.count == 1 {
-                let image = selected[i].asset
-                images.append(image!)
-            }else{
-                let image = selected[i].asset
-                images.append(image!)
-            }
-            
-            //这里保存的高清图片
-//            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0),{
-                //这里写需要放到子线程做的耗时的代码
-                //如果该图片大于2M，会自动旋转90度；否则不旋转
-                
-                //let representation = selected[i].asset.defaultRepresentation()
-                //let imageBuffer = UnsafeMutablePointer<UInt8>.allocate(capacity: Int((representation?.size())!))
-                //let bufferSize = representation?.getBytes(imageBuffer, fromOffset: Int64(0),
-                  //  length: Int((representation?.size())!), error: nil)
-                //let data = Data(bytesNoCopy: UnsafeMutablePointer<UInt8>(imageBuffer) ,count: bufferSize!, deallocator: .free)
-                
-//                let imageH = self.fixOrientation(UIImage(data: data)!)
-                
-//                dispatch_async(dispatch_get_main_queue(), {
-                  //  self.imagesHighQData.append(data)
-//                })
-//            })
-            
-        }
-        setReloadData(images)
+        timer.setTimer(interval: 0, target: self, selector: #selector(self.savePic), repeats: true)
     }
     
-    //修正旋转
-    func fixOrientation(_ aImage: UIImage) -> UIImage {
-        
-        if (aImage.imageOrientation == .up) {
+    func savePic(){
+        timer.pauseTimer()
+        //在列表页显示缩略图
+        let asset = selectedModel[picIndex].asset!
+        getThumbnailImage(asset: asset, imageResult: { (image) in
+            self.images.append(image)
             
-            return aImage
-            
-        }
-        
-        var transform = CGAffineTransform.identity
-        
-        switch (aImage.imageOrientation) {
-            
-        case .down, .downMirrored:
-            
-            transform = transform.translatedBy(x: aImage.size.width, y: aImage.size.height)
-            
-            transform = transform.rotated(by: CGFloat(Double.pi))
-            
-        case .left, .leftMirrored:
-            
-            transform = transform.translatedBy(x: aImage.size.width, y: 0)
-            
-            transform = transform.rotated(by: CGFloat(Double.pi/2))
-            
-        case .right, .rightMirrored:
-            
-            transform = transform.translatedBy(x: 0, y: aImage.size.height)
-            
-            transform = transform.rotated(by: CGFloat(-(Double.pi)/2))
-            
-        default:
-            
-            break
-            
-        }
-        
-        switch (aImage.imageOrientation) {
-            
-        case .upMirrored, .downMirrored:
-            
-            transform = transform.translatedBy(x: aImage.size.width, y: 0)
-            
-            transform = transform.scaledBy(x: -1, y: 1)
-            
-        case .leftMirrored, .rightMirrored:
-            
-            transform = transform.translatedBy(x: aImage.size.height, y: 0)
-            
-            transform = transform.scaledBy(x: -1, y: 1)
-            
-        default:
-            
-            break
-            
-        }
-        
-        let ctx = CGContext(data: nil, width: Int(aImage.size.width), height: Int(aImage.size.height),
-                                        
-                                        bitsPerComponent: (aImage.cgImage?.bitsPerComponent)!, bytesPerRow: 0,
-                                        
-                                        space: (aImage.cgImage?.colorSpace!)!,
-                                        
-                                        bitmapInfo: (aImage.cgImage?.bitmapInfo.rawValue)!)
-        
-        ctx?.concatenate(transform)
-        
-        switch (aImage.imageOrientation) {
-            
-        case .left, .leftMirrored, .right, .rightMirrored:
-            
-            ctx?.draw(aImage.cgImage!, in: CGRect(x: 0,y: 0,width: aImage.size.height,height: aImage.size.width))
-            
-        default:
-            
-            ctx?.draw(aImage.cgImage!, in: CGRect(x: 0,y: 0,width: aImage.size.width,height: aImage.size.height))
-            
-        }
-        
-        // And now we just create a new UIImage from the drawing context
-        
-        let cgimg = ctx?.makeImage()
-        
-        return UIImage(cgImage: cgimg!)
-        
+            getRetainImage(asset: asset, imageResult: { (image) in
+                self.imagesHighQ.append(image)
+                
+                self.picIndex += 1
+                if self.picIndex >= self.selectedModel.count{
+                    self.setReloadData(self.images)
+                    self.navigationItem.rightBarButtonItem?.isEnabled = true
+                    self.timer.stopTimer()
+                }else{
+                    self.timer.startTimer(interval: 0)
+                }
+            })
+        })
     }
     
     //设置数据
     func setReloadData(_ pics: [UIImage]){
-        tableData = NSMutableArray()
-        
-        let tableOne = SendFindMyPetInfoModel(pics: pics)
-        let tableOneTwo = SendFindMyPetInfoModel(name: "所在位置", lable: "", icon: "Location")
-        let tableTwo = SendFindMyPetInfoModel(name: "谁可以看", lable: "公开", icon: "WhoCanSee")
-        let tableTwoTwo = SendFindMyPetInfoModel(name: "提醒谁看", lable: "", icon: "MindWhoSee")
-        
-        tableData?.add([tableOne, tableOneTwo])
-        tableData?.add([tableTwo, tableTwoTwo])
+        let origin = (tableData!.firstObject as! [SendFindMyPetsInfoModel])[0]
+        let data = SendFindMyPetsInfoModel(pics: pics)
+        origin.pics = pics
+        origin.height = data.height
         
         mainTabelView?.reloadData()
         
         //有图片时，可点
-        if tableOne.pics.count == 0{
+        if pics.count == 0{
             self.navigationItem.rightBarButtonItem?.isEnabled = false
         }else{
             self.navigationItem.rightBarButtonItem?.isEnabled = true

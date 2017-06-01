@@ -48,8 +48,6 @@ class SellBuyViewController: UIViewController, UIScrollViewDelegate, isRefreshin
     }
     
     func setUpEles(){
-//        self.title = "首页"
-//        self.navigationItem.title = "首页"
         self.view.backgroundColor = UIColor.white //背景色
         self.automaticallyAdjustsScrollViewInsets = false //解决scrollView自动偏移64的问题
         
@@ -108,57 +106,6 @@ class SellBuyViewController: UIViewController, UIScrollViewDelegate, isRefreshin
         }
     }
     
-    
-//======================================代理================================
-    //actionMenuView的代理方法
-    func menuClicked(_ tag: Int, eventFlag: Int) {
-        switch eventFlag{
-        case 1:
-            switch tag{
-            //我要寻宠页
-            case 0:
-                ToastView().showToast(addArray.allKeys[0] as! String)
-            case 1:
-                ToastView().showToast(addArray.allKeys[1] as! String)
-            case 2:
-                ToastView().showToast(addArray.allKeys[2] as! String)
-            default:
-                break
-            }
-        default:
-            break
-        }
-    }
-    
-//======================================collectionView================================
-    //初始化collectionView
-    func setUpCollection(){
-        
-        let layout = UICollectionViewFlowLayout() //也可自定义的
-        layout.minimumLineSpacing = 0 //上下
-        layout.minimumInteritemSpacing = 0 //左右
-        
-        collectionView = UICollectionView(frame: CGRect(x: 0, y: 64, width: Width, height: Height-64-49), collectionViewLayout: layout)
-        collectionView?.backgroundColor = UIColor.white
-        
-        headerView =  RefreshHeaderView(frame: collectionView!.frame, subView: collectionView!, target: self)  //添加下拉刷新
-        
-        //注册一个cell
-        collectionView!.register(SellBuyCollectionViewCell.self, forCellWithReuseIdentifier:cellReuseIdentifier)
-        //注册一个headView
-        collectionView!.register(SellBuyCollectionHeaderView.self, forSupplementaryViewOfKind:UICollectionElementKindSectionHeader, withReuseIdentifier: headerReuseIdentifier)
-        //注册一个footView
-        collectionView!.register(SellBuyCollectionFooterView.self, forSupplementaryViewOfKind:UICollectionElementKindSectionFooter, withReuseIdentifier: footerReuseIdentifier)
-        
-        collectionView?.delegate = self
-        collectionView?.dataSource = self
-        collectionView?.backgroundColor = UIColor.clear
-        
-        self.view.addSubview(collectionView!)
-        
-        setUpData()
-    }
-    
     //数据
     func setUpData(){
         
@@ -193,7 +140,31 @@ class SellBuyViewController: UIViewController, UIScrollViewDelegate, isRefreshin
         
     }
     
-    //isfreshing中的代理方法
+    
+//===============================================代理================================
+    
+//==================================================================================actionMenuView的代理方法
+    func menuClicked(_ tag: Int, eventFlag: Int) {
+        switch eventFlag{
+        case 1:
+            switch tag{
+            //我要寻宠页
+            case 0:
+                ToastView().showToast(addArray.allKeys[0] as! String)
+            case 1:
+                ToastView().showToast(addArray.allKeys[1] as! String)
+            case 2:
+                ToastView().showToast(addArray.allKeys[2] as! String)
+            default:
+                break
+            }
+        default:
+            break
+        }
+    }
+
+    
+//==================================================================================isfreshing中的代理方法
     func reFreshing(){
         
         collectionView!.setContentOffset(CGPoint(x: 0, y: 64-RefreshHeaderHeight*2), animated: true)
@@ -209,7 +180,34 @@ class SellBuyViewController: UIViewController, UIScrollViewDelegate, isRefreshin
         }
     }
     
-    // MARK: UICollectionViewDataSource
+//==================================================================================UICollectionViewDataSource
+    //初始化collectionView
+    func setUpCollection(){
+        
+        let layout = UICollectionViewFlowLayout() //也可自定义的
+        layout.minimumLineSpacing = 0 //上下
+        layout.minimumInteritemSpacing = 0 //左右
+        
+        collectionView = UICollectionView(frame: CGRect(x: 0, y: 64, width: Width, height: Height-64-49), collectionViewLayout: layout)
+        collectionView?.backgroundColor = UIColor.white
+        
+        headerView =  RefreshHeaderView(frame: collectionView!.frame, subView: collectionView!, target: self)  //添加下拉刷新
+        
+        //注册一个cell
+        collectionView!.register(SellBuyCollectionViewCell.self, forCellWithReuseIdentifier:cellReuseIdentifier)
+        //注册一个headView
+        collectionView!.register(SellBuyCollectionHeaderView.self, forSupplementaryViewOfKind:UICollectionElementKindSectionHeader, withReuseIdentifier: headerReuseIdentifier)
+        //注册一个footView
+        collectionView!.register(SellBuyCollectionFooterView.self, forSupplementaryViewOfKind:UICollectionElementKindSectionFooter, withReuseIdentifier: footerReuseIdentifier)
+        
+        collectionView?.delegate = self
+        collectionView?.dataSource = self
+        collectionView?.backgroundColor = UIColor.clear
+        
+        self.view.addSubview(collectionView!)
+        
+        setUpData()
+    }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         // #warning Incomplete implementation, return the number of sections
@@ -251,7 +249,7 @@ class SellBuyViewController: UIViewController, UIScrollViewDelegate, isRefreshin
         cell.dataPic?.frame = CGRect(x: 10, y: 10, width: cell.frame.width-20, height: cell.frame.height-35)
         
         cell.dataLable?.text = model.name
-        let dataLableSize = sizeWithText(model.name! as NSString, font: sellBuyLabelFont, maxSize: CGSize(width: Width, height: 20))
+        let dataLableSize = sizeWithText(model.name!, font: sellBuyLabelFont, maxSize: CGSize(width: Width, height: 20))
         cell.dataLable!.frame = CGRect(x: cell.frame.width/2-dataLableSize.width/2, y: (cell.dataPic?.frame)!.maxY+5, width: dataLableSize.width, height: 20)
         
         cell.addSubview(cell.dataPic!)
@@ -353,7 +351,7 @@ class SellBuyViewController: UIViewController, UIScrollViewDelegate, isRefreshin
 
 }
 
-//动画的协议
+//==================================================================================进入搜索页动画的协议
 extension SellBuyViewController: UIViewControllerTransitioningDelegate{
     
     //进入搜索页
@@ -378,7 +376,7 @@ extension SellBuyViewController: UIViewControllerTransitioningDelegate{
     }
 }
 
-//点击头图的协议
+//==================================================================================点击头图的协议
 extension SellBuyViewController: SellBuyHeaderDelegate{
     func selectedPic(_ str: String) {
         

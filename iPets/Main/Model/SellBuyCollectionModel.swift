@@ -11,8 +11,8 @@ import UIKit
 //每个collection中的cell的数据模型
 
 class SellBuyCollectionModel: NSObject {
-    var name : String?
-    var picture : String?
+    var name: String?
+    var picture: String?
     
     init(dic: NSDictionary) {
         self.name = dic.value(forKey: "name") as? String

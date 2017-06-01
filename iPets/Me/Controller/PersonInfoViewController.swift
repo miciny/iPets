@@ -18,7 +18,6 @@ class PersonInfoViewController: UIViewController, UITableViewDelegate, UITableVi
         setUpEles()
         setData()
         setUpTable()
-        
     }
     
     func setUpEles(){
@@ -49,15 +48,15 @@ class PersonInfoViewController: UIViewController, UITableViewDelegate, UITableVi
             motto = (SettingDataArray.lastObject! as AnyObject).value(forKey: settingDataNameOfMyMotto)! as! String
         }
         
-        let infoOne1 = PersonInfoModel(pic: myInfo.icon!, name: "头像")
-        let infoOne2 = PersonInfoModel(lable: myInfo.username!, name: "名字")
-        let infoOne3 = PersonInfoModel(lable: myInfo.nickname!, name: "寻宠号")
-        let infoOne4 = PersonInfoModel(TDicon: "TDicon", name: "我的二维码")
-        let infoOne5 = PersonInfoModel(lable: "西小口", name: "我的地址")
+        let infoOne1 = PersonInfoDataModel(pic: myInfo.icon!, name: "头像")
+        let infoOne2 = PersonInfoDataModel(lable: myInfo.username!, name: "名字")
+        let infoOne3 = PersonInfoDataModel(lable: myInfo.nickname!, name: "寻宠号")
+        let infoOne4 = PersonInfoDataModel(TDicon: "TDicon", name: "我的二维码")
+        let infoOne5 = PersonInfoDataModel(lable: "西小口", name: "我的地址")
         
-        let infoTwo1 = PersonInfoModel(lable: sex, name: "性别")
-        let infoTwo2 = PersonInfoModel(lable: address, name: "地区")
-        let infoTwo3 = PersonInfoModel(lable: motto, name: "个性签名")
+        let infoTwo1 = PersonInfoDataModel(lable: sex, name: "性别")
+        let infoTwo2 = PersonInfoDataModel(lable: address, name: "地区")
+        let infoTwo3 = PersonInfoDataModel(lable: motto, name: "个性签名")
         
         infoData?.add([infoOne1, infoOne2, infoOne3, infoOne4, infoOne5])
         infoData?.add([infoTwo1, infoTwo2, infoTwo3])
@@ -93,8 +92,8 @@ class PersonInfoViewController: UIViewController, UITableViewDelegate, UITableVi
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let section: [AnyObject]  =  self.infoData![indexPath.section] as! [AnyObject] //获取section里的对象
         let data = section[indexPath.row]
-        let item =  data as! PersonInfoModel
-        let height  = item.view.frame.height
+        let item =  data as! PersonInfoDataModel
+        let height  = item.height
         
         return height
     }
@@ -104,7 +103,7 @@ class PersonInfoViewController: UIViewController, UITableViewDelegate, UITableVi
         let cellId = "InfoCell"
         let section : NSArray =  self.infoData![indexPath.section] as! NSArray
         let data = section[indexPath.row]
-        let cell =  PersonInfoTableViewCell(data: data as! PersonInfoModel, reuseIdentifier: cellId)
+        let cell =  PersonInfoTableViewCell(data: data as! PersonInfoDataModel, reuseIdentifier: cellId)
         //寻宠好不能变
         if indexPath.section != 0 || indexPath.row != 2 {
             cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
@@ -120,7 +119,7 @@ class PersonInfoViewController: UIViewController, UITableViewDelegate, UITableVi
         //提取cell的数据
         let section : NSArray =  self.infoData![indexPath.section] as! NSArray
         let data = section[indexPath.row]
-        let item = data as! PersonInfoModel
+        let item = data as! PersonInfoDataModel
         
         switch indexPath.section{
         case 0:
@@ -128,19 +127,19 @@ class PersonInfoViewController: UIViewController, UITableViewDelegate, UITableVi
             
             //头像页
             case 0:
-                let myIconVc = MyIconViewController()
+                let myIconVc = PersonInfo_IconViewController()
                 myIconVc.image = item.pic
                 self.navigationController?.pushViewController(myIconVc, animated: true)
                 
             //名字页
             case 1:
-                let myNameVc = PersonInfoChangeNameViewController()
-                myNameVc.name = item.lable
+                let myNameVc = PersonInfo_ChangeNameViewController()
+                myNameVc.name = item.lable!
                 self.navigationController?.pushViewController(myNameVc, animated: true)
                 
             //二维码页
             case 3:
-                let myTDIcon = MyTDCodeImageViewController()
+                let myTDIcon = PersonInfo_TDCodeImageViewController()
                 self.navigationController?.pushViewController(myTDIcon, animated: true)
                 
             default:

@@ -10,7 +10,7 @@ import UIKit
 import Photos
 
 class ImageCollectionModel: NSObject {
-    var asset: UIImage!
+    var asset: PHAsset!
     var isSelect: Bool = false
     
     override init() {

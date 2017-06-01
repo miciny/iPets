@@ -10,13 +10,13 @@ import UIKit
 
 class ContectorListTableViewCell: UITableViewCell {
     
-    var mainContectorItem: ContectorListModel!
+    var mainContectorItem: ContectorListViewDataModel!
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
-    init(data: ContectorListModel, reuseIdentifier cellId:String){
+    init(data: ContectorListViewDataModel, reuseIdentifier cellId:String){
         self.mainContectorItem = data
         super.init(style: UITableViewCellStyle.default, reuseIdentifier:cellId)
         rebuildCell()
@@ -28,10 +28,13 @@ class ContectorListTableViewCell: UITableViewCell {
         contectorIcon.backgroundColor = UIColor.gray
         contectorIcon.layer.masksToBounds = true //不然设置边角没用
         contectorIcon.layer.cornerRadius = 5
-        contectorIcon.image = mainContectorItem.icon
+        if let icon = mainContectorItem.icon{
+            contectorIcon.image = icon
+        }
         self.addSubview(contectorIcon)
+        
         //联系人，名字
-        let contectorNameSize = sizeWithText(mainContectorItem.name as NSString, font: contectorListPageLableFont, maxSize: CGSize(width: Width/2, height: 1000))
+        let contectorNameSize = sizeWithText((mainContectorItem.name as NSString) as String, font: contectorListPageLableFont, maxSize: CGSize(width: Width/2, height: 1000))
         let contectorName = UILabel(frame: CGRect(x: contectorIcon.frame.maxX+10, y: contectorIcon.frame.origin.y,
             width: contectorNameSize.width, height: contectorIcon.frame.height))
         contectorName.backgroundColor = UIColor.white
