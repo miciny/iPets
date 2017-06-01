@@ -81,8 +81,12 @@ class RichScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDe
         
         //如果设备不允许，显示提示并返回
         if (error != nil && input == nil) {
-            let errorAlert = UIAlertView(title: "提醒", message: "请在iPhone的\"设置-隐私-相机\"选项中,允许本程序访问您的相机", delegate: self, cancelButtonTitle: "确定")
-            errorAlert.show()
+            
+            let deleteAlertView = UIAlertController(title: "提醒", message: "请在iPhone的\"设置-隐私-相机\"选项中,允许本程序访问您的相机", preferredStyle: .alert)
+            let cancelAction = UIAlertAction(title: "确定", style: .cancel, handler: nil)
+            deleteAlertView.addAction(cancelAction)
+            self.present(deleteAlertView, animated: true, completion: nil)
+            
             return
         }
         

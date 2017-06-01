@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FindPetsViewController: UIViewController, isRefreshingDelegate, UIAlertViewDelegate, isLoadMoreingDelegate, actionMenuViewDelegate, UITableViewDataSource, UITableViewDelegate{
+class FindPetsViewController: UIViewController, isRefreshingDelegate, isLoadMoreingDelegate, actionMenuViewDelegate, UITableViewDataSource, UITableViewDelegate{
     
     fileprivate var cellData: NSMutableArray?
     fileprivate var mainTableView: UITableView?
@@ -195,6 +195,7 @@ class FindPetsViewController: UIViewController, isRefreshingDelegate, UIAlertVie
         cellDataTemp.addObjects(from: findMyPetsData.loadFindMyPetsDataFromTempDirectory())
         
         guard cellDataTemp.count > 0 else{
+            self.mainTableView!.tableFooterView = UIView(frame: CGRect.zero)
             return
         }
         
@@ -325,28 +326,28 @@ class FindPetsViewController: UIViewController, isRefreshingDelegate, UIAlertVie
     //删除按钮
     func deleteFindPets(_ sender: UIButton){
         deledeIndex = sender.tag
-        let deleteAlert = UIAlertView(title: "您确定要删除吗？", message: "", delegate: self,
-                                      cancelButtonTitle: "取消", otherButtonTitles: "确定")
-        deleteAlert.alertViewStyle = UIAlertViewStyle.default
-        deleteAlert.show()
-    }
-    
-    
-    func alertView(_ alertView: UIAlertView, clickedButtonAt buttonIndex: Int){
-        if buttonIndex == 1{
+        let deleteAlertView = UIAlertController(title: "您确定要删除吗？", message: nil, preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+        let okAction = UIAlertAction(title: "确定", style: .default, handler:{
+            
+            (UIAlertAction) -> Void in
             //先删除cellData
-            cellData?.removeObject(at: deledeIndex)
+            self.cellData?.removeObject(at: self.deledeIndex)
             self.mainTableView?.reloadData()
             
             //删plist 删图片
-            deletePlistData()
+            self.deletePlistData()
             
-            if cellData?.count == 0 {
+            if self.cellData?.count == 0 {
                 self.refreshData()
             }
             
             ToastView().showToast("删除成功")
-        }
+        })
+        
+        deleteAlertView.addAction(cancelAction)
+        deleteAlertView.addAction(okAction)// 当添加的UIAlertAction超过两个的时候，会自动变成纵向分布
+        self.present(deleteAlertView, animated: true, completion: nil)
     }
     
     //删plist

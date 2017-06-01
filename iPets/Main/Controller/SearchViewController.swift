@@ -106,7 +106,13 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDe
                 recordListData.add([str, date])
             }
             
-            recordListData.sort(comparator: sortDate as! (Any, Any) -> ComparisonResult)
+            recordListData.sort(comparator: { (m1, m2) -> ComparisonResult in
+                if(((m1 as! NSArray)[1] as! Date).timeIntervalSince1970 > ((m2 as! NSArray)[1] as! Date).timeIntervalSince1970){
+                    return ComparisonResult.orderedAscending
+                }else{
+                    return ComparisonResult.orderedDescending
+                }
+            })
             
             // 提取数据
             
@@ -120,15 +126,6 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDe
             
             let deleteTitle = SearchRecordModel(record: "清除记录", type: 2)
             searchData.add(deleteTitle)
-        }
-    }
-    
-    //排序
-    func sortDate(_ m1: AnyObject!, m2: AnyObject!) -> ComparisonResult {
-        if(((m1 as! NSArray)[1] as! Date).timeIntervalSince1970 > ((m2 as! NSArray)[1] as! Date).timeIntervalSince1970){
-            return ComparisonResult.orderedAscending
-        }else{
-            return ComparisonResult.orderedDescending
         }
     }
     

@@ -61,17 +61,19 @@ class TabbarViewController: UITabBarController, UITabBarControllerDelegate {
     UINavigationBar.appearance().tintColor = UIColor.white  //导航栏左右按钮文字颜色
     UINavigationBar.appearance().titleTextAttributes = [NSFontAttributeName: pageTitleFont, NSForegroundColorAttributeName: UIColor.white] //导航栏title文字颜色
     
-//    UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated:true) //系统栏白色文字 info中 View controller-based status bar appearance设置为no才能用
-
-    UIApplication.shared.setStatusBarStyle(preferredStatusBarStyle, animated:true)
-    
+    self.setNeedsStatusBarAppearanceUpdate()
     }
+    
     
     /**
      设置状态栏风格,系统栏白色文字 info中 View controller-based status bar appearance设置为no才能用
      */
     override var preferredStatusBarStyle : UIStatusBarStyle {
         return UIStatusBarStyle.lightContent
+    }
+    
+    override func setNeedsStatusBarAppearanceUpdate() {
+        
     }
 
     override func didReceiveMemoryWarning() {

@@ -47,10 +47,12 @@ class ContectorListViewController: UIViewController, UITableViewDelegate, UITabl
         allKeys = [String]()
         contectorsList = NSMutableArray()
         contectorsDataDicSearch = NSMutableDictionary()
-        
         contectors = SQLLine.SelectAllData(entityNameOfContectors)
+        
         //如果没有数据，就直接返回
         if(contectors!.count == 0){
+            self.mainTabelView!.isScrollEnabled = false
+            self.mainTabelView!.tableHeaderView?.isHidden = true
             return
         }
         
@@ -102,23 +104,20 @@ class ContectorListViewController: UIViewController, UITableViewDelegate, UITabl
         }
     }
     
-//设置tableView*****************************
+//==========================================设置tableView*****************************
     //设置tableView
     func setUpTable(){
         mainTabelView = UITableView(frame: CGRect(x: 0, y: 0, width: Width, height: Height))  //为普通模式
         mainTabelView!.backgroundColor = UIColor(red: 230/255, green: 230/255, blue: 230/255, alpha: 1)
-        
         mainTabelView!.showsHorizontalScrollIndicator = false
         mainTabelView!.tableFooterView = UIView(frame: CGRect.zero) //消除底部多余的线
-        
         mainTabelView!.delegate = self
         mainTabelView!.dataSource = self
-        
         self.view.addSubview(mainTabelView!)
         
         //配置搜索控制器
         self.searchBar = ({
-            let controller = UISearchController(searchResultsController: self)
+            let controller = UISearchController(searchResultsController: nil) //要为nil。才能在原页面显示结果
             controller.searchResultsUpdater = self
             controller.hidesNavigationBarDuringPresentation = false
             controller.dimsBackgroundDuringPresentation = false
@@ -169,7 +168,6 @@ class ContectorListViewController: UIViewController, UITableViewDelegate, UITabl
     
     //计算每个cell高度,固定60
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
         let height  = CGFloat(60)
         return height
     }
@@ -181,10 +179,11 @@ class ContectorListViewController: UIViewController, UITableViewDelegate, UITabl
         if searchBar.isActive {
             let contectorsList = contectorsDataDicSearch?.value(forKey: "$") as! NSArray
             let data = contectorsList[indexPath.row]
-            let cell =  ContectorListTableViewCell(data: data as! ContectorListViewDataModel, reuseIdentifier:cellId)
+            let cell = ContectorListTableViewCell(data: data as! ContectorListViewDataModel, reuseIdentifier:cellId)
             
             return cell
         }
+        
         let contectorsList = contectorsDataDic?.value(forKey: allKeys[indexPath.section]) as! NSArray
         let data = contectorsList[indexPath.row]
         let cell =  ContectorListTableViewCell(data: data as! ContectorListViewDataModel, reuseIdentifier:cellId)

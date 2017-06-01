@@ -119,20 +119,4 @@ class FindPetsPicView: UIView, UIScrollViewDelegate{
             self.mainView.removeFromSuperview()
         }) 
     }
-
-    //隐藏
-    func hideView(){
-        
-//        let animation = CABasicAnimation(keyPath: "transform.scale")
-//        animation.fromValue = 1 // 开始时的倍率
-//        animation.toValue = 0.1 // 结束时的倍率
-//        animation.duration = 0.3
-//        animation.fillMode = kCAFillModeForwards  // 保持结束时的状态
-//        animation.removedOnCompletion = false
-//        self.view.layer.addAnimation(animation, forKey: "")
-        
-//        delay(0.3) {
-//            self.mainView.removeFromSuperview()
-//        }
-    }
 }
