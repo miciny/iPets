@@ -1,13 +1,19 @@
 import UIKit
 
+//点击头像进入个人信息页的代理
+protocol ChatTableViewCellDelegate {
+    func pushToView(name: String)
+}
+
 //信息体加用户头像
-class ChatTableViewCell: UITableViewCell{
+class ChatTableViewCell: UITableViewCell, MessageItemDelegate{
     
     var customView: UIView! //信息的view
     var bubbleView: BubbleItem! //背景气泡
     var avatarImage: UIImageView! //用户icon
     var msgItem: MessageItem!
-    var delegate: SingleChatPicViewDelegate?
+    var picDelegate: SingleChatPicViewDelegate?
+    var pushDelegate: ChatTableViewCellDelegate?
     var chatName: String!
     
     required init?(coder aDecoder: NSCoder) {
@@ -50,6 +56,12 @@ class ChatTableViewCell: UITableViewCell{
             self.avatarImage.layer.borderColor = UIColor(white:0.0 ,alpha:0.2).cgColor
             self.avatarImage.layer.borderWidth = 1.0
             
+            //头像点击事件
+            self.avatarImage.isUserInteractionEnabled = true
+            let tap = UITapGestureRecognizer(target: self, action: #selector(tapedIcon))
+            self.avatarImage.tag = 1
+            self.avatarImage.addGestureRecognizer(tap)
+            
             //计算用户头像的x坐标
             let avatarX =  (type == ChatType.someone) ? 2 : Width-52 //x坐标 对方的为2 自己的为 Width-52
             let avatarY: CGFloat = 0 //y坐标为信息的高度，为了对其，设置相应值
@@ -69,25 +81,24 @@ class ChatTableViewCell: UITableViewCell{
             }
         }
         
+        
+        self.msgItem.delegate = self
         //判断气泡的类型和位置 , 图片就不显示气泡
         if(!self.msgItem.view.isKind(of: UIImageView.self)){
             self.bubbleView = BubbleItem.init(mtype: type, frame: CGRect(x: x, y: y, width: width + self.msgItem.insets.left + self.msgItem.insets.right, height: height + self.msgItem.insets.top + self.msgItem.insets.bottom))
             self.addSubview(self.bubbleView.view)
+            
             //添加信息体的view
             self.customView = self.msgItem.view
-        
             self.customView.frame = CGRect(x: self.msgItem.insets.left, y: self.msgItem.insets.top, width: width, height: height)
             self.bubbleView.view.addSubview(self.customView)
-            
-            self.customView.isUserInteractionEnabled = true
-            let tap = UITapGestureRecognizer(target: self, action: #selector(tapedText))
-            self.customView.addGestureRecognizer(tap)
             
         }else{
             //添加信息体的view
             self.customView = self.msgItem.view
             self.customView.frame = CGRect(x: x+self.msgItem.insets.left, y: y+self.msgItem.insets.top, width: width, height: height)
             
+            //图片点击事件
             self.customView.isUserInteractionEnabled = true
             let tap = UITapGestureRecognizer(target: self, action: #selector(tapedPic))
             self.customView.tag = 1
@@ -96,6 +107,31 @@ class ChatTableViewCell: UITableViewCell{
         }
     }
     
+//========================================长安文字的代理==================================
+    func lbLongPressed() {
+        self.bubbleView.imageView.backgroundColor = UIColor.lightGray
+    }
+    
+    func lbNoPressed() {
+        self.bubbleView.imageView.backgroundColor = UIColor.clear
+    }
+    
+    func imageLongPressed() {
+        
+    }
+    
+    func imageNoPressed() {
+        
+    }
+    
+
+//========================================头像点击事件==================================
+    func tapedIcon(_ sender: UITapGestureRecognizer){
+        self.pushDelegate?.pushToView(name: self.msgItem.user.username!)        //进入个人信息页
+    }
+    
+    
+//========================================图片点击事件==================================
     func tapedPic(_ sender: UITapGestureRecognizer){
         
         let frame = sender.view?.superview?.convert((sender.view?.frame)!, to: sender.view?.superview?.superview?.superview?.superview)
@@ -125,7 +161,7 @@ class ChatTableViewCell: UITableViewCell{
             }
         }
         
-        self.delegate?.showPic(imageArray, index: tag, imageDate: imageDate, frame: frame!)
+        self.picDelegate?.showPic(imageArray, index: tag, imageDate: imageDate, frame: frame!)
     }
     
     func tapedText(){

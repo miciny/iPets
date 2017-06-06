@@ -126,7 +126,7 @@ class MeViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
             case 0:
 
                 let aa = SQLLine.SelectAllData(entityNameOfContectors)
-                if(aa.count > 0){
+                if(aa.count > 1){
                     ToastView().showToast("已添加")
                     return
                 }

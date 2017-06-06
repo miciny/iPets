@@ -6,18 +6,21 @@ class BubbleItem: NSObject{
     var mtype: ChatType
     var frame: CGRect
     var view: UIView
+    var imageView: UIImageView
     
-    init(mtype: ChatType, frame: CGRect, bubble: UIImageView, view: UIView){
+    init(mtype: ChatType, frame: CGRect, bubble: UIImageView, view: UIView, image: UIImageView){
         self.mtype = mtype
         self.frame = frame
         self.bubble = bubble
         self.view = view
+        self.imageView = image
     }
     
     //我的
     convenience init(mtype: ChatType, frame: CGRect){
         let bubble = UIImageView()
         let bubbleView = UIView()
+        
         //装气泡的view
         bubbleView.frame = frame
         bubbleView.backgroundColor = UIColor.clear
@@ -32,7 +35,7 @@ class BubbleItem: NSObject{
         }
         bubbleView.addSubview(bubble)
         
-        self.init(mtype: mtype, frame: frame, bubble: bubble, view: bubbleView)
+        self.init(mtype: mtype, frame: frame, bubble: bubble, view: bubbleView, image: bubble)
     }
     
 }

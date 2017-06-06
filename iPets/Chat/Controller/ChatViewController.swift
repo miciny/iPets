@@ -182,6 +182,7 @@ class ChatViewController: UIViewController, ChatDataSource, UITextViewDelegate, 
                 })
                 
                 let sendedImage = ChatData(chatType: ChatType.mine.rawValue, chatBody: "", time: timeArray[j], chatImage: timestrArray[j])
+                
                 self.chatDataArray?.append(sendedImage)
             }
             
@@ -195,7 +196,9 @@ class ChatViewController: UIViewController, ChatDataSource, UITextViewDelegate, 
     func sendPic(_ image: UIImage, imageName: String, sendDate: Date){
         
         let thisChat = MessageItem(image: image, imageName: imageName, user: myInfo, date: sendDate, mtype: ChatType.mine)
+        let thatChat = MessageItem(image: image, imageName: imageName, user: youInfo, date: sendDate.addingTimeInterval(0.01), mtype: ChatType.someone)
         self.Chats.add(thisChat)
+        self.Chats.add(thatChat)
         
         self.tableView.chatDataSource = self
         self.tableView.reloadData()
@@ -464,6 +467,7 @@ class ChatViewController: UIViewController, ChatDataSource, UITextViewDelegate, 
         
         //set the chatDataSource
         self.tableView.chatDataSource = self
+        self.tableView.pushDelegate = self
         self.tableView.reloadData()
         
     }
@@ -482,5 +486,15 @@ class ChatViewController: UIViewController, ChatDataSource, UITextViewDelegate, 
         super.didReceiveMemoryWarning()
     }
     
+}
+
+
+//点击头像进入个人信息页的代理
+extension ChatViewController: ChatTableViewDelegate{
+    func pushToView(name: String) {
+        let guestContectorVC = ContectorInfoViewController()
+        guestContectorVC.contectorName = name
+        self.navigationController?.pushViewController(guestContectorVC, animated: true)
+    }
 }
 

@@ -6,6 +6,11 @@ enum ChatBubbleTypingType{
     case somebody
 }
 
+//点击头像进入个人信息页的代理
+protocol ChatTableViewDelegate {
+    func pushToView(name: String)
+}
+
 class ChatTableView: UITableView, UITableViewDelegate, UITableViewDataSource{
     
     var bubbleSection: NSMutableArray! //对话体
@@ -13,8 +18,9 @@ class ChatTableView: UITableView, UITableViewDelegate, UITableViewDataSource{
     
     var snapInterval: TimeInterval! //时间间隔
     var typingBubble: ChatBubbleTypingType! //信息类型
-    
     var chatTitle: String! //聊天的标题
+    
+    var pushDelegate: ChatTableViewDelegate?
     
     fileprivate let picView = SingleChatPicView() //展示图片的
     
@@ -200,7 +206,8 @@ class ChatTableView: UITableView, UITableViewDelegate, UITableViewDataSource{
         let data = section[indexPath.row - 1]
         
         let cell =  ChatTableViewCell(data: data as! MessageItem, reuseIdentifier: cellId, chatName: chatTitle)
-        cell.delegate = self
+        cell.picDelegate = self
+        cell.pushDelegate = self
         return cell
     }
 }
@@ -210,5 +217,13 @@ extension ChatTableView: SingleChatPicViewDelegate{
     func showPic(_ pic: [UIImage], index: Int, imageDate: [Date], frame: CGRect) {
         picView.setUpPic(pic, index: index, imageDate: imageDate, frame: frame)
     }
+}
+
+//点击头像进入个人信息页的代理
+extension ChatTableView: ChatTableViewCellDelegate{
+    func pushToView(name: String) {
+        self.pushDelegate?.pushToView(name: name)
+    }
+    
 }
 

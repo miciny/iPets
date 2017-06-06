@@ -43,12 +43,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             let defaultIcon = UIImage(named: "defaultIcon")
             let imageData = UIImagePNGRepresentation(defaultIcon!)
+            let defaultIconData = UIImagePNGRepresentation(defaultIcon!)
             
             if SQLLine.InsertSettingData(imageData!, name: "毛彩元", nickname: "Xue", sex: "男", address: "北京",
                                          motto: "设置你的名言!"){
                 print("创建默认头像成功！")
             }else{
                 print("创建默认头像失败！")
+            }
+            
+            if SQLLine.InsertContectorsData("毛彩元", icon: defaultIconData!, nickname: "Xue", sex: "男", remark: "my heart is yours", address: "北京", http: "www.baidu.com"){
+                print("创建默认用户成功！")
             }
         }
         

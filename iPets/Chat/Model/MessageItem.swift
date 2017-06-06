@@ -5,13 +5,24 @@ enum ChatType: String{
     case someone = "0"
 }
 
-class MessageItem: NSObject{
+protocol MessageItemDelegate {
+    func lbLongPressed()  //长按了
+    
+    func lbNoPressed()  //取消长按
+    
+    func imageLongPressed()
+    
+    func imageNoPressed()
+}
+
+class MessageItem: NSObject, CanCopyLabelDelegate, CanCopyImageDelegate{
     var user: UserInfo
     var date: Date
     var mtype: ChatType
     var view: UIView
     var insets: UIEdgeInsets
     var imageName: String?
+    var delegate: MessageItemDelegate?
     
     //图片和文字与周围的间距
     class func getTextInsetsMine() -> UIEdgeInsets{
@@ -46,7 +57,7 @@ class MessageItem: NSObject{
         let height : CGFloat = 10000.0
         let size =  sizeWithText(body as String, font: chatPageTextFont, maxSize: CGSize(width: width, height: height))
         
-        let label =  UILabel(frame:CGRect(x: 0, y: 0, width: size.width, height: size.height))
+        let label =  CanCopyLabel(frame:CGRect(x: 0, y: 0, width: size.width, height: size.height))
         label.numberOfLines = 0
         label.lineBreakMode = NSLineBreakMode.byWordWrapping
         label.text = (body.length != 0 ? body as String : "")
@@ -56,7 +67,22 @@ class MessageItem: NSObject{
         let insets: UIEdgeInsets = (mtype == ChatType.mine ? MessageItem.getTextInsetsMine() : MessageItem.getTextInsetsSomeone())
         
         self.init(user:user, date:date, mtype:mtype, view:label, insets:insets, imageName: nil)
-    }    
+        
+        label.copyLabelDelegate = self
+    }
+    
+    //文字长按事件
+    func lbLongPressed() {
+        self.delegate?.lbLongPressed()
+    }
+    //文字取消长按事件
+    func lbNoPressed() {
+        self.delegate?.lbNoPressed()
+    }
+    
+    
+    
+    
     
     //图片类型消息
     convenience init(image: UIImage, imageName: String, user: UserInfo, date: Date, mtype: ChatType){
@@ -67,7 +93,7 @@ class MessageItem: NSObject{
             size.width = 170
         }
         
-        let imageView = UIImageView(frame:CGRect(x: 0, y: 0, width: size.width, height: size.height))
+        let imageView = CanCopyImageView(frame:CGRect(x: 0, y: 0, width: size.width, height: size.height))
         imageView.image = image
         imageView.layer.cornerRadius = 5.0
         imageView.layer.masksToBounds = true
@@ -75,6 +101,15 @@ class MessageItem: NSObject{
         let insets:UIEdgeInsets =  (mtype == ChatType.mine ? MessageItem.getImageInsetsMine() : MessageItem.getImageInsetsSomeone())
         
         self.init(user:user, date:date, mtype:mtype, view:imageView, insets:insets, imageName: imageName)
+    }
+    
+    //图片长按
+    func imageLongPressed() {
+        self.delegate?.imageLongPressed()
+    }
+    
+    func imageNoPressed() {
+        self.delegate?.imageNoPressed()
     }
     
 }

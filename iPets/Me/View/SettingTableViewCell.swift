@@ -27,7 +27,7 @@ class SettingTableViewCell: UITableViewCell {
         
         //个人信息页-title
         let nameSize = sizeWithText(settingItem.name, font: settingPageNameFont, maxSize: CGSize(width: Width/2, height: self.frame.height))
-        let myName = UILabel(frame: CGRect(x: 20, y: 0, width: nameSize.width, height: 44))
+        let myName = UILabel(frame: CGRect(x: 20, y: 0, width: nameSize.width, height: 44).integral)
         myName.backgroundColor = UIColor.white
         myName.font = settingPageNameFont
         myName.textAlignment = .left
@@ -37,7 +37,8 @@ class SettingTableViewCell: UITableViewCell {
         if(settingItem.pic != nil || settingItem.lable != nil){
             //设置 帐号
             let lableSize = sizeWithText(settingItem.lable!, font: settingPageLabelFont, maxSize: CGSize(width: Width-myName.frame.maxX-50, height: self.frame.height))
-            let leble = UILabel(frame: CGRect(x: Width-lableSize.width-40, y: 0, width: lableSize.width, height: self.frame.height))
+            let leble = UILabel(frame: CGRect(x: Width-lableSize.width-40, y: 0,
+                                              width: lableSize.width, height: self.frame.height).integral)
             leble.backgroundColor = UIColor.white
             leble.font = settingPageLabelFont
             leble.textAlignment = .right

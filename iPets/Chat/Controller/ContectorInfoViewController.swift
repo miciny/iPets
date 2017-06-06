@@ -76,6 +76,8 @@ class ContectorInfoViewController: UIViewController, UITableViewDelegate, UITabl
                 contectorInfoData?.add([data1])
                 contectorInfoData?.add([data2])
                 contectorInfoData?.add([data3, data4])
+                
+                return
             }
         }
     }

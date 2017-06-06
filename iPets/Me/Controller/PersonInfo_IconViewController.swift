@@ -100,11 +100,12 @@ class PersonInfo_IconViewController: UIViewController, UIImagePickerControllerDe
             //从CoreData里读取数据
             let SettingDataArray = SQLLine.SelectAllData(entityNameOfSettingData)
             
-            //保存到最后一行
+            //保存setting 和 联系人  ，以后优化
             let result = SQLLine.UpdateSettingData(SettingDataArray.count-1, changeValue: imageData as AnyObject,
-                                            changeEntityName: settingDataNameOfMyIcon)
+                                                   changeEntityName: settingDataNameOfMyIcon)
+            let result1 = SQLLine.UpdateContectorsData(0, changeValue: imageData as AnyObject, changeEntityName: ContectorsNameOfIcon)
             //给出提示
-            result ? ToastView().showToast("保存成功！") : ToastView().showToast("保存失败！")
+            result && result1 ? ToastView().showToast("保存成功！") : ToastView().showToast("保存失败！")
             
             imageView!.image = image    //展示
             myInfo = UserInfo(name: myInfo.username, icon: image, nickname: myInfo.nickname) //把改变的image保存到icon

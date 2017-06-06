@@ -37,7 +37,7 @@ class MainChatTableViewCell: UITableViewCell {
         //聊天栏，名字
         let nameSize = sizeWithText(self.mainChatItem.name, font: chatListPageTitleFont, maxSize: CGSize(width: Width*2/3, height: chatIcon.frame.height/2))
         let chatName = UILabel(frame: CGRect(x: chatIcon.frame.maxX+10, y: chatIcon.frame.origin.y,
-            width: nameSize.width, height: chatIcon.frame.height/2))
+            width: nameSize.width, height: chatIcon.frame.height/2).integral)
         chatName.backgroundColor = UIColor.white
         chatName.font = chatListPageTitleFont
         chatName.textColor = UIColor.black
@@ -48,9 +48,10 @@ class MainChatTableViewCell: UITableViewCell {
         //聊天栏，文字
         if let labelStr = self.mainChatItem.lable{
             
-            let textSize = sizeWithText(labelStr, font: chatListPageTextFont, maxSize: CGSize(width: self.frame.width, height: chatIcon.frame.height/2))
+            let textSize = sizeWithText(labelStr, font: chatListPageTextFont,
+                                        maxSize: CGSize(width: self.frame.width-40, height: chatIcon.frame.height/2))
             let chatLb = UILabel(frame: CGRect(x: chatIcon.frame.maxX+10, y: chatIcon.frame.origin.y+chatIcon.frame.height/2,
-                                               width: textSize.width, height: chatIcon.frame.height/2))
+                                               width: textSize.width, height: chatIcon.frame.height/2).integral)
             chatLb.backgroundColor = UIColor.white
             chatLb.font = chatListPageTextFont
             chatLb.textColor = UIColor.gray
@@ -62,11 +63,11 @@ class MainChatTableViewCell: UITableViewCell {
             let str = DateToToString.getChatListTimeFormat(mainChatItem.time)
             let timeSize = sizeWithText(str, font: chatListPageTimeFont, maxSize: CGSize(width: Width-chatName.frame.maxX-10, height: chatIcon.frame.height/2))
             let chatTimeLb = UILabel(frame: CGRect(x: Width-timeSize.width-10, y: chatIcon.frame.origin.y,
-                                                   width: timeSize.width, height: chatIcon.frame.height/2))
+                                    width: timeSize.width, height: timeSize.height+4).integral) //解决多一条线的问题
             chatTimeLb.backgroundColor = UIColor.white
             chatTimeLb.font = chatListPageTimeFont
             chatTimeLb.textColor = UIColor.gray
-            chatTimeLb.textAlignment = .right
+            chatTimeLb.textAlignment = .center
             chatTimeLb.text = str
             self.addSubview(chatTimeLb)
         }

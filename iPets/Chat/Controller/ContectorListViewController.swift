@@ -178,8 +178,8 @@ class ContectorListViewController: UIViewController, UITableViewDelegate, UITabl
         //如果激活了searchBar 就从 contectorsDataDicSearch提取数据
         if searchBar.isActive {
             let contectorsList = contectorsDataDicSearch?.value(forKey: "$") as! NSArray
-            let data = contectorsList[indexPath.row]
-            let cell = ContectorListTableViewCell(data: data as! ContectorListViewDataModel, reuseIdentifier:cellId)
+            let data = contectorsList[indexPath.row] as! ContectorListViewDataModel
+            let cell = ContectorListTableViewCell(data: data, reuseIdentifier:cellId)
             
             return cell
         }
@@ -197,12 +197,13 @@ class ContectorListViewController: UIViewController, UITableViewDelegate, UITabl
         
         //如果激活了searchBar 就从 contectorsDataDicSearch提取数据
         if searchBar.isActive {
-            searchBar.isActive = false
             
             let contectorsList = contectorsDataDicSearch?.value(forKey: "$") as! NSArray
             let data = contectorsList[indexPath.row] as! ContectorListViewDataModel
             let guestContectorVC = ContectorInfoViewController()
             guestContectorVC.contectorName = data.name
+            
+            searchBar.isActive = false
             self.navigationController?.pushViewController(guestContectorVC, animated: true)
         }else{
             let contectorsList = contectorsDataDic?.value(forKey: allKeys[indexPath.section]) as! NSArray

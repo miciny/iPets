@@ -27,8 +27,8 @@ class GetInfo: NSObject {
         }else{
             let defaultIcon = UIImage(named: "defaultIcon")
             myIcon = defaultIcon!
-            myName = ""
-            myNickname = ""
+            myName = "毛彩元"
+            myNickname = "Xue"
         }
         
         return UserInfo(name: myName, icon: myIcon, nickname: myNickname)

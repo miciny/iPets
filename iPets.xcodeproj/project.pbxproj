@@ -18,6 +18,8 @@
 		E126FD151CFD6E7700DAFF84 /* TabbarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E126FD0F1CFD6E7700DAFF84 /* TabbarViewController.swift */; };
 		E14197D01CA1A6BE00EDD443 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E14197CE1CA1A6BE00EDD443 /* Main.storyboard */; };
 		E14197D51CA1A6BE00EDD443 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E14197D31CA1A6BE00EDD443 /* LaunchScreen.storyboard */; };
+		E16B35471EE64E9A00895094 /* CanCopyLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16B35461EE64E9A00895094 /* CanCopyLabel.swift */; };
+		E16B35491EE682D100895094 /* CanCopyImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16B35481EE682D100895094 /* CanCopyImageView.swift */; };
 		E17528321ED3E42600269EDF /* ImageCollectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E175282F1ED3E42600269EDF /* ImageCollectionModel.swift */; };
 		E17528331ED3E42600269EDF /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17528301ED3E42600269EDF /* ImageCollectionViewCell.swift */; };
 		E17528341ED3E42600269EDF /* ImageCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17528311ED3E42600269EDF /* ImageCollectionViewController.swift */; };
@@ -137,6 +139,8 @@
 		E14197CF1CA1A6BE00EDD443 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E14197D41CA1A6BE00EDD443 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E14197F01CA1AB9A00EDD443 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = iPets/Info.plist; sourceTree = SOURCE_ROOT; };
+		E16B35461EE64E9A00895094 /* CanCopyLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CanCopyLabel.swift; sourceTree = "<group>"; };
+		E16B35481EE682D100895094 /* CanCopyImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CanCopyImageView.swift; sourceTree = "<group>"; };
 		E175282F1ED3E42600269EDF /* ImageCollectionModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCollectionModel.swift; sourceTree = "<group>"; };
 		E17528301ED3E42600269EDF /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		E17528311ED3E42600269EDF /* ImageCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewController.swift; sourceTree = "<group>"; };
@@ -339,9 +343,20 @@
 			path = ../../../../Users/miciny/ToGitHub/iPets/iPets/Universal;
 			sourceTree = DEVELOPER_DIR;
 		};
+		E16B35451EE64E6600895094 /* MCYCopySDK */ = {
+			isa = PBXGroup;
+			children = (
+				E16B35461EE64E9A00895094 /* CanCopyLabel.swift */,
+				E16B35481EE682D100895094 /* CanCopyImageView.swift */,
+			);
+			name = MCYCopySDK;
+			path = ../../../../Users/miciny/ToGitHub/iPets/iPets/SDKs/MCYCopySDK;
+			sourceTree = DEVELOPER_DIR;
+		};
 		E175282C1ED3E2BC00269EDF /* SDKs */ = {
 			isa = PBXGroup;
 			children = (
+				E16B35451EE64E6600895094 /* MCYCopySDK */,
 				E175283B1ED3E59400269EDF /* MCYDataSaveSDK */,
 				E175282E1ED3E33F00269EDF /* MCYPicBrowserSDK */,
 				E175282D1ED3E33A00269EDF /* MCYPicChooseSDK */,
@@ -887,6 +902,7 @@
 				E17528A21ED406C600269EDF /* MainChatListViewController.swift in Sources */,
 				E17528E21ED40A9300269EDF /* ToastView.swift in Sources */,
 				E175283A1ED3E52600269EDF /* SingleChatPicView.swift in Sources */,
+				E16B35491EE682D100895094 /* CanCopyImageView.swift in Sources */,
 				E1ADD75D1ED6CD29000BCBC4 /* MyTimer.swift in Sources */,
 				E17528F31ED40B1800269EDF /* DateToToString.swift in Sources */,
 				E17528F51ED40B1800269EDF /* GetMyInfo.swift in Sources */,
@@ -903,6 +919,7 @@
 				E17528561ED3E8AE00269EDF /* SellBuyCollectionFooterView.swift in Sources */,
 				E17528821ED404A400269EDF /* PersonInfo_TDCodeImageViewController.swift in Sources */,
 				E17528551ED3E8AE00269EDF /* SearchTableViewCell.swift in Sources */,
+				E16B35471EE64E9A00895094 /* CanCopyLabel.swift in Sources */,
 				E17528E81ED40B0F00269EDF /* Protocol.swift in Sources */,
 				E17528731ED4048E00269EDF /* SettingDataModel.swift in Sources */,
 				E17528F61ED40B1800269EDF /* PinYinString.swift in Sources */,
