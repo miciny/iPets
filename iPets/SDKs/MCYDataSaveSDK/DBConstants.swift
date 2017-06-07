@@ -8,15 +8,7 @@
 
 import Foundation
 
-
-//setting的数据库
-let entityNameOfSettingData = "SettingData"
-let settingDataNameOfMyIcon = "myIcon"
-let settingDataNameOfMyAddress = "myAddress"
-let settingDataNameOfMySex = "mySex"
-let settingDataNameOfMyMotto = "myMotto"
-let settingDataNameOfMyNickname = "myNickname"
-let settingDataNameOfMyName = "myName"
+let myNikename = "Xue"
 
 //chatList的数据库
 let entityNameOfChatList = "ChatList"

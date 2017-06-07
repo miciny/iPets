@@ -359,7 +359,7 @@ class ChatViewController: UIViewController, ChatDataSource, UITextViewDelegate, 
     func initData(){
         
         myInfo = UserInfo(name: myInfo.username ,icon: myInfo.icon, nickname: myInfo.nickname)
-        yourNickname = youInfo.nickname
+        self.updataYourInfo()
         isOut = true
         
         //读取数据
@@ -404,6 +404,23 @@ class ChatViewController: UIViewController, ChatDataSource, UITextViewDelegate, 
         }
     }
     
+    func updataYourInfo(){
+        let dataArray = SQLLine.SelectAllData(entityNameOfContectors)
+        yourNickname = youInfo.nickname
+        //保存联系人
+        for data in dataArray{
+            let nickName = (data as AnyObject).value(forKey: ContectorsNameOfNickname)! as! String
+            if nickName == yourNickname{
+                let iconData = (data as AnyObject).value(forKey: ContectorsNameOfIcon)! as! Data
+                let icon = ChangeValue.dataToImage(iconData)
+                let name = (data as AnyObject).value(forKey: ContectorsNameOfName)! as! String
+                youInfo.icon = icon
+                youInfo.username = name
+                break
+            }
+        }
+    }
+    
     //保存plist
     func saveChatData(){
         //如果是进入选择图片的界面，isOut为fasle 就直接返回了，不保存了
@@ -441,8 +458,17 @@ class ChatViewController: UIViewController, ChatDataSource, UITextViewDelegate, 
             }
         }
         
-        //如果没发送过，就不保存
+        //如果没发送过，就不保存  更新头像和 聊天名
         if(!isChanged){
+            for i in 0 ..< chatList.count {
+                let title = (chatList[i] as AnyObject).value(forKey: ChatListNameOfNickname) as! String
+                if(title == yourNickname){
+                    let imageData = ChangeValue.imageToData(youInfo.icon!)
+                    let _ = SQLLine.UpdateChatListData(i, changeValue: imageData as AnyObject, changeEntityName: ChatListNameOfIcon)
+                    let _ = SQLLine.UpdateChatListData(i, changeValue: youInfo.username as AnyObject, changeEntityName: ChatListNameOfTitle)
+                    break
+                }
+            }
             return
         }
         
@@ -491,7 +517,7 @@ class ChatViewController: UIViewController, ChatDataSource, UITextViewDelegate, 
 
 //点击头像进入个人信息页的代理
 extension ChatViewController: ChatTableViewDelegate{
-    func pushToView(name: String) {
+    func pushToPersonInfoView(name: String) {
         let guestContectorVC = ContectorInfoViewController()
         guestContectorVC.contectorName = name
         self.navigationController?.pushViewController(guestContectorVC, animated: true)

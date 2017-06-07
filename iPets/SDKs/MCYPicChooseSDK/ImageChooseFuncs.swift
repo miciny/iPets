@@ -17,7 +17,7 @@ func getThumbnailImage(asset: PHAsset, imageResult: @escaping (_ image: UIImage)
     options.isSynchronous = true
     
     //根据单元格的尺寸计算我们需要的缩略图大小
-    let assetGridThumbnailSize = CGSize(width: (Width)/3, height: (Width)/3)
+    let assetGridThumbnailSize = CGSize(width: (Width)/3.1, height: (Width)/3.1)
     
     PHCachingImageManager.default().requestImage(for: asset,
                                                  targetSize: assetGridThumbnailSize,
@@ -42,6 +42,7 @@ func getBigThumbnailImage(asset: PHAsset, imageResult: @escaping (_ image: UIIma
                                                  options: options) { (image, nfo) in
                                                     imageResult(image!)
     }
+    
 }
 
 func getRetainImage(asset: PHAsset, imageResult: @escaping (_ image: UIImage)->()){

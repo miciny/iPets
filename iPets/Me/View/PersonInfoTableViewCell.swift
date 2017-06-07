@@ -59,7 +59,8 @@ class PersonInfoTableViewCell: UITableViewCell {
         }else{
             //个人信息页-其他栏
             let lableSize = sizeWithText(infoItem.lable!, font: settingPageLabelFont, maxSize: CGSize(width: Width-myName.frame.maxX-50, height: self.frame.height))
-            let leble = UILabel(frame: CGRect(x: Width-lableSize.width-40, y: 0, width: lableSize.width, height: self.frame.height))
+            let leble = UILabel(frame: CGRect(x: Width-lableSize.width-40, y: 0,
+                                              width: lableSize.width, height: self.frame.height).integral)
             leble.backgroundColor = UIColor.white
             leble.font = settingPageLabelFont
             leble.textColor = UIColor.gray

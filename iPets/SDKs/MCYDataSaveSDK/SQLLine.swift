@@ -49,32 +49,6 @@ class SQLLine: NSObject{
         }
     }
     
-    
-    //======================================SettingData================================
-    
-    //SettingData插入一条数据
-    class func InsertSettingData(_ pic: Data, name: String, nickname: String, sex: String, address: String, motto: String) -> Bool{
-        let allDataSource = (UIApplication.shared.delegate as! AppDelegate).managedObjectContext
-        let row : AnyObject = NSEntityDescription.insertNewObject(forEntityName: entityNameOfSettingData, into: allDataSource)
-        
-        row.setValue(pic, forKey: settingDataNameOfMyIcon)
-        row.setValue(name, forKey: settingDataNameOfMyName)
-        row.setValue(nickname, forKey: settingDataNameOfMyNickname)
-        row.setValue(sex, forKey: settingDataNameOfMySex)
-        row.setValue(address, forKey: settingDataNameOfMyAddress)
-        row.setValue(motto, forKey: settingDataNameOfMyMotto)
-        
-        return saveData()
-    }
-    //SettingData改一条的某个数据
-    class func UpdateSettingData(_ indexPath: Int, changeValue: AnyObject, changeEntityName: String) -> Bool{
-        var data = NSArray()
-        data = SQLLine.SelectAllData(entityNameOfSettingData)
-        
-        (data[indexPath] as AnyObject).setValue(changeValue, forKey: changeEntityName)
-        return saveData()
-    }
-    
     //======================================chatlist================================
     
     //chatlist插入一条数据

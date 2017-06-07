@@ -35,17 +35,21 @@ class PersonInfoViewController: UIViewController, UITableViewDelegate, UITableVi
         infoData = NSMutableArray()
         
         //从CoreData里读取数据
-        let SettingDataArray = SQLLine.SelectAllData(entityNameOfSettingData)
+        let dataArray = SQLLine.SelectAllData(entityNameOfContectors)
         
         var sex = ""
         var address = ""
         var motto = ""
         
         //如果有数据，就读取数据
-        if(SettingDataArray.count > 0){
-            sex = (SettingDataArray.lastObject! as AnyObject).value(forKey: settingDataNameOfMySex)! as! String
-            address = (SettingDataArray.lastObject! as AnyObject).value(forKey: settingDataNameOfMyAddress)! as! String
-            motto = (SettingDataArray.lastObject! as AnyObject).value(forKey: settingDataNameOfMyMotto)! as! String
+        for data in dataArray{
+            let nickName = (data as AnyObject).value(forKey: ContectorsNameOfNickname)! as! String
+            if nickName == myNikename{
+                sex = (data as AnyObject).value(forKey: ContectorsNameOfSex)! as! String
+                address = (data as AnyObject).value(forKey: ContectorsNameOfAddress)! as! String
+                motto = (data as AnyObject).value(forKey: ContectorsNameOfRemark)! as! String
+                break
+            }
         }
         
         let infoOne1 = PersonInfoDataModel(pic: myInfo.icon!, name: "头像")

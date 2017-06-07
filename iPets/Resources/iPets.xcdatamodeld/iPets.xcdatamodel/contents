@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10171" systemVersion="15E65" minimumToolsVersion="Xcode 7.0">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="12141" systemVersion="16E195" minimumToolsVersion="Xcode 7.0" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
     <entity name="ChatList" syncable="YES">
         <attribute name="icon" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="lable" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="nickname" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="time" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="time" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="Contectors" syncable="YES">
@@ -24,21 +24,12 @@
     </entity>
     <entity name="SearchRecord" syncable="YES">
         <attribute name="label" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="time" optional="YES" attributeType="Date" syncable="YES"/>
-    </entity>
-    <entity name="SettingData" syncable="YES">
-        <attribute name="myAddress" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="myIcon" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
-        <attribute name="myMotto" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="myName" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="myNickname" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="mySex" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="time" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
     </entity>
     <elements>
         <element name="ChatList" positionX="-63" positionY="36" width="128" height="120"/>
         <element name="Contectors" positionX="-63" positionY="36" width="128" height="150"/>
         <element name="MyAddress" positionX="-63" positionY="27" width="128" height="105"/>
-        <element name="SettingData" positionX="-63" positionY="-18" width="128" height="135"/>
         <element name="SearchRecord" positionX="-63" positionY="63" width="128" height="75"/>
     </elements>
 </model>

@@ -21,7 +21,8 @@ class ImageCollectionViewCell: UICollectionViewCell {
         super.init(frame: frame)
         
         dataPic = UIImageView(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height))
-        dataPic!.contentMode = .scaleToFill
+        dataPic!.contentMode = .scaleAspectFill  //比例不变，但是是填充整个ImageView
+        dataPic!.clipsToBounds = true
         self.addSubview(dataPic!)
         
         checkPic = UIImageView(frame: CGRect(x: self.frame.width-21, y: self.frame.height-21, width: 20, height: 20))

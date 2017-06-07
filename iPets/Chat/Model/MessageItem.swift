@@ -58,6 +58,7 @@ class MessageItem: NSObject, CanCopyLabelDelegate, CanCopyImageDelegate{
         let size =  sizeWithText(body as String, font: chatPageTextFont, maxSize: CGSize(width: width, height: height))
         
         let label =  CanCopyLabel(frame:CGRect(x: 0, y: 0, width: size.width, height: size.height))
+        label.canCopyLabelFrom = CanCopyLabelFrom.chat
         label.numberOfLines = 0
         label.lineBreakMode = NSLineBreakMode.byWordWrapping
         label.text = (body.length != 0 ? body as String : "")

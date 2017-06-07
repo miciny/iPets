@@ -2,7 +2,10 @@ import UIKit
 
 //点击头像进入个人信息页的代理
 protocol ChatTableViewCellDelegate {
-    func pushToView(name: String)
+    
+    func pushToPersonInfoView(name: String)
+    
+    func showPic(_ pic: [UIImage], index: Int, imageDate: [Date], frame: CGRect)
 }
 
 //信息体加用户头像
@@ -12,8 +15,7 @@ class ChatTableViewCell: UITableViewCell, MessageItemDelegate{
     var bubbleView: BubbleItem! //背景气泡
     var avatarImage: UIImageView! //用户icon
     var msgItem: MessageItem!
-    var picDelegate: SingleChatPicViewDelegate?
-    var pushDelegate: ChatTableViewCellDelegate?
+    var cellDelegate: ChatTableViewCellDelegate?
     var chatName: String!
     
     required init?(coder aDecoder: NSCoder) {
@@ -127,44 +129,50 @@ class ChatTableViewCell: UITableViewCell, MessageItemDelegate{
 
 //========================================头像点击事件==================================
     func tapedIcon(_ sender: UITapGestureRecognizer){
-        self.pushDelegate?.pushToView(name: self.msgItem.user.username!)        //进入个人信息页
+        self.cellDelegate?.pushToPersonInfoView(name: self.msgItem.user.username!)        //进入个人信息页
     }
     
     
 //========================================图片点击事件==================================
     func tapedPic(_ sender: UITapGestureRecognizer){
         
-        let frame = sender.view?.superview?.convert((sender.view?.frame)!, to: sender.view?.superview?.superview?.superview?.superview)
-        
-        let imageNameH = "H" + self.msgItem.imageName!
-        var imageArray = [UIImage]()
-        var imageDate = [Date]()
+        let wait = WaitView()
+        wait.showWait("加载中")
+        var imageArray: [UIImage]?
+        var imageDate: [Date]?
         var tag = 0 //点击的第几张图片
         var j = 0 //记录总图片数
-        //读取聊天的图片数据
-        let chatsData = SaveDataModel()
-        let chatCacheImages = SaveCacheDataModel()
         
-        let singleChatData = chatsData.loadChatsDataFromTempDirectory(chatName+".plist", key: chatName)
-        for i in 0 ..< singleChatData.count {
-            if singleChatData[i].chatImage != "" {
-                let imageName = "H"+singleChatData[i].chatImage
-                let imageData = chatCacheImages.loadImageFromChatCacheDir(chatName, imageName: imageName)
-                let image = ChangeValue.dataToImage(imageData)
-                imageArray.append(image)
-                imageDate.append(singleChatData[i].chatDate)
-                
-                if imageName == imageNameH {
-                    tag = j
+        globalQueue.async(execute: {
+            let frame = sender.view?.superview?.convert((sender.view?.frame)!, to: sender.view?.superview?.superview?.superview?.superview)
+            let imageNameH = "H" + self.msgItem.imageName!
+            imageArray = [UIImage]()
+            imageDate = [Date]()
+            //读取聊天的图片数据
+            let chatsData = SaveDataModel()
+            let chatCacheImages = SaveCacheDataModel()
+            
+            let singleChatData = chatsData.loadChatsDataFromTempDirectory(self.chatName+".plist", key: self.chatName)
+            for i in 0 ..< singleChatData.count {
+                if singleChatData[i].chatImage != "" {
+                    let imageName = "H"+singleChatData[i].chatImage
+                    let imageData = chatCacheImages.loadImageFromChatCacheDir(self.chatName, imageName: imageName)
+                    let image = ChangeValue.dataToImage(imageData)
+                    imageArray!.append(image)
+                    imageDate!.append(singleChatData[i].chatDate)
+                    
+                    if imageName == imageNameH {
+                        tag = j
+                    }
+                    j += 1
                 }
-                j += 1
             }
-        }
-        
-        self.picDelegate?.showPic(imageArray, index: tag, imageDate: imageDate, frame: frame!)
-    }
-    
-    func tapedText(){
-        print("taped text")
+            mainQueue.async(execute: {
+                wait.hideView()
+                self.cellDelegate?.showPic(imageArray!, index: tag, imageDate: imageDate!, frame: frame!)
+                imageArray = nil
+                imageDate = nil
+            })
+        })
     }
 }

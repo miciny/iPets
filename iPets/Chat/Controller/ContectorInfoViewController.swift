@@ -199,15 +199,15 @@ class ContectorInfoViewController: UIViewController, UITableViewDelegate, UITabl
         chatView.hidesBottomBarWhenPushed = true
         
         //导航
-        let viewArray = NSMutableArray()
-        viewArray.addObjects(from: (self.navigationController?.viewControllers)!)
-        //删两次
-        viewArray.removeObject(at: 1)
-        viewArray.removeObject(at: 1)
+        let tabView = (self.navigationController?.viewControllers[0])!
+        var viewArray = (self.navigationController?.viewControllers)!
+        viewArray.removeAll()
         
-        viewArray.add(chatView)
+        viewArray.append(tabView)
+        viewArray.append(chatView)
         //重新设置导航器，执行动画
-        self.navigationController?.setViewControllers(viewArray as NSArray as! [UIViewController], animated: true)
+        self.navigationController?.setViewControllers(viewArray, animated: true)
+        
     }
 
     override func didReceiveMemoryWarning() {

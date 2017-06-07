@@ -43,20 +43,6 @@ protocol PassPhotosDelegate{
     func passPhotos(_ selected: [ImageCollectionModel])
 }
 
-//寻宠界面，点击图片事件
-protocol FindPetsCellViewDelegate{
-    func showPic(_ pic: [UIImage], index: Int, frame: [CGRect])
-}
-
-//聊天界面，点击图片事件
-protocol SingleChatPicViewDelegate{
-    func showPic(_ pic: [UIImage], index: Int, imageDate: [Date], frame: CGRect)
-}
-
-//发布寻宠界面，点击＋ 事件
-protocol SendFindMyPetsInfoCellViewDelegate{
-    func addMorePic()
-}
 
 //搜索协议
 protocol SearchViewDelegate{

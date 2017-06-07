@@ -8,7 +8,7 @@ enum ChatBubbleTypingType{
 
 //点击头像进入个人信息页的代理
 protocol ChatTableViewDelegate {
-    func pushToView(name: String)
+    func pushToPersonInfoView(name: String)
 }
 
 class ChatTableView: UITableView, UITableViewDelegate, UITableViewDataSource{
@@ -22,7 +22,7 @@ class ChatTableView: UITableView, UITableViewDelegate, UITableViewDataSource{
     
     var pushDelegate: ChatTableViewDelegate?
     
-    fileprivate let picView = SingleChatPicView() //展示图片的
+    fileprivate let picView = PicsBrowserView() //展示图片的
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -206,24 +206,19 @@ class ChatTableView: UITableView, UITableViewDelegate, UITableViewDataSource{
         let data = section[indexPath.row - 1]
         
         let cell =  ChatTableViewCell(data: data as! MessageItem, reuseIdentifier: cellId, chatName: chatTitle)
-        cell.picDelegate = self
-        cell.pushDelegate = self
+        cell.cellDelegate = self
         return cell
-    }
-}
-
-extension ChatTableView: SingleChatPicViewDelegate{
-    
-    func showPic(_ pic: [UIImage], index: Int, imageDate: [Date], frame: CGRect) {
-        picView.setUpPic(pic, index: index, imageDate: imageDate, frame: frame)
     }
 }
 
 //点击头像进入个人信息页的代理
 extension ChatTableView: ChatTableViewCellDelegate{
-    func pushToView(name: String) {
-        self.pushDelegate?.pushToView(name: name)
+    func pushToPersonInfoView(name: String) {
+        self.pushDelegate?.pushToPersonInfoView(name: name)
     }
     
+    func showPic(_ pic: [UIImage], index: Int, imageDate: [Date], frame: CGRect) {
+        picView.setUpSingleFramePicBrowser(pic, index: index, imageDate: imageDate, frame: frame)
+    }
 }
 

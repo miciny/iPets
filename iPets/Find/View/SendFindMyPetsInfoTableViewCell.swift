@@ -8,6 +8,11 @@
 
 import UIKit
 
+//发布寻宠界面，点击＋ 事件
+protocol SendFindMyPetsInfoCellViewDelegate{
+    func addMorePic()
+}
+
 class SendFindMyPetsInfoTableViewCell: UITableViewCell {
     
     var sendInfoItem: SendFindMyPetsInfoModel!
@@ -65,6 +70,8 @@ class SendFindMyPetsInfoTableViewCell: UITableViewCell {
                 
                 let myPic = UIImageView(frame: CGRect(x: 20+(singleWidth+10)*CGFloat(Int(i%4)), y: 100*CGFloat(Int(i/4)+1), width: singleWidth, height: singleWidth))
                 myPic.backgroundColor = UIColor.clear
+                myPic.contentMode = .scaleAspectFill  //比例不变，但是是填充整个ImageView
+                myPic.clipsToBounds = true
                 myPic.layer.masksToBounds = true //不然设置边角没用
                 
                 //先显示用户的图，在现实加号
@@ -75,7 +82,7 @@ class SendFindMyPetsInfoTableViewCell: UITableViewCell {
                     //给add按钮添加点击事件
                     myPic.image = UIImage(named: "addMore")
                     myPic.isUserInteractionEnabled = true
-                    let tap = UITapGestureRecognizer(target: self, action: #selector(SendFindMyPetsInfoTableViewCell.selectedAddMorePic))
+                    let tap = UITapGestureRecognizer(target: self, action: #selector(self.selectedAddMorePic))
                     myPic.addGestureRecognizer(tap)
                     self.addSubview(myPic)
                 }

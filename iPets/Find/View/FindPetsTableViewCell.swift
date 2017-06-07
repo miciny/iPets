@@ -9,6 +9,13 @@
 import UIKit
 import Kingfisher
 
+//寻宠界面，点击图片事件
+protocol FindPetsCellViewDelegate{
+    func showPic(_ pic: [UIImage], index: Int, frame: [CGRect])
+    
+    func pushToPersonInfoView(name: String)
+}
+
 class FindPetsTableViewCell: UITableViewCell, UIAlertViewDelegate{
     
     var delegate: FindPetsCellViewDelegate?
@@ -16,7 +23,7 @@ class FindPetsTableViewCell: UITableViewCell, UIAlertViewDelegate{
     
     var iconView = UIImageView()
     var nameView = UILabel()
-    var textView = UILabel()
+    var textView = CanCopyLabel()  //能复制
     var pictureView = [UIImageView]()
     var timeView = UILabel()
     var deleteView = UIButton()
@@ -60,7 +67,6 @@ class FindPetsTableViewCell: UITableViewCell, UIAlertViewDelegate{
         let model = modelFrame?.myCellModel
         
         //是我就显示我的名字，如果是别人的，可以考虑循环查找
-        //坑爹啊，这个地方耗时啊，滑动卡啊，也开个线程查找吧
         
         globalQueue.async(execute: {
             //这里写需要放到子线程做的耗时的代码
@@ -72,6 +78,7 @@ class FindPetsTableViewCell: UITableViewCell, UIAlertViewDelegate{
             mainQueue.async(execute: {
                 self.iconView.image = icon as? UIImage //这里返回主线程，写需要主线程执行的代码
                 self.nameView.text = name as? String //名字
+                self.clickIcon()
                 
                 if isMy{
                     self.deleteView.setTitle("删除", for: UIControlState())
@@ -90,6 +97,7 @@ class FindPetsTableViewCell: UITableViewCell, UIAlertViewDelegate{
             self.textView.font = textFont
             self.addSubview(self.textView)
             self.textView.text = model!.text
+            self.textView.canCopyLabelFrom = CanCopyLabelFrom.find
         }
         
         //hide
@@ -123,6 +131,22 @@ class FindPetsTableViewCell: UITableViewCell, UIAlertViewDelegate{
         
     }
     
+//===============================点击头像和名字，进入个人信息页==================
+    func clickIcon(){
+        self.iconView.isUserInteractionEnabled = true
+        self.nameView.isUserInteractionEnabled = true
+        let tap = UITapGestureRecognizer(target: self, action: #selector(goPersonInfo))
+        let tap1 = UITapGestureRecognizer(target: self, action: #selector(goPersonInfo))
+        self.nameView.addGestureRecognizer(tap)
+        self.iconView.addGestureRecognizer(tap1)
+    }
+    
+    func goPersonInfo(){
+        let name = self.nameView.text!
+        self.delegate?.pushToPersonInfoView(name: name)
+    }
+    
+//================================图片的展示=====================
     func showPic(_ pics: [UIImage]){
         let picViewCount = self.pictureView.count
         for i in 0 ..< picViewCount {
@@ -181,9 +205,7 @@ class FindPetsTableViewCell: UITableViewCell, UIAlertViewDelegate{
             frames.append(frame)
         }
 
-        
         var images = [UIImage]()
-        
         let wait = WaitView()
         wait.showWait("加载中")
         
@@ -198,17 +220,23 @@ class FindPetsTableViewCell: UITableViewCell, UIAlertViewDelegate{
             mainQueue.async(execute: {
                 wait.hideView()
                 self.delegate?.showPic(images, index: tag, frame: frames)
+                images = [UIImage]()
             })
         })
     }
     
-    //设置cell显示的frame
+//=================================设置cell显示的frame=================================
     func settingFrame(){
         self.pictureView = [UIImageView]()
         if(modelFrame?.myCellModel?.picture != nil){
             let count = (modelFrame?.myCellModel?.picture?.count)! as Int
             for j in 0 ..< count {
-                self.pictureView.append(UIImageView())
+                
+                let myPic = UIImageView()
+                myPic.contentMode = .scaleAspectFill  //比例不变，但是是填充整个ImageView
+                myPic.clipsToBounds = true
+                
+                self.pictureView.append(myPic)
                 self.pictureView[j].frame = modelFrame!.pictureF[j]
                 self.addSubview(self.pictureView[j])
             }

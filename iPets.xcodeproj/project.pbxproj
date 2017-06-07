@@ -16,6 +16,7 @@
 		E10E446D1CC62BA700D9992A /* Navigation.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E10E446C1CC62BA700D9992A /* Navigation.xcassets */; };
 		E126FD101CFD6E7700DAFF84 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E126FD0A1CFD6E7700DAFF84 /* AppDelegate.swift */; };
 		E126FD151CFD6E7700DAFF84 /* TabbarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E126FD0F1CFD6E7700DAFF84 /* TabbarViewController.swift */; };
+		E12A389F1EE7B19900755C6C /* ActionMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12A389E1EE7B19900755C6C /* ActionMenuView.swift */; };
 		E14197D01CA1A6BE00EDD443 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E14197CE1CA1A6BE00EDD443 /* Main.storyboard */; };
 		E14197D51CA1A6BE00EDD443 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E14197D31CA1A6BE00EDD443 /* LaunchScreen.storyboard */; };
 		E16B35471EE64E9A00895094 /* CanCopyLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16B35461EE64E9A00895094 /* CanCopyLabel.swift */; };
@@ -23,8 +24,7 @@
 		E17528321ED3E42600269EDF /* ImageCollectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E175282F1ED3E42600269EDF /* ImageCollectionModel.swift */; };
 		E17528331ED3E42600269EDF /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17528301ED3E42600269EDF /* ImageCollectionViewCell.swift */; };
 		E17528341ED3E42600269EDF /* ImageCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17528311ED3E42600269EDF /* ImageCollectionViewController.swift */; };
-		E17528381ED3E52000269EDF /* FindPetsPicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17528371ED3E52000269EDF /* FindPetsPicView.swift */; };
-		E175283A1ED3E52600269EDF /* SingleChatPicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17528391ED3E52600269EDF /* SingleChatPicView.swift */; };
+		E175283A1ED3E52600269EDF /* PicsBrowserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17528391ED3E52600269EDF /* PicsBrowserView.swift */; };
 		E17528401ED3E63E00269EDF /* DBConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E175283E1ED3E63E00269EDF /* DBConstants.swift */; };
 		E17528411ED3E63E00269EDF /* SQLLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = E175283F1ED3E63E00269EDF /* SQLLine.swift */; };
 		E17528431ED3E64600269EDF /* CacheConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17528421ED3E64600269EDF /* CacheConstants.swift */; };
@@ -86,7 +86,6 @@
 		E17528D11ED409B100269EDF /* iPets.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E17528CF1ED409B100269EDF /* iPets.xcdatamodeld */; };
 		E17528D51ED40A5A00269EDF /* InternetExplorerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17528D31ED40A5A00269EDF /* InternetExplorerViewController.swift */; };
 		E17528D61ED40A5A00269EDF /* RichScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17528D41ED40A5A00269EDF /* RichScanViewController.swift */; };
-		E17528DE1ED40A9300269EDF /* ActionMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17528D81ED40A9300269EDF /* ActionMenuView.swift */; };
 		E17528DF1ED40A9300269EDF /* LoadMoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17528D91ED40A9300269EDF /* LoadMoreView.swift */; };
 		E17528E01ED40A9300269EDF /* MyBottomMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17528DA1ED40A9300269EDF /* MyBottomMenuView.swift */; };
 		E17528E11ED40A9300269EDF /* RefreshHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17528DB1ED40A9300269EDF /* RefreshHeaderView.swift */; };
@@ -135,6 +134,7 @@
 		E10E446C1CC62BA700D9992A /* Navigation.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Navigation.xcassets; sourceTree = "<group>"; };
 		E126FD0A1CFD6E7700DAFF84 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E126FD0F1CFD6E7700DAFF84 /* TabbarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabbarViewController.swift; sourceTree = "<group>"; };
+		E12A389E1EE7B19900755C6C /* ActionMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionMenuView.swift; sourceTree = "<group>"; };
 		E14197C71CA1A6BE00EDD443 /* iPets.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iPets.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E14197CF1CA1A6BE00EDD443 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E14197D41CA1A6BE00EDD443 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -144,8 +144,7 @@
 		E175282F1ED3E42600269EDF /* ImageCollectionModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCollectionModel.swift; sourceTree = "<group>"; };
 		E17528301ED3E42600269EDF /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		E17528311ED3E42600269EDF /* ImageCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewController.swift; sourceTree = "<group>"; };
-		E17528371ED3E52000269EDF /* FindPetsPicView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindPetsPicView.swift; sourceTree = "<group>"; };
-		E17528391ED3E52600269EDF /* SingleChatPicView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleChatPicView.swift; sourceTree = "<group>"; };
+		E17528391ED3E52600269EDF /* PicsBrowserView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PicsBrowserView.swift; sourceTree = "<group>"; };
 		E175283E1ED3E63E00269EDF /* DBConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DBConstants.swift; sourceTree = "<group>"; };
 		E175283F1ED3E63E00269EDF /* SQLLine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SQLLine.swift; sourceTree = "<group>"; };
 		E17528421ED3E64600269EDF /* CacheConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheConstants.swift; sourceTree = "<group>"; };
@@ -207,7 +206,6 @@
 		E17528D01ED409B100269EDF /* iPets.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = iPets.xcdatamodel; sourceTree = "<group>"; };
 		E17528D31ED40A5A00269EDF /* InternetExplorerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InternetExplorerViewController.swift; sourceTree = "<group>"; };
 		E17528D41ED40A5A00269EDF /* RichScanViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RichScanViewController.swift; sourceTree = "<group>"; };
-		E17528D81ED40A9300269EDF /* ActionMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionMenuView.swift; sourceTree = "<group>"; };
 		E17528D91ED40A9300269EDF /* LoadMoreView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadMoreView.swift; sourceTree = "<group>"; };
 		E17528DA1ED40A9300269EDF /* MyBottomMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyBottomMenuView.swift; sourceTree = "<group>"; };
 		E17528DB1ED40A9300269EDF /* RefreshHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefreshHeaderView.swift; sourceTree = "<group>"; };
@@ -390,7 +388,6 @@
 		E17528351ED3E47B00269EDF /* Single */ = {
 			isa = PBXGroup;
 			children = (
-				E17528391ED3E52600269EDF /* SingleChatPicView.swift */,
 			);
 			name = Single;
 			sourceTree = "<group>";
@@ -398,7 +395,7 @@
 		E17528361ED3E48D00269EDF /* More */ = {
 			isa = PBXGroup;
 			children = (
-				E17528371ED3E52000269EDF /* FindPetsPicView.swift */,
+				E17528391ED3E52600269EDF /* PicsBrowserView.swift */,
 			);
 			name = More;
 			sourceTree = "<group>";
@@ -675,9 +672,9 @@
 		E17528D71ED40A6800269EDF /* View */ = {
 			isa = PBXGroup;
 			children = (
-				E17528D81ED40A9300269EDF /* ActionMenuView.swift */,
-				E17528D91ED40A9300269EDF /* LoadMoreView.swift */,
+				E12A389E1EE7B19900755C6C /* ActionMenuView.swift */,
 				E17528DA1ED40A9300269EDF /* MyBottomMenuView.swift */,
+				E17528D91ED40A9300269EDF /* LoadMoreView.swift */,
 				E17528DB1ED40A9300269EDF /* RefreshHeaderView.swift */,
 				E17528DC1ED40A9300269EDF /* ToastView.swift */,
 				E17528DD1ED40A9300269EDF /* WaitView.swift */,
@@ -861,7 +858,6 @@
 			files = (
 				E17528E91ED40B0F00269EDF /* UniversalConstants.swift in Sources */,
 				E17528BB1ED406DC00269EDF /* ChatTableView.swift in Sources */,
-				E17528381ED3E52000269EDF /* FindPetsPicView.swift in Sources */,
 				E17528D51ED40A5A00269EDF /* InternetExplorerViewController.swift in Sources */,
 				E17528F71ED40B1800269EDF /* UniversalFuncs.swift in Sources */,
 				E17528571ED3E8AE00269EDF /* SellBuyCollectionHeaderView.swift in Sources */,
@@ -877,7 +873,6 @@
 				E17528AF1ED406D000269EDF /* ContectorModel.swift in Sources */,
 				E17528431ED3E64600269EDF /* CacheConstants.swift in Sources */,
 				E126FD151CFD6E7700DAFF84 /* TabbarViewController.swift in Sources */,
-				E17528DE1ED40A9300269EDF /* ActionMenuView.swift in Sources */,
 				E17528781ED4049900269EDF /* SettingTableViewCell.swift in Sources */,
 				E17528661ED4034D00269EDF /* SearchResultViewController.swift in Sources */,
 				E17528AC1ED406D000269EDF /* BubbleItem.swift in Sources */,
@@ -896,12 +891,13 @@
 				E17528541ED3E8AE00269EDF /* CycleView.swift in Sources */,
 				E175286D1ED4045800269EDF /* Cache.swift in Sources */,
 				E17528611ED3E95300269EDF /* SellBuyCollectionModel.swift in Sources */,
+				E12A389F1EE7B19900755C6C /* ActionMenuView.swift in Sources */,
 				E17528F21ED40B1800269EDF /* ChangeValue.swift in Sources */,
 				E17528F41ED40B1800269EDF /* Extension.swift in Sources */,
 				E17528471ED3E6DC00269EDF /* SaveDataModel.swift in Sources */,
 				E17528A21ED406C600269EDF /* MainChatListViewController.swift in Sources */,
 				E17528E21ED40A9300269EDF /* ToastView.swift in Sources */,
-				E175283A1ED3E52600269EDF /* SingleChatPicView.swift in Sources */,
+				E175283A1ED3E52600269EDF /* PicsBrowserView.swift in Sources */,
 				E16B35491EE682D100895094 /* CanCopyImageView.swift in Sources */,
 				E1ADD75D1ED6CD29000BCBC4 /* MyTimer.swift in Sources */,
 				E17528F31ED40B1800269EDF /* DateToToString.swift in Sources */,

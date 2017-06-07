@@ -17,20 +17,17 @@ class GetInfo: NSObject {
         var myNickname = String()
         
         //从CoreData里读取数据,数据库肯定会有东西
-        let SettingDataArray = SQLLine.SelectAllData(entityNameOfSettingData)
+        let dataArray = SQLLine.SelectAllData(entityNameOfContectors)
         
-        if(SettingDataArray.count > 0){
-            let myIconData = (SettingDataArray.lastObject! as AnyObject).value(forKey: settingDataNameOfMyIcon)! as! Data
-            myIcon = UIImage(data: myIconData)!
-            myName = (SettingDataArray.lastObject! as AnyObject).value(forKey: settingDataNameOfMyName)! as! String
-            myNickname = (SettingDataArray.lastObject! as AnyObject).value(forKey: settingDataNameOfMyNickname)! as! String
-        }else{
-            let defaultIcon = UIImage(named: "defaultIcon")
-            myIcon = defaultIcon!
-            myName = "毛彩元"
-            myNickname = "Xue"
+        for data in dataArray{
+            myNickname = (data as AnyObject).value(forKey: ContectorsNameOfNickname)! as! String
+            if myNickname == myNickname{
+                let myIconData = (data as AnyObject).value(forKey: ContectorsNameOfIcon)! as! Data
+                myIcon = UIImage(data: myIconData)!
+                myName = (data as AnyObject).value(forKey: ContectorsNameOfName)! as! String
+                break
+            }
         }
-        
         return UserInfo(name: myName, icon: myIcon, nickname: myNickname)
     }
 }

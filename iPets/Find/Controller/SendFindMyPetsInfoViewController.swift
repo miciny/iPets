@@ -13,10 +13,8 @@ class SendFindMyPetsInfoViewController: UIViewController, UITableViewDelegate, U
     
     var images = [UIImage]() //保存选择的图片的缩略图
     
-    
     fileprivate var mainTabelView: UITableView? //整个table
     fileprivate var tableData : NSMutableArray? //数据
-    fileprivate var imagesHighQ = [UIImage]() //高清图的
     
     fileprivate let timer = MyTimer()
     fileprivate var picIndex = 0
@@ -54,6 +52,25 @@ class SendFindMyPetsInfoViewController: UIViewController, UITableViewDelegate, U
         self.dismiss(animated: true, completion: nil)
     }
     
+    func savePic(){
+        timer.pauseTimer()
+        //在列表页显示缩略图
+        let asset = selectedModel[picIndex].asset!
+        getThumbnailImage(asset: asset, imageResult: { (image) in
+            self.images.append(image)
+            
+            self.picIndex += 1
+            if self.picIndex >= self.selectedModel.count{
+                self.setReloadData(self.images)
+                self.navigationItem.rightBarButtonItem?.isEnabled = true
+                self.timer.stopTimer()
+            }else{
+                self.timer.startTimer(interval: 0)
+            }
+        })
+    }
+
+    
     //发送
     func sendFindMyPetsInfo(){
         let waitView = WaitView()
@@ -68,19 +85,25 @@ class SendFindMyPetsInfoViewController: UIViewController, UITableViewDelegate, U
             let findMyPetsData = SaveDataModel()
             var oldData = findMyPetsData.loadFindMyPetsDataFromTempDirectory()
             
-            if(self.imagesHighQ.count > 0){
+            if self.selectedModel.count > 0{
                 let timeStr = DateToToString.dateToStringBySelf(time, format: "yyyyMMddHHmmss")
                 //保存图片到本地沙盒
                 let saveCache = SaveCacheDataModel()
                 var nameArray = [String]() //保存名字数组
                 
-                for j in 0 ..<  self.imagesHighQ.count{
-                    if saveCache.savaImageToFindPetsCacheDir(self.imagesHighQ[j], imageName: "H\(timeStr)\(j).png"){
-                        print("保存高清图缓存成功！")
-                    }else{
-                        print("保存高清图缓存失败！")
-                    }
+                for j in 0 ..<  self.selectedModel.count{
                     
+                    //保存高清图
+                    let asset = self.selectedModel[j].asset!
+                    getRetainImage(asset: asset, imageResult: { (image) in
+                        if saveCache.savaImageToFindPetsCacheDir(image, imageName: "H\(timeStr)\(j).png"){
+                            print("保存高清图缓存成功！")
+                        }else{
+                            print("保存高清图缓存失败！")
+                        }
+                    })
+                    
+                    //保存普清图
                     if saveCache.savaImageToFindPetsCacheDir(self.images[j], imageName: "\(timeStr)\(j).png"){
                        print("保存普通图缓存成功！")
                     }else{
@@ -208,33 +231,9 @@ class SendFindMyPetsInfoViewController: UIViewController, UITableViewDelegate, U
     func passPhotos(_ selected: [ImageCollectionModel]) {
         self.navigationItem.rightBarButtonItem?.isEnabled = false
         images = [] //清空
-        imagesHighQ = []
         picIndex = 0
         selectedModel = selected
-        
         timer.setTimer(interval: 0, target: self, selector: #selector(self.savePic), repeats: true)
-    }
-    
-    func savePic(){
-        timer.pauseTimer()
-        //在列表页显示缩略图
-        let asset = selectedModel[picIndex].asset!
-        getThumbnailImage(asset: asset, imageResult: { (image) in
-            self.images.append(image)
-            
-            getRetainImage(asset: asset, imageResult: { (image) in
-                self.imagesHighQ.append(image)
-                
-                self.picIndex += 1
-                if self.picIndex >= self.selectedModel.count{
-                    self.setReloadData(self.images)
-                    self.navigationItem.rightBarButtonItem?.isEnabled = true
-                    self.timer.stopTimer()
-                }else{
-                    self.timer.startTimer(interval: 0)
-                }
-            })
-        })
     }
     
     //设置数据

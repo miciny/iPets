@@ -83,10 +83,15 @@ class PersonInfo_ChangeNameViewController: UIViewController, UITextFieldDelegate
     //保存
     func saveName() {
         //从CoreData里读取数据
-        let SettingDataArray = SQLLine.SelectAllData(entityNameOfSettingData)
-        //保存到最后一行
-        let result = SQLLine.UpdateSettingData(SettingDataArray.count-1, changeValue: nameTextField.text! as AnyObject,
-                                        changeEntityName: settingDataNameOfMyName)
+        let dataArray = SQLLine.SelectAllData(entityNameOfContectors)
+        var result = Bool()
+        for i in 0 ..< dataArray.count{
+            let nickName = (dataArray[i] as AnyObject).value(forKey: ContectorsNameOfNickname)! as! String
+            if nickName == myNikename{
+                result = SQLLine.UpdateContectorsData(i, changeValue: nameTextField.text! as AnyObject, changeEntityName: ContectorsNameOfName)
+                break
+            }
+        }
         
         myInfo = UserInfo(name: nameTextField.text!, icon: myInfo.icon, nickname: myInfo.nickname)
         
