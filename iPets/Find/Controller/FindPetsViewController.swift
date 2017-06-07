@@ -16,7 +16,7 @@ class FindPetsViewController: UIViewController, isRefreshingDelegate, isLoadMore
     
     fileprivate var headerView: RefreshHeaderView? //自己写的
     fileprivate var footerView: LoadMoreView?
-    fileprivate let picView = PicsBrowserView() //展示图片的
+    fileprivate var picView: PicsBrowserView? //展示图片的
     
     //右上角添加按钮的事件
     fileprivate let addArray : NSDictionary = ["我要寻宠": "FindPets",
@@ -408,12 +408,20 @@ class FindPetsViewController: UIViewController, isRefreshingDelegate, isLoadMore
 extension FindPetsViewController: FindPetsCellViewDelegate{
     
     func showPic(_ pic: [UIImage], index: Int, frame: [CGRect]) {
-        picView.setUpAllFramePicBrowser(pic, index: index, frame: frame)
+        picView = PicsBrowserView()
+        picView?.delegate = self
+        picView!.setUpAllFramePicBrowser(pic, index: index, frame: frame)
     }
     
     func pushToPersonInfoView(name: String){
         let guestContectorVC = ContectorInfoViewController()
         guestContectorVC.contectorName = name
         self.navigationController?.pushViewController(guestContectorVC, animated: true)
+    }
+}
+
+extension FindPetsViewController: PicsBrowserViewDelegate{
+    func disapper() {
+        picView = nil
     }
 }

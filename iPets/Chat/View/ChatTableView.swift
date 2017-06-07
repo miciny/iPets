@@ -22,7 +22,7 @@ class ChatTableView: UITableView, UITableViewDelegate, UITableViewDataSource{
     
     var pushDelegate: ChatTableViewDelegate?
     
-    fileprivate let picView = PicsBrowserView() //展示图片的
+    fileprivate var picView: PicsBrowserView? //展示图片的
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -218,7 +218,15 @@ extension ChatTableView: ChatTableViewCellDelegate{
     }
     
     func showPic(_ pic: [UIImage], index: Int, imageDate: [Date], frame: CGRect) {
-        picView.setUpSingleFramePicBrowser(pic, index: index, imageDate: imageDate, frame: frame)
+        picView = PicsBrowserView()
+        picView?.delegate = self
+        picView!.setUpSingleFramePicBrowser(pic, index: index, imageDate: imageDate, frame: frame)
+    }
+}
+
+extension ChatTableView: PicsBrowserViewDelegate{
+    func disapper() {
+        picView = nil
     }
 }
 

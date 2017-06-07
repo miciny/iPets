@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol PicsBrowserViewDelegate {
+    func disapper()   //消失时的代理，不然有点好内存
+}
+
 class PicsBrowserView: UIView, UIScrollViewDelegate{
 
     fileprivate var controlView: UIControl!
@@ -27,6 +31,8 @@ class PicsBrowserView: UIView, UIScrollViewDelegate{
     fileprivate var timeLable: UILabel?
     fileprivate var imageDate: [Date]?
     fileprivate var images: [UIImage]?
+    
+    var delegate: PicsBrowserViewDelegate?
     
     override init(frame: CGRect){
         super.init(frame: frame)
@@ -275,8 +281,8 @@ class PicsBrowserView: UIView, UIScrollViewDelegate{
             
             self.scrolls[self.curentPage].setZoomScale(1, animated: true)
             self.showPics[self.curentPage].frame = toFrame!
+            
         }, completion: { (finished) in
-            self.images = [UIImage]()
             self.images = nil
             
             for sub in self.controlView.subviews{
@@ -284,6 +290,7 @@ class PicsBrowserView: UIView, UIScrollViewDelegate{
             }
             self.controlView.removeFromSuperview()
             self.removeFromSuperview()
+            self.delegate?.disapper()
         }) 
     }
     
