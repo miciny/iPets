@@ -9,9 +9,9 @@
 import UIKit
 
 // 显示底部菜单
-class MyBottomMenuView: UIView{
+class MyBottomMenuView: UIControl{
     
-    var delegate : bottomMenuViewDelegate?
+    var delegate: bottomMenuViewDelegate?
     var isShowingMenu = false  //是否正在显示
     
     fileprivate var eventFlag = Int() //一个界面多次调用时，进行的判断，可以传入按钮的tag等
@@ -29,12 +29,7 @@ class MyBottomMenuView: UIView{
     var objectFont : CGFloat = 20
     var objectColor = UIColor.black
     
-    var mainView : UIControl!
     let buttonView = UIView()
-    
-    let Height = UIScreen.main.bounds.height
-    let Width = UIScreen.main.bounds.width
-    
     var centerPosition = CGPoint()
     
     fileprivate var title: String!
@@ -50,8 +45,9 @@ class MyBottomMenuView: UIView{
         centerPosition = CGPoint(x: Width/2, y: Height/2)
         let totalHeight = calculateheight()
         
-        self.frame = CGRect(x: 0, y: 0, width: Width, height: Height)
+        self.frame = UIScreen.main.bounds
         self.backgroundColor = UIColor.clear  //背景色
+        self.center = CGPoint(x: centerPosition.x, y: centerPosition.y)
         self.isOpaque = true
         self.alpha = 1
         self.eventFlag = eventFlag
@@ -91,20 +87,9 @@ class MyBottomMenuView: UIView{
         
         addRemoveBtn()
         
-        //为什么用uicontroller加，我也不知道
-        if mainView == nil {
-            mainView = UIControl(frame: UIScreen.main.bounds)
-            mainView.backgroundColor = UIColor.clear
-            mainView.addSubview(self)
-            self.center = CGPoint(x: centerPosition.x, y: centerPosition.y)
-            mainView.alpha = 1
-            
-            UIApplication.shared.keyWindow?.addSubview(self.mainView)
-            
-            self.addSubview(buttonView)
-            self.buttonView.layer.add(presentAnimation(), forKey: "")
-        }
-        
+        UIApplication.shared.keyWindow?.addSubview(self)
+        self.addSubview(buttonView)
+        self.buttonView.layer.add(presentAnimation(), forKey: "")
         self.isShowingMenu = true
     }
     
@@ -180,11 +165,11 @@ class MyBottomMenuView: UIView{
     func hideView(){
         UIView.animate(withDuration: 0.2, animations: {
             () -> ()in
-            self.buttonView.frame = CGRect(x: 0, y: self.Height, width: self.Width, height: self.buttonView.frame.height)
+            self.buttonView.frame = CGRect(x: 0, y: Height, width: Width, height: self.buttonView.frame.height)
             }, completion: {
                 (Boolean) -> ()in
-                self.mainView.removeFromSuperview()
                 self.isShowingMenu = false
+                self.removeFromSuperview()
         })
     }
     
