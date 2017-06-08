@@ -55,7 +55,7 @@ class ChatViewController: UIViewController, ChatDataSource, UITextViewDelegate, 
             self.saveChatList()
             
             mainQueue.async(execute: {
-                print("saved")
+                print("与"+self.yourNickname+"的聊天数据保存成功")
             })
         })
     }
@@ -122,7 +122,7 @@ class ChatViewController: UIViewController, ChatDataSource, UITextViewDelegate, 
     
     //选择表情
     func motionAdd(){
-        print("ok")
+        
         
     }
     
@@ -216,7 +216,7 @@ class ChatViewController: UIViewController, ChatDataSource, UITextViewDelegate, 
         let msg = txtMsg.text!.trimmingCharacters(in: CharacterSet.whitespaces)
 //        whitespaceAndNewlineCharacterSet
         if msg == ""{
-            ToastView().showToast("不能为空")
+            ToastView().showToast("消息不能为空")
             txtMsg.resignFirstResponder()
             return
         }
@@ -243,10 +243,9 @@ class ChatViewController: UIViewController, ChatDataSource, UITextViewDelegate, 
             self.chatDataArray?.append(first2)
             
             mainQueue.async(execute: {
-                print("saved Msg")
+                self.saveChatData()
             })
         })
-        saveChatData()
     }
     
 //＊＊＊＊＊＊＊＊＊＊＊＊键盘相关代理＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊
@@ -264,13 +263,12 @@ class ChatViewController: UIViewController, ChatDataSource, UITextViewDelegate, 
         //获得新的字符串
         let newText = textView.text!.replacingCharacters(
             in: range.toRange(string: textView.text!), with: text)
-//        print(newText)
         
         let textViewSize = sizeWithText(newText, font: chatPageInputTextFont, maxSize: CGSize(width: sendView.frame.width-130, height: 1000))
         let singgleLineSize1 = sizeWithText("我爱你！", font: chatPageInputTextFont, maxSize: CGSize(width: sendView.frame.width-130, height: 1000))
+        
         //获取行数，可能不是很准
         let i = textViewSize.height/singgleLineSize1.height
-//        print(i)
 //        let size = txtMsg.sizeThatFits(CGSizeMake(CGRectGetWidth(txtMsg.frame), CGFloat(MAXFLOAT)))
         if(i < 5){
             //底部发送框
@@ -453,7 +451,7 @@ class ChatViewController: UIViewController, ChatDataSource, UITextViewDelegate, 
                 let title = (chatList[i] as AnyObject).value(forKey: ChatListNameOfNickname) as! String
                 if(title == yourNickname){
                     let _ = SQLLine.DeleteData(entityNameOfChatList, indexPath: i)
-                    break
+                    return
                 }
             }
         }
@@ -466,10 +464,9 @@ class ChatViewController: UIViewController, ChatDataSource, UITextViewDelegate, 
                     let imageData = ChangeValue.imageToData(youInfo.icon!)
                     let _ = SQLLine.UpdateChatListData(i, changeValue: imageData as AnyObject, changeEntityName: ChatListNameOfIcon)
                     let _ = SQLLine.UpdateChatListData(i, changeValue: youInfo.username as AnyObject, changeEntityName: ChatListNameOfTitle)
-                    break
+                    return
                 }
             }
-            return
         }
         
         //有消息就写到数据库

@@ -91,7 +91,7 @@ class ImageCollectionViewController: UIViewController, UICollectionViewDelegate,
         getAllPhotos()
     }
     
-    
+    //获取所有图片
     func getGroupList(){
         
         self.getAllPhotos()
@@ -177,8 +177,7 @@ class ImageCollectionViewController: UIViewController, UICollectionViewDelegate,
                     self.count += 1
                     self.assetsImage[indexPath.row].isSelect = true
                 }else{
-                    let toast = ToastView()
-                    toast.showToast("最多选择\(self.countLimited)张图片")
+                    ToastView().showToast("最多选择\(self.countLimited)张图片")
                     self.assetsImage[indexPath.row].isSelect = false
                     cell.isSelect = !cell.isSelect
                 }

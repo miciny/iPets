@@ -231,9 +231,9 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDe
             
             for _ in 0 ..< data.count {
                 if SQLLine.DeleteData(entityNameOfSearchRecord, indexPath: 0){
-                    print("删除数据成功！")
+                    print("删除搜索数据成功！")
                 }else{
-                    print("删除数据失败！")
+                    print("删除搜索数据失败！")
                 }
             }
             

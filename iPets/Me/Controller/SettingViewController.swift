@@ -50,14 +50,14 @@ class SettingViewController: UIViewController, UITableViewDelegate, UITableViewD
         let infoDictionary = Bundle.main.infoDictionary
         let majorVersion : AnyObject? = infoDictionary! ["CFBundleShortVersionString"] as! String as AnyObject
         let minorVersion : AnyObject? = infoDictionary! ["CFBundleVersion"] as! String as AnyObject
-        let iosversion : NSString = UIDevice.current.systemVersion as NSString;
         
-        let appversion = majorVersion as! String
-        let buildversion = minorVersion as! String
+        let iosversion = UIDevice.current.systemVersion as String //系统版本号
+        let appversion = majorVersion as! String //版本号
+        let buildversion = minorVersion as! String  //构建号
         
-        print(appversion)
-        print(buildversion)
-        print(iosversion)
+        print("app version: "+appversion)
+        print("build version: "+buildversion)
+        print("iOS version: "+iosversion)
         
         infoData = NSMutableArray()
         
@@ -73,7 +73,6 @@ class SettingViewController: UIViewController, UITableViewDelegate, UITableViewD
         infoData?.add([infoOne1])
         infoData?.add([infoTwo1, infoTwo2, infoTwo3])
         infoData?.add([infoThree1, infoThree2])
-        
     }
     
     //设置tableView

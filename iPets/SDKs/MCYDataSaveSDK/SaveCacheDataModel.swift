@@ -30,7 +30,7 @@ class SaveCacheDataModel: NSObject {
                 try
                     manager.createDirectory(atPath: findPetsDir, withIntermediateDirectories: true, attributes: nil)
             }catch let error as NSError{
-                print("创建失败！")
+                print("创建"+dirName+"文件夹失败！")
                 print(error)
             }
         }
@@ -47,11 +47,10 @@ class SaveCacheDataModel: NSObject {
         //通过文件地址判断数据文件是否存在
         if defaultManager.fileExists(atPath: singleChatDir) {
             do{
-                try
-                    defaultManager.removeItem(atPath: singleChatDir)
-                print("删除缓存文件夹成功！")
+                try defaultManager.removeItem(atPath: singleChatDir)
+                print("删除"+dirName+"缓存文件夹成功！")
             }catch let error as NSError{
-                print("删除缓存文件夹失败！")
+                print("删除"+dirName+"缓存文件夹失败！")
                 print(error)
             }
         }
@@ -65,10 +64,10 @@ class SaveCacheDataModel: NSObject {
         let manager = FileManager.default
         if !manager.fileExists(atPath: singleChatDir) {
             do{
-                try
-                    manager.createDirectory(atPath: singleChatDir, withIntermediateDirectories: true, attributes: nil)
+                try manager.createDirectory(atPath: singleChatDir, withIntermediateDirectories: true, attributes: nil)
+                print("创建"+dirName+"聊天的子文件夹成功！")
             }catch let error as NSError{
-                print("创建失败！")
+                print("创建"+dirName+"聊天的子文件夹失败！")
                 print(error)
             }
         }
@@ -91,12 +90,13 @@ class SaveCacheDataModel: NSObject {
             do{
                 try imageData.write(to: URL(fileURLWithPath: chatDirPath.appendingPathComponent(imageName)), options: .atomicWrite)
                 isSaved = true
+                print("保存图片"+imageName+"到"+dirName+"目录成功！")
             }catch let error as NSError{
+                print("保存图片"+imageName+"到"+dirName+"目录失败！")
                 print(error)
                 isSaved = false
             }
         }
-//        print(chatDirPath.stringByAppendingPathComponent(imageName))
         return isSaved
     }
     
@@ -127,13 +127,13 @@ class SaveCacheDataModel: NSObject {
             do{
                 try imageData.write(to: URL(fileURLWithPath: imagePath.appendingPathComponent(imageName)), options: .atomicWrite)
                 isSaved = true
+                print("保存图片"+imageName+"到findPets目录成功！")
             }catch let error as NSError{
                 print(error)
+                print("保存图片"+imageName+"到findPets目录失败！")
                 isSaved = false
             }
         }
-        
-//        print(imagePath.stringByAppendingPathComponent(imageName))
         return isSaved
     }
     
@@ -144,7 +144,6 @@ class SaveCacheDataModel: NSObject {
         var imageData = Data()
         if FileManager.default.fileExists(atPath: imagePath) {
             imageData = try! Data(contentsOf: URL(fileURLWithPath: imagePath))
-//            print(imagePath)
         }
         return imageData
     }
@@ -155,14 +154,13 @@ class SaveCacheDataModel: NSObject {
         for i in 0 ..<  imageName.count{
         
             let imagePath = createDirInCache(findPetsImageDataSaveFolderName).strings(byAppendingPaths: ["H"+imageName[i]])[0]
-//            print(imagePath)
             if manager.fileExists(atPath: imagePath) {
                 do{
                     try
                         manager.removeItem(atPath: imagePath)
-                    print("删除高清图成功")
+                    print("从findpets删除高清图成功")
                 }catch let error as NSError{
-                    print("删除高清图失败！")
+                    print("从findpets删除高清图失败！")
                     print(error)
                 }
                 
@@ -173,15 +171,13 @@ class SaveCacheDataModel: NSObject {
                 do{
                     try
                         manager.removeItem(atPath: imagePath1)
-                    print("删除普通图成功！")
+                    print("从findpets删除普通图成功！")
                 }catch let error as NSError{
-                    print("删除普通图失败！")
+                    print("从findpets删除普通图失败！")
                     print(error)
                 }
                 
             }
-            
-        
         }
     }
 }

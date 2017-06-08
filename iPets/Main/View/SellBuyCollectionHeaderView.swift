@@ -50,9 +50,7 @@ class SellBuyCollectionHeaderView: UICollectionReusableView, MCYAutoScrollViewDe
     }
     
     func didSelectedIndex(_ index: Int) {
-        print("you click autoScrollView index:\(index)")
         self.delegate?.selectedPic("\(index)")
-        
     }
     
     func currentIndexDidChange(_ index: Int) {

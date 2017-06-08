@@ -8,13 +8,9 @@
 
 import UIKit
 
-protocol PicsBrowserViewDelegate {
-    func disapper()   //消失时的代理，不然有点好内存
-}
+class PicsBrowserView: UIControl, UIScrollViewDelegate{
 
-class PicsBrowserView: UIView, UIScrollViewDelegate{
-
-    fileprivate var controlView: UIControl!
+    //fileprivate var controlView: UIControl!
     fileprivate var mainScrollview: UIScrollView!
     fileprivate var showPics = [UIImageView]()
     fileprivate var scrolls = [UIScrollView]()
@@ -31,8 +27,6 @@ class PicsBrowserView: UIView, UIScrollViewDelegate{
     fileprivate var timeLable: UILabel?
     fileprivate var imageDate: [Date]?
     fileprivate var images: [UIImage]?
-    
-    var delegate: PicsBrowserViewDelegate?
     
     override init(frame: CGRect){
         super.init(frame: frame)
@@ -58,7 +52,7 @@ class PicsBrowserView: UIView, UIScrollViewDelegate{
         self.setUpMainScroll()
         mainScrollview.contentSize = CGSize(width: CGFloat(imageCount!)*Width, height: Height)
         mainScrollview.scrollRectToVisible(CGRect(x: CGFloat(index) * Width, y: 0, width: Width, height: Height), animated: true)
-        controlView.addSubview(mainScrollview)
+        self.addSubview(mainScrollview)
         
         self.setupImage()
         self.initPageControl(imageCount, index: index)
@@ -80,7 +74,7 @@ class PicsBrowserView: UIView, UIScrollViewDelegate{
         self.setUpMainScroll()
         mainScrollview.contentSize = CGSize(width: CGFloat(imageCount)*Width, height: Height)
         mainScrollview.scrollRectToVisible(CGRect(x: CGFloat(index) * Width, y: 0, width: Width, height: Height), animated: true)
-        controlView.addSubview(mainScrollview)
+        self.addSubview(mainScrollview)
         
         self.setupImage()
         self.setupLabel()
@@ -147,7 +141,7 @@ class PicsBrowserView: UIView, UIScrollViewDelegate{
         pageControl!.hidesForSinglePage = true
         pageControl!.numberOfPages = imageCount
         pageControl!.currentPage = index
-        self.controlView.addSubview(pageControl!)
+        self.addSubview(pageControl!)
     }
     
     func setupLabel(){
@@ -158,7 +152,7 @@ class PicsBrowserView: UIView, UIScrollViewDelegate{
         countLable!.backgroundColor = UIColor.clear
         countLable!.textColor = UIColor.white
         countLable!.text = String(index+1)+"/"+String(imageCount)
-        self.controlView.addSubview(countLable!)
+        self.addSubview(countLable!)
         
         //显示时间的lable
         timeLable = UILabel(frame: CGRect(x: 10, y: Height-60, width: 200, height: 30))
@@ -167,7 +161,7 @@ class PicsBrowserView: UIView, UIScrollViewDelegate{
         timeLable!.textColor = UIColor.white
         let timeStr = DateToToString.dateToStringBySelf(self.imageDate![index], format: "yyyy/MM/dd HH:mm")
         timeLable!.text = timeStr
-        self.controlView.addSubview(timeLable!)
+        self.addSubview(timeLable!)
     }
     
     func setupZoomScroll() -> UIScrollView{
@@ -184,10 +178,10 @@ class PicsBrowserView: UIView, UIScrollViewDelegate{
     func setUpMainScroll(){
         
         //为什么用uicontroller加，我也不知道
-        self.controlView = UIControl(frame: UIScreen.main.bounds)
-        self.controlView.backgroundColor = UIColor.black
-        self.controlView.alpha = 1
-        UIApplication.shared.keyWindow?.addSubview(self.controlView)
+        self.frame = UIScreen.main.bounds
+        self.backgroundColor = UIColor.black
+        self.alpha = 1
+        UIApplication.shared.keyWindow?.addSubview(self)
         
         mainScrollview = UIScrollView()
         mainScrollview.frame = UIScreen.main.bounds
@@ -261,7 +255,7 @@ class PicsBrowserView: UIView, UIScrollViewDelegate{
     //点击图片
     func tapedPic(_ sender: UITapGestureRecognizer){
         self.mainScrollview.backgroundColor = UIColor.clear
-        self.controlView.backgroundColor = UIColor.clear
+        self.backgroundColor = UIColor.clear
         
         self.pageControl?.isHidden = true
         
@@ -285,12 +279,10 @@ class PicsBrowserView: UIView, UIScrollViewDelegate{
         }, completion: { (finished) in
             self.images = nil
             
-            for sub in self.controlView.subviews{
+            for sub in self.subviews{
                 sub.removeFromSuperview()
             }
-            self.controlView.removeFromSuperview()
             self.removeFromSuperview()
-            self.delegate?.disapper()
         }) 
     }
     

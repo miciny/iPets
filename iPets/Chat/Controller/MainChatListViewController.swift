@@ -249,9 +249,9 @@ class MainChatListViewController: UIViewController, actionMenuViewDelegate, isRe
                 let title = (chatList[i] as AnyObject).value(forKey: ChatListNameOfNickname) as! String
                 if(title == item.nickname){
                     if SQLLine.DeleteData(entityNameOfChatList, indexPath: i){
-                        print("删除数据库成功！")
+                        print("删除"+title+"聊天数据库成功！")
                     }else{
-                        print("删除数据库失败！")
+                        print("删除"+title+"聊天数据库失败！")
                     }
                     break
                 }

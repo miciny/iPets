@@ -33,11 +33,10 @@ class SaveDataModel: NSObject {
         //通过文件地址判断数据文件是否存在
         if defaultManager.fileExists(atPath: path) {
             do{
-                try
-                    defaultManager.removeItem(atPath: path)
-                    print("删除本地plist文件成功！")
+                try defaultManager.removeItem(atPath: path)
+                    print("删除本地"+fileName+".plist文件成功！")
             }catch let error as NSError{
-                print("删除本地plist文件失败！")
+                print("删除本地"+fileName+".plist文件失败！")
                 print(error)
             }
         }
@@ -60,11 +59,12 @@ class SaveDataModel: NSObject {
                 dataChatData = unarchiver.decodeObject(forKey: key) as! [ChatData]  //通过归档时设置的关键字还原
                 unarchiver.finishDecoding()  //结束解码
             }catch let e as NSError{
+                print("聊天数据读取失败！")
                 print(e)
             }
             
         }else{
-            print("ChatData 文件不存在")
+            print(fileName+"的ChatData文件不存在")
         }
         return dataChatData
     }
