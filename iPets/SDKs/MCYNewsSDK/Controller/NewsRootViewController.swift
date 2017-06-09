@@ -32,7 +32,6 @@ class NewsRootViewController: UIViewController, UIScrollViewDelegate, channelCli
         automaticallyAdjustsScrollViewInsets = false //手动偏移
         self.view.backgroundColor = UIColor(red: 232/255, green: 232/255, blue: 232/255, alpha: 1.0)
         self.title = "新闻"
-        self.navigationItem.title = "新闻"
     }
     
     //频道

@@ -20,10 +20,6 @@ protocol bottomMenuViewDelegate{
     func buttonClicked(_ tag: Int, eventFlag: Int)
 }
 
-
-
-
-
 //自动滑动图的代理
 @objc protocol MCYAutoScrollViewDelegate: NSObjectProtocol{
     func numbersOfPages()->Int

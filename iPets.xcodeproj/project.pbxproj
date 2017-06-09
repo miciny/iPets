@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		928E05F83569019CD74BDCEB /* Pods_iPets.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C0F66AE3DDCC948CA07F7880 /* Pods_iPets.framework */; };
+		E10B34DB1EEA9D4D00D65C9F /* ShowPicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10B34DA1EEA9D4D00D65C9F /* ShowPicViewController.swift */; };
+		E10B34DD1EEA9E0100D65C9F /* LocalNews.js in Resources */ = {isa = PBXBuildFile; fileRef = E10B34DC1EEA9E0100D65C9F /* LocalNews.js */; };
+		E10B34E21EEAA2D500D65C9F /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10B34E11EEAA2D500D65C9F /* VideoViewController.swift */; };
+		E10B34E41EEAA2E200D65C9F /* VideoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10B34E31EEAA2E200D65C9F /* VideoTableViewCell.swift */; };
 		E10E44651CC62B3500D9992A /* Contacts.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E10E44601CC62B3500D9992A /* Contacts.xcassets */; };
 		E10E44661CC62B3500D9992A /* Discover.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E10E44611CC62B3500D9992A /* Discover.xcassets */; };
 		E10E44671CC62B3500D9992A /* Home.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E10E44621CC62B3500D9992A /* Home.xcassets */; };
@@ -159,6 +163,10 @@
 		1E5E34788EAF7E5842AB3455 /* Pods-iPets.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iPets.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iPets/Pods-iPets.debug.xcconfig"; sourceTree = "<group>"; };
 		626BBE37DA2AA08F813BF74C /* Pods-iPets.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iPets.release.xcconfig"; path = "Pods/Target Support Files/Pods-iPets/Pods-iPets.release.xcconfig"; sourceTree = "<group>"; };
 		C0F66AE3DDCC948CA07F7880 /* Pods_iPets.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iPets.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E10B34DA1EEA9D4D00D65C9F /* ShowPicViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowPicViewController.swift; sourceTree = "<group>"; };
+		E10B34DC1EEA9E0100D65C9F /* LocalNews.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = LocalNews.js; sourceTree = "<group>"; };
+		E10B34E11EEAA2D500D65C9F /* VideoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
+		E10B34E31EEAA2E200D65C9F /* VideoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoTableViewCell.swift; sourceTree = "<group>"; };
 		E10E44601CC62B3500D9992A /* Contacts.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Contacts.xcassets; sourceTree = "<group>"; };
 		E10E44611CC62B3500D9992A /* Discover.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Discover.xcassets; sourceTree = "<group>"; };
 		E10E44621CC62B3500D9992A /* Home.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Home.xcassets; sourceTree = "<group>"; };
@@ -324,6 +332,29 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		E10B34DE1EEAA2A400D65C9F /* VideoChannal */ = {
+			isa = PBXGroup;
+			children = (
+				E10B34E11EEAA2D500D65C9F /* VideoViewController.swift */,
+			);
+			name = VideoChannal;
+			sourceTree = "<group>";
+		};
+		E10B34DF1EEAA2B100D65C9F /* VideoChannal */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = VideoChannal;
+			sourceTree = "<group>";
+		};
+		E10B34E01EEAA2B900D65C9F /* VideoChannal */ = {
+			isa = PBXGroup;
+			children = (
+				E10B34E31EEAA2E200D65C9F /* VideoTableViewCell.swift */,
+			);
+			name = VideoChannal;
+			sourceTree = "<group>";
+		};
 		E10E445F1CC62B0900D9992A /* resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -357,6 +388,7 @@
 		E14197C91CA1A6BE00EDD443 /* iPets */ = {
 			isa = PBXGroup;
 			children = (
+				E10B34DC1EEA9E0100D65C9F /* LocalNews.js */,
 				E1DE0E341EEA8DBB00CF580D /* SDKs */,
 				E175284B1ED3E76D00269EDF /* Me */,
 				E175284A1ED3E75F00269EDF /* Main */,
@@ -801,10 +833,12 @@
 		E1DE0E941EEA946300CF580D /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				E1DE0EB61EEA94CC00CF580D /* LocalH5NewsViewController.swift */,
+				E10B34DE1EEAA2A400D65C9F /* VideoChannal */,
+				E10B34DA1EEA9D4D00D65C9F /* ShowPicViewController.swift */,
 				E1DE0EB71EEA94CC00CF580D /* NewsRootViewController.swift */,
 				E1DE0EB81EEA94CC00CF580D /* NewsViewController.swift */,
 				E1DE0EB91EEA94CC00CF580D /* WebViewController.swift */,
+				E1DE0EB61EEA94CC00CF580D /* LocalH5NewsViewController.swift */,
 			);
 			name = Controller;
 			path = ../../../../Users/miciny/ToGitHub/iPets/iPets/SDKs/MCYNewsSDK/Controller;
@@ -813,6 +847,7 @@
 		E1DE0E951EEA946A00CF580D /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E10B34E01EEAA2B900D65C9F /* VideoChannal */,
 				E1DE0E981EEA94B200CF580D /* NewsChannelView.swift */,
 				E1DE0E991EEA94B200CF580D /* NewsHeaderView.swift */,
 				E1DE0E9A1EEA94B200CF580D /* NewsTableViewCell.swift */,
@@ -824,6 +859,7 @@
 		E1DE0E961EEA947000CF580D /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				E10B34DF1EEAA2B100D65C9F /* VideoChannal */,
 				E1DE0EAC1EEA94C000CF580D /* JsonToModule.swift */,
 				E1DE0EAD1EEA94C000CF580D /* LocalNewsDataModule.swift */,
 				E1DE0EAE1EEA94C000CF580D /* NewsDataModule.swift */,
@@ -938,6 +974,7 @@
 				E1ADD75F1EDFE899000BCBC4 /* Temp.xcassets in Resources */,
 				E10E44661CC62B3500D9992A /* Discover.xcassets in Resources */,
 				E14197D01CA1A6BE00EDD443 /* Main.storyboard in Resources */,
+				E10B34DD1EEA9E0100D65C9F /* LocalNews.js in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1004,6 +1041,7 @@
 				E17528D51ED40A5A00269EDF /* InternetExplorerViewController.swift in Sources */,
 				E17528F71ED40B1800269EDF /* UniversalFuncs.swift in Sources */,
 				E17528571ED3E8AE00269EDF /* SellBuyCollectionHeaderView.swift in Sources */,
+				E10B34E21EEAA2D500D65C9F /* VideoViewController.swift in Sources */,
 				E175289A1ED406BB00269EDF /* FindPetsTableViewCell.swift in Sources */,
 				E17528E31ED40A9300269EDF /* WaitView.swift in Sources */,
 				E17528901ED406A500269EDF /* FindPetsViewController.swift in Sources */,
@@ -1024,6 +1062,7 @@
 				E1DE0E6C1EEA919F00CF580D /* CanCopyImageView.swift in Sources */,
 				E1DE0E751EEA91BA00CF580D /* CacheConstants.swift in Sources */,
 				E175289B1ED406BB00269EDF /* SendFindMyPetsInfoTableViewCell.swift in Sources */,
+				E10B34E41EEAA2E200D65C9F /* VideoTableViewCell.swift in Sources */,
 				E1DE0EC21EEA95E100CF580D /* LoadMoreView.swift in Sources */,
 				E17528FC1ED40B7600269EDF /* CustomDismissAnimationController.swift in Sources */,
 				E1DE0E681EEA918600CF580D /* VideoPlayerView.swift in Sources */,
@@ -1050,6 +1089,7 @@
 				E17528541ED3E8AE00269EDF /* CycleView.swift in Sources */,
 				E1DE0E671EEA918600CF580D /* VideoFuncs.swift in Sources */,
 				E17528611ED3E95300269EDF /* SellBuyCollectionModel.swift in Sources */,
+				E10B34DB1EEA9D4D00D65C9F /* ShowPicViewController.swift in Sources */,
 				E1DE0E9B1EEA94B200CF580D /* NewsChannelView.swift in Sources */,
 				E12A389F1EE7B19900755C6C /* ActionMenuView.swift in Sources */,
 				E17528F21ED40B1800269EDF /* ChangeValue.swift in Sources */,

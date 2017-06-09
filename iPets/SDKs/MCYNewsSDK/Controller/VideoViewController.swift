@@ -1,8 +1,8 @@
 //
-//  ViewController.swift
+//  VideoViewController.swift
 //  MyNews
 //
-//  Created by maocaiyuan on 16/6/16.
+//  Created by maocaiyuan on 16/6/17.
 //  Copyright © 2016年 maocaiyuan. All rights reserved.
 //
 
@@ -10,23 +10,16 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 
-class NewsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, headerViewDelegate{
-    
+class VideoViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
     var netManager: SessionManager? //网络请求的manager
     var mainTabelView: UITableView? //整个table
+    var showData : NSMutableArray? //数据
     var refreshView: RefreshHeaderView? //自己写的刷新
+    
     var footerView: LoadMoreView? //上拉加载更多
-    
-    //进入页面要配置的
-    var channel: String! //请求的url 的频道
-    
-    fileprivate var showData: NSMutableArray? //数据
-    fileprivate var headerArray: [NewsHeaderDataModule]?
-    fileprivate var headerView: NewsHeaderView? //头图
-    fileprivate var loading: MyLoadingView?
-    fileprivate var isloadmoreDone = false //只能上拉一次
-    
-    //viewDidLoad
+    var loading: MyLoadingView?
+    var isloadmoreDone = false //只能上拉一次
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setUpTitle()
@@ -39,30 +32,27 @@ class NewsViewController: UIViewController, UITableViewDelegate, UITableViewData
     // 停止视频
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
-        VideoFuncs.viewWillDisappearStopVideo()
+        VideoFuncs.viewWillDisappearStopVideo() //停止视频
     }
     
     //title,左边按钮和右边按钮
     func setUpTitle(){
         self.view.backgroundColor = UIColor(red: 232/255, green: 232/255, blue: 232/255, alpha: 1.0)
+        self.title = "视频"
+        self.navigationItem.title = "视频"
     }
+    
     
 //=========================初始化数据==================================================
     //网络获取数据后，显示
     func setData(_ json: JSON){
         let json = json
         showData = NSMutableArray()
-        let urlJson = json["feed"] //普通新闻的
-        let headerJson = json["focus"] //头图的
-
-        //如果没有focus，就不显示头图
-        if headerJson != JSON.null && headerJson.count > 0 {
-            setUpHeader(headerJson)
-        }
-        
+        let urlJson = json["feed"]
+       
         for i in 0 ..< urlJson.count {
             let news = urlJson[i]
-            if let module = JsonToModule.NewsJsonToModule(news, type: moduleType.common){
+            if let module = JsonToModule.NewsJsonToModule(news, type: moduleType.video) {
                 showData?.add(module)
             }
         }
@@ -72,7 +62,6 @@ class NewsViewController: UIViewController, UITableViewDelegate, UITableViewData
         isloadmoreDone = false
         self.endFresh()                 //停止刷新
     }
-    
     
     //上拉加载更多的数据
     func setLoadMoreData(_ json: JSON){
@@ -90,7 +79,7 @@ class NewsViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         for i in 0 ..< urlJson.count {
             let news = urlJson[i]
-            if let module = JsonToModule.NewsJsonToModule(news, type: moduleType.common){
+            if let module = JsonToModule.NewsJsonToModule(news, type: moduleType.video){
                 let newsID = module.newsId
                 //去重
                 if !newsids.contains(newsID!) {
@@ -104,95 +93,51 @@ class NewsViewController: UIViewController, UITableViewDelegate, UITableViewData
         isloadmoreDone = true
         self.endLoadMore()                 //停止刷新
     }
-
-    
-    //设置头图
-    func setUpHeader(_ json: JSON){
-        defer{
-            self.headerView?.setData()
-        }
-        
-        self.headerArray = [NewsHeaderDataModule]()
-        
-        for i in 0 ..< json.count {
-            let header = json[i]
-            self.headerArray?.append(JsonToModule.HeaderJsonToModule(header))
-        }
-       
-        //如果存在，就只传数据
-        if self.headerView != nil {
-            self.headerView?.headerData = self.headerArray
-            self.headerView?.refreshData()
-            return
-        }
-        
-        self.headerView = NewsHeaderView(frame: CGRect(x: 0, y: 0, width: Width, height: Width/2), target: self)
-        //给header设置数据
-        self.headerView?.headerData = self.headerArray
-        self.headerView?.setUpView()
-        self.mainTabelView?.tableHeaderView = self.headerView
-    }
     
     //从本地获取缓存数据
     func loadToutiaoCache(){
-        //是否显示loading，如果第一次从网上加载，就需要
-        loading = MyLoadingView()
-        loading!.setLoading(self.view, color: UIColor.black)
-        loading!.show()
-        
-        if let json = JsonCache.loadjsonFromCacheDir(String(self.channel)){
+        if let json = JsonCache.loadjsonFromCacheDir(String(describing: requestChannel.news_video)){
+            
             self.setData(json)
-            loading!.hide()
         }else{
             self.getDataFromNet()
         }
     }
-
+    
     //无数据时，先展示空的
     func initShowData(){
         showData = NSMutableArray()
     }
-    
+
+
 //=========================初始化tableView以及代理方法==================================================
     //设置tableView
     func setUpTable(){
-        self.mainTabelView = UITableView(frame: CGRect(x: 0, y: 0, width: Width, height: Height-103))  //为普通模式 tab高度49
+        self.mainTabelView = UITableView(frame: CGRect(x: 0, y: 0, width: Width, height: Height), style: .grouped)  //为集合模式
         self.mainTabelView?.backgroundColor = UIColor(red: 230/255, green: 230/255, blue: 230/255, alpha: 1)
         
         self.mainTabelView?.showsHorizontalScrollIndicator = false
-        self.mainTabelView?.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0)) //消除底部多余的线
-        
         self.mainTabelView?.delegate = self
         self.mainTabelView?.dataSource = self
         
-        self.mainTabelView?.scrollsToTop = false
-        
-        self.refreshView = RefreshHeaderView(subView: self.mainTabelView!, target: self)  //添加下拉刷新
+        self.refreshView =  RefreshHeaderView(subView: self.mainTabelView!, target: self)  //添加下拉刷新
         
         self.view.addSubview(self.mainTabelView!)
     }
     
-    
-    //代理事件
-    func newsClicked(_ data: NewsHeaderDataModule) {
-        if let category = data.category{
-            goNewsDetail(category, data: nil, headerData: data)
-        }
-    }
-    
     //section个数
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return showData!.count
     }
     
     //每个section的行数
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return showData!.count
+        return 1
     }
     
     //计算每个cell高度
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let data = showData![indexPath.row]
+        let data = showData![indexPath.section]
         let item =  data as! NewsDataModule
         let height  = item.cellHeight
         
@@ -202,8 +147,8 @@ class NewsViewController: UIViewController, UITableViewDelegate, UITableViewData
     //每个cell内容
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cellId = "NewsListCell"
-        let data = showData![indexPath.row] as! NewsDataModule
-        let cell =  NewsTableViewCell(data: data, reuseIdentifier: cellId, indexPath: (indexPath as NSIndexPath) as IndexPath)
+        let data = showData![indexPath.section] as! NewsDataModule
+        let cell =  VideoTableViewCell(data: data, reuseIdentifier: cellId, indexPath: (indexPath as NSIndexPath) as IndexPath)
         
         return cell
     }
@@ -212,8 +157,9 @@ class NewsViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         mainTabelView!.deselectRow(at: indexPath as IndexPath, animated: true)  //被选择后，会变灰，这么做还原
         
-        let data = showData![indexPath.row] as! NewsDataModule
-        goNewsDetail(data.category, data: data, headerData: nil)
+        let vc = LocalH5NewsViewController()
+        vc.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     //结束cell
@@ -222,58 +168,32 @@ class NewsViewController: UIViewController, UITableViewDelegate, UITableViewData
         VideoFuncs.cellWillDisappearStopVideo((indexPath as NSIndexPath) as IndexPath)
     }
     
-    //根据类型进入新闻
-    func goNewsDetail(_ category: newsType, data: NewsDataModule?, headerData: NewsHeaderDataModule?){
-        
-        //图片页
-        if category == newsType.hdpic{
-            let vc = ShowPicViewController()
-            vc.hidesBottomBarWhenPushed = true
-            vc.dataModule = data //现在是假的
-            self.navigationController?.pushViewController(vc, animated: true)
-            //url
-        }else if category == newsType.url || category == newsType.plan{
-            let vc = WebViewController()
-            
-            //需要判断是头图还是列表
-            if let data1 = data{
-                vc.url = data1.link
-                vc.title = data1.title //设置标题
-            }else if let data2 = headerData{
-                vc.url = data2.link
-                vc.title = data2.title //设置标题
-            }
-            
-            vc.hidesBottomBarWhenPushed = true
-            self.navigationController?.pushViewController(vc, animated: true)
-            
-            //普通新闻 blog 原创 视频
-        }else if category == newsType.cms || category == newsType.blog || category == newsType.original || category == newsType.video{
-            let vc = LocalH5NewsViewController()
-            vc.hidesBottomBarWhenPushed = true
-            self.navigationController?.pushViewController(vc, animated: true)
-            
-        }else if category == newsType.live || category == newsType.subject || category == newsType.consice{
-            ToastView().showToast("未实现")
-        }
+    //一个section头部的高度
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 0.1
     }
     
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        if section == (showData?.count)!-1 {
+            return 0.1
+        }
+        return 10
+    }
     
     //此处添加footerView，方便找到contentSize的高度
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
         //如果不足一屏幕，不显示footer
         if(self.mainTabelView!.contentSize.height <= self.mainTabelView!.frame.height){
-            self.mainTabelView!.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+            self.mainTabelView!.tableFooterView = UIView(frame: CGRect.zero)
             return
         }
         
-        if(footerView == nil && indexPath.row == self.showData!.count-1 && isloadmoreDone == false){
-            
+        if( footerView == nil && indexPath.section == self.showData!.count-1 && isloadmoreDone == false){
             footerView = LoadMoreView(frame: mainTabelView!.frame, subView: mainTabelView!, target: self)
         }
         
-        if(indexPath.row == self.showData!.count-1){
+        if(indexPath.section == self.showData!.count-1){
             if isloadmoreDone == false {
                 footerView?.refreshHeight()
                 footerView?.showView()
@@ -281,13 +201,12 @@ class NewsViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
 
-    //didReceiveMemoryWarning
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-}
 
+}
 
 //=====================================================================================================
 /**
@@ -295,7 +214,7 @@ class NewsViewController: UIViewController, UITableViewDelegate, UITableViewData
  **/
 //=====================================================================================================
 
-extension NewsViewController{
+extension VideoViewController{
     
     //初始化网络请求的manager
     func initNetManager(){
@@ -305,29 +224,19 @@ extension NewsViewController{
     
     //网络请求数据,url参数的顺序还有影响？
     func getDataFromNet(){
+        NetFuncs.showNetIndicator() //显示系统栏的网络状态
         
-        var url = String()
-        let channelType = DataFormat.strToNewsChannel(self.channel)
-        switch channelType {
-        case requestChannel.news_toutiao:
-            url = TabNetConstant().toutiaoRequestURL
-        case requestChannel.news_funny:
-            url = TabNetConstant().gaoxiaoRequestURL
-        case requestChannel.news_ent:
-            url = TabNetConstant().yuleRequestURL
-        case requestChannel.news_sports:
-            url = TabNetConstant().tiyuRequestURL
-        case requestChannel.news_tech:
-            url = TabNetConstant().kejiRequestURL
-        case requestChannel.news_mil:
-            url = TabNetConstant().junshiRequestURL
-        default:
-            url = TabNetConstant().toutiaoRequestURL
+        if loading == nil {
+            loading = MyLoadingView()
+            loading!.setLoading(self.view, color: UIColor.black)
+        }
+        if self.refreshView?.refreshState != RefreshState.refreshStateLoading {
+            loading!.show()
         }
         
-        NetFuncs.showNetIndicator() //显示系统栏的网络状态
-        doReuest(url, refresh: true)
+        doReuest(TabNetConstant().videoRequestURL, refresh: true)
     }
+    
     
     //执行请求
     //refresh 是否下拉刷新的，否则上拉
@@ -336,7 +245,9 @@ extension NewsViewController{
         netManager!.request(url)
             .responseJSON { response in
                 NetFuncs.hidenNetIndicator()    //隐藏系统栏的网络状态
-                self.loading!.hide()
+                if refresh{
+                    self.loading!.hide()
+                }
                 
                 switch response.result{
                 case .success:
@@ -346,7 +257,7 @@ extension NewsViewController{
                         
                         //缓存到本地
                         if refresh{
-                            if JsonCache.savaJsonToCacheDir(json, name: String(self.channel)){
+                            if JsonCache.savaJsonToCacheDir(json, name: String(describing: requestChannel.news_video)){
                                 
                             }//下拉的缓存 上拉加载更多的就不缓存了
                         }
@@ -375,8 +286,8 @@ extension NewsViewController{
                 }
         }
     }
-    
-    //都是失败时调用
+
+    //失败时调用
     func endFreshOrLoadMore(_ refresh: Bool){
         if refresh{
             self.endFresh()                 //停止刷新
@@ -385,33 +296,15 @@ extension NewsViewController{
         }
     }
     
-    
     //上啦加载更多
     func loadMoreDataFromNet(){
-        var url = String()
-        let channelType = DataFormat.strToNewsChannel(self.channel)
-        switch channelType {
-        case requestChannel.news_toutiao:
-            url = TabNetConstant().toutiaoUpRequestURL
-        case requestChannel.news_funny:
-            url = TabNetConstant().gaoxiaoUpRequestURL
-        case requestChannel.news_ent:
-            url = TabNetConstant().yuleUpRequestURL
-        case requestChannel.news_sports:
-            url = TabNetConstant().tiyuUpRequestURL
-        case requestChannel.news_tech:
-            url = TabNetConstant().kejiUpRequestURL
-        case requestChannel.news_mil:
-            url = TabNetConstant().junshiUpRequestURL
-        default:
-            url = TabNetConstant().toutiaoUpRequestURL
-        }
+        let url = TabNetConstant().videoUpRequestURL
         
         NetFuncs.showNetIndicator() //显示系统栏的网络状态
         doReuest(url, refresh: false)
     }
-}
 
+}
 
 //=====================================================================================================
 /**
@@ -419,7 +312,7 @@ extension NewsViewController{
  **/
 //=====================================================================================================
 
-extension NewsViewController: isRefreshingDelegate, isLoadMoreDelegate{
+extension VideoViewController: isRefreshingDelegate, isLoadMoreDelegate{
     //isfreshing中的代理方法
     func reFreshing(){
         //这里做你想做的事
@@ -430,10 +323,8 @@ extension NewsViewController: isRefreshingDelegate, isLoadMoreDelegate{
     //结束刷新时调用
     func endFresh(){
         self.refreshView?.endRefresh()
-        
     }
     
-    //加载更多
     func loadingMore() {
         //这里做你想做的事
         loadMoreDataFromNet()
@@ -451,11 +342,11 @@ extension NewsViewController: isRefreshingDelegate, isLoadMoreDelegate{
         }
     }
     
-    //点击tab 自动刷新
-    func autoRefresh(){
+    //点击tab时刷新
+    func refreshVideoView() {
         self.refreshView?.startRefresh()
-        hideFooterView()
         
+        hideFooterView()
     }
     
     //删除footer

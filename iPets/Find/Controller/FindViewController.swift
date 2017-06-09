@@ -112,7 +112,9 @@ class FindViewController: UIViewController, UITableViewDelegate, UITableViewData
             switch indexPath.row {
             //视频
             case 1:
-                break
+                let vc = VideoViewController()
+                vc.hidesBottomBarWhenPushed = true
+                self.navigationController?.pushViewController(vc, animated: true)
             //新闻
             case 0:
                 let vc = NewsRootViewController()

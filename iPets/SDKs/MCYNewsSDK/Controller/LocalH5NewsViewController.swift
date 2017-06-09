@@ -154,7 +154,7 @@ class LocalH5NewsViewController: UIViewController, WKUIDelegate, WKScriptMessage
             // 初始化播放器
             
             //如果播放同一个视频，就返回
-            if videoPlayer.videoUrl == url {
+            if videoPlayer.videoUrl == url && videoPlayer.isPlayed == true{
                 return
             }
             

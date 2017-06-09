@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FindPetsViewController: UIViewController, isRefreshingDelegate, isLoadMoreingDelegate, actionMenuViewDelegate, UITableViewDataSource, UITableViewDelegate{
+class FindPetsViewController: UIViewController, isRefreshingDelegate, isLoadMoreDelegate, actionMenuViewDelegate, UITableViewDataSource, UITableViewDelegate{
     
     fileprivate var cellData: NSMutableArray?
     fileprivate var mainTableView: UITableView?
@@ -111,7 +111,7 @@ class FindPetsViewController: UIViewController, isRefreshingDelegate, isLoadMore
     }
     
     //isLoadMore中的代理方法
-    func loadMore(){
+    func loadingMore(){
         mainTableView!.setContentOffset(CGPoint(x: 0, y: mainTableView!.contentSize.height - mainTableView!.frame.size.height+tabBarHeight+RefreshHeaderHeight), animated: true)
         //这里做你想做的事
         let _ = delay(0.3){
@@ -127,23 +127,13 @@ class FindPetsViewController: UIViewController, isRefreshingDelegate, isLoadMore
     //isfreshing中的代理方法
     func reFreshing(){
         
-        mainTableView!.setContentOffset(CGPoint(x: 0, y: -RefreshHeaderHeight*2), animated: true)
-        mainTableView!.isScrollEnabled = false
+        self.refreshData()
+        
         //这里做你想做的事
         let _ = delay(0.5){
-            self.mainTableView!.isScrollEnabled = true
-            self.refreshData()
-            if(self.cellData!.count > 0){
-               self.mainTableView!.scrollToRow(at: IndexPath(row: 0, section: 0), at:UITableViewScrollPosition.top, animated:true)
-            }else{
-                self.mainTableView!.setContentOffset(CGPoint(x: 0, y: -RefreshHeaderHeight), animated: true)
-            }
-            
             self.headerView?.endRefresh()
             ToastView().showToast("刷新完成！")
-            
         }
-        
     }
     
 //======================================tableView================================
@@ -163,7 +153,7 @@ class FindPetsViewController: UIViewController, isRefreshingDelegate, isLoadMore
         let cell = FindPetsTableViewCell.self
         mainTableView!.register(cell, forCellReuseIdentifier: cellID)
         
-        headerView =  RefreshHeaderView(frame: mainTableView!.frame, subView: mainTableView!, target: self)  //添加下拉刷新
+        headerView = RefreshHeaderView(subView: mainTableView!, target: self)  //添加下拉刷新
     }
     
     //加载更多数据

@@ -146,21 +146,13 @@ class MainChatListViewController: UIViewController, actionMenuViewDelegate, isRe
     //isfreshing中的代理方法
     func reFreshing(){
         
-        mainTabelView!.setContentOffset(CGPoint(x: 0, y: -RefreshHeaderHeight*2), animated: true)
-        mainTabelView!.isScrollEnabled = false
-        //这里做你想做的事
-        
         let _ = delay(0.5){
-            self.mainTabelView!.setContentOffset(CGPoint(x: 0, y: -RefreshHeaderHeight), animated: true)
-            self.mainTabelView!.isScrollEnabled = true
-
             self.setData()            
             self.mainTabelView?.reloadData()
             self.headerView?.endRefresh()
             
             ToastView().showToast("刷新完成！")
         }
-        
     }
 
 //＊＊＊＊＊＊＊＊＊＊＊＊初始化tableView以及代理方法＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊
@@ -175,7 +167,7 @@ class MainChatListViewController: UIViewController, actionMenuViewDelegate, isRe
         mainTabelView?.delegate = self
         mainTabelView?.dataSource = self
         
-        headerView =  RefreshHeaderView(frame: mainTabelView!.frame, subView: mainTabelView!, target: self)  //添加下拉刷新
+        headerView =  RefreshHeaderView(subView: mainTabelView!, target: self)  //添加下拉刷新
         
         self.view.addSubview(mainTabelView!)
     }

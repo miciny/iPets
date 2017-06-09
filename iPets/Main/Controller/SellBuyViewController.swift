@@ -166,17 +166,10 @@ class SellBuyViewController: UIViewController, UIScrollViewDelegate, isRefreshin
     
 //==================================================================================isfreshing中的代理方法
     func reFreshing(){
-        
-        collectionView!.setContentOffset(CGPoint(x: 0, y: 64-RefreshHeaderHeight*2), animated: true)
-        collectionView!.isScrollEnabled = false
         //这里做你想做的事
         let _ = delay(0.5){
-            self.collectionView!.isScrollEnabled = true
-            self.collectionView!.setContentOffset(CGPoint(x: 0, y: 64-RefreshHeaderHeight), animated: true)
-            
             self.headerView?.endRefresh()
             ToastView().showToast("刷新完成！")
-            
         }
     }
     
@@ -191,7 +184,7 @@ class SellBuyViewController: UIViewController, UIScrollViewDelegate, isRefreshin
         collectionView = UICollectionView(frame: CGRect(x: 0, y: 64, width: Width, height: Height-64-49), collectionViewLayout: layout)
         collectionView?.backgroundColor = UIColor.white
         
-        headerView =  RefreshHeaderView(frame: collectionView!.frame, subView: collectionView!, target: self)  //添加下拉刷新
+        headerView =  RefreshHeaderView(subView: collectionView!, target: self)  //添加下拉刷新
         
         //注册一个cell
         collectionView!.register(SellBuyCollectionViewCell.self, forCellWithReuseIdentifier:cellReuseIdentifier)

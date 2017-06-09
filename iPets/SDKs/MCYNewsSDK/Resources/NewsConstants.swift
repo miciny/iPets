@@ -25,3 +25,8 @@ let newslabelFont = UIFont.systemFont(ofSize: standardFontNo-4) //新闻标签�
 let videoTimeFont = UIFont.systemFont(ofSize: standardFontNo-5) //视频时间的字体大小
 let videoRuntimeFont = UIFont.systemFont(ofSize: standardFontNo-2) //的字体大小
 let videoTitleFont = UIFont.systemFont(ofSize: standardFontNo+2) //title的字体大小
+
+
+//图集
+let picTitleFont = UIFont.boldSystemFont(ofSize: standardFontNo+3) // 图集title的字体大小
+let picintroFont = UIFont.systemFont(ofSize: standardFontNo+1) // 图集简介的字体大小
