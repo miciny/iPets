@@ -11,23 +11,22 @@ import UIKit
 class ActionMenuView: UIView {
 
     fileprivate var delegate : actionMenuViewDelegate? // 代理
-
     fileprivate var frameMarginSize: CGFloat! = 20 //与周围的边距
-    fileprivate var frameSize:CGSize = CGSize(width: Width-40, height: 60) //大小
+    fileprivate var frameSize = CGSize(width: Width-40, height: 60) //大小
     fileprivate let buttonView = UIView() //装button的View
     
     //可设置项
     var eventFlag = 0 //一个界面多次调用时，进行的判断，可以传入按钮的tag等
-    var objectHeight : CGFloat = 50 //每个菜单的高度高度
-    var objectFont : CGFloat = 15  //字体
+    var objectHeight: CGFloat = 50 //每个菜单的高度高度
+    var objectFont: CGFloat = 15  //字体
     var objectColor = UIColor.white //字体颜色
-    var gap : CGFloat = 10  //间距
+    var gap: CGFloat = 10  //间距
     var triCenter = CGPoint() //小三角的位置，就是指示箭头
     
     
     //返回字体的size
-    func sizeWithString(_ string:NSString, font:UIFont)->CGSize {
-        let dic:NSDictionary = NSDictionary(object: font, forKey: NSFontAttributeName as NSCopying)
+    func sizeWithString(_ string: String, font: UIFont)->CGSize {
+        let dic = NSDictionary(object: font, forKey: NSFontAttributeName as NSCopying)
         let options = NSStringDrawingOptions.truncatesLastVisibleLine
         let rect:CGRect = string.boundingRect(with: frameSize, options:options, attributes: dic as? [String : AnyObject], context: nil)
         return rect.size
@@ -41,13 +40,13 @@ class ActionMenuView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    convenience init(object: NSDictionary, center: CGPoint, target: actionMenuViewDelegate, showInView: UIView){
+    convenience init(object: NSDictionary, origin: CGPoint, target: actionMenuViewDelegate, showInView: UIView){
         self.init()
         
         //获取最大长度
         var size = CGSize(width: 0, height: 0)
         for title in object.allKeys{
-            let sizeTmp = self.sizeWithString(title as! String as NSString, font: UIFont.systemFont(ofSize: objectFont))
+            let sizeTmp = self.sizeWithString(title as! String, font: UIFont.systemFont(ofSize: objectFont))
             if(size.width < sizeTmp.width){
                 size = sizeTmp
             }
@@ -56,6 +55,8 @@ class ActionMenuView: UIView {
         let totalHeight = CGFloat(object.count) * objectHeight //总高度
         let totalWidth = size.width + objectHeight + gap //总宽度
         var centerPosition = CGPoint()
+        
+        let center = CGPoint(x: origin.x + totalWidth/2, y: origin.y + totalHeight/2 + 15)
         
         //超出边界的处理
         var marginX = center.x

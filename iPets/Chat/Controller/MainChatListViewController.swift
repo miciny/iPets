@@ -77,7 +77,7 @@ class MainChatListViewController: UIViewController, actionMenuViewDelegate, isRe
     //右上角添加按钮的事件
     func addButtonClicked(){
         if(addActionView?.superview == nil){
-            addActionView = ActionMenuView(object: addArray, center: CGPoint(x: Width, y: navigateBarHeight+90), target: self, showInView: self.view)
+            addActionView = ActionMenuView(object: addArray, origin: CGPoint(x: Width, y: navigateBarHeight), target: self, showInView: self.view)
             addActionView!.eventFlag = 0 //可以不设置，默认为0，方便一个页面多次调用
         }else{
             addActionView?.hideView()

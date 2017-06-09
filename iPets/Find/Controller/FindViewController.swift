@@ -38,9 +38,11 @@ class FindViewController: UIViewController, UITableViewDelegate, UITableViewData
         let oneOne = FindDataModel(icon: "collection.png", title: "附近寻宠")
         let twoOne = FindDataModel(icon: "RichScan", title: "热点新闻")
         let twoTwo = FindDataModel(icon: "shake", title: "热点视频")
+        let threeTwo = FindDataModel(icon: "shake", title: "游戏")
         
         findData!.add([oneOne])
         findData!.add([twoOne, twoTwo])
+        findData!.add([threeTwo])
     }
     
     //设置tableView

@@ -98,7 +98,7 @@ class SellBuyViewController: UIViewController, UIScrollViewDelegate, isRefreshin
     //点击右上角的添加按钮
     func addButtonClicked(){
         if(addActionView?.superview == nil){
-            addActionView = ActionMenuView(object: addArray, center: CGPoint(x: Width, y: navigateBarHeight+90), target: self, showInView: self.view)
+            addActionView = ActionMenuView(object: addArray, origin: CGPoint(x: Width, y: navigateBarHeight), target: self, showInView: self.view)
             addActionView!.eventFlag = 1 //可以不设置，默认为0，方便一个页面多次调用
         }else{
             addActionView?.hideView()

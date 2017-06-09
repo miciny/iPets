@@ -7,11 +7,13 @@
 //
 
 import UIKit
+import Kingfisher
 
 class Setting_CommonFuncViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     fileprivate var mainTabelView: UITableView? //整个table
     fileprivate var infoData : NSMutableArray? //数据
+    fileprivate var isClaculatingCache: Bool? //是否在计算
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,16 +65,6 @@ class Setting_CommonFuncViewController: UIViewController, UITableViewDelegate, U
         infoData?.add([infoTwo1, infoTwo2, infoTwo3])
         infoData?.add([infoThree1, infoThree2])
         
-    }
-    
-    func setCacheData(){
-        let cache = (Cache.cacheSize > Float(0.01) ? String(format: "%.2f", Cache.cacheSize) : "0.0")
-        let index = IndexPath(row: 1, section: 2)
-        let section = self.infoData![index.section] as! [AnyObject]
-        let data = section[index.row] as! SettingDataModel
-        
-        data.lable = cache+"MB  "
-        self.mainTabelView?.reloadRows(at: [index], with: .none)
     }
     
     //设置tableView
@@ -174,5 +166,63 @@ class Setting_CommonFuncViewController: UIViewController, UITableViewDelegate, U
         // Dispose of any resources that can be recreated.
     }
     
-
+    
+//===========================================缓存======================================
+    
+    func setCacheData(){
+        self.isClaculatingCache = true
+        
+        getLocalCache { (myCache) in
+            let CalculateQueue = DispatchQueue(label: "CalculateQueue", attributes: [])
+            CalculateQueue.async {
+                let indexPath = IndexPath(item: 1, section: 2)
+                let allSize = myCache  //本地缓存加kingfisher的缓存
+                let cacheSizeStr = NSString(format: "%.2fMB", allSize) as String
+                let section = self.infoData![indexPath.section] as! [AnyObject]
+                let data = section[indexPath.row] as! SettingDataModel
+                
+                data.lable = cacheSizeStr
+                mainQueue.async(execute: {
+                    self.mainTabelView!.reloadRows(at: [indexPath], with: .none)
+                    self.isClaculatingCache = false
+                })
+            }
+        }
+    }
+    
+    //获取本地,因为kinfisher, WebKit 也把缓存放到缓存目录了
+    func getLocalCache(_ completeHander: @escaping (Float) -> ()){
+        let CalculateLocalQueue = DispatchQueue(label: "CalculateLocalQueue", attributes: [])
+        CalculateLocalQueue.async {
+            let myCache = Cache.cacheSize //本地缓存
+            mainQueue.async(execute: {
+                completeHander(myCache)
+            })
+        }
+    }
+    
+    
+    //清除缓存
+    func clearCache(){
+        let wait = WaitView()
+        wait.showWait("清除中")
+        
+        //清除本地缓存
+        if Cache.clearCache(){
+            let imageCache = KingfisherManager.shared.cache
+            //清理内存缓存
+            imageCache.clearMemoryCache()
+            imageCache.cleanExpiredDiskCache()
+            
+            // 清理硬盘缓存，这是一个异步的操作
+            imageCache.clearDiskCache(completion: {
+                wait.hideView()
+                self.setCacheData()
+                ToastView().showToast("清除成功")
+            })
+        }else{
+            let toast = ToastView()
+            toast.showToast("清除失败！")
+        }
+    }
 }
