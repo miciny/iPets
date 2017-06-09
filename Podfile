@@ -5,4 +5,5 @@ target 'iPets' do
     pod 'Cartography', '~> 1.1.0'
     pod 'ReachabilitySwift', '~> 3'
     pod 'Alamofire', '~> 4.0.1'
+    pod 'SwiftyJSON', :git => 'https://github.com/SwiftyJSON/SwiftyJSON.git'
 end

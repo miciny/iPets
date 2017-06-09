@@ -9,10 +9,15 @@
 import Foundation
 import UIKit
 
+//上拉加载更多的代理
+protocol isLoadingMoreDelegate{
+    func loadMore()
+}
+
 class LoadMoreView: UIView, UIScrollViewDelegate{
     
     var loadMoreEnabled = true
-    fileprivate var delegate : isLoadMoreingDelegate?
+    fileprivate var delegate : isLoadingMoreDelegate?
     
     fileprivate let footerView = UIView()
     fileprivate var titleLabel: UILabel!
@@ -20,7 +25,7 @@ class LoadMoreView: UIView, UIScrollViewDelegate{
     fileprivate var actView: UIActivityIndicatorView?
     fileprivate var arrowImage: UIImageView?
     
-    init(frame: CGRect, subView: UIScrollView, target: isLoadMoreingDelegate) {
+    init(frame: CGRect, subView: UIScrollView, target: isLoadingMoreDelegate) {
         
         super.init(frame:frame)
         scrollView = subView

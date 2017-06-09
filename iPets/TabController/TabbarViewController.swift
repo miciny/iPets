@@ -34,9 +34,9 @@ class TabbarViewController: UITabBarController, UITabBarControllerDelegate {
     secNav.tabBarItem.selectedImage=UIImage(named: "Chat_Selected")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal)
     
     //添加第三个试图，寻宠页，发布或者收看所有当地的寻宠消息
-    let thirdVC = FindPetsViewController()
+    let thirdVC = FindViewController()
     let thirdNav = UINavigationController(rootViewController: thirdVC)
-    thirdNav.tabBarItem.title = "寻宠"
+    thirdNav.tabBarItem.title = "发现"
     thirdNav.tabBarItem.image=UIImage(named: "Find")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal)
     thirdNav.tabBarItem.selectedImage=UIImage(named: "Find_Selected")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal)
     

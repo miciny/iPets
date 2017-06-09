@@ -3,19 +3,31 @@ PODS:
   - Cartography (1.1.0)
   - Kingfisher (3.6.2)
   - ReachabilitySwift (3)
+  - SwiftyJSON (3.1.4)
 
 DEPENDENCIES:
   - Alamofire (~> 4.0.1)
   - Cartography (~> 1.1.0)
   - Kingfisher (~> 3.6.0)
   - ReachabilitySwift (~> 3)
+  - SwiftyJSON (from `https://github.com/SwiftyJSON/SwiftyJSON.git`)
+
+EXTERNAL SOURCES:
+  SwiftyJSON:
+    :git: https://github.com/SwiftyJSON/SwiftyJSON.git
+
+CHECKOUT OPTIONS:
+  SwiftyJSON:
+    :commit: d932f6498b9acdd286e65ff6691c3dd3518b086e
+    :git: https://github.com/SwiftyJSON/SwiftyJSON.git
 
 SPEC CHECKSUMS:
   Alamofire: 7682d43245de14874acd142ec137b144aa1dd335
   Cartography: 0538ccb4044acbbda2266335fc58cb4228794d90
   Kingfisher: 2c94e72c6830622c71d06adf4ea024c37d316830
   ReachabilitySwift: f5b9bb30a0777fac8f09ce8b067e32faeb29bb64
+  SwiftyJSON: 05cf0e98a950e2ba343735264f5a96b81e755d00
 
-PODFILE CHECKSUM: 89b4d974cb746401f896fe0a9d22876f3c067c3a
+PODFILE CHECKSUM: c8077e75b3c2533cae830cfad7ecb3c187898af6
 
 COCOAPODS: 1.0.1

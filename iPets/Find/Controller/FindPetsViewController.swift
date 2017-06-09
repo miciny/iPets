@@ -50,8 +50,7 @@ class FindPetsViewController: UIViewController, isRefreshingDelegate, isLoadMore
     
     //初始化title 背景等
     func setUpEles(){
-        self.title = "寻宠"                           //页面title和底部title
-        self.navigationItem.title = "附近寻宠信息"        //再次设置顶部title,这样才可以和tabbar上的title不一样
+        self.title = "附近寻宠"                           //页面title和底部title
         self.view.backgroundColor = UIColor.white //背景色
         
         //右上角添加按钮

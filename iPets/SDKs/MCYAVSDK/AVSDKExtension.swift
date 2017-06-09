@@ -9,10 +9,6 @@
 import Foundation
 import UIKit
 
-//视频
-let videoTimeFont = UIFont.systemFont(ofSize: standardFontNo-5) //视频时间的字体大小
-let videoRuntimeFont = UIFont.systemFont(ofSize: standardFontNo-2) //的字体大小
-let videoTitleFont = UIFont.systemFont(ofSize: standardFontNo+2) //title的字体大小
 
 extension UIView {
     

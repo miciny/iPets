@@ -20,15 +20,9 @@ protocol bottomMenuViewDelegate{
     func buttonClicked(_ tag: Int, eventFlag: Int)
 }
 
-//下拉刷新的代理
-protocol isRefreshingDelegate{
-    func reFreshing()
-}
 
-//上拉加载更多的代理
-protocol isLoadMoreingDelegate{
-    func loadMore()
-}
+
+
 
 //自动滑动图的代理
 @objc protocol MCYAutoScrollViewDelegate: NSObjectProtocol{

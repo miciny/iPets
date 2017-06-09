@@ -60,6 +60,9 @@ let sellBuyLabelFont = UIFont.systemFont(ofSize: standardFontNo) //首页的文�
 let settingPageNameFont = UIFont.systemFont(ofSize: standardFontNo+2) //设置页字体大小
 let settingPageLabelFont = UIFont.systemFont(ofSize: standardFontNo) //设置页lable字体大小
 
+//==================find页的字体==========================
+let findPageLabelFont = UIFont.systemFont(ofSize: standardFontNo+3) //设置页lable字体大小
+
 
 var myInfo = UserInfo(name: nil, icon: nil, nickname: nil)   //我的名字，头像，昵称 ，规则是昵称不能为空，且不能重复
 
