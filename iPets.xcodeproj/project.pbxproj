@@ -17,6 +17,15 @@
 		E126FD101CFD6E7700DAFF84 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E126FD0A1CFD6E7700DAFF84 /* AppDelegate.swift */; };
 		E126FD151CFD6E7700DAFF84 /* TabbarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E126FD0F1CFD6E7700DAFF84 /* TabbarViewController.swift */; };
 		E12A389F1EE7B19900755C6C /* ActionMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12A389E1EE7B19900755C6C /* ActionMenuView.swift */; };
+		E12A38A71EE92FE200755C6C /* BaseVideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12A38A11EE92FE200755C6C /* BaseVideoView.swift */; };
+		E12A38A81EE92FE200755C6C /* SetMaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12A38A21EE92FE200755C6C /* SetMaskView.swift */; };
+		E12A38A91EE92FE200755C6C /* Video.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E12A38A31EE92FE200755C6C /* Video.xcassets */; };
+		E12A38AA1EE92FE200755C6C /* VideoFuncs.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12A38A41EE92FE200755C6C /* VideoFuncs.swift */; };
+		E12A38AB1EE92FE200755C6C /* VideoPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12A38A51EE92FE200755C6C /* VideoPlayerView.swift */; };
+		E12A38AC1EE92FE200755C6C /* VideoSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12A38A61EE92FE200755C6C /* VideoSlider.swift */; };
+		E12A38AE1EE94C5D00755C6C /* AVSDKExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12A38AD1EE94C5D00755C6C /* AVSDKExtension.swift */; };
+		E12A38B11EE94DBF00755C6C /* NetFuncs.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12A38B01EE94DBF00755C6C /* NetFuncs.swift */; };
+		E12A38B31EE94F2000755C6C /* LoadingPicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12A38B21EE94F2000755C6C /* LoadingPicView.swift */; };
 		E14197D01CA1A6BE00EDD443 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E14197CE1CA1A6BE00EDD443 /* Main.storyboard */; };
 		E14197D51CA1A6BE00EDD443 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E14197D31CA1A6BE00EDD443 /* LaunchScreen.storyboard */; };
 		E16B35471EE64E9A00895094 /* CanCopyLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16B35461EE64E9A00895094 /* CanCopyLabel.swift */; };
@@ -135,6 +144,15 @@
 		E126FD0A1CFD6E7700DAFF84 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E126FD0F1CFD6E7700DAFF84 /* TabbarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabbarViewController.swift; sourceTree = "<group>"; };
 		E12A389E1EE7B19900755C6C /* ActionMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionMenuView.swift; sourceTree = "<group>"; };
+		E12A38A11EE92FE200755C6C /* BaseVideoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseVideoView.swift; sourceTree = "<group>"; };
+		E12A38A21EE92FE200755C6C /* SetMaskView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetMaskView.swift; sourceTree = "<group>"; };
+		E12A38A31EE92FE200755C6C /* Video.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Video.xcassets; sourceTree = "<group>"; };
+		E12A38A41EE92FE200755C6C /* VideoFuncs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoFuncs.swift; sourceTree = "<group>"; };
+		E12A38A51EE92FE200755C6C /* VideoPlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoPlayerView.swift; sourceTree = "<group>"; };
+		E12A38A61EE92FE200755C6C /* VideoSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoSlider.swift; sourceTree = "<group>"; };
+		E12A38AD1EE94C5D00755C6C /* AVSDKExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVSDKExtension.swift; sourceTree = "<group>"; };
+		E12A38B01EE94DBF00755C6C /* NetFuncs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetFuncs.swift; sourceTree = "<group>"; };
+		E12A38B21EE94F2000755C6C /* LoadingPicView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingPicView.swift; sourceTree = "<group>"; };
 		E14197C71CA1A6BE00EDD443 /* iPets.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iPets.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E14197CF1CA1A6BE00EDD443 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E14197D41CA1A6BE00EDD443 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -270,6 +288,31 @@
 			name = resources;
 			sourceTree = "<group>";
 		};
+		E12A38A01EE92FC300755C6C /* MCYAVSDK */ = {
+			isa = PBXGroup;
+			children = (
+				E12A38A11EE92FE200755C6C /* BaseVideoView.swift */,
+				E12A38A51EE92FE200755C6C /* VideoPlayerView.swift */,
+				E12A38A21EE92FE200755C6C /* SetMaskView.swift */,
+				E12A38A41EE92FE200755C6C /* VideoFuncs.swift */,
+				E12A38A61EE92FE200755C6C /* VideoSlider.swift */,
+				E12A38A31EE92FE200755C6C /* Video.xcassets */,
+				E12A38AD1EE94C5D00755C6C /* AVSDKExtension.swift */,
+			);
+			name = MCYAVSDK;
+			path = ../../../../Users/miciny/ToGitHub/iPets/iPets/SDKs/MCYAVSDK;
+			sourceTree = DEVELOPER_DIR;
+		};
+		E12A38AF1EE94DA200755C6C /* MCYInternetSDK */ = {
+			isa = PBXGroup;
+			children = (
+				E12A38B01EE94DBF00755C6C /* NetFuncs.swift */,
+				E12A38B21EE94F2000755C6C /* LoadingPicView.swift */,
+			);
+			name = MCYInternetSDK;
+			path = ../../../../Users/miciny/ToGitHub/iPets/iPets/SDKs/MCYInternetSDK;
+			sourceTree = DEVELOPER_DIR;
+		};
 		E14197BE1CA1A6BE00EDD443 = {
 			isa = PBXGroup;
 			children = (
@@ -354,6 +397,8 @@
 		E175282C1ED3E2BC00269EDF /* SDKs */ = {
 			isa = PBXGroup;
 			children = (
+				E12A38AF1EE94DA200755C6C /* MCYInternetSDK */,
+				E12A38A01EE92FC300755C6C /* MCYAVSDK */,
 				E16B35451EE64E6600895094 /* MCYCopySDK */,
 				E175283B1ED3E59400269EDF /* MCYDataSaveSDK */,
 				E175282E1ED3E33F00269EDF /* MCYPicBrowserSDK */,
@@ -793,6 +838,7 @@
 				E17528C61ED4090B00269EDF /* Setting.xcassets in Resources */,
 				E10E44691CC62B3500D9992A /* Me.xcassets in Resources */,
 				E17528CA1ED4092B00269EDF /* FindPets.xcassets in Resources */,
+				E12A38A91EE92FE200755C6C /* Video.xcassets in Resources */,
 				E10E44681CC62B3500D9992A /* Images.xcassets in Resources */,
 				E14197D51CA1A6BE00EDD443 /* LaunchScreen.storyboard in Resources */,
 				E1ADD75F1EDFE899000BCBC4 /* Temp.xcassets in Resources */,
@@ -856,6 +902,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E12A38B31EE94F2000755C6C /* LoadingPicView.swift in Sources */,
 				E17528E91ED40B0F00269EDF /* UniversalConstants.swift in Sources */,
 				E17528BB1ED406DC00269EDF /* ChatTableView.swift in Sources */,
 				E17528D51ED40A5A00269EDF /* InternetExplorerViewController.swift in Sources */,
@@ -865,6 +912,8 @@
 				E17528E31ED40A9300269EDF /* WaitView.swift in Sources */,
 				E17528901ED406A500269EDF /* FindPetsViewController.swift in Sources */,
 				E17528B21ED406D000269EDF /* MessageItem.swift in Sources */,
+				E12A38AE1EE94C5D00755C6C /* AVSDKExtension.swift in Sources */,
+				E12A38AA1EE92FE200755C6C /* VideoFuncs.swift in Sources */,
 				E17528F11ED40B1800269EDF /* AutoLayout.swift in Sources */,
 				E17528D61ED40A5A00269EDF /* RichScanViewController.swift in Sources */,
 				E17528831ED404A400269EDF /* PersonInfo_ChangeNameViewController.swift in Sources */,
@@ -889,8 +938,10 @@
 				E126FD101CFD6E7700DAFF84 /* AppDelegate.swift in Sources */,
 				E17528951ED406AD00269EDF /* FindPetsCellFrameModel.swift in Sources */,
 				E17528541ED3E8AE00269EDF /* CycleView.swift in Sources */,
+				E12A38B11EE94DBF00755C6C /* NetFuncs.swift in Sources */,
 				E175286D1ED4045800269EDF /* Cache.swift in Sources */,
 				E17528611ED3E95300269EDF /* SellBuyCollectionModel.swift in Sources */,
+				E12A38A71EE92FE200755C6C /* BaseVideoView.swift in Sources */,
 				E12A389F1EE7B19900755C6C /* ActionMenuView.swift in Sources */,
 				E17528F21ED40B1800269EDF /* ChangeValue.swift in Sources */,
 				E17528F41ED40B1800269EDF /* Extension.swift in Sources */,
@@ -899,6 +950,7 @@
 				E17528E21ED40A9300269EDF /* ToastView.swift in Sources */,
 				E175283A1ED3E52600269EDF /* PicsBrowserView.swift in Sources */,
 				E16B35491EE682D100895094 /* CanCopyImageView.swift in Sources */,
+				E12A38AB1EE92FE200755C6C /* VideoPlayerView.swift in Sources */,
 				E1ADD75D1ED6CD29000BCBC4 /* MyTimer.swift in Sources */,
 				E17528F31ED40B1800269EDF /* DateToToString.swift in Sources */,
 				E17528F51ED40B1800269EDF /* GetMyInfo.swift in Sources */,
@@ -906,6 +958,7 @@
 				E17528791ED4049900269EDF /* MeViewCell.swift in Sources */,
 				E17528341ED3E42600269EDF /* ImageCollectionViewController.swift in Sources */,
 				E17528A01ED406C600269EDF /* ChatViewController.swift in Sources */,
+				E12A38A81EE92FE200755C6C /* SetMaskView.swift in Sources */,
 				E17528801ED404A400269EDF /* Setting_CommonFuncViewController.swift in Sources */,
 				E17528BA1ED406DC00269EDF /* ChatTableHeaderViewCell.swift in Sources */,
 				E17528331ED3E42600269EDF /* ImageCollectionViewCell.swift in Sources */,
@@ -914,6 +967,7 @@
 				E17528811ED404A400269EDF /* PersonInfo_IconViewController.swift in Sources */,
 				E17528561ED3E8AE00269EDF /* SellBuyCollectionFooterView.swift in Sources */,
 				E17528821ED404A400269EDF /* PersonInfo_TDCodeImageViewController.swift in Sources */,
+				E12A38AC1EE92FE200755C6C /* VideoSlider.swift in Sources */,
 				E17528551ED3E8AE00269EDF /* SearchTableViewCell.swift in Sources */,
 				E16B35471EE64E9A00895094 /* CanCopyLabel.swift in Sources */,
 				E17528E81ED40B0F00269EDF /* Protocol.swift in Sources */,

@@ -70,7 +70,6 @@ class SendFindMyPetsInfoViewController: UIViewController, UITableViewDelegate, U
         })
     }
 
-    
     //发送
     func sendFindMyPetsInfo(){
         let waitView = WaitView()
@@ -80,12 +79,12 @@ class SendFindMyPetsInfoViewController: UIViewController, UITableViewDelegate, U
         
         globalQueue.async(execute: {
             let time = Date()
-            
             //提取原来的寻宠数据
             let findMyPetsData = SaveDataModel()
             var oldData = findMyPetsData.loadFindMyPetsDataFromTempDirectory()
             
             if self.selectedModel.count > 0{
+                
                 let timeStr = DateToToString.dateToStringBySelf(time, format: "yyyyMMddHHmmss")
                 //保存图片到本地沙盒
                 let saveCache = SaveCacheDataModel()
@@ -113,10 +112,10 @@ class SendFindMyPetsInfoViewController: UIViewController, UITableViewDelegate, U
                     nameArray.append("\(timeStr)\(j).png")
                 }
                 
-                let myFindPetsInfo = FindPetsCellModel(name: myInfo.username!, text: textStr, picture: nameArray, date: time, nickname: myInfo.nickname!)
+                let myFindPetsInfo = FindPetsCellModel(name: myInfo.username!, text: textStr, picture: nameArray, date: time, nickname: myInfo.nickname!, video: nil, from: .me)
                 oldData.append(myFindPetsInfo)
             }else{
-                let myFindPetsInfo = FindPetsCellModel(name: myInfo.username!, text: textStr, picture: nil, date: time, nickname: myInfo.nickname!)
+                let myFindPetsInfo = FindPetsCellModel(name: myInfo.username!, text: textStr, picture: nil, date: time, nickname: myInfo.nickname!, video: nil, from: .me)
                 oldData.append(myFindPetsInfo)
             }
             

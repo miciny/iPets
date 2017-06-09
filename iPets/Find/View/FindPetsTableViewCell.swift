@@ -19,36 +19,21 @@ protocol FindPetsCellViewDelegate{
 class FindPetsTableViewCell: UITableViewCell, UIAlertViewDelegate{
     
     var delegate: FindPetsCellViewDelegate?
-    var modelFrame: FindPetsCellFrameModel?
+    var modelFrame: FindPetsCellFrameModel!
     
     var iconView = UIImageView()
     var nameView = UILabel()
-    var textView = CanCopyLabel()  //能复制
-    var pictureView = [UIImageView]()
+    var textView: CanCopyLabel?  //能复制
+    var pictureView: [UIImageView]?
+    var deleteView: UIButton?
+    var videoView: UIView?
+    
     var timeView = UILabel()
-    var deleteView = UIButton()
     var moreView = UIImageView()
-    var hideView: UIButton?
-    let rowLimited = CGFloat(5)
-    var isHide = false
-    var isAll = false
+    var indexPath = IndexPath()
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?){
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
-        //用contentView加的话，清除的时候 不会被清掉
-        self.contentView.addSubview(self.iconView)
-        
-        self.nameView.textColor = UIColor(red: 80/255, green: 100/255, blue: 150/255, alpha: 1)
-        self.nameView.font = nameFont
-        self.contentView.addSubview(self.nameView)
-        
-        self.timeView.font = timeFont
-        self.timeView.textColor = UIColor.gray
-        self.contentView.addSubview(self.timeView)
-        
-        self.contentView.addSubview(self.moreView)
-        
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -56,66 +41,33 @@ class FindPetsTableViewCell: UITableViewCell, UIAlertViewDelegate{
     }
     
     //
-    func showCellWithModel(_ frameModel: FindPetsCellFrameModel){
-        modelFrame = frameModel
+    func showCellWithModel(_ frameModel: FindPetsCellFrameModel, indexPath: IndexPath){
+        self.modelFrame = frameModel
+        self.indexPath = indexPath
+        
+        //在复用时，如果不置空，会有数据被重新利用
+        textView = nil
+        pictureView = nil
+        deleteView = nil
+        videoView = nil
+        
         self.settingFrame()
         self.settingData()
     }
     
     //设置cell的数据
     func settingData(){
-        let model = modelFrame?.myCellModel
         
-        //是我就显示我的名字，如果是别人的，可以考虑循环查找
-        
-        globalQueue.async(execute: {
-            //这里写需要放到子线程做的耗时的代码
-            let info = self.loadIcon()
-            let icon = info[0]
-            let name = info[1]
-            let isMy = info[2] as! Bool
-            
-            mainQueue.async(execute: {
-                self.iconView.image = icon as? UIImage //这里返回主线程，写需要主线程执行的代码
-                self.nameView.text = name as? String //名字
-                self.clickIcon()
-                
-                if isMy{
-                    self.deleteView.setTitle("删除", for: UIControlState())
-                    self.deleteView.backgroundColor = UIColor.clear
-                    self.deleteView.titleLabel?.font = timeFont
-                    self.deleteView.setTitleColor(UIColor(red: 80/255, green: 100/255, blue: 150/255, alpha: 1), for: UIControlState())
-                    self.addSubview(self.deleteView)
-                }
-                
-            })
-        })
-        
+        //name icon
+        self.setNameIcon()
         //text
-        if(model!.text != ""){
-            self.textView.numberOfLines = 0
-            self.textView.font = textFont
-            self.addSubview(self.textView)
-            self.textView.text = model!.text
-            self.textView.canCopyLabelFrom = CanCopyLabelFrom.find
-        }
+        self.setText()
         
-        //hide
-        if isHide == true {
-            self.hideView!.setTitle("全文", for: UIControlState())
-            self.hideView!.setTitleColor(UIColor(red: 80/255, green: 100/255, blue: 150/255, alpha: 1), for: UIControlState())
-            self.hideView!.titleLabel?.font = hideFont
-            self.hideView!.backgroundColor = UIColor.clear
-            self.addSubview(self.hideView!)
-        }
-        
-        //图片，异步加载，解决滑动页面卡的问题
-        if (model!.picture != nil) {
-            
+        //pic
+        if self.pictureView != nil {
             globalQueue.async(execute: {
                 //这里写需要放到子线程做的耗时的代码
                 let findImage = self.loadPic()
-                
                 mainQueue.async(execute: {
                     self.showPic(findImage) //这里返回主线程，写需要主线程执行的代码
                 })
@@ -123,13 +75,83 @@ class FindPetsTableViewCell: UITableViewCell, UIAlertViewDelegate{
             
         }
         
+        //video
+        self.setVideo()
+        
         //时间lable
-        self.timeView.text = DateToToString.getFindPetsTimeFormat(model!.date)
+        self.timeView.text = DateToToString.getFindPetsTimeFormat(modelFrame.myCellModel.date)
         
         //more
         self.moreView.image = UIImage(named: "More")
-        
     }
+    
+    func setNameIcon(){
+        
+        //用contentView加的话，清除的时候 不会被清掉
+        self.addSubview(self.iconView)
+        
+        self.nameView.textColor = UIColor(red: 80/255, green: 100/255, blue: 150/255, alpha: 1)
+        self.nameView.font = nameFont
+        self.addSubview(self.nameView)
+        
+        self.timeView.font = timeFont
+        self.timeView.textColor = UIColor.gray
+        self.addSubview(self.timeView)
+        self.addSubview(self.moreView)
+        
+        globalQueue.async(execute: {
+            //这里写需要放到子线程做的耗时的代码
+            let icon = self.loadIcon()
+            
+            mainQueue.async(execute: {
+                self.iconView.image = icon //这里返回主线程，写需要主线程执行的代码
+                self.nameView.text = self.modelFrame.myCellModel.name //名字
+                self.clickIcon()
+                
+                if let deleteBtn = self.deleteView{
+                    deleteBtn.setTitle("删除", for: UIControlState())
+                    deleteBtn.backgroundColor = UIColor.clear
+                    deleteBtn.titleLabel?.font = timeFont
+                    deleteBtn.setTitleColor(UIColor(red: 80/255, green: 100/255, blue: 150/255, alpha: 1), for: UIControlState())
+                    self.addSubview(deleteBtn)
+                }
+            })
+        })
+    }
+    
+    func setText(){
+        if let textView = self.textView{
+            textView.numberOfLines = 0
+            textView.font = textFont
+            self.addSubview(textView)
+            textView.text = modelFrame.myCellModel.text
+            textView.canCopyLabelFrom = CanCopyLabelFrom.find
+        }
+    }
+
+//===============================video==================
+    func setVideo(){
+        if let videoView = self.videoView{
+            let avView = BaseVideoView()
+            
+            let videoURL = "http://newsapi.sina.cn/?resource=video/location&videoId=&videoPlayUrl=http%3A%2F%2Fus.sinaimg.cn%2F002Y3UUTjx07bIB3F08w010f11008G3e0k01.mp4%3FExpires%3D1496986166%26ssig%3Dqi4h8FL62f%26KID%3Dunistore%2Cvideo&docID=fyfzaaq5757350&col=&videoCate=weiborank&fromsinago=1&postt=news_news_video_6&from=6051193012"
+            let picURL = "http://wx3.sinaimg.cn/large/7fa9a04fgy1fge7zzzit6j20dx07ugma.jpg"
+            let time = 66000
+            
+            avView.setUp(CGRect(x: 0, y: 0, width: videoView.width, height: videoView.height),
+                         videoUrl: videoURL,
+                         picUrl: picURL,
+                         runtime: time,
+                         indexPath: self.indexPath,
+                         videoTitle: nil,
+                         showCloseBtn: true)
+            
+            videoView.addSubview(avView)
+            
+            self.addSubview(videoView)
+        }
+    }
+    
     
 //===============================点击头像和名字，进入个人信息页==================
     func clickIcon(){
@@ -148,60 +170,53 @@ class FindPetsTableViewCell: UITableViewCell, UIAlertViewDelegate{
     
 //================================图片的展示=====================
     func showPic(_ pics: [UIImage]){
-        let picViewCount = self.pictureView.count
+        let picViewCount = self.pictureView!.count
         for i in 0 ..< picViewCount {
-            self.pictureView[i].image = pics[i]
+            self.pictureView![i].image = pics[i]
+            //单机事件
+            self.pictureView![i].isUserInteractionEnabled = true
+            self.pictureView![i].tag = i
+            let tap = UITapGestureRecognizer(target: self, action: #selector(self.selectedPic))
+            self.pictureView![i].addGestureRecognizer(tap)
         }
     }
     
     //图片，异步加载，解决滑动页面卡的问题
     func loadPic() -> [UIImage]{
-        let picViewCount = self.pictureView.count
+        let picViewCount = self.pictureView!.count
         var findImage = [UIImage]()
         
         for i in 0 ..< picViewCount {
             
             let saveCache = SaveCacheDataModel()
-            let imageData = saveCache.loadImageFromFindPetsCacheDir((modelFrame?.myCellModel!.picture![i])!)
+            let imageData = saveCache.loadImageFromFindPetsCacheDir((modelFrame.myCellModel.picture![i]))
             let image = ChangeValue.dataToImage(imageData)
             findImage.append(image)
-            
-            self.pictureView[i].isUserInteractionEnabled = true
-            self.pictureView[i].tag = i
-            let tap = UITapGestureRecognizer(target: self, action: #selector(self.selectedPic))
-            self.pictureView[i].addGestureRecognizer(tap)
         }
-        
         return findImage
     }
     
-    ////坑爹啊，这个地方耗时啊，滑动卡啊，也开个线程查找吧
-    func loadIcon() -> NSArray{
+    //先这样吧
+    func loadIcon() -> UIImage{
         var icon = UIImage()
-        var name = String()
-        var isMy = Bool()
         
-        if(myInfo.nickname == modelFrame?.myCellModel!.nickname){
+        if modelFrame.myCellModel.from == FindPetsDataFromType.me.rawValue{
             icon = myInfo.icon!
-            name = myInfo.username!
-            isMy = true
             
         }else{
             icon = UIImage(named: "defaultIcon")!
-            name = ""
-            isMy = false
         }
-        return [icon, name, isMy]
+        return icon
     }
     
     //点击处理,展示图片
     func selectedPic(_ sender: UITapGestureRecognizer){
         let tag = (sender.view?.tag)! as Int
-        
         //转化成相对于屏幕的绝对坐标
         var frames = [CGRect]()
-        for i in 0 ..< self.pictureView.count {
-            let frame = self.pictureView[i].superview!.convert(self.pictureView[i].frame, to: self.superview?.superview?.superview)
+        for i in 0 ..< self.pictureView!.count {
+            let frame = self.pictureView![i].superview!.convert(self.pictureView![i].frame,
+                                                                to: self.superview?.superview?.superview)
             frames.append(frame)
         }
 
@@ -210,7 +225,7 @@ class FindPetsTableViewCell: UITableViewCell, UIAlertViewDelegate{
         wait.showWait("加载中")
         
         globalQueue.async(execute: {
-            for i in 0 ..< self.pictureView.count {
+            for i in 0 ..< self.pictureView!.count {
                 let saveCache = SaveCacheDataModel()
                 let imageHData = saveCache.loadImageFromFindPetsCacheDir("H"+(self.modelFrame?.myCellModel!.picture![i])!)
                 
@@ -227,42 +242,45 @@ class FindPetsTableViewCell: UITableViewCell, UIAlertViewDelegate{
     
 //=================================设置cell显示的frame=================================
     func settingFrame(){
-        self.pictureView = [UIImageView]()
-        if(modelFrame?.myCellModel?.picture != nil){
-            let count = (modelFrame?.myCellModel?.picture?.count)! as Int
+        
+        // pic
+        if let picFrames = modelFrame.pictureF{
+            self.pictureView = [UIImageView]()
+            let count = picFrames.count
+            
             for j in 0 ..< count {
                 
                 let myPic = UIImageView()
                 myPic.contentMode = .scaleAspectFill  //比例不变，但是是填充整个ImageView
                 myPic.clipsToBounds = true
                 
-                self.pictureView.append(myPic)
-                self.pictureView[j].frame = modelFrame!.pictureF[j]
-                self.addSubview(self.pictureView[j])
+                self.pictureView!.append(myPic)
+                self.pictureView![j].frame = picFrames[j]
+                self.addSubview(self.pictureView![j])
             }
         }
         
-        self.iconView.frame = modelFrame!.iconF
-        self.nameView.frame = modelFrame!.nameF
-        self.textView.frame = modelFrame!.textF
-        self.timeView.frame = modelFrame!.timeF
-        self.moreView.frame = modelFrame!.moreF
-        self.deleteView.frame = modelFrame!.deleteBtnF
-        
-        //判断是非显示全文
-        let singleTextSize = sizeWithText("这是一行字", font: textFont, maxSize: CGSize(width: Width, height: CGFloat(MAXFLOAT)))
-        if (modelFrame?.myCellModel?.picture == nil && modelFrame!.textF.height/singleTextSize.height > rowLimited && isAll == false){
-            isHide = true
-            self.hideView = UIButton()
-            self.hideView!.frame = modelFrame!.hideBtnF
-            
-            let tempX = modelFrame?.textF.origin.x
-            let tempY = modelFrame?.textF.origin.y
-            var tempSize = modelFrame!.textF.size
-            tempSize.height = singleTextSize.height * rowLimited
-            let tempFrame = CGRect(x: tempX!, y: tempY!, width: tempSize.width, height: tempSize.height)
-            self.textView.frame =  tempFrame
+        if let videoF = modelFrame.videoF{
+            self.videoView = UIView()
+            self.videoView?.frame = videoF
         }
+        
+        // text
+        if let textF = modelFrame.textF{
+            self.textView = CanCopyLabel()
+            self.textView!.frame = textF
+        }
+        
+        // delete
+        if let deleteF = modelFrame.deleteBtnF{
+            self.deleteView = UIButton()
+            self.deleteView!.frame = deleteF
+        }
+        
+        self.iconView.frame = modelFrame.iconF
+        self.nameView.frame = modelFrame.nameF
+        self.timeView.frame = modelFrame.timeF
+        self.moreView.frame = modelFrame.moreF
     }
     
     override func awakeFromNib() {

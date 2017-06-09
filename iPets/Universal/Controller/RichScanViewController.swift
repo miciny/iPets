@@ -114,7 +114,7 @@ class RichScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDe
     //扫描完成的代理方法
     func captureOutput(_ captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [Any]!, from connection: AVCaptureConnection!) {
         
-        var stringValue:String?
+        var stringValue: String?
         
         if metadataObjects.count > 0 {
             let metadataObject = metadataObjects[0] as!AVMetadataMachineReadableCodeObject

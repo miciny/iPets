@@ -18,24 +18,25 @@ class FindPetsViewController: UIViewController, isRefreshingDelegate, isLoadMore
     fileprivate var footerView: LoadMoreView?
     
     //右上角添加按钮的事件
-    fileprivate let addArray : NSDictionary = ["我要寻宠": "FindPets",
+    fileprivate let addArray: NSDictionary = ["我要寻宠": "FindPets",
                                                "发布宠物踪迹": "PetsClue",
-                                               "只看朋友": "OnlyFriends"]
+                                               "只看朋友": "OnlyFriends",
+                                               "测试视频": "TestVideo"]
     fileprivate var addActionView: ActionMenuView?  //此处定义，方便显示和消失的判断
     fileprivate let limited = 10 //每次加载的数量
     fileprivate var deledeIndex = -1 //删除的index
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUpEles()
-        setUpTable()
+        self.setUpEles()
+        self.setUpTable()
         
         // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        refreshData()
+        self.refreshData()
     }
     
     //退出界面，菜单消失
@@ -44,6 +45,7 @@ class FindPetsViewController: UIViewController, isRefreshingDelegate, isLoadMore
         if addActionView != nil {
             addActionView?.hideView()
         }
+        VideoFuncs.viewWillDisappearStopVideo() //停止视频
     }
     
     //初始化title 背景等
@@ -82,12 +84,31 @@ class FindPetsViewController: UIViewController, isRefreshingDelegate, isLoadMore
                 ToastView().showToast(addArray.allKeys[1] as! String)
             case 2:
                 ToastView().showToast(addArray.allKeys[2] as! String)
+            case 3:
+                self.testVideo()
             default:
                 break
             }
         default:
             break
         }
+    }
+    
+    func testVideo(){
+        
+        let time = Date()
+        //提取原来的寻宠数据
+        let findMyPetsData = SaveDataModel()
+        var oldData = findMyPetsData.loadFindMyPetsDataFromTempDirectory()
+        
+        let myFindPetsInfo = FindPetsCellModel(name: myInfo.username!, text: nil, picture: nil, date: time, nickname: myInfo.nickname!, video: "ddd", from: .me)
+        
+        oldData.append(myFindPetsInfo)
+        
+        //保存寻宠数据
+        findMyPetsData.saveFindMyPetsToTempDirectory(oldData)
+        
+        self.refreshData()
     }
     
     //isLoadMore中的代理方法
@@ -270,41 +291,26 @@ class FindPetsViewController: UIViewController, isRefreshingDelegate, isLoadMore
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! FindPetsTableViewCell
         cell.delegate = self
-        cell.isAll = true //
+        
         //清空
         for subViews in cell.subviews{
-            if subViews.isKind(of: UILabel.self) {
-                let lable = subViews as! UILabel
-                lable.removeFromSuperview()
-            }
-            if subViews.isKind(of: UIImageView.self) {
-                let imageView = subViews as! UIImageView
-                imageView.removeFromSuperview()
-            }
-            if subViews.isKind(of: UIButton.self) {
-                let btn = subViews as! UIButton
-                btn.removeFromSuperview()
-            }
+            subViews.removeFromSuperview()
         }
         
-        cell.showCellWithModel(self.cellData![indexPath.row] as! FindPetsCellFrameModel) //处理显示数据的大小高度问题
+        cell.showCellWithModel(self.cellData![indexPath.row] as! FindPetsCellFrameModel, indexPath: indexPath) //处理显示数据的大小高度问题
         cell.selectionStyle = UITableViewCellSelectionStyle.none
         
         //设置删除
-        cell.deleteView.tag = indexPath.row
-        cell.deleteView.addTarget(self, action: #selector(deleteFindPets(_:)), for: .touchUpInside)
+        if let delete = cell.deleteView{
+            delete.tag = indexPath.row
+            delete.addTarget(self, action: #selector(deleteFindPets(_:)), for: .touchUpInside)
+        }
         
         //设置more
         cell.moreView.tag = indexPath.row
         cell.moreView.isUserInteractionEnabled = true
         let tap = UITapGestureRecognizer(target: self, action: #selector(moreFindPets(_:)))
         cell.moreView.addGestureRecognizer(tap)
-        
-        //设置hide
-        if cell.hideView != nil {
-            cell.hideView?.tag = indexPath.row
-            cell.hideView?.addTarget(self, action: #selector(hideFindPets(_:)), for: .touchUpInside)
-        }
         
         return cell
     }
@@ -313,13 +319,6 @@ class FindPetsViewController: UIViewController, isRefreshingDelegate, isLoadMore
     func moreFindPets(_ sender: UITapGestureRecognizer){
         let more = sender.view
         ToastView().showToast(String(describing: more?.tag))
-    }
-    
-    //hide按钮
-    func hideFindPets(_ sender: UIButton){
-        let hideIndex = sender.tag
-        let indexPath = IndexPath.init(row: hideIndex, section: 0)
-        self.mainTableView?.reloadRows(at: [indexPath], with: .none)
     }
     
     //删除按钮
@@ -379,6 +378,12 @@ class FindPetsViewController: UIViewController, isRefreshingDelegate, isLoadMore
         return cellFrame.cellHeight
     }
     
+    //结束cell
+    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        //cell滑出屏幕时，结束播放
+        VideoFuncs.cellWillDisappearStopVideo(indexPath)
+    }
+    
     //此处添加footerView，方便找到contentSize的高度
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
        
@@ -414,6 +419,7 @@ extension FindPetsViewController: FindPetsCellViewDelegate{
     func pushToPersonInfoView(name: String){
         let guestContectorVC = ContectorInfoViewController()
         guestContectorVC.contectorName = name
+        guestContectorVC.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(guestContectorVC, animated: true)
     }
 }
