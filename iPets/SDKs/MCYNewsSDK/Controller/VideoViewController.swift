@@ -12,7 +12,7 @@ import SwiftyJSON
 
 class VideoViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
     var netManager: SessionManager? //网络请求的manager
-    var mainTabelView: UITableView? //整个table
+    var mainTabelView: UITableView! //整个table
     var showData : NSMutableArray? //数据
     var refreshView: RefreshHeaderView? //自己写的刷新
     
@@ -58,6 +58,13 @@ class VideoViewController: UIViewController, UITableViewDelegate, UITableViewDat
         }
         
         self.mainTabelView?.reloadData()
+        
+        if footerView == nil {
+            footerView = LoadMoreView(subView: mainTabelView, target: self)
+            self.mainTabelView.tableFooterView = footerView
+        }else{
+            self.mainTabelView.tableFooterView = UIView(frame: CGRect.zero)
+        }
         
         isloadmoreDone = false
         self.endFresh()                 //停止刷新
@@ -178,27 +185,6 @@ class VideoViewController: UIViewController, UITableViewDelegate, UITableViewDat
             return 0.1
         }
         return 10
-    }
-    
-    //此处添加footerView，方便找到contentSize的高度
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        
-        //如果不足一屏幕，不显示footer
-        if(self.mainTabelView!.contentSize.height <= self.mainTabelView!.frame.height){
-            self.mainTabelView!.tableFooterView = UIView(frame: CGRect.zero)
-            return
-        }
-        
-        if( footerView == nil && indexPath.section == self.showData!.count-1 && isloadmoreDone == false){
-            footerView = LoadMoreView(frame: mainTabelView!.frame, subView: mainTabelView!, target: self)
-        }
-        
-        if(indexPath.section == self.showData!.count-1){
-            if isloadmoreDone == false {
-                footerView?.refreshHeight()
-                footerView?.showView()
-            }
-        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -355,6 +341,7 @@ extension VideoViewController: isRefreshingDelegate, isLoadMoreDelegate{
             footerView?.endRefresh()
             footerView?.hideView()
             footerView?.removeOberver()
+            self.mainTabelView.tableFooterView = UIView(frame: CGRect.zero)
             footerView = nil
         }
     }

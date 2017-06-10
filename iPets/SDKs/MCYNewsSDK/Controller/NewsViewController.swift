@@ -13,7 +13,7 @@ import SwiftyJSON
 class NewsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, headerViewDelegate{
     
     var netManager: SessionManager? //网络请求的manager
-    var mainTabelView: UITableView? //整个table
+    var mainTabelView: UITableView! //整个table
     var refreshView: RefreshHeaderView? //自己写的刷新
     var footerView: LoadMoreView? //上拉加载更多
     
@@ -67,7 +67,14 @@ class NewsViewController: UIViewController, UITableViewDelegate, UITableViewData
             }
         }
         
-        self.mainTabelView?.reloadData()
+        self.mainTabelView.reloadData()
+        
+        if footerView == nil {
+            footerView = LoadMoreView(subView: mainTabelView, target: self)
+            self.mainTabelView.tableFooterView = footerView
+        }else{
+            self.mainTabelView.tableFooterView = UIView(frame: CGRect.zero)
+        }
         
         isloadmoreDone = false
         self.endFresh()                 //停止刷新
@@ -160,7 +167,7 @@ class NewsViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.mainTabelView?.backgroundColor = UIColor(red: 230/255, green: 230/255, blue: 230/255, alpha: 1)
         
         self.mainTabelView?.showsHorizontalScrollIndicator = false
-        self.mainTabelView?.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0)) //消除底部多余的线
+        self.mainTabelView?.tableFooterView = UIView(frame: CGRect.zero) //消除底部多余的线
         
         self.mainTabelView?.delegate = self
         self.mainTabelView?.dataSource = self
@@ -255,29 +262,6 @@ class NewsViewController: UIViewController, UITableViewDelegate, UITableViewData
             
         }else if category == newsType.live || category == newsType.subject || category == newsType.consice{
             ToastView().showToast("未实现")
-        }
-    }
-    
-    
-    //此处添加footerView，方便找到contentSize的高度
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        
-        //如果不足一屏幕，不显示footer
-        if(self.mainTabelView!.contentSize.height <= self.mainTabelView!.frame.height){
-            self.mainTabelView!.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-            return
-        }
-        
-        if(footerView == nil && indexPath.row == self.showData!.count-1 && isloadmoreDone == false){
-            
-            footerView = LoadMoreView(frame: mainTabelView!.frame, subView: mainTabelView!, target: self)
-        }
-        
-        if(indexPath.row == self.showData!.count-1){
-            if isloadmoreDone == false {
-                footerView?.refreshHeight()
-                footerView?.showView()
-            }
         }
     }
 
@@ -464,6 +448,7 @@ extension NewsViewController: isRefreshingDelegate, isLoadMoreDelegate{
             footerView?.endRefresh()
             footerView?.hideView()
             footerView?.removeOberver()
+            self.mainTabelView.tableFooterView = UIView(frame: CGRect.zero)
             footerView = nil
         }
     }

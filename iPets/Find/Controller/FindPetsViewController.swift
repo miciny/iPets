@@ -11,7 +11,7 @@ import UIKit
 class FindPetsViewController: UIViewController, isRefreshingDelegate, isLoadMoreDelegate, actionMenuViewDelegate, UITableViewDataSource, UITableViewDelegate{
     
     fileprivate var cellData: NSMutableArray?
-    fileprivate var mainTableView: UITableView?
+    fileprivate var mainTableView: UITableView!
     fileprivate let cellID = "FindPetsCell"
     
     fileprivate var headerView: RefreshHeaderView? //自己写的
@@ -112,16 +112,11 @@ class FindPetsViewController: UIViewController, isRefreshingDelegate, isLoadMore
     
     //isLoadMore中的代理方法
     func loadingMore(){
-        mainTableView!.setContentOffset(CGPoint(x: 0, y: mainTableView!.contentSize.height - mainTableView!.frame.size.height+tabBarHeight+RefreshHeaderHeight), animated: true)
         //这里做你想做的事
         let _ = delay(0.3){
+            
             self.loadMoreData()
-            
-            self.footerView!.endRefresh()
-            self.footerView!.hideView()
-            
         }
-
     }
     
     //isfreshing中的代理方法
@@ -169,6 +164,14 @@ class FindPetsViewController: UIViewController, isRefreshingDelegate, isLoadMore
         if cellDataTemp.count <= cellDataCount{
             ToastView().showToast("无更多数据")
             mainTableView!.setContentOffset(CGPoint(x: 0, y: mainTableView!.contentSize.height - mainTableView!.frame.size.height+tabBarHeight), animated: true)
+            
+            self.footerView!.endRefresh()
+            self.footerView!.removeOberver()
+            self.footerView!.hideView()
+            self.mainTableView!.tableFooterView = UIView(frame: CGRect.zero)
+            self.mainTableView!.reloadData()
+            self.footerView = nil
+            
         }else if cellDataTemp.count-cellDataCount > limited{
             self.sortDate(data: cellDataTemp)  //那 mutableArray用这个方法
             
@@ -179,6 +182,8 @@ class FindPetsViewController: UIViewController, isRefreshingDelegate, isLoadMore
                 cellData?.add(frame)
             }
             ToastView().showToast("加载完成！")
+            self.mainTableView!.reloadData()
+            self.footerView!.endRefresh()
         }else{
             self.sortDate(data: cellDataTemp)  //那 mutableArray用这个方法
             
@@ -189,9 +194,9 @@ class FindPetsViewController: UIViewController, isRefreshingDelegate, isLoadMore
                 cellData?.add(frame)
             }
             ToastView().showToast("加载完成！")
+            self.mainTableView!.reloadData()
+            self.footerView!.endRefresh()
         }
-        
-        self.mainTableView!.reloadData()
     }
     
     //刷新数据
@@ -229,28 +234,12 @@ class FindPetsViewController: UIViewController, isRefreshingDelegate, isLoadMore
         
         self.mainTableView!.reloadData()
         
-        //没有数据，就显示footer
-        if cellData?.count == 0 {
-            self.mainTableView?.tableFooterView = setFooterView()
-            self.mainTableView?.tableFooterView?.isHidden = false
-        }else{
-            self.mainTableView?.tableFooterView?.isHidden = true
+        if cellDataTemp.count > limited && footerView == nil {
+            footerView = LoadMoreView(subView: mainTableView!, target: self)
+            self.mainTableView?.tableFooterView = footerView
+        }else if cellDataTemp.count <= limited{
+            self.mainTableView?.tableFooterView = UIView(frame: CGRect.zero)
         }
-    }
-    
-    //footerView
-    func setFooterView() -> UIView{
-        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: Width, height: 120))
-        footerView.backgroundColor = UIColor.clear
-        
-        let logOutBtn = UIButton(frame: CGRect(x: 20, y: 100, width: Width-44, height: 44))
-        logOutBtn.backgroundColor = UIColor.white
-        logOutBtn.setTitle("无数据", for: UIControlState())
-        logOutBtn.setTitleColor(UIColor.black, for: UIControlState())
-        logOutBtn.layer.cornerRadius = 5
-        footerView.addSubview(logOutBtn)
-        
-        return footerView
     }
     
     //排序
@@ -371,25 +360,6 @@ class FindPetsViewController: UIViewController, isRefreshingDelegate, isLoadMore
     func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         //cell滑出屏幕时，结束播放
         VideoFuncs.cellWillDisappearStopVideo(indexPath)
-    }
-    
-    //此处添加footerView，方便找到contentSize的高度
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-       
-        //如果不足一屏幕，不显示footer
-        if(self.mainTableView!.contentSize.height <= self.mainTableView!.frame.height){
-            self.mainTableView!.tableFooterView = UIView(frame: CGRect.zero)
-            return
-        }
-        
-        if(footerView == nil && indexPath.row == self.cellData!.count-1 ){
-            footerView = LoadMoreView(frame: mainTableView!.frame, subView: mainTableView!, target: self)
-        }
-        
-        if(indexPath.row == self.cellData!.count-1 ){
-            footerView?.refreshHeight()
-            footerView?.showView()
-        }
     }
 
     override func didReceiveMemoryWarning() {
