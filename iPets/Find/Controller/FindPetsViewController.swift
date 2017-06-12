@@ -8,10 +8,10 @@
 
 import UIKit
 
-class FindPetsViewController: UIViewController, isRefreshingDelegate, isLoadMoreDelegate, actionMenuViewDelegate, UITableViewDataSource, UITableViewDelegate{
+class FindPetsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate{
     
     fileprivate var cellData: NSMutableArray?
-    fileprivate var mainTableView: UITableView!
+    fileprivate var mainTableView: MCYTableView!
     fileprivate let cellID = "FindPetsCell"
     
     fileprivate var headerView: RefreshHeaderView? //自己写的
@@ -25,6 +25,8 @@ class FindPetsViewController: UIViewController, isRefreshingDelegate, isLoadMore
     fileprivate var addActionView: ActionMenuView?  //此处定义，方便显示和消失的判断
     fileprivate let limited = 10 //每次加载的数量
     fileprivate var deledeIndex = -1 //删除的index
+    
+    private var moreView: FindPetsMoreView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,40 +61,16 @@ class FindPetsViewController: UIViewController, isRefreshingDelegate, isLoadMore
     }
     
     func addButtonClicked(){
+        self.removerMoreView()
         if(addActionView?.superview == nil){
             addActionView = ActionMenuView(object: addArray, origin: CGPoint(x: Width, y: navigateBarHeight), target: self, showInView: self.view)
-            addActionView!.eventFlag = 1 //可以不设置，默认为0，方便一个页面多次调用
         }else{
             addActionView?.hideView()
             addActionView?.removeFromSuperview()
         }
     }
     
-//======================================一些代理方法================================
-    //actionMenuView的代理方法
-    func menuClicked(_ tag: Int, eventFlag: Int) {
-        switch eventFlag{
-        case 1:
-            switch tag{
-            //我要寻宠页
-            case 0:
-                let sendFindMyPetsInfoVc = SendFindMyPetsInfoViewController()
-                let sendFindMyPetsInfoVcNavigationController = UINavigationController(rootViewController: sendFindMyPetsInfoVc) //带导航栏
-                self.navigationController?.present(sendFindMyPetsInfoVcNavigationController, animated: true, completion: nil)
-            case 1:
-                ToastView().showToast(addArray.allKeys[1] as! String)
-            case 2:
-                ToastView().showToast(addArray.allKeys[2] as! String)
-            case 3:
-                self.testVideo()
-            default:
-                break
-            }
-        default:
-            break
-        }
-    }
-    
+//======================================一些方法================================
     func testVideo(){
         
         let time = Date()
@@ -110,32 +88,11 @@ class FindPetsViewController: UIViewController, isRefreshingDelegate, isLoadMore
         self.refreshData()
     }
     
-    //isLoadMore中的代理方法
-    func loadingMore(){
-        //这里做你想做的事
-        let _ = delay(0.3){
-            
-            self.loadMoreData()
-        }
-    }
-    
-    //isfreshing中的代理方法
-    func reFreshing(){
-        
-        self.refreshData()
-        
-        //这里做你想做的事
-        let _ = delay(0.5){
-            self.headerView?.endRefresh()
-            ToastView().showToast("刷新完成！")
-        }
-    }
-    
 //======================================tableView================================
     //tableView部分
     
     func setUpTable(){
-        mainTableView = UITableView()
+        mainTableView = MCYTableView()
         cellData = NSMutableArray()
         
         mainTableView!.frame = CGRect(x: 0, y: 0, width: Width, height: Height) //49为tabbar高度
@@ -295,8 +252,19 @@ class FindPetsViewController: UIViewController, isRefreshingDelegate, isLoadMore
     
     //more按钮
     func moreFindPets(_ sender: UITapGestureRecognizer){
-        let more = sender.view
-        ToastView().showToast(String(describing: more?.tag))
+        let moreImageView = sender.view!
+        let cell = moreImageView.superview!
+        
+        //
+        if moreView != nil && moreView?.index! == moreImageView.tag{
+            self.removerMoreView()
+        }else {
+            moreView = FindPetsMoreView.shared
+            moreView!.index =  moreImageView.tag
+            moreView!.delegate = self
+            moreView!.frame.origin = CGPoint(x: moreImageView.x-160, y: moreImageView.centerYY-22)
+            cell.addSubview(moreView!)
+        }
     }
     
     //删除按钮
@@ -366,19 +334,99 @@ class FindPetsViewController: UIViewController, isRefreshingDelegate, isLoadMore
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    
+    //让点赞评论view消失
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        self.removerMoreView()
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.removerMoreView()
+    }
+    
+    func removerMoreView(){
+        moreView?.removeFromSuperview()
+        moreView = nil
+    }
+    
 }
+
+
 
 extension FindPetsViewController: FindPetsCellViewDelegate{
     
     func showPic(_ pic: [UIImage], index: Int, frame: [CGRect]) {
         let picView = PicsBrowserView()
         picView.setUpAllFramePicBrowser(pic, index: index, frame: frame)
+        
+        self.removerMoreView()
     }
     
     func pushToPersonInfoView(name: String){
+        self.removerMoreView()
+        
         let guestContectorVC = ContectorInfoViewController()
         guestContectorVC.contectorName = name
         guestContectorVC.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(guestContectorVC, animated: true)
+    }
+    
+    func videoChanged() {
+        self.removerMoreView()
+    }
+}
+
+extension FindPetsViewController: isRefreshingDelegate, isLoadMoreDelegate{
+    //isLoadMore中的代理方法
+    func loadingMore(){
+        //这里做你想做的事
+        let _ = delay(0.3){
+            
+            self.loadMoreData()
+        }
+    }
+    
+    //isfreshing中的代理方法
+    func reFreshing(){
+        
+        self.refreshData()
+        
+        //这里做你想做的事
+        let _ = delay(0.5){
+            self.headerView?.endRefresh()
+            ToastView().showToast("刷新完成！")
+        }
+    }
+}
+
+extension FindPetsViewController: actionMenuViewDelegate{
+    func menuClicked(_ tag: Int) {
+        switch tag{
+        //我要寻宠页
+        case 0:
+            let sendFindMyPetsInfoVc = SendFindMyPetsInfoViewController()
+            let sendFindMyPetsInfoVcNavigationController = UINavigationController(rootViewController: sendFindMyPetsInfoVc) //带导航栏
+            self.navigationController?.present(sendFindMyPetsInfoVcNavigationController, animated: true, completion: nil)
+        case 1:
+            ToastView().showToast(addArray.allKeys[1] as! String)
+        case 2:
+            ToastView().showToast(addArray.allKeys[2] as! String)
+        case 3:
+            self.testVideo()
+        default:
+            break
+        }
+    }
+}
+
+extension FindPetsViewController: FindPetsMoreViewDelegate{
+    
+    func commend(index: Int) {
+        self.removerMoreView()
+    }
+    
+    func like(index: Int) {
+        self.removerMoreView()
     }
 }

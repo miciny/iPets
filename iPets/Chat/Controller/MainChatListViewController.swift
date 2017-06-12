@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MainChatListViewController: UIViewController, actionMenuViewDelegate, isRefreshingDelegate, UITableViewDelegate, UITableViewDataSource {
+class MainChatListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var headerView: RefreshHeaderView? //自己写的
     
@@ -78,34 +78,9 @@ class MainChatListViewController: UIViewController, actionMenuViewDelegate, isRe
     func addButtonClicked(){
         if(addActionView?.superview == nil){
             addActionView = ActionMenuView(object: addArray, origin: CGPoint(x: Width, y: navigateBarHeight), target: self, showInView: self.view)
-            addActionView!.eventFlag = 0 //可以不设置，默认为0，方便一个页面多次调用
         }else{
             addActionView?.hideView()
             addActionView?.removeFromSuperview()
-        }
-    }
-    
-    //actionMenuView的代理方法
-    func menuClicked(_ tag: Int, eventFlag: Int) {
-        switch eventFlag{
-            
-        case 0:
-            switch tag{
-            case 0:
-                ToastView().showToast(addArray.allKeys[0] as! String)
-            case 1:
-                ToastView().showToast(addArray.allKeys[1] as! String)
-                
-            //扫一扫界面
-            case 2:
-                let TDCodeVc = RichScanViewController()
-                TDCodeVc.hidesBottomBarWhenPushed = true
-                self.navigationController?.pushViewController(TDCodeVc, animated: true)
-            default:
-                break
-            }
-        default:
-            break
         }
     }
     
@@ -142,19 +117,6 @@ class MainChatListViewController: UIViewController, actionMenuViewDelegate, isRe
             }
         })
     }
-    
-    //isfreshing中的代理方法
-    func reFreshing(){
-        
-        let _ = delay(0.5){
-            self.setData()            
-            self.mainTabelView?.reloadData()
-            self.headerView?.endRefresh()
-            
-            ToastView().showToast("刷新完成！")
-        }
-    }
-
 //＊＊＊＊＊＊＊＊＊＊＊＊初始化tableView以及代理方法＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊
     //设置tableView
     func setUpTable(){
@@ -258,4 +220,40 @@ class MainChatListViewController: UIViewController, actionMenuViewDelegate, isRe
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+}
+
+//===========================actionview 代理========================
+extension MainChatListViewController: actionMenuViewDelegate{
+    //actionMenuView的代理方法
+    func menuClicked(_ tag: Int) {
+        switch tag{
+        case 0:
+            ToastView().showToast(addArray.allKeys[0] as! String)
+        case 1:
+            ToastView().showToast(addArray.allKeys[1] as! String)
+            
+        //扫一扫界面
+        case 2:
+            let TDCodeVc = RichScanViewController()
+            TDCodeVc.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(TDCodeVc, animated: true)
+        default:
+            break
+        }
+    }
+}
+
+extension MainChatListViewController: isRefreshingDelegate{
+    //isfreshing中的代理方法
+    func reFreshing(){
+        
+        let _ = delay(0.5){
+            self.setData()
+            self.mainTabelView?.reloadData()
+            self.headerView?.endRefresh()
+            
+            ToastView().showToast("刷新完成！")
+        }
+    }
+
 }

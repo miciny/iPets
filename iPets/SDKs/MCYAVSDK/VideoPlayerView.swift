@@ -14,6 +14,16 @@ import MediaPlayer
 
 let videoPlayer = VideoPlayerView.shared
 
+protocol VideoPlayerViewDelegate {
+    func prepareToPlay()
+    
+    func pauseVideo()
+    
+    func resumeVideo()
+    
+    func stopVideo()
+}
+
 class VideoPlayerView: NSObject, AVPlayerViewControllerDelegate{
     
     static let shared = VideoPlayerView.init()
@@ -32,6 +42,7 @@ class VideoPlayerView: NSObject, AVPlayerViewControllerDelegate{
     var videoUrl: String?  //视频地址
     var showCloseBtn: Bool! //是否显示关闭按钮，
     var mainView: UIView!
+    var delegate: VideoPlayerViewDelegate?
     
     fileprivate var playerLayer: AVPlayerLayer?
     fileprivate var session: AVAudioSession?
@@ -712,6 +723,8 @@ class VideoPlayerView: NSObject, AVPlayerViewControllerDelegate{
 // 视频的相关操作
     
     func play(){
+        self.delegate?.prepareToPlay()
+        
         print("播放准备中。。。")
         self.isPlayed = true
         self.loadingIndicator!.startAnimating()
@@ -724,6 +737,7 @@ class VideoPlayerView: NSObject, AVPlayerViewControllerDelegate{
     
     
     func pause(){
+        self.delegate?.pauseVideo()
         print("暂停播放")
         self.isPlaying = false
         
@@ -742,6 +756,7 @@ class VideoPlayerView: NSObject, AVPlayerViewControllerDelegate{
     
     
     func stop(){
+        self.delegate?.stopVideo()
         print("结束播放")
         self.isPlaying = false
         self.isPlayed = false
@@ -772,6 +787,7 @@ class VideoPlayerView: NSObject, AVPlayerViewControllerDelegate{
     
     //继续播放
     func resume(){
+        self.delegate?.resumeVideo()
         print("继续播放")
         self.isPlaying = true
         

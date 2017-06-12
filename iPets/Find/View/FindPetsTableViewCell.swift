@@ -14,6 +14,8 @@ protocol FindPetsCellViewDelegate{
     func showPic(_ pic: [UIImage], index: Int, frame: [CGRect])
     
     func pushToPersonInfoView(name: String)
+    
+    func videoChanged()
 }
 
 class FindPetsTableViewCell: UITableViewCell, UIAlertViewDelegate{
@@ -147,6 +149,7 @@ class FindPetsTableViewCell: UITableViewCell, UIAlertViewDelegate{
                          showCloseBtn: true)
             
             videoView.addSubview(avView)
+            avView.delegate = self
             
             self.addSubview(videoView)
         }
@@ -294,4 +297,25 @@ class FindPetsTableViewCell: UITableViewCell, UIAlertViewDelegate{
         // Configure the view for the selected state
     }
 
+}
+
+extension FindPetsTableViewCell: VideoPlayerViewDelegate{
+    func prepareToPlay() {
+        self.delegate?.videoChanged()
+    }
+    
+    func stopVideo() {
+        self.delegate?.videoChanged()
+        
+    }
+    
+    func resumeVideo() {
+        self.delegate?.videoChanged()
+        
+    }
+    
+    func pauseVideo() {
+        self.delegate?.videoChanged()
+        
+    }
 }

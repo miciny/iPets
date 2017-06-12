@@ -10,11 +10,6 @@
 import Foundation
 import UIKit
 
-//弹出菜单的代理
-protocol actionMenuViewDelegate{
-    func menuClicked(_ tag: Int, eventFlag: Int)
-}
-
 //底部菜单的代理
 protocol bottomMenuViewDelegate{
     func buttonClicked(_ tag: Int, eventFlag: Int)
@@ -31,12 +26,6 @@ protocol bottomMenuViewDelegate{
 //发送图片，选择多张图片的协议
 protocol PassPhotosDelegate{
     func passPhotos(_ selected: [ImageCollectionModel])
-}
-
-
-//搜索协议
-protocol SearchViewDelegate{
-    func search(_ label: String)
 }
 
 //点击头图的协议

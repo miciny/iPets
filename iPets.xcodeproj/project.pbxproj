@@ -30,6 +30,8 @@
 		E12A38B91EEA795700755C6C /* FindDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12A38B81EEA795700755C6C /* FindDataModel.swift */; };
 		E14197D01CA1A6BE00EDD443 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E14197CE1CA1A6BE00EDD443 /* Main.storyboard */; };
 		E14197D51CA1A6BE00EDD443 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E14197D31CA1A6BE00EDD443 /* LaunchScreen.storyboard */; };
+		E14407F11EEE690800C8E23B /* FindPetsMoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14407F01EEE690800C8E23B /* FindPetsMoreView.swift */; };
+		E14407F31EEE73CF00C8E23B /* MCYTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14407F21EEE73CF00C8E23B /* MCYTableView.swift */; };
 		E17528541ED3E8AE00269EDF /* CycleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E175284F1ED3E8AE00269EDF /* CycleView.swift */; };
 		E17528551ED3E8AE00269EDF /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17528501ED3E8AE00269EDF /* SearchTableViewCell.swift */; };
 		E17528561ED3E8AE00269EDF /* SellBuyCollectionFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17528511ED3E8AE00269EDF /* SellBuyCollectionFooterView.swift */; };
@@ -187,6 +189,8 @@
 		E14197CF1CA1A6BE00EDD443 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E14197D41CA1A6BE00EDD443 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E14197F01CA1AB9A00EDD443 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = iPets/Info.plist; sourceTree = SOURCE_ROOT; };
+		E14407F01EEE690800C8E23B /* FindPetsMoreView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindPetsMoreView.swift; sourceTree = "<group>"; };
+		E14407F21EEE73CF00C8E23B /* MCYTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCYTableView.swift; sourceTree = "<group>"; };
 		E175284F1ED3E8AE00269EDF /* CycleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CycleView.swift; sourceTree = "<group>"; };
 		E17528501ED3E8AE00269EDF /* SearchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
 		E17528511ED3E8AE00269EDF /* SellBuyCollectionFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SellBuyCollectionFooterView.swift; sourceTree = "<group>"; };
@@ -450,6 +454,34 @@
 			path = ../../../../Users/miciny/ToGitHub/iPets/iPets/Universal;
 			sourceTree = DEVELOPER_DIR;
 		};
+		E14407ED1EEE3D7300C8E23B /* NewsChannal */ = {
+			isa = PBXGroup;
+			children = (
+				E1DE0EB71EEA94CC00CF580D /* NewsRootViewController.swift */,
+				E1DE0EB81EEA94CC00CF580D /* NewsViewController.swift */,
+			);
+			name = NewsChannal;
+			sourceTree = "<group>";
+		};
+		E14407EE1EEE3D8000C8E23B /* NewsChannal */ = {
+			isa = PBXGroup;
+			children = (
+				E1DE0E981EEA94B200CF580D /* NewsChannelView.swift */,
+				E1DE0E991EEA94B200CF580D /* NewsHeaderView.swift */,
+				E1DE0E9A1EEA94B200CF580D /* NewsTableViewCell.swift */,
+			);
+			name = NewsChannal;
+			sourceTree = "<group>";
+		};
+		E14407EF1EEE3D8500C8E23B /* NewsChannal */ = {
+			isa = PBXGroup;
+			children = (
+				E1DE0EB01EEA94C000CF580D /* PicsDataModule.swift */,
+				E1DE0EAF1EEA94C000CF580D /* NewsHeaderDataModule.swift */,
+			);
+			name = NewsChannal;
+			sourceTree = "<group>";
+		};
 		E17528481ED3E74C00269EDF /* Chat */ = {
 			isa = PBXGroup;
 			children = (
@@ -586,6 +618,7 @@
 				E12A38B61EEA794000755C6C /* FindTableViewCell.swift */,
 				E17528981ED406BB00269EDF /* FindPetsTableViewCell.swift */,
 				E17528991ED406BB00269EDF /* SendFindMyPetsInfoTableViewCell.swift */,
+				E14407F01EEE690800C8E23B /* FindPetsMoreView.swift */,
 			);
 			name = View;
 			path = ../../../../Users/miciny/ToGitHub/iPets/iPets/Find/View;
@@ -687,6 +720,7 @@
 			children = (
 				E17528D31ED40A5A00269EDF /* InternetExplorerViewController.swift */,
 				E17528D41ED40A5A00269EDF /* RichScanViewController.swift */,
+				E14407F21EEE73CF00C8E23B /* MCYTableView.swift */,
 			);
 			name = Controller;
 			path = ../../../../Users/miciny/ToGitHub/iPets/iPets/Universal/Controller;
@@ -749,13 +783,13 @@
 		E1DE0E551EEA90AF00CF580D /* MCYAVSDK */ = {
 			isa = PBXGroup;
 			children = (
-				E1DE0E5C1EEA918600CF580D /* AVSDKExtension.swift */,
 				E1DE0E5D1EEA918600CF580D /* BaseVideoView.swift */,
+				E1DE0E611EEA918600CF580D /* VideoPlayerView.swift */,
 				E1DE0E5E1EEA918600CF580D /* SetMaskView.swift */,
 				E1DE0E5F1EEA918600CF580D /* Video.xcassets */,
 				E1DE0E601EEA918600CF580D /* VideoFuncs.swift */,
-				E1DE0E611EEA918600CF580D /* VideoPlayerView.swift */,
 				E1DE0E621EEA918600CF580D /* VideoSlider.swift */,
+				E1DE0E5C1EEA918600CF580D /* AVSDKExtension.swift */,
 			);
 			name = MCYAVSDK;
 			path = ../../../../Users/miciny/ToGitHub/iPets/iPets/SDKs/MCYAVSDK;
@@ -832,10 +866,9 @@
 		E1DE0E941EEA946300CF580D /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				E14407ED1EEE3D7300C8E23B /* NewsChannal */,
 				E10B34DE1EEAA2A400D65C9F /* VideoChannal */,
 				E10B34DA1EEA9D4D00D65C9F /* ShowPicViewController.swift */,
-				E1DE0EB71EEA94CC00CF580D /* NewsRootViewController.swift */,
-				E1DE0EB81EEA94CC00CF580D /* NewsViewController.swift */,
 				E1DE0EB91EEA94CC00CF580D /* WebViewController.swift */,
 				E1DE0EB61EEA94CC00CF580D /* LocalH5NewsViewController.swift */,
 			);
@@ -846,10 +879,8 @@
 		E1DE0E951EEA946A00CF580D /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E14407EE1EEE3D8000C8E23B /* NewsChannal */,
 				E10B34E01EEAA2B900D65C9F /* VideoChannal */,
-				E1DE0E981EEA94B200CF580D /* NewsChannelView.swift */,
-				E1DE0E991EEA94B200CF580D /* NewsHeaderView.swift */,
-				E1DE0E9A1EEA94B200CF580D /* NewsTableViewCell.swift */,
 			);
 			name = Views;
 			path = ../../../../Users/miciny/ToGitHub/iPets/iPets/SDKs/MCYNewsSDK/Views;
@@ -858,12 +889,11 @@
 		E1DE0E961EEA947000CF580D /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				E14407EF1EEE3D8500C8E23B /* NewsChannal */,
 				E10B34DF1EEAA2B100D65C9F /* VideoChannal */,
 				E1DE0EAC1EEA94C000CF580D /* JsonToModule.swift */,
 				E1DE0EAD1EEA94C000CF580D /* LocalNewsDataModule.swift */,
 				E1DE0EAE1EEA94C000CF580D /* NewsDataModule.swift */,
-				E1DE0EAF1EEA94C000CF580D /* NewsHeaderDataModule.swift */,
-				E1DE0EB01EEA94C000CF580D /* PicsDataModule.swift */,
 			);
 			name = Models;
 			path = ../../../../Users/miciny/ToGitHub/iPets/iPets/SDKs/MCYNewsSDK/Models;
@@ -1109,6 +1139,7 @@
 				E17528BA1ED406DC00269EDF /* ChatTableHeaderViewCell.swift in Sources */,
 				E17528841ED404A400269EDF /* PersonInfoViewController.swift in Sources */,
 				E17528971ED406AD00269EDF /* SendFindMyPetsInfoModel.swift in Sources */,
+				E14407F31EEE73CF00C8E23B /* MCYTableView.swift in Sources */,
 				E17528811ED404A400269EDF /* PersonInfo_IconViewController.swift in Sources */,
 				E1DE0E7E1EEA91FA00CF580D /* LoadingPicView.swift in Sources */,
 				E17528561ED3E8AE00269EDF /* SellBuyCollectionFooterView.swift in Sources */,
@@ -1151,6 +1182,7 @@
 				E17528B11ED406D000269EDF /* MainChatListViewDataModel.swift in Sources */,
 				E12A38B91EEA795700755C6C /* FindDataModel.swift in Sources */,
 				E17528BD1ED406DC00269EDF /* ContectorListTableViewCell.swift in Sources */,
+				E14407F11EEE690800C8E23B /* FindPetsMoreView.swift in Sources */,
 				E17528581ED3E8AE00269EDF /* SellBuyCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1216,7 +1248,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -1257,7 +1289,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";

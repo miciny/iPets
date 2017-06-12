@@ -35,14 +35,20 @@ class FindViewController: UIViewController, UITableViewDelegate, UITableViewData
     func setData(){
         findData = NSMutableArray()
         
-        let oneOne = FindDataModel(icon: "collection.png", title: "附近寻宠")
-        let twoOne = FindDataModel(icon: "RichScan", title: "热点新闻")
-        let twoTwo = FindDataModel(icon: "shake", title: "热点视频")
-        let threeTwo = FindDataModel(icon: "shake", title: "游戏")
+        let oneOne = FindDataModel(icon: "FriendsCircle", title: "附近寻宠")
+        
+        let twoOne = FindDataModel(icon: "ScanBook_HL", title: "热点新闻")
+        let twoTwo = FindDataModel(icon: "Shake_icon_tvHL", title: "热点视频")
+        
+        let threeOne = FindDataModel(icon: "RichScan", title: "扫一扫")
+        let threeTwo = FindDataModel(icon: "shake", title: "摇一摇")
+        
+        let fourOne = FindDataModel(icon: "MoreGame", title: "游戏")
         
         findData!.add([oneOne])
         findData!.add([twoOne, twoTwo])
-        findData!.add([threeTwo])
+        findData!.add([threeOne, threeTwo])
+        findData!.add([fourOne])
     }
     
     //设置tableView
@@ -122,6 +128,18 @@ class FindViewController: UIViewController, UITableViewDelegate, UITableViewData
                 let vc = NewsRootViewController()
                 vc.hidesBottomBarWhenPushed = true
                 self.navigationController?.pushViewController(vc, animated: true)
+                
+            default:
+                break
+            }
+            
+        case 2:
+            switch indexPath.row {
+            //扫一扫
+            case 0:
+                let TDCodeVc = RichScanViewController()
+                TDCodeVc.hidesBottomBarWhenPushed = true
+                self.navigationController?.pushViewController(TDCodeVc, animated: true)
                 
             default:
                 break

@@ -13,6 +13,8 @@ class BaseVideoView: UIView{
     
     var wifiOnly = true
     
+    var delegate: VideoPlayerViewDelegate?
+    
     fileprivate var videoUrl: String!  //视频地址
     
     fileprivate var picUrl: String?     // 封面图地址
@@ -121,6 +123,9 @@ class BaseVideoView: UIView{
     //点击事件
     // 单击后时无反应还是播放，未加载视频，未播放
     func playOrNothing(){
+        
+        self.delegate?.prepareToPlay()
+        
         if wifiOnly{
             if NetFuncs.checkNet() != networkType.wifi {
                 ToastView().showToast("请连接Wi-Fi")

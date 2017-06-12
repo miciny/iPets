@@ -9,7 +9,7 @@
 import UIKit
 
 
-class SellBuyViewController: UIViewController, UIScrollViewDelegate, isRefreshingDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, actionMenuViewDelegate , SearchViewDelegate{
+class SellBuyViewController: UIViewController, UIScrollViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     
     let customPresentAnimationController = CustomPresentAnimationController()
     let customDismissAnimationController = CustomDismissAnimationController()
@@ -82,15 +82,6 @@ class SellBuyViewController: UIViewController, UIScrollViewDelegate, isRefreshin
         self.navigationItem.titleView = titleView
     }
     
-    //反向传值的函数，从搜索页返回后调用
-    func search(_ label: String){
-        
-        let resultPage = SearchResultViewController()
-        resultPage.pageTitle = label
-        resultPage.hidesBottomBarWhenPushed = true
-        self.navigationController?.pushViewController(resultPage, animated: true)
-    }
-    
     func addressButtonClicked(){
         
     }
@@ -99,7 +90,6 @@ class SellBuyViewController: UIViewController, UIScrollViewDelegate, isRefreshin
     func addButtonClicked(){
         if(addActionView?.superview == nil){
             addActionView = ActionMenuView(object: addArray, origin: CGPoint(x: Width, y: navigateBarHeight), target: self, showInView: self.view)
-            addActionView!.eventFlag = 1 //可以不设置，默认为0，方便一个页面多次调用
         }else{
             addActionView?.hideView()
             addActionView?.removeFromSuperview()
@@ -140,38 +130,6 @@ class SellBuyViewController: UIViewController, UIScrollViewDelegate, isRefreshin
         
     }
     
-    
-//===============================================代理================================
-    
-//==================================================================================actionMenuView的代理方法
-    func menuClicked(_ tag: Int, eventFlag: Int) {
-        switch eventFlag{
-        case 1:
-            switch tag{
-            //我要寻宠页
-            case 0:
-                ToastView().showToast(addArray.allKeys[0] as! String)
-            case 1:
-                ToastView().showToast(addArray.allKeys[1] as! String)
-            case 2:
-                ToastView().showToast(addArray.allKeys[2] as! String)
-            default:
-                break
-            }
-        default:
-            break
-        }
-    }
-
-    
-//==================================================================================isfreshing中的代理方法
-    func reFreshing(){
-        //这里做你想做的事
-        let _ = delay(0.5){
-            self.headerView?.endRefresh()
-            ToastView().showToast("刷新完成！")
-        }
-    }
     
 //==================================================================================UICollectionViewDataSource
     //初始化collectionView
@@ -345,7 +303,7 @@ class SellBuyViewController: UIViewController, UIScrollViewDelegate, isRefreshin
 }
 
 //==================================================================================进入搜索页动画的协议
-extension SellBuyViewController: UIViewControllerTransitioningDelegate{
+extension SellBuyViewController: UIViewControllerTransitioningDelegate, SearchViewDelegate{
     
     //进入搜索页
     func searchButtonClicked(){
@@ -367,6 +325,15 @@ extension SellBuyViewController: UIViewControllerTransitioningDelegate{
     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return customDismissAnimationController
     }
+    
+    //反向传值的函数，从搜索页返回后调用
+    func search(_ label: String){
+        
+        let resultPage = SearchResultViewController()
+        resultPage.pageTitle = label
+        resultPage.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(resultPage, animated: true)
+    }
 }
 
 //==================================================================================点击头图的协议
@@ -379,5 +346,38 @@ extension SellBuyViewController: SellBuyHeaderDelegate{
         iePage.url = "http://www.baidu.com"
         iePage.title = str
         self.navigationController?.pushViewController(iePage, animated: true)
+    }
+}
+
+//==================================================================================点击action View的协议
+extension SellBuyViewController: actionMenuViewDelegate{
+    
+    func menuClicked(_ tag: Int) {
+        switch tag{
+        //我要寻宠页
+        case 0:
+            ToastView().showToast(addArray.allKeys[0] as! String)
+        case 1:
+            ToastView().showToast(addArray.allKeys[1] as! String)
+        case 2:
+            ToastView().showToast(addArray.allKeys[2] as! String)
+        default:
+            break
+        }
+    }
+}
+
+
+
+//==================================================================================isfreshing中的代理方法
+
+extension SellBuyViewController: isRefreshingDelegate{
+    
+    func reFreshing(){
+        //这里做你想做的事
+        let _ = delay(0.5){
+            self.headerView?.endRefresh()
+            ToastView().showToast("刷新完成！")
+        }
     }
 }

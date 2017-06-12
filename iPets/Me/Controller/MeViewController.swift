@@ -36,14 +36,19 @@ class MeViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         settingData = NSMutableArray()
         
         let settingOne = MeDataModel(pic: myInfo.icon!, name: myInfo.username!, nickname: myInfo.nickname!, TDicon: "TDicon")
-        let settingTwoOne = MeDataModel(icon: "collection.png", lable: "收藏（测试添加联系人）")
-        let settingTwoTwo = MeDataModel(icon: "RichScan", lable: "扫一扫")
-        let settingTwoThree = MeDataModel(icon: "shake", lable: "摇一摇")
-        let settingThree = MeDataModel(icon: "setting", lable: "设置")
+        
+        let settingTwoOne = MeDataModel(icon: "MoneyPackt", lable: "钱包")
+        
+        let settingThreeOne = MeDataModel(icon: "collection.png", lable: "收藏(测试联系人)")
+        let settingThreeTwo = MeDataModel(icon: "EMotion", lable: "表情")
+        let settingThreeThree = MeDataModel(icon: "MoreMyAlbum", lable: "相册")
+        
+        let settingFourOne = MeDataModel(icon: "setting", lable: "设置")
         
         settingData?.add([settingOne])
-        settingData?.add([settingTwoOne, settingTwoTwo, settingTwoThree])
-        settingData?.add([settingThree])
+        settingData?.add([settingTwoOne])
+        settingData?.add([settingThreeOne, settingThreeTwo, settingThreeThree])
+        settingData?.add([settingFourOne])
     }
     
     //设置tableView
@@ -112,15 +117,23 @@ class MeViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                 break
             }
             
-        //第二个设置栏
         case 1:
             switch indexPath.row {
+            //钱包
+            case 0:
+                break
                 
-            //扫一扫
+            default:
+                break
+            }
+            
+        //设置栏
+        case 2:
+            switch indexPath.row {
+                
+            //表情
             case 1:
-                let TDCodeVc = RichScanViewController()
-                TDCodeVc.hidesBottomBarWhenPushed = true
-                self.navigationController?.pushViewController(TDCodeVc, animated: true)
+                break
                 
             // 收藏 测试添加联系人
             case 0:
@@ -142,12 +155,16 @@ class MeViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                 
                 ToastView().showToast("添加成功")
                 
+            //相册
+            case 2:
+                break
+                
             default:
                 break
             }
             
         //设置
-        case 2:
+        case 3:
             switch indexPath.row {
             case 0: //设置
                 let settingPage = SettingViewController()

@@ -8,13 +8,18 @@
 
 import UIKit
 
+//搜索协议
+protocol SearchViewDelegate{
+    func search(_ label: String)
+}
+
 class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate{
     
-    var searchBar : UISearchBar!
+    var searchBar: UISearchBar!
     var searchTable = UITableView()
     var searchData = NSMutableArray()
     
-    var delegate : SearchViewDelegate? // 代理
+    var delegate: SearchViewDelegate? // 代理
     
     override func viewDidLoad() {
         super.viewDidLoad()
