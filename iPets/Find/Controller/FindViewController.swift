@@ -145,6 +145,18 @@ class FindViewController: UIViewController, UITableViewDelegate, UITableViewData
                 break
             }
             
+        case 3:
+            switch indexPath.row {
+            //游戏
+            case 0:
+                let gameVc = TetrisGameViewController()
+                gameVc.hidesBottomBarWhenPushed = true
+                self.navigationController?.pushViewController(gameVc, animated: true)
+                
+            default:
+                break
+            }
+            
         default:
             break
         }
