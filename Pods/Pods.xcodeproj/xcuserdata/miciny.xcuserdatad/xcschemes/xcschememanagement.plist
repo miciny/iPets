@@ -19,6 +19,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>MCYRefresher.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-iPets.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -37,32 +42,37 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>09D3E40CBC7CC381C653AECFF26DA080</key>
+		<key>544212980401A6DA7806F65EAD8C6637</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>1DE93A359FA21F91DFBE81309E851A4A</key>
+		<key>555341823A8E3F71D9A63234D5FD7AB9</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>79C040AFDDCE1BCBF6D8B5EB0B85887F</key>
+		<key>7CF7F3FF2ECBF1E9D1481F2EBCA2E1CB</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A398EC73FEC26E9BFE02B65DDB63F0F9</key>
+		<key>88E9EC28B8B46C3631E6B242B50F4442</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>BA71D51147B8A72A588BFCC03DB91086</key>
+		<key>C4944FEC314D1A66588651D006273ADE</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>D653AFF82CBA86EDC1E6475E8FD5980C</key>
+		<key>DF393B7F69A02CB183F8104D8686524A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E5DB6BCF5738F18C94539781F050CE8A</key>
 		<dict>
 			<key>primary</key>
 			<true/>

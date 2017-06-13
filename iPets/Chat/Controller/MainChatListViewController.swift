@@ -7,10 +7,11 @@
 //
 
 import UIKit
+import MCYRefresher
 
 class MainChatListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    var headerView: RefreshHeaderView? //自己写的
+    var headerView: MCYRefreshView? //自己写的
     
     fileprivate var mainTabelView: UITableView? //整个table
     fileprivate var chatData : NSMutableArray? //数据
@@ -129,7 +130,7 @@ class MainChatListViewController: UIViewController, UITableViewDelegate, UITable
         mainTabelView?.delegate = self
         mainTabelView?.dataSource = self
         
-        headerView =  RefreshHeaderView(subView: mainTabelView!, target: self)  //添加下拉刷新
+        headerView =  MCYRefreshView(subView: mainTabelView!, target: self, imageName: "tableview_pull_refresh")  //添加下拉刷新
         
         self.view.addSubview(mainTabelView!)
     }
@@ -243,7 +244,7 @@ extension MainChatListViewController: actionMenuViewDelegate{
     }
 }
 
-extension MainChatListViewController: isRefreshingDelegate{
+extension MainChatListViewController: MCYRefreshViewDelegate{
     //isfreshing中的代理方法
     func reFreshing(){
         

@@ -8,49 +8,82 @@
 
 import UIKit
 
-//上啦加载更多
-protocol isLoadMoreDelegate {
+//上拉加载更多
+public protocol MCYLoadMoreViewDelegate {
     func loadingMore()
 }
 
-class LoadMoreView: UIView, UIScrollViewDelegate{
+
+public class MCYLoadMoreView: UIView, UIScrollViewDelegate{
     
+    let Width = UIScreen.main.bounds.width
+    let Height = UIScreen.main.bounds.height
     let LoadMoreHeaderHeight: CGFloat = 50
     
-    fileprivate var delegate: isLoadMoreDelegate?
+    fileprivate var imageName: String!
+    fileprivate var delegate: MCYLoadMoreViewDelegate?
     fileprivate var titleLabel: UILabel!
     fileprivate var scrollView: UIScrollView!
     fileprivate var actView: UIActivityIndicatorView?
     fileprivate var arrowImage: UIImageView?
     fileprivate var isRefreshing = false
     
-    var refreshState: RefreshState?
+    public var refreshState: MCYRefreshState?
     
-    init(subView: UIScrollView, target: isLoadMoreDelegate) {
+    public init(subView: UIScrollView, target: MCYLoadMoreViewDelegate, imageName: String) {
         
         super.init(frame: subView.frame)
-        scrollView = subView
+        self.scrollView = subView
         self.delegate = target
+        self.imageName = imageName
+        
         setupFooterView()
         designKFC()
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    
+    
+    public func endRefresh(){
+        if refreshState == MCYRefreshState.refreshStateLoading {
+            setRrefreshState(.refreshStateNormal)
+            self.scrollView.isScrollEnabled = true
+            self.isRefreshing = false
+        }
+    }
+    
+    
+    
+    public func hideView(){
+        self.endRefresh()
+        self.removeOberver()
+        self.removeFromSuperview()
+    }
+    
+    
+    //开始刷新
+    public func startRefresh(){
+        guard self.isRefreshing == false else{
+            return
+        }
+        self.setRrefreshState(MCYRefreshState.refreshStateLoading)
+    }
+    
     //设置观察者
-    func designKFC(){
+    fileprivate func designKFC(){
         scrollView.addObserver(self, forKeyPath: "contentOffset", options: NSKeyValueObservingOptions.new, context: nil)
     }
     
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+    override public func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if(keyPath == "contentOffset"){
             scrollViewContentOffsetDidChange(scrollView);
         }
     }
     
-    func removeOberver(){
+    fileprivate func removeOberver(){
         scrollView.removeObserver(self, forKeyPath: "contentOffset")
     }
     
@@ -69,7 +102,7 @@ class LoadMoreView: UIView, UIScrollViewDelegate{
         actView = UIActivityIndicatorView()
         actView?.color = UIColor.gray
         
-        arrowImage = UIImageView(image: UIImage(named: "tableview_pull_refresh"))
+        arrowImage = UIImageView(image: UIImage(named: self.imageName))
         self.arrowImage?.transform  = CGAffineTransform(rotationAngle: CGFloat(Double.pi))
         
         self.addSubview(titleLabel!)
@@ -78,25 +111,25 @@ class LoadMoreView: UIView, UIScrollViewDelegate{
         
         titleLabel.frame.size.width = 100
         titleLabel.frame.size.height = 30
-        titleLabel.center = CGPoint(x: self.centerXX, y: LoadMoreHeaderHeight-30)
+        titleLabel.center = CGPoint(x: self.center.x, y: LoadMoreHeaderHeight-30)
         
         actView!.frame.size.width = 30
         actView!.frame.size.height = 30
-        actView!.frame.origin.x = titleLabel.x - 30
+        actView!.frame.origin.x = titleLabel.frame.minX - 30
         actView!.frame.origin.y = LoadMoreHeaderHeight-45
         
         arrowImage!.frame.size.width = 30
         arrowImage!.frame.size.height = 30
-        arrowImage!.frame.origin.x = titleLabel.x - 30
+        arrowImage!.frame.origin.x = titleLabel.frame.minX - 30
         arrowImage!.frame.origin.y = LoadMoreHeaderHeight-45
     }
     
-    func scrollViewContentOffsetDidChange(_ scrollView: UIScrollView) {
+    fileprivate func scrollViewContentOffsetDidChange(_ scrollView: UIScrollView) {
         
         let dragHeight = scrollView.contentOffset.y - scrollView.contentInset.bottom
         let tableHeigt = scrollView.contentSize.height - scrollView.frame.size.height
         
-        if(dragHeight < tableHeigt || refreshState == RefreshState.refreshStateLoading){
+        if(dragHeight < tableHeigt || refreshState == MCYRefreshState.refreshStateLoading){
             return
         }else{
             if(scrollView.isDragging){
@@ -106,19 +139,15 @@ class LoadMoreView: UIView, UIScrollViewDelegate{
                     setRrefreshState(.refreshStatePulling)
                 }
             }else{
-                if(refreshState == RefreshState.refreshStatePulling){
+                if(refreshState == MCYRefreshState.refreshStatePulling){
                     setRrefreshState(.refreshStateLoading)
                 }
             }
         }
     }
     
-    func hideView(){
-        self.removeFromSuperview()
-    }
-    
     //刷新状态变换
-    func setRrefreshState(_ state: RefreshState){
+    fileprivate func setRrefreshState(_ state: MCYRefreshState){
         
         refreshState = state
         switch state{
@@ -148,26 +177,10 @@ class LoadMoreView: UIView, UIScrollViewDelegate{
             
             //固定底部
             UIView.animate(withDuration: 0.2, delay: 0.2, options: .curveEaseInOut, animations: {
-                
+                self.scrollView.contentInset.bottom = self.scrollView.contentInset.bottom
             }, completion: { (done) in
                 self.delegate?.loadingMore()
             })
-        }
-    }
-    
-    //开始刷新
-    func startRefresh(){
-        guard self.isRefreshing == false else{
-            return
-        }
-        self.setRrefreshState(RefreshState.refreshStateLoading)
-    }
-    
-    func endRefresh(){   
-        if refreshState == RefreshState.refreshStateLoading {
-            setRrefreshState(.refreshStateNormal)
-            self.scrollView.isScrollEnabled = true
-            self.isRefreshing = false
         }
     }
 }

@@ -32,6 +32,7 @@
 		E14197D51CA1A6BE00EDD443 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E14197D31CA1A6BE00EDD443 /* LaunchScreen.storyboard */; };
 		E14407F11EEE690800C8E23B /* FindPetsMoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14407F01EEE690800C8E23B /* FindPetsMoreView.swift */; };
 		E14407F31EEE73CF00C8E23B /* MCYTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14407F21EEE73CF00C8E23B /* MCYTableView.swift */; };
+		E14407F51EEEA0D600C8E23B /* ShopCarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14407F41EEEA0D600C8E23B /* ShopCarViewController.swift */; };
 		E17528541ED3E8AE00269EDF /* CycleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E175284F1ED3E8AE00269EDF /* CycleView.swift */; };
 		E17528551ED3E8AE00269EDF /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17528501ED3E8AE00269EDF /* SearchTableViewCell.swift */; };
 		E17528561ED3E8AE00269EDF /* SellBuyCollectionFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17528511ED3E8AE00269EDF /* SellBuyCollectionFooterView.swift */; };
@@ -144,8 +145,6 @@
 		E1DE0EBB1EEA94CC00CF580D /* NewsRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DE0EB71EEA94CC00CF580D /* NewsRootViewController.swift */; };
 		E1DE0EBC1EEA94CC00CF580D /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DE0EB81EEA94CC00CF580D /* NewsViewController.swift */; };
 		E1DE0EBD1EEA94CC00CF580D /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DE0EB91EEA94CC00CF580D /* WebViewController.swift */; };
-		E1DE0EC01EEA955A00CF580D /* RefreshHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DE0EBF1EEA955A00CF580D /* RefreshHeaderView.swift */; };
-		E1DE0EC21EEA95E100CF580D /* LoadMoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DE0EC11EEA95E100CF580D /* LoadMoreView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -191,6 +190,7 @@
 		E14197F01CA1AB9A00EDD443 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = iPets/Info.plist; sourceTree = SOURCE_ROOT; };
 		E14407F01EEE690800C8E23B /* FindPetsMoreView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindPetsMoreView.swift; sourceTree = "<group>"; };
 		E14407F21EEE73CF00C8E23B /* MCYTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCYTableView.swift; sourceTree = "<group>"; };
+		E14407F41EEEA0D600C8E23B /* ShopCarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopCarViewController.swift; sourceTree = "<group>"; };
 		E175284F1ED3E8AE00269EDF /* CycleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CycleView.swift; sourceTree = "<group>"; };
 		E17528501ED3E8AE00269EDF /* SearchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
 		E17528511ED3E8AE00269EDF /* SellBuyCollectionFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SellBuyCollectionFooterView.swift; sourceTree = "<group>"; };
@@ -303,8 +303,6 @@
 		E1DE0EB71EEA94CC00CF580D /* NewsRootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsRootViewController.swift; sourceTree = "<group>"; };
 		E1DE0EB81EEA94CC00CF580D /* NewsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsViewController.swift; sourceTree = "<group>"; };
 		E1DE0EB91EEA94CC00CF580D /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
-		E1DE0EBF1EEA955A00CF580D /* RefreshHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefreshHeaderView.swift; sourceTree = "<group>"; };
-		E1DE0EC11EEA95E100CF580D /* LoadMoreView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadMoreView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -559,6 +557,7 @@
 				E17528651ED4034D00269EDF /* SellBuyViewController.swift */,
 				E17528631ED4034D00269EDF /* SearchResultViewController.swift */,
 				E17528641ED4034D00269EDF /* SearchViewController.swift */,
+				E14407F41EEEA0D600C8E23B /* ShopCarViewController.swift */,
 			);
 			name = Controller;
 			path = ../../../../Users/miciny/ToGitHub/iPets/iPets/Main/Controller;
@@ -767,7 +766,6 @@
 			isa = PBXGroup;
 			children = (
 				E10B34E51EEAA60700D65C9F /* MCYViewSDK */,
-				E1DE0EBE1EEA94FE00CF580D /* MCYRefreshSDK */,
 				E1DE0E5B1EEA910C00CF580D /* MCYNewsSDK */,
 				E1DE0E5A1EEA90F200CF580D /* MCYPicChooseSDK */,
 				E1DE0E591EEA90E400CF580D /* MCYPicBrowserSDK */,
@@ -914,16 +912,6 @@
 			path = ../../../../Users/miciny/ToGitHub/iPets/iPets/SDKs/MCYNewsSDK/Resources;
 			sourceTree = DEVELOPER_DIR;
 		};
-		E1DE0EBE1EEA94FE00CF580D /* MCYRefreshSDK */ = {
-			isa = PBXGroup;
-			children = (
-				E1DE0EBF1EEA955A00CF580D /* RefreshHeaderView.swift */,
-				E1DE0EC11EEA95E100CF580D /* LoadMoreView.swift */,
-			);
-			name = MCYRefreshSDK;
-			path = ../../../../Users/miciny/ToGitHub/iPets/iPets/SDKs/MCYRefreshSDK;
-			sourceTree = DEVELOPER_DIR;
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1037,7 +1025,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		63D6FA484313A2D2FF0184F0 /* [CP] Copy Pods Resources */ = {
@@ -1063,7 +1051,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				E1DE0E9C1EEA94B200CF580D /* NewsHeaderView.swift in Sources */,
-				E1DE0EC01EEA955A00CF580D /* RefreshHeaderView.swift in Sources */,
 				E1DE0EB31EEA94C000CF580D /* NewsDataModule.swift in Sources */,
 				E17528E91ED40B0F00269EDF /* UniversalConstants.swift in Sources */,
 				E17528BB1ED406DC00269EDF /* ChatTableView.swift in Sources */,
@@ -1092,7 +1079,6 @@
 				E1DE0E751EEA91BA00CF580D /* CacheConstants.swift in Sources */,
 				E175289B1ED406BB00269EDF /* SendFindMyPetsInfoTableViewCell.swift in Sources */,
 				E10B34E41EEAA2E200D65C9F /* VideoTableViewCell.swift in Sources */,
-				E1DE0EC21EEA95E100CF580D /* LoadMoreView.swift in Sources */,
 				E17528FC1ED40B7600269EDF /* CustomDismissAnimationController.swift in Sources */,
 				E1DE0E681EEA918600CF580D /* VideoPlayerView.swift in Sources */,
 				E1DE0E8B1EEA928600CF580D /* ImageCollectionViewController.swift in Sources */,
@@ -1102,6 +1088,7 @@
 				E17528AD1ED406D000269EDF /* ChatData.swift in Sources */,
 				E1DE0E9D1EEA94B200CF580D /* NewsTableViewCell.swift in Sources */,
 				E1DE0E791EEA91BA00CF580D /* SQLLine.swift in Sources */,
+				E14407F51EEEA0D600C8E23B /* ShopCarViewController.swift in Sources */,
 				E1DE0EBD1EEA94CC00CF580D /* WebViewController.swift in Sources */,
 				E1DE0EB21EEA94C000CF580D /* LocalNewsDataModule.swift in Sources */,
 				E10B34EB1EEAA65800D65C9F /* ActionMenuView.swift in Sources */,

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MCYRefresher
 
 class FindPetsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate{
     
@@ -14,8 +15,8 @@ class FindPetsViewController: UIViewController, UITableViewDataSource, UITableVi
     fileprivate var mainTableView: MCYTableView!
     fileprivate let cellID = "FindPetsCell"
     
-    fileprivate var headerView: RefreshHeaderView? //自己写的
-    fileprivate var footerView: LoadMoreView?
+    fileprivate var headerView: MCYRefreshView? //自己写的
+    fileprivate var footerView: MCYLoadMoreView?
     
     //右上角添加按钮的事件
     fileprivate let addArray: NSDictionary = ["我要寻宠": "FindPets",
@@ -105,7 +106,7 @@ class FindPetsViewController: UIViewController, UITableViewDataSource, UITableVi
         let cell = FindPetsTableViewCell.self
         mainTableView!.register(cell, forCellReuseIdentifier: cellID)
         
-        headerView = RefreshHeaderView(subView: mainTableView!, target: self)  //添加下拉刷新
+        headerView = MCYRefreshView(subView: mainTableView!, target: self, imageName: "tableview_pull_refresh")  //添加下拉刷新
     }
     
     //加载更多数据
@@ -122,8 +123,6 @@ class FindPetsViewController: UIViewController, UITableViewDataSource, UITableVi
             ToastView().showToast("无更多数据")
             mainTableView!.setContentOffset(CGPoint(x: 0, y: mainTableView!.contentSize.height - mainTableView!.frame.size.height+tabBarHeight), animated: true)
             
-            self.footerView!.endRefresh()
-            self.footerView!.removeOberver()
             self.footerView!.hideView()
             self.mainTableView!.tableFooterView = UIView(frame: CGRect.zero)
             self.mainTableView!.reloadData()
@@ -192,7 +191,7 @@ class FindPetsViewController: UIViewController, UITableViewDataSource, UITableVi
         self.mainTableView!.reloadData()
         
         if cellDataTemp.count > limited && footerView == nil {
-            footerView = LoadMoreView(subView: mainTableView!, target: self)
+            footerView = MCYLoadMoreView(subView: mainTableView!, target: self, imageName: "tableview_pull_refresh")
             self.mainTableView?.tableFooterView = footerView
         }else if cellDataTemp.count <= limited{
             self.mainTableView?.tableFooterView = UIView(frame: CGRect.zero)
@@ -377,7 +376,7 @@ extension FindPetsViewController: FindPetsCellViewDelegate{
     }
 }
 
-extension FindPetsViewController: isRefreshingDelegate, isLoadMoreDelegate{
+extension FindPetsViewController: MCYRefreshViewDelegate, MCYLoadMoreViewDelegate{
     //isLoadMore中的代理方法
     func loadingMore(){
         //这里做你想做的事

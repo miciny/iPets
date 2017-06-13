@@ -6,4 +6,5 @@ target 'iPets' do
     pod 'ReachabilitySwift', '~> 3'
     pod 'Alamofire', '~> 4.0.1'
     pod 'SwiftyJSON', :git => 'https://github.com/SwiftyJSON/SwiftyJSON.git'
+    pod 'MCYRefresher', '~>1.0.6'
 end

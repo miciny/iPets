@@ -26,7 +26,7 @@ class FindPetsMoreView: UIView {
         super.init(frame: CGRect.zero)
         
         self.frame.size = CGSize(width: 150, height: 44)
-        self.backgroundColor = UIColor(red: 30/255, green: 30/255, blue: 30/255, alpha: 1.0)
+        self.backgroundColor = UIColor(red: 50/255, green: 50/255, blue: 50/255, alpha: 1.0)
         
         self.layer.cornerRadius = 5
         

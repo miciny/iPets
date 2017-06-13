@@ -127,10 +127,4 @@ class NewsRootViewController: UIViewController, UIScrollViewDelegate, channelCli
         let offset = scrollView.contentOffset
         self.delegate?.newsPageOffsetChanged(offset.x)
     }
-    
-    //点击tab 刷新页面
-    func refreshNewsView() {
-        let vc = childViewControllers[lastPageIndex!] as! NewsViewController
-        vc.autoRefresh()
-    }
 }

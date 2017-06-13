@@ -9,14 +9,16 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
+import MCYRefresher
 
 class VideoViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
     var netManager: SessionManager? //网络请求的manager
     var mainTabelView: UITableView! //整个table
     var showData : NSMutableArray? //数据
-    var refreshView: RefreshHeaderView? //自己写的刷新
     
-    var footerView: LoadMoreView? //上拉加载更多
+    var refreshView: MCYRefreshView? //自己写的刷新
+    var footerView: MCYLoadMoreView? //上拉加载更多
+    
     var loading: MyLoadingView?
     var isloadmoreDone = false //只能上拉一次
 
@@ -60,7 +62,7 @@ class VideoViewController: UIViewController, UITableViewDelegate, UITableViewDat
         self.mainTabelView?.reloadData()
         
         if footerView == nil {
-            footerView = LoadMoreView(subView: mainTabelView, target: self)
+            footerView = MCYLoadMoreView(subView: mainTabelView, target: self, imageName: "tableview_pull_refresh")
             self.mainTabelView.tableFooterView = footerView
         }else{
             self.mainTabelView.tableFooterView = UIView(frame: CGRect.zero)
@@ -127,7 +129,7 @@ class VideoViewController: UIViewController, UITableViewDelegate, UITableViewDat
         self.mainTabelView?.delegate = self
         self.mainTabelView?.dataSource = self
         
-        self.refreshView =  RefreshHeaderView(subView: self.mainTabelView!, target: self)  //添加下拉刷新
+        self.refreshView =  MCYRefreshView(subView: self.mainTabelView!, target: self, imageName: "tableview_pull_refresh")  //添加下拉刷新
         
         self.view.addSubview(self.mainTabelView!)
     }
@@ -216,7 +218,8 @@ extension VideoViewController{
             loading = MyLoadingView()
             loading!.setLoading(self.view, color: UIColor.black)
         }
-        if self.refreshView?.refreshState != RefreshState.refreshStateLoading {
+        
+        if self.refreshView?.refreshState != MCYRefreshState.refreshStateLoading {
             loading!.show()
         }
         
@@ -298,7 +301,7 @@ extension VideoViewController{
  **/
 //=====================================================================================================
 
-extension VideoViewController: isRefreshingDelegate, isLoadMoreDelegate{
+extension VideoViewController: MCYLoadMoreViewDelegate, MCYRefreshViewDelegate{
     //isfreshing中的代理方法
     func reFreshing(){
         //这里做你想做的事
@@ -328,19 +331,10 @@ extension VideoViewController: isRefreshingDelegate, isLoadMoreDelegate{
         }
     }
     
-    //点击tab时刷新
-    func refreshVideoView() {
-        self.refreshView?.startRefresh()
-        
-        hideFooterView()
-    }
-    
     //删除footer
     func hideFooterView(){
         if footerView != nil {
-            footerView?.endRefresh()
             footerView?.hideView()
-            footerView?.removeOberver()
             self.mainTabelView.tableFooterView = UIView(frame: CGRect.zero)
             footerView = nil
         }

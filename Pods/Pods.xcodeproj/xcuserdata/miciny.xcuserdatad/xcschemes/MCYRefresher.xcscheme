@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'DF393B7F69A02CB183F8104D8686524A'
-               BlueprintName = 'ReachabilitySwift'
+               BlueprintIdentifier = '555341823A8E3F71D9A63234D5FD7AB9'
+               BlueprintName = 'MCYRefresher'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'ReachabilitySwift.framework'>
+               BuildableName = 'MCYRefresher.framework'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

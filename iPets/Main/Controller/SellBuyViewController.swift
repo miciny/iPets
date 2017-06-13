@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MCYRefresher
 
 
 class SellBuyViewController: UIViewController, UIScrollViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
@@ -18,11 +19,11 @@ class SellBuyViewController: UIViewController, UIScrollViewDelegate, UICollectio
     fileprivate let headerReuseIdentifier = "collectionHeader"
     fileprivate let footerReuseIdentifier = "collectionFooter"
     fileprivate var collectionView: UICollectionView?
-    fileprivate var headerView: RefreshHeaderView? //自己写的
+    fileprivate var headerView: MCYRefreshView? //自己写的
     
     fileprivate var addActionView: ActionMenuView?  //此处定义，方便显示和消失的判断
-    fileprivate let addArray: NSDictionary = ["我的购物车": "ShoppingCart",
-                                               "我的收藏": "MyFavorite",
+    fileprivate let addArray: NSDictionary = ["购物车": "ShoppingCart",
+                                               "收藏": "MyFavorite",
                                                "我要开店": "OpenShop"]
     let pics = ["dog1.jpg",
                 "dog2.jpeg",
@@ -142,7 +143,7 @@ class SellBuyViewController: UIViewController, UIScrollViewDelegate, UICollectio
         collectionView = UICollectionView(frame: CGRect(x: 0, y: 64, width: Width, height: Height-64-49), collectionViewLayout: layout)
         collectionView?.backgroundColor = UIColor.white
         
-        headerView =  RefreshHeaderView(subView: collectionView!, target: self)  //添加下拉刷新
+        headerView =  MCYRefreshView(subView: collectionView!, target: self, imageName: "tableview_pull_refresh")  //添加下拉刷新
         
         //注册一个cell
         collectionView!.register(SellBuyCollectionViewCell.self, forCellWithReuseIdentifier:cellReuseIdentifier)
@@ -354,9 +355,10 @@ extension SellBuyViewController: actionMenuViewDelegate{
     
     func menuClicked(_ tag: Int) {
         switch tag{
-        //我要寻宠页
         case 0:
-            ToastView().showToast(addArray.allKeys[0] as! String)
+            let shopCar = ShopCarViewController()
+            shopCar.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(shopCar, animated: true)
         case 1:
             ToastView().showToast(addArray.allKeys[1] as! String)
         case 2:
@@ -371,7 +373,7 @@ extension SellBuyViewController: actionMenuViewDelegate{
 
 //==================================================================================isfreshing中的代理方法
 
-extension SellBuyViewController: isRefreshingDelegate{
+extension SellBuyViewController: MCYRefreshViewDelegate{
     
     func reFreshing(){
         //这里做你想做的事

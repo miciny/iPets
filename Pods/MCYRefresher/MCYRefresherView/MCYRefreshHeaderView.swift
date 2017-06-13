@@ -9,55 +9,89 @@
 import UIKit
 
 //下拉刷新的代理
-protocol isRefreshingDelegate{
+public protocol MCYRefreshViewDelegate{
     func reFreshing()
 }
 
-enum RefreshState{
+public enum MCYRefreshState{
     case  refreshStateNormal //正常
     case  refreshStatePulling //正在下啦
     case  refreshStateLoading //正在加载
 }
 
-class RefreshHeaderView: UIView{
-    var refreshState: RefreshState?
+public class MCYRefreshView: UIView{
     
-    fileprivate var delegate: isRefreshingDelegate?
+    public var refreshState: MCYRefreshState?
+    
+    fileprivate var imageName: String!
+    fileprivate var delegate: MCYRefreshViewDelegate?
     fileprivate let RefreshHeaderHeight: CGFloat = 64 //高度
-
     fileprivate var titleLabel: UILabel!
     fileprivate var scrollView: UIScrollView!
     fileprivate var actView: UIActivityIndicatorView?
     fileprivate var arrowImage: UIImageView?
-    
     fileprivate var isRefreshing = false
     
-    init(subView: UIScrollView, target: isRefreshingDelegate){
+    public init(subView: UIScrollView, target: MCYRefreshViewDelegate, imageName: String){
         super.init(frame: subView.frame)
         scrollView = subView
         self.delegate = target
-        self.refreshState = RefreshState.refreshStateNormal
-       
-        //scrollView.delegate = self  //如果不是设置的观察者，会出现cell显示错误的问题
+        self.refreshState = MCYRefreshState.refreshStateNormal
+        self.imageName = imageName
+        
         initUI()
         designKFC()
     }
     
+    required public init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    //结束刷新
+    public func endRefresh(){
+        if refreshState == MCYRefreshState.refreshStateLoading {
+            setRrefreshState(.refreshStateNormal)
+            self.scrollView.isScrollEnabled = true
+            
+            //动画返回
+            UIView.animate(withDuration: 0.3, delay: 0.4, options: .curveEaseInOut, animations: {
+                self.scrollView.contentInset.top = -self.RefreshHeaderHeight + self.getInsetTop()
+            }, completion: { (done) in
+                self.isRefreshing = false
+            })
+        }
+    }
+    
+    //开始刷新 可以手动调用
+    public func startRefresh(){
+        guard self.isRefreshing == false else{
+            return
+        }
+        //此处不宜有动画
+        self.scrollView.contentOffset = CGPoint(x: 0, y: -(self.getInsetTop() + self.RefreshHeaderHeight))
+        self.setRrefreshState(MCYRefreshState.refreshStateLoading)
+    }
+    
+    
     //设置观察者
-    func designKFC(){
+    fileprivate func designKFC(){
         scrollView.addObserver(self, forKeyPath: "contentOffset", options: NSKeyValueObservingOptions.new, context: nil)
     }
     
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+    override public func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if(keyPath == "contentOffset"){
             scrollViewContentOffsetDidChange(scrollView)
         }
     }
     
+    func removeOberver(){
+        scrollView.removeObserver(self, forKeyPath: "contentOffset")
+    }
+    
     //设置页面
-    func initUI(){
+    fileprivate func initUI(){
         
-        self.frame = CGRect(x: 0, y: -RefreshHeaderHeight, width: scrollView.width, height: RefreshHeaderHeight)
+        self.frame = CGRect(x: 0, y: -RefreshHeaderHeight, width: scrollView.frame.width, height: RefreshHeaderHeight)
         self.backgroundColor = UIColor.clear
         scrollView.addSubview(self)
         
@@ -69,7 +103,7 @@ class RefreshHeaderView: UIView{
         actView = UIActivityIndicatorView()
         actView?.color = UIColor.gray
         
-        arrowImage = UIImageView(image: UIImage(named: "tableview_pull_refresh"))
+        arrowImage = UIImageView(image: UIImage(named: self.imageName))
         
         self.addSubview(titleLabel!)
         self.addSubview(arrowImage!)
@@ -77,28 +111,24 @@ class RefreshHeaderView: UIView{
         
         titleLabel.frame.size.width = 100
         titleLabel.frame.size.height = 30
-        titleLabel.center = CGPoint(x: self.centerXX, y: RefreshHeaderHeight-30)
+        titleLabel.center = CGPoint(x: self.center.x, y: RefreshHeaderHeight-30)
         
         actView!.frame.size.width = 30
         actView!.frame.size.height = 30
-        actView!.frame.origin.x = titleLabel.x - 30
+        actView!.frame.origin.x = titleLabel.frame.minX - 30
         actView!.frame.origin.y = RefreshHeaderHeight-45
         
         arrowImage!.frame.size.width = 30
         arrowImage!.frame.size.height = 30
-        arrowImage!.frame.origin.x = titleLabel.x - 30
+        arrowImage!.frame.origin.x = titleLabel.frame.minX - 30
         arrowImage!.frame.origin.y = RefreshHeaderHeight-45
         
     }
     
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
     
-    //delegate
-    func scrollViewContentOffsetDidChange(_ scrollView: UIScrollView) {
+    fileprivate func scrollViewContentOffsetDidChange(_ scrollView: UIScrollView) {
         
-        if(dragHeight() < 0 || refreshState == RefreshState.refreshStateLoading ){
+        if(dragHeight() < 0 || refreshState == MCYRefreshState.refreshStateLoading ){
             return
         }else{
             if(scrollView.isDragging){
@@ -108,7 +138,7 @@ class RefreshHeaderView: UIView{
                     setRrefreshState(.refreshStatePulling)
                 }
             }else{
-                if(refreshState == RefreshState.refreshStatePulling){
+                if(refreshState == MCYRefreshState.refreshStatePulling){
                     setRrefreshState(.refreshStateLoading)
                 }
             }
@@ -116,7 +146,7 @@ class RefreshHeaderView: UIView{
     }
     
     //刷新状态变换
-    func setRrefreshState(_ state: RefreshState){
+    fileprivate func setRrefreshState(_ state: MCYRefreshState){
         
         refreshState = state
         switch state{
@@ -147,23 +177,14 @@ class RefreshHeaderView: UIView{
             //固定顶部
             UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseInOut, animations: {
                 self.scrollView.contentInset.top = self.RefreshHeaderHeight + self.getInsetTop()
-                }, completion: { (done) in
-                    self.delegate?.reFreshing()
+            }, completion: { (done) in
+                self.delegate?.reFreshing()
             })
             
             break
         }
     }
     
-    //开始刷新
-    func startRefresh(){
-        guard self.isRefreshing == false else{
-            return
-        }
-        //此处不宜有动画
-        self.scrollView.contentOffset = CGPoint(x: 0, y: -(self.getInsetTop() + self.RefreshHeaderHeight))
-        self.setRrefreshState(RefreshState.refreshStateLoading)
-    }
     
     //计算拉的高度
     fileprivate func dragHeight()->CGFloat{
@@ -174,19 +195,5 @@ class RefreshHeaderView: UIView{
         return scrollView.contentInset.top
     }
     
-    //结束刷新
-    func endRefresh(){
-        if refreshState == RefreshState.refreshStateLoading {
-            setRrefreshState(.refreshStateNormal)
-            self.scrollView.isScrollEnabled = true
-            
-            //动画返回
-            UIView.animate(withDuration: 0.3, delay: 0.4, options: .curveEaseInOut, animations: {
-                self.scrollView.contentInset.top = -self.RefreshHeaderHeight + self.getInsetTop()
-                }, completion: { (done) in
-                    self.isRefreshing = false
-            })
-        }
-    }
 }
 
