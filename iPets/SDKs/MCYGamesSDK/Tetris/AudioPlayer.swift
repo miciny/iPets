@@ -22,14 +22,20 @@ class AudioPlayer: NSObject, AVAudioPlayerDelegate{
         //设置支持后台
         try! session.setActive(true)
        
-        self.audioPath = Bundle.main.path(forResource: "A_comme_amour", ofType: "mp3")
+        self.audioPath = Bundle.main.path(forResource: "A_comme_amour", ofType: "mp3")!
     }
     
     //播放
     func playAudio(){
+        
+        guard self.audioPath != nil else {
+            return
+        }
+        
         if self.player != nil{
             self.player = nil
         }
+        
         
         if let url = URL(string: self.audioPath){
             do{

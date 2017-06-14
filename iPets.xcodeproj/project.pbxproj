@@ -49,6 +49,7 @@
 		E14408441EEFEB6A00C8E23B /* MineCalculate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14408401EEFEB6A00C8E23B /* MineCalculate.swift */; };
 		E14408451EEFEB6A00C8E23B /* MineConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14408411EEFEB6A00C8E23B /* MineConstant.swift */; };
 		E14408471EEFED6C00C8E23B /* GameChooseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14408461EEFED6C00C8E23B /* GameChooseViewController.swift */; };
+		E14408491EF0EA7F00C8E23B /* A_comme_amour.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E14408481EF0EA7F00C8E23B /* A_comme_amour.mp3 */; };
 		E17528541ED3E8AE00269EDF /* CycleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E175284F1ED3E8AE00269EDF /* CycleView.swift */; };
 		E17528551ED3E8AE00269EDF /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17528501ED3E8AE00269EDF /* SearchTableViewCell.swift */; };
 		E17528561ED3E8AE00269EDF /* SellBuyCollectionFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17528511ED3E8AE00269EDF /* SellBuyCollectionFooterView.swift */; };
@@ -223,6 +224,7 @@
 		E14408401EEFEB6A00C8E23B /* MineCalculate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MineCalculate.swift; sourceTree = "<group>"; };
 		E14408411EEFEB6A00C8E23B /* MineConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MineConstant.swift; sourceTree = "<group>"; };
 		E14408461EEFED6C00C8E23B /* GameChooseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameChooseViewController.swift; sourceTree = "<group>"; };
+		E14408481EF0EA7F00C8E23B /* A_comme_amour.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = A_comme_amour.mp3; sourceTree = "<group>"; };
 		E175284F1ED3E8AE00269EDF /* CycleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CycleView.swift; sourceTree = "<group>"; };
 		E17528501ED3E8AE00269EDF /* SearchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
 		E17528511ED3E8AE00269EDF /* SellBuyCollectionFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SellBuyCollectionFooterView.swift; sourceTree = "<group>"; };
@@ -566,6 +568,7 @@
 		E14408221EEFE21400C8E23B /* TetrisUniversal */ = {
 			isa = PBXGroup;
 			children = (
+				E14408481EF0EA7F00C8E23B /* A_comme_amour.mp3 */,
 				E144082F1EEFE27900C8E23B /* TetrisCalculate.swift */,
 				E14408311EEFE27900C8E23B /* TetrisConstant.swift */,
 				E14408321EEFE27900C8E23B /* TetrisSetting.swift */,
@@ -1091,6 +1094,7 @@
 				E10E44671CC62B3500D9992A /* Home.xcassets in Resources */,
 				E17528C61ED4090B00269EDF /* Setting.xcassets in Resources */,
 				E10E44691CC62B3500D9992A /* Me.xcassets in Resources */,
+				E14408491EF0EA7F00C8E23B /* A_comme_amour.mp3 in Resources */,
 				E17528CA1ED4092B00269EDF /* FindPets.xcassets in Resources */,
 				E1DE0E661EEA918600CF580D /* Video.xcassets in Resources */,
 				E10E44681CC62B3500D9992A /* Images.xcassets in Resources */,

@@ -78,21 +78,31 @@ class TetrisGameViewController: UIViewController, controllerViewDelegate, mainVi
         self.view.addSubview(self.mainView!)
         self.view.addSubview(self.tipsView!)
         self.view.addSubview(self.controllerViw!)
+        
+        
+        
+        //左上角联系人按钮按钮，一下方法添加图片，需要对图片进行遮罩处理，否则不会出现图片
+        // 我们会发现出来的是一个纯色的图片，是因为iOS扁平化设计风格应用之后做成这样的，如果需要现实图片，我们可以设置一项
+        var image = UIImage(named:"MoreSetting")
+        image = image?.withRenderingMode(UIImageRenderingMode.alwaysOriginal)
+        let contectItem = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(setGamePause))
+        
+        let spacer = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)  //用于消除左边空隙，要不然按钮顶不到最前面
+        spacer.width = -5
+        
+        self.navigationItem.rightBarButtonItems = [spacer, contectItem]
     }
     
-    
     //设置暂停的弹层
-    func setPauseView(){
-        //结束点ps按钮 无反应
-        guard self.mainView!.isGaming != TetrisGameType.gameOver else{
-            return
-        }
-        
+    func setGamePause(){
+        self.mainView?.pauseGame()
         if pauseView == nil{
             pauseView = PauseView(frame: self.view.frame, delegate: self)
+            self.view.addSubview(pauseView!)
+        }else{
+            pauseView?.removeFromSuperview()
+            pauseView = nil
         }
-        
-        self.view.addSubview(pauseView!)
     }
     
     //消失弹层
@@ -280,7 +290,6 @@ class TetrisGameViewController: UIViewController, controllerViewDelegate, mainVi
     
     //暂停
     func pauseGame() {
-        self.setPauseView()  //添加弹层
         self.mainView?.pauseGame()
     }
     
@@ -294,7 +303,7 @@ class TetrisGameViewController: UIViewController, controllerViewDelegate, mainVi
     //获取下一个元素
     func getTheNextOne() {
         //判断相当于重新开始
-        if self.mainView!.isGaming == TetrisGameType.gameOver{
+        if self.mainView?.isGaming == TetrisGameType.gameOver{
             self.typeArray = [Int]() //初始化
         }
         self.getEle()
