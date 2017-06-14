@@ -42,8 +42,13 @@
 		E14408341EEFE27900C8E23B /* TetrisCalculate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E144082F1EEFE27900C8E23B /* TetrisCalculate.swift */; };
 		E14408361EEFE27900C8E23B /* TetrisConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14408311EEFE27900C8E23B /* TetrisConstant.swift */; };
 		E14408371EEFE27900C8E23B /* TetrisSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14408321EEFE27900C8E23B /* TetrisSetting.swift */; };
-		E144083B1EEFE28400C8E23B /* ElementsModules.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14408391EEFE28400C8E23B /* ElementsModules.swift */; };
-		E144083C1EEFE28400C8E23B /* ElementsObj.swift in Sources */ = {isa = PBXBuildFile; fileRef = E144083A1EEFE28400C8E23B /* ElementsObj.swift */; };
+		E144083B1EEFE28400C8E23B /* TetrisElementsModules.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14408391EEFE28400C8E23B /* TetrisElementsModules.swift */; };
+		E144083C1EEFE28400C8E23B /* TetrisElementsObj.swift in Sources */ = {isa = PBXBuildFile; fileRef = E144083A1EEFE28400C8E23B /* TetrisElementsObj.swift */; };
+		E14408421EEFEB6A00C8E23B /* MineMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E144083E1EEFEB6A00C8E23B /* MineMainViewController.swift */; };
+		E14408431EEFEB6A00C8E23B /* MineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E144083F1EEFEB6A00C8E23B /* MineView.swift */; };
+		E14408441EEFEB6A00C8E23B /* MineCalculate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14408401EEFEB6A00C8E23B /* MineCalculate.swift */; };
+		E14408451EEFEB6A00C8E23B /* MineConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14408411EEFEB6A00C8E23B /* MineConstant.swift */; };
+		E14408471EEFED6C00C8E23B /* GameChooseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14408461EEFED6C00C8E23B /* GameChooseViewController.swift */; };
 		E17528541ED3E8AE00269EDF /* CycleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E175284F1ED3E8AE00269EDF /* CycleView.swift */; };
 		E17528551ED3E8AE00269EDF /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17528501ED3E8AE00269EDF /* SearchTableViewCell.swift */; };
 		E17528561ED3E8AE00269EDF /* SellBuyCollectionFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17528511ED3E8AE00269EDF /* SellBuyCollectionFooterView.swift */; };
@@ -211,8 +216,13 @@
 		E144082F1EEFE27900C8E23B /* TetrisCalculate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TetrisCalculate.swift; sourceTree = "<group>"; };
 		E14408311EEFE27900C8E23B /* TetrisConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TetrisConstant.swift; sourceTree = "<group>"; };
 		E14408321EEFE27900C8E23B /* TetrisSetting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TetrisSetting.swift; sourceTree = "<group>"; };
-		E14408391EEFE28400C8E23B /* ElementsModules.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ElementsModules.swift; sourceTree = "<group>"; };
-		E144083A1EEFE28400C8E23B /* ElementsObj.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ElementsObj.swift; sourceTree = "<group>"; };
+		E14408391EEFE28400C8E23B /* TetrisElementsModules.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TetrisElementsModules.swift; sourceTree = "<group>"; };
+		E144083A1EEFE28400C8E23B /* TetrisElementsObj.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TetrisElementsObj.swift; sourceTree = "<group>"; };
+		E144083E1EEFEB6A00C8E23B /* MineMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MineMainViewController.swift; sourceTree = "<group>"; };
+		E144083F1EEFEB6A00C8E23B /* MineView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MineView.swift; sourceTree = "<group>"; };
+		E14408401EEFEB6A00C8E23B /* MineCalculate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MineCalculate.swift; sourceTree = "<group>"; };
+		E14408411EEFEB6A00C8E23B /* MineConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MineConstant.swift; sourceTree = "<group>"; };
+		E14408461EEFED6C00C8E23B /* GameChooseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameChooseViewController.swift; sourceTree = "<group>"; };
 		E175284F1ED3E8AE00269EDF /* CycleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CycleView.swift; sourceTree = "<group>"; };
 		E17528501ED3E8AE00269EDF /* SearchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
 		E17528511ED3E8AE00269EDF /* SellBuyCollectionFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SellBuyCollectionFooterView.swift; sourceTree = "<group>"; };
@@ -547,8 +557,8 @@
 		E14408211EEFE1FC00C8E23B /* TetrisModel */ = {
 			isa = PBXGroup;
 			children = (
-				E14408391EEFE28400C8E23B /* ElementsModules.swift */,
-				E144083A1EEFE28400C8E23B /* ElementsObj.swift */,
+				E14408391EEFE28400C8E23B /* TetrisElementsModules.swift */,
+				E144083A1EEFE28400C8E23B /* TetrisElementsObj.swift */,
 			);
 			name = TetrisModel;
 			sourceTree = "<group>";
@@ -566,6 +576,10 @@
 		E144083D1EEFEB0000C8E23B /* Mine */ = {
 			isa = PBXGroup;
 			children = (
+				E144083E1EEFEB6A00C8E23B /* MineMainViewController.swift */,
+				E144083F1EEFEB6A00C8E23B /* MineView.swift */,
+				E14408401EEFEB6A00C8E23B /* MineCalculate.swift */,
+				E14408411EEFEB6A00C8E23B /* MineConstant.swift */,
 			);
 			name = Mine;
 			path = ../../../../Users/miciny/ToGitHub/iPets/iPets/SDKs/MCYGamesSDK/Mine;
@@ -697,6 +711,7 @@
 				E12A38B41EEA78BE00755C6C /* FindViewController.swift */,
 				E175288E1ED406A500269EDF /* FindPetsViewController.swift */,
 				E175288F1ED406A500269EDF /* SendFindMyPetsInfoViewController.swift */,
+				E14408461EEFED6C00C8E23B /* GameChooseViewController.swift */,
 			);
 			name = Controller;
 			path = ../../../../Users/miciny/ToGitHub/iPets/iPets/Find/Controller;
@@ -1146,6 +1161,7 @@
 				E1DE0EB31EEA94C000CF580D /* NewsDataModule.swift in Sources */,
 				E17528E91ED40B0F00269EDF /* UniversalConstants.swift in Sources */,
 				E17528BB1ED406DC00269EDF /* ChatTableView.swift in Sources */,
+				E14408471EEFED6C00C8E23B /* GameChooseViewController.swift in Sources */,
 				E17528D51ED40A5A00269EDF /* InternetExplorerViewController.swift in Sources */,
 				E10B34ED1EEAA65800D65C9F /* MyLoadingView.swift in Sources */,
 				E17528F71ED40B1800269EDF /* UniversalFuncs.swift in Sources */,
@@ -1177,12 +1193,14 @@
 				E17528911ED406A500269EDF /* SendFindMyPetsInfoViewController.swift in Sources */,
 				E1DE0E781EEA91BA00CF580D /* SaveDataModel.swift in Sources */,
 				E17528BC1ED406DC00269EDF /* ChatTableViewCell.swift in Sources */,
+				E14408451EEFEB6A00C8E23B /* MineConstant.swift in Sources */,
 				E14408281EEFE23700C8E23B /* MainView.swift in Sources */,
 				E17528AD1ED406D000269EDF /* ChatData.swift in Sources */,
 				E1DE0E9D1EEA94B200CF580D /* NewsTableViewCell.swift in Sources */,
 				E1DE0E791EEA91BA00CF580D /* SQLLine.swift in Sources */,
 				E14407F51EEEA0D600C8E23B /* ShopCarViewController.swift in Sources */,
 				E1DE0EBD1EEA94CC00CF580D /* WebViewController.swift in Sources */,
+				E14408431EEFEB6A00C8E23B /* MineView.swift in Sources */,
 				E1DE0EB21EEA94C000CF580D /* LocalNewsDataModule.swift in Sources */,
 				E10B34EB1EEAA65800D65C9F /* ActionMenuView.swift in Sources */,
 				E1DE0E821EEA926900CF580D /* PicsBrowserView.swift in Sources */,
@@ -1212,7 +1230,7 @@
 				E17528F31ED40B1800269EDF /* DateToToString.swift in Sources */,
 				E17528F51ED40B1800269EDF /* GetMyInfo.swift in Sources */,
 				E1DE0E891EEA928600CF580D /* ImageCollectionModel.swift in Sources */,
-				E144083B1EEFE28400C8E23B /* ElementsModules.swift in Sources */,
+				E144083B1EEFE28400C8E23B /* TetrisElementsModules.swift in Sources */,
 				E17528681ED4034D00269EDF /* SellBuyViewController.swift in Sources */,
 				E12A38B51EEA78BE00755C6C /* FindViewController.swift in Sources */,
 				E17528791ED4049900269EDF /* MeViewCell.swift in Sources */,
@@ -1234,6 +1252,7 @@
 				E1DE0E641EEA918600CF580D /* BaseVideoView.swift in Sources */,
 				E144082B1EEFE23700C8E23B /* PauseView.swift in Sources */,
 				E17528731ED4048E00269EDF /* SettingDataModel.swift in Sources */,
+				E14408441EEFEB6A00C8E23B /* MineCalculate.swift in Sources */,
 				E17528F61ED40B1800269EDF /* PinYinString.swift in Sources */,
 				E17528BE1ED406DC00269EDF /* ContectorInfoTableViewCell.swift in Sources */,
 				E17528721ED4048E00269EDF /* MeDataModel.swift in Sources */,
@@ -1261,6 +1280,7 @@
 				E17528711ED4048E00269EDF /* PersonInfoDataModel.swift in Sources */,
 				E17528D11ED409B100269EDF /* iPets.xcdatamodeld in Sources */,
 				E1DE0EA91EEA94BA00CF580D /* NewsConstants.swift in Sources */,
+				E14408421EEFEB6A00C8E23B /* MineMainViewController.swift in Sources */,
 				E1DE0EB11EEA94C000CF580D /* JsonToModule.swift in Sources */,
 				E1DE0E771EEA91BA00CF580D /* SaveCacheDataModel.swift in Sources */,
 				E1DE0E7F1EEA91FA00CF580D /* NetFuncs.swift in Sources */,
@@ -1268,7 +1288,7 @@
 				E14408341EEFE27900C8E23B /* TetrisCalculate.swift in Sources */,
 				E17528671ED4034D00269EDF /* SearchViewController.swift in Sources */,
 				E17528FE1ED40B7600269EDF /* PushAndPopAnimation.swift in Sources */,
-				E144083C1EEFE28400C8E23B /* ElementsObj.swift in Sources */,
+				E144083C1EEFE28400C8E23B /* TetrisElementsObj.swift in Sources */,
 				E17528B11ED406D000269EDF /* MainChatListViewDataModel.swift in Sources */,
 				E12A38B91EEA795700755C6C /* FindDataModel.swift in Sources */,
 				E17528BD1ED406DC00269EDF /* ContectorListTableViewCell.swift in Sources */,

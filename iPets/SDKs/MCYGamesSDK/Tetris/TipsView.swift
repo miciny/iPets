@@ -11,12 +11,12 @@ import UIKit
 class TipsView: UIView {
     
     fileprivate var nextView = UIView()
-    fileprivate var elements2 = ElementsModules()
-    fileprivate var element2: ElementsObj!
-    fileprivate var elementTemp: ElementsObj!  //临时保存第一个，因为要下降
+    fileprivate var elements2 = TetrisElementsModules()
+    fileprivate var element2: TetrisElementsObj!
+    fileprivate var elementTemp: TetrisElementsObj!  //临时保存第一个，因为要下降
     
-    fileprivate var elements1 = ElementsModules()
-    fileprivate var element1: ElementsObj!
+    fileprivate var elements1 = TetrisElementsModules()
+    fileprivate var element1: TetrisElementsObj!
     
     fileprivate var timer: MyTimer!
     fileprivate var wcount = Int(5) //横向格子数
@@ -88,7 +88,7 @@ class TipsView: UIView {
                 mine.backgroundColor = BGC
                 mine.layer.borderWidth = 0.5
                 mine.layer.masksToBounds = true
-                mine.tag = setTag(j, j: i) //设置坐标tag
+                mine.tag = TetrisCalculate.setTag(j, j: i) //设置坐标tag
                 view.addSubview(mine)
             }
         }
@@ -339,7 +339,7 @@ class TipsView: UIView {
     
     //根据坐标，返回btn
     fileprivate func getBtn(_ x: Int, y: Int) -> UIButton{
-        let tag = setTag(x, j: y)
+        let tag = TetrisCalculate.setTag(x, j: y)
         var btn = UIButton()
         
         for sub in self.nextView.subviews{

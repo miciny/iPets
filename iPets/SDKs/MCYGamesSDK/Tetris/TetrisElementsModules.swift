@@ -8,13 +8,13 @@
 
 import UIKit
 
-class ElementsModules: NSObject {
+class TetrisElementsModules: NSObject {
     
     var centerPointNo = 0  //中心
-    fileprivate var ele: ElementsObj!
+    fileprivate var ele: TetrisElementsObj!
     
     //获取元素
-    func getView(_ type: Int) -> ElementsObj{
+    func getView(_ type: Int) -> TetrisElementsObj{
         
         switch type {
         case 1:
@@ -76,9 +76,9 @@ class ElementsModules: NSObject {
     func getTurnedView(_ element: [[Int]], dir: Int, wcount: Int) -> [[Int]]{
         
         let ceter = self.ele.ceterPonintNo
-        if self.ele.dirNo == dirModules.four {
+        if self.ele.dirNo == TetrisDirModules.four {
             return self.theTransFunc4Dir(ceter!, point: element, count: wcount)
-        }else if self.ele.dirNo == dirModules.two{
+        }else if self.ele.dirNo == TetrisDirModules.two{
             return self.theTransFunc2Dir(ceter!, point: element, count: wcount, dir: dir)
         }else{
             return element
@@ -208,7 +208,7 @@ class ElementsModules: NSObject {
             pTemp.append(p[0])
         }
         
-        let pT = pTemp.sorted(by: getSort)
+        let pT = pTemp.sorted(by: tetrisGetSort)
         
         let min = pT.first!
         let max = pT.last!
@@ -223,245 +223,245 @@ class ElementsModules: NSObject {
     
     
 //===I40=============================================================================
-    fileprivate func I4View() -> ElementsObj{
+    fileprivate func I4View() -> TetrisElementsObj{
         let point = [[centerPointNo, 0],
                      [centerPointNo, 1],
                      [centerPointNo, 2],
                      [centerPointNo, 3]]
-        let pointModule = ElementsObj(elePoint: point, ceterPonintNo: 1,
-                                      dirNo: dirModules.two, eleFunction: eleFunction.nothing, color: ele0Color)
+        let pointModule = TetrisElementsObj(elePoint: point, ceterPonintNo: 1,
+                                      dirNo: TetrisDirModules.two, eleFunction: TetrisEleFunction.nothing, color: ele0Color)
         return pointModule
     }
     
 
 //===田1=============================================================================
-    fileprivate func tianView() -> ElementsObj{
+    fileprivate func tianView() -> TetrisElementsObj{
         let point = [[centerPointNo-1, 0], [centerPointNo, 0],
                      [centerPointNo-1, 1], [centerPointNo, 1]]
-        let pointModule = ElementsObj(elePoint: point, ceterPonintNo: 0,
-                                      dirNo: dirModules.no, eleFunction: eleFunction.nothing, color: ele1Color)
+        let pointModule = TetrisElementsObj(elePoint: point, ceterPonintNo: 0,
+                                      dirNo: TetrisDirModules.no, eleFunction: TetrisEleFunction.nothing, color: ele1Color)
         return pointModule
     }
     
 //===右z2=============================================================================
-    fileprivate func rightZView() -> ElementsObj{
+    fileprivate func rightZView() -> TetrisElementsObj{
         let point = [[centerPointNo-1, 0],
                      [centerPointNo-1, 1], [centerPointNo, 1],
                      [centerPointNo, 2]]
-        let pointModule = ElementsObj(elePoint: point, ceterPonintNo: 1,
-                                      dirNo: dirModules.two, eleFunction: eleFunction.nothing, color: ele2Color)
+        let pointModule = TetrisElementsObj(elePoint: point, ceterPonintNo: 1,
+                                      dirNo: TetrisDirModules.two, eleFunction: TetrisEleFunction.nothing, color: ele2Color)
         return pointModule
     }
     
 //===左z3=============================================================================
-    fileprivate func leftZView() -> ElementsObj{
+    fileprivate func leftZView() -> TetrisElementsObj{
         let point = [[centerPointNo, 0],
                      [centerPointNo, 1], [centerPointNo-1, 1],
                      [centerPointNo-1, 2]]
-        let pointModule = ElementsObj(elePoint: point, ceterPonintNo: 1,
-                                      dirNo: dirModules.two, eleFunction: eleFunction.nothing, color: ele3Color)
+        let pointModule = TetrisElementsObj(elePoint: point, ceterPonintNo: 1,
+                                      dirNo: TetrisDirModules.two, eleFunction: TetrisEleFunction.nothing, color: ele3Color)
         return pointModule
     }
     
 //===土4=============================================================================
-    fileprivate func tuView() -> ElementsObj {
+    fileprivate func tuView() -> TetrisElementsObj {
         let point = [[centerPointNo, 0],
                      [centerPointNo-1, 1], [centerPointNo, 1], [centerPointNo+1, 1]]
-        let pointModule = ElementsObj(elePoint: point, ceterPonintNo: 2,
-                                      dirNo: dirModules.four, eleFunction: eleFunction.nothing, color: ele4Color)
+        let pointModule = TetrisElementsObj(elePoint: point, ceterPonintNo: 2,
+                                      dirNo: TetrisDirModules.four, eleFunction: TetrisEleFunction.nothing, color: ele4Color)
         return pointModule
     }
     
     
     
 //===左L5=============================================================================
-    fileprivate func leftLView() -> ElementsObj {
+    fileprivate func leftLView() -> TetrisElementsObj {
         let point = [[centerPointNo, 0],
                      [centerPointNo, 1],
                      [centerPointNo, 2], [centerPointNo-1, 2]]
-        let pointModule = ElementsObj(elePoint: point, ceterPonintNo: 2,
-                                      dirNo: dirModules.four, eleFunction: eleFunction.nothing, color: ele5Color)
+        let pointModule = TetrisElementsObj(elePoint: point, ceterPonintNo: 2,
+                                      dirNo: TetrisDirModules.four, eleFunction: TetrisEleFunction.nothing, color: ele5Color)
         return pointModule
     }
     
 //===右L6=============================================================================
-    fileprivate func rightLView() -> ElementsObj {
+    fileprivate func rightLView() -> TetrisElementsObj {
         let point = [[centerPointNo, 0],
                      [centerPointNo, 1],
                      [centerPointNo, 2], [centerPointNo+1, 2]]
-        let pointModule = ElementsObj(elePoint: point, ceterPonintNo: 2,
-                                      dirNo: dirModules.four, eleFunction: eleFunction.nothing, color: ele6Color)
+        let pointModule = TetrisElementsObj(elePoint: point, ceterPonintNo: 2,
+                                      dirNo: TetrisDirModules.four, eleFunction: TetrisEleFunction.nothing, color: ele6Color)
         return pointModule
     }
     
 //===折7=============================================================================
-    fileprivate func zheView() -> ElementsObj {
+    fileprivate func zheView() -> TetrisElementsObj {
         let point = [[centerPointNo, 0],
                      [centerPointNo, 1], [centerPointNo-1, 1]]
-        let pointModule = ElementsObj(elePoint: point, ceterPonintNo: 1,
-                                      dirNo: dirModules.four, eleFunction: eleFunction.nothing, color: ele7Color)
+        let pointModule = TetrisElementsObj(elePoint: point, ceterPonintNo: 1,
+                                      dirNo: TetrisDirModules.four, eleFunction: TetrisEleFunction.nothing, color: ele7Color)
         return pointModule
     }
     
 //===点8=============================================================================
-    fileprivate func dotView() -> ElementsObj {
+    fileprivate func dotView() -> TetrisElementsObj {
         let point = [[centerPointNo, 0]]
-        let pointModule = ElementsObj(elePoint: point, ceterPonintNo: 0,
-                                      dirNo: dirModules.no, eleFunction: eleFunction.invisible, color: ele8Color)
+        let pointModule = TetrisElementsObj(elePoint: point, ceterPonintNo: 0,
+                                      dirNo: TetrisDirModules.no, eleFunction: TetrisEleFunction.invisible, color: ele8Color)
         return pointModule
     }
     
 //===半框9=============================================================================
-    fileprivate func bankuangView() -> ElementsObj {
+    fileprivate func bankuangView() -> TetrisElementsObj {
         let point = [[centerPointNo-1, 0], [centerPointNo+1, 0],
                      [centerPointNo-1, 1], [centerPointNo, 1], [centerPointNo+1, 1]]
-        let pointModule = ElementsObj(elePoint: point, ceterPonintNo: 3,
-                                      dirNo: dirModules.four, eleFunction: eleFunction.nothing, color: ele9Color)
+        let pointModule = TetrisElementsObj(elePoint: point, ceterPonintNo: 3,
+                                      dirNo: TetrisDirModules.four, eleFunction: TetrisEleFunction.nothing, color: ele9Color)
         return pointModule
     }
     
 //===大土10=============================================================================
-    fileprivate func bigTuView() -> ElementsObj {
+    fileprivate func bigTuView() -> TetrisElementsObj {
         let point = [[centerPointNo, 0],
                      [centerPointNo, 1],
                      [centerPointNo-1, 2], [centerPointNo, 2], [centerPointNo+1, 2]]
-        let pointModule = ElementsObj(elePoint: point, ceterPonintNo: 3,
-                                      dirNo: dirModules.four, eleFunction: eleFunction.nothing, color: ele10Color)
+        let pointModule = TetrisElementsObj(elePoint: point, ceterPonintNo: 3,
+                                      dirNo: TetrisDirModules.four, eleFunction: TetrisEleFunction.nothing, color: ele10Color)
         return pointModule
     }
     
 //===I311=============================================================================
-    fileprivate func I3View() -> ElementsObj{
+    fileprivate func I3View() -> TetrisElementsObj{
         let point = [[centerPointNo, 0],
                      [centerPointNo, 1],
                      [centerPointNo, 2]]
-        let pointModule = ElementsObj(elePoint: point, ceterPonintNo: 1,
-                                      dirNo: dirModules.two, eleFunction: eleFunction.nothing, color: ele11Color)
+        let pointModule = TetrisElementsObj(elePoint: point, ceterPonintNo: 1,
+                                      dirNo: TetrisDirModules.two, eleFunction: TetrisEleFunction.nothing, color: ele11Color)
         return pointModule
     }
     
 //===大山12=============================================================================
-    fileprivate func bigShanView() -> ElementsObj{
+    fileprivate func bigShanView() -> TetrisElementsObj{
         let point = [[centerPointNo-2, 0], [centerPointNo, 0], [centerPointNo+2, 0],
                      [centerPointNo-2, 1],[centerPointNo-1, 1], [centerPointNo, 1],[centerPointNo+1, 1], [centerPointNo+2, 1]]
-        let pointModule = ElementsObj(elePoint: point, ceterPonintNo: 5,
-                                      dirNo: dirModules.four, eleFunction: eleFunction.nothing, color: ele12Color)
+        let pointModule = TetrisElementsObj(elePoint: point, ceterPonintNo: 5,
+                                      dirNo: TetrisDirModules.four, eleFunction: TetrisEleFunction.nothing, color: ele12Color)
         return pointModule
     }
     
 //===大大山13=============================================================================
-    fileprivate func bigbigShanView() -> ElementsObj{
+    fileprivate func bigbigShanView() -> TetrisElementsObj{
         let point = [[centerPointNo-2, 0], [centerPointNo+2, 0],
                      [centerPointNo-2, 1],[centerPointNo, 1],[centerPointNo+2, 1],
                      [centerPointNo-2, 2],[centerPointNo, 2], [centerPointNo+2, 2],
                      [centerPointNo-2, 3], [centerPointNo-1, 3],[centerPointNo, 3],[centerPointNo+1, 3],[centerPointNo+2, 3]]
-        let pointModule = ElementsObj(elePoint: point, ceterPonintNo: 10,
-                                      dirNo: dirModules.four, eleFunction: eleFunction.nothing, color: ele13Color)
+        let pointModule = TetrisElementsObj(elePoint: point, ceterPonintNo: 10,
+                                      dirNo: TetrisDirModules.four, eleFunction: TetrisEleFunction.nothing, color: ele13Color)
         return pointModule
     }
     
 //===大筐14=============================================================================
-    fileprivate func bigKuangView() -> ElementsObj{
+    fileprivate func bigKuangView() -> TetrisElementsObj{
         let point = [[centerPointNo-1, 0], [centerPointNo+1, 0],
                      [centerPointNo-1, 1],[centerPointNo+1, 1],
                      [centerPointNo-1, 2], [centerPointNo, 2],[centerPointNo+1, 2]]
-        let pointModule = ElementsObj(elePoint: point, ceterPonintNo: 5,
-                                      dirNo: dirModules.four, eleFunction: eleFunction.nothing, color: ele14Color)
+        let pointModule = TetrisElementsObj(elePoint: point, ceterPonintNo: 5,
+                                      dirNo: TetrisDirModules.four, eleFunction: TetrisEleFunction.nothing, color: ele14Color)
         return pointModule
     }
     
 //===H15=============================================================================
-    fileprivate func HView() -> ElementsObj{
+    fileprivate func HView() -> TetrisElementsObj{
         let point = [[centerPointNo-1, 0], [centerPointNo+1, 0],
                      [centerPointNo-1, 1],[centerPointNo, 1],[centerPointNo+1, 1],
                      [centerPointNo-1, 2],[centerPointNo+1, 2]]
-        let pointModule = ElementsObj(elePoint: point, ceterPonintNo: 3,
-                                      dirNo: dirModules.two, eleFunction: eleFunction.nothing, color: ele15Color)
+        let pointModule = TetrisElementsObj(elePoint: point, ceterPonintNo: 3,
+                                      dirNo: TetrisDirModules.two, eleFunction: TetrisEleFunction.nothing, color: ele15Color)
         return pointModule
     }
     
 //===十字16=============================================================================
-    fileprivate func shiziView() -> ElementsObj{
+    fileprivate func shiziView() -> TetrisElementsObj{
         let point = [[centerPointNo, 0],
                      [centerPointNo-1, 1],[centerPointNo, 1],[centerPointNo+1, 1],
                      [centerPointNo, 2]]
-        let pointModule = ElementsObj(elePoint: point, ceterPonintNo: 2,
-                                      dirNo: dirModules.no, eleFunction: eleFunction.nothing, color: ele16Color)
+        let pointModule = TetrisElementsObj(elePoint: point, ceterPonintNo: 2,
+                                      dirNo: TetrisDirModules.no, eleFunction: TetrisEleFunction.nothing, color: ele16Color)
         return pointModule
     }
     
 //===米字17=============================================================================
-    fileprivate func miView() -> ElementsObj{
+    fileprivate func miView() -> TetrisElementsObj{
         let point = [[centerPointNo-1, 0],[centerPointNo+1, 0],
                      [centerPointNo, 1],
                      [centerPointNo-1, 2],[centerPointNo+1, 2]]
-        let pointModule = ElementsObj(elePoint: point, ceterPonintNo: 2,
-                                      dirNo: dirModules.no, eleFunction: eleFunction.boom, color: ele17Color)
+        let pointModule = TetrisElementsObj(elePoint: point, ceterPonintNo: 2,
+                                      dirNo: TetrisDirModules.no, eleFunction: TetrisEleFunction.boom, color: ele17Color)
         return pointModule
     }
     
 //===半米字18=============================================================================
-    fileprivate func halfmiView() -> ElementsObj{
+    fileprivate func halfmiView() -> TetrisElementsObj{
         let point = [[centerPointNo, 0],
                      [centerPointNo-1, 1],[centerPointNo+1, 1]]
-        let pointModule = ElementsObj(elePoint: point, ceterPonintNo: 0,
-                                      dirNo: dirModules.four, eleFunction: eleFunction.nothing, color: ele18Color)
+        let pointModule = TetrisElementsObj(elePoint: point, ceterPonintNo: 0,
+                                      dirNo: TetrisDirModules.four, eleFunction: TetrisEleFunction.nothing, color: ele18Color)
         return pointModule
     }
     
 //===斜的4个19=============================================================================
-    fileprivate func xie4View() -> ElementsObj{
+    fileprivate func xie4View() -> TetrisElementsObj{
         let point = [[centerPointNo+1, 0],
                      [centerPointNo, 1],
                      [centerPointNo-1, 2],
                      [centerPointNo-2, 3]]
-        let pointModule = ElementsObj(elePoint: point, ceterPonintNo: 2,
-                                      dirNo: dirModules.two, eleFunction: eleFunction.nothing, color: ele19Color)
+        let pointModule = TetrisElementsObj(elePoint: point, ceterPonintNo: 2,
+                                      dirNo: TetrisDirModules.two, eleFunction: TetrisEleFunction.nothing, color: ele19Color)
         return pointModule
     }
     
 //===斜的3个20=============================================================================
-    fileprivate func xie3View() -> ElementsObj{
+    fileprivate func xie3View() -> TetrisElementsObj{
         let point = [[centerPointNo+1, 0],
                      [centerPointNo, 1],
                      [centerPointNo-1, 2]]
-        let pointModule = ElementsObj(elePoint: point, ceterPonintNo: 1,
-                                      dirNo: dirModules.two, eleFunction: eleFunction.nothing, color: ele20Color)
+        let pointModule = TetrisElementsObj(elePoint: point, ceterPonintNo: 1,
+                                      dirNo: TetrisDirModules.two, eleFunction: TetrisEleFunction.nothing, color: ele20Color)
         return pointModule
     }
     
 //===21F1 =============================================================================
-    fileprivate func F1View() -> ElementsObj{
+    fileprivate func F1View() -> TetrisElementsObj{
         let point = [[centerPointNo-2, 0], [centerPointNo, 0],
                      [centerPointNo-2, 1],[centerPointNo-1, 1], [centerPointNo, 1],[centerPointNo+1, 1]]
-        let pointModule = ElementsObj(elePoint: point, ceterPonintNo: 3,
-                                      dirNo: dirModules.four, eleFunction: eleFunction.nothing, color: ele21Color)
+        let pointModule = TetrisElementsObj(elePoint: point, ceterPonintNo: 3,
+                                      dirNo: TetrisDirModules.four, eleFunction: TetrisEleFunction.nothing, color: ele21Color)
         return pointModule
     }
     
 //颜色不一样===22F2 =============================================================================
-    fileprivate func F2View() -> ElementsObj{
+    fileprivate func F2View() -> TetrisElementsObj{
         let point = [[centerPointNo-2, 0], [centerPointNo-1, 0], [centerPointNo, 0], [centerPointNo+1, 0],
                      [centerPointNo-1, 1],[centerPointNo+1, 1]]
-        let pointModule = ElementsObj(elePoint: point, ceterPonintNo: 2,
-                                      dirNo: dirModules.four, eleFunction: eleFunction.nothing, color: ele22Color)
+        let pointModule = TetrisElementsObj(elePoint: point, ceterPonintNo: 2,
+                                      dirNo: TetrisDirModules.four, eleFunction: TetrisEleFunction.nothing, color: ele22Color)
         return pointModule
     }
     
 //===I2 23=============================================================================
-    fileprivate func I2View() -> ElementsObj{
+    fileprivate func I2View() -> TetrisElementsObj{
         let point = [[centerPointNo, 0],
                      [centerPointNo, 1]]
-        let pointModule = ElementsObj(elePoint: point, ceterPonintNo: 0,
-                                      dirNo: dirModules.two, eleFunction: eleFunction.nothing, color: ele23Color)
+        let pointModule = TetrisElementsObj(elePoint: point, ceterPonintNo: 0,
+                                      dirNo: TetrisDirModules.two, eleFunction: TetrisEleFunction.nothing, color: ele23Color)
         return pointModule
     }
     
 //===I5 24=============================================================================
-    fileprivate func I5View() -> ElementsObj{
+    fileprivate func I5View() -> TetrisElementsObj{
         let point = [[centerPointNo-2, 0],[centerPointNo-1, 0],[centerPointNo, 0],[centerPointNo+1, 0],[centerPointNo+2, 0]]
-        let pointModule = ElementsObj(elePoint: point, ceterPonintNo: 2,
-                                      dirNo: dirModules.two, eleFunction: eleFunction.nothing, color: ele24Color)
+        let pointModule = TetrisElementsObj(elePoint: point, ceterPonintNo: 2,
+                                      dirNo: TetrisDirModules.two, eleFunction: TetrisEleFunction.nothing, color: ele24Color)
         return pointModule
     }
 }

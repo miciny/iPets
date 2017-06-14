@@ -21,14 +21,15 @@ protocol mainViewDelegate{
 }
 
 class MainView: UIView{
-    var isGaming: gameType! //1正在游戏,2暂停，3游戏结束
+    var isGaming: TetrisGameType! //1正在游戏,2暂停，3游戏结束
+
     var timer: MyTimer!
     
     fileprivate var _width = CGFloat(0)
     fileprivate var _height = CGFloat(0)
-    fileprivate var elements = ElementsModules()
+    fileprivate var elements = TetrisElementsModules()
     
-    fileprivate var element: ElementsObj!
+    fileprivate var element: TetrisElementsObj!
     
     fileprivate var wcount = Int(0) //横向格子数
     fileprivate var hcount = Int(0) //竖向格子数
@@ -50,7 +51,7 @@ class MainView: UIView{
         self.wcount = Int(self._width / gap)
         self.hcount = Int(self._height / gap)
         
-        self.isGaming = gameType.gaming
+        self.isGaming = TetrisGameType.gaming
         self.elements.centerPointNo = Int(wcount/2)  //设置显示的中心
         self.resetColorArray()
         self.setTimer()
@@ -67,20 +68,20 @@ class MainView: UIView{
         self.timer.startTimer(interval: speed)
         
         speed = downSpeed //初始化速度
-        self.isGaming = gameType.gaming
+        self.isGaming = TetrisGameType.gaming
     }
     
     //暂停游戏 继续游戏
     func pauseGame(){
-        if isGaming == gameType.gaming{
+        if isGaming == TetrisGameType.gaming{
             self.timer.pauseTimer()
-            isGaming = gameType.pausing
-        }else if isGaming == gameType.pausing{
+            isGaming = TetrisGameType.pausing
+        }else if isGaming == TetrisGameType.pausing{
             self.timer.startTimer(interval: speed)
-            isGaming = gameType.gaming
-        }else if isGaming == gameType.gameOver{
+            isGaming = TetrisGameType.gaming
+        }else if isGaming == TetrisGameType.gameOver{
             self.restartGame()
-            isGaming = gameType.gaming
+            isGaming = TetrisGameType.gaming
         }
     }
     
@@ -114,7 +115,7 @@ class MainView: UIView{
                 let mine = UIButton(frame: CGRect(x: x, y: y, width: gap, height: gap))
                 mine.backgroundColor = BGC
                 mine.layer.borderWidth = 0.5
-                mine.tag = setTag(j, j: i) //设置坐标tag
+                mine.tag = TetrisCalculate.setTag(j, j: i) //设置坐标tag
                 self.addSubview(mine)
             }
         }
@@ -146,7 +147,7 @@ class MainView: UIView{
     
     //向下移动
     @objc fileprivate func autoMoveDown(){
-        guard self.isGaming == gameType.gaming else {
+        guard self.isGaming == TetrisGameType.gaming else {
             return
         }
         
@@ -185,10 +186,10 @@ class MainView: UIView{
         self.resetColorArray()  //重置颜色的array
         
         if isGameOver(){ //再判断游戏结束
-            systemVibration() //震动
+            TetrisCalculate.systemVibration() //震动
             self.showElements() //显示下一个元素
             self.gameOverAlert()
-            isGaming = gameType.gameOver
+            isGaming = TetrisGameType.gameOver
             speed = downSpeed //速度可能出问题，这里初始化一下
             self.delegate?.restartRecord(over: 1)
             print("游戏结束")
@@ -208,7 +209,7 @@ class MainView: UIView{
     
     // 炸弹到头的处理,中心方圆5里爆炸
     fileprivate func boomDownProgress(){
-        guard self.element.eleFunction == eleFunction.boom else {
+        guard self.element.eleFunction == TetrisEleFunction.boom else {
             return
         }
         let range = 4
@@ -230,11 +231,11 @@ class MainView: UIView{
     //左右移动,-1左，1为右
     func moveLeftOrRight(_ dir: Int){
         if dir == -1{
-            guard !isLeft() && isGaming == gameType.gaming else{
+            guard !isLeft() && isGaming == TetrisGameType.gaming else{
                 return
             }
         }else{
-            guard !isRight() && isGaming == gameType.gaming else{
+            guard !isRight() && isGaming == TetrisGameType.gaming else{
                 return
             }
         }
@@ -253,7 +254,7 @@ class MainView: UIView{
     
     //变形
     func transformEle(){
-        guard isGaming == gameType.gaming else{
+        guard isGaming == TetrisGameType.gaming else{
             return
         }
         
@@ -384,7 +385,7 @@ class MainView: UIView{
         var isDown = false
         
         //最大的空白地方的y 可穿透的,只有点可以=====================================================================
-        if self.element.eleFunction == eleFunction.invisible{
+        if self.element.eleFunction == TetrisEleFunction.invisible{
             return self.eleInvisibleProgress()
         }
         
@@ -456,7 +457,7 @@ class MainView: UIView{
     
     //btn变颜色 只有点可以变红=====================================================================
     fileprivate func turnBtnBlack(_ btn: UIButton, dir: Int){
-        if self.element.eleFunction == eleFunction.invisible && colorRecordArray.lastObject as? UIColor != BGC && dir==0{
+        if self.element.eleFunction == TetrisEleFunction.invisible && colorRecordArray.lastObject as? UIColor != BGC && dir==0{
             btn.backgroundColor = UIColor.red
         }else{
             btn.backgroundColor = self.element.color
@@ -467,7 +468,7 @@ class MainView: UIView{
     fileprivate func turnElementBtnWhite(_ dir: Int){
         
         //穿透 记录之前的颜色，本身和下一个，只有点可以=====================================================================
-        if self.element.eleFunction == eleFunction.invisible{
+        if self.element.eleFunction == TetrisEleFunction.invisible{
             for i in self.element.elePoint{
                 let x = i[0]+dir
                 let y = i[1]+1
@@ -488,7 +489,7 @@ class MainView: UIView{
             let x = i[0]
             let y = i[1]
             let btn = self.getBtn(x, y: y)
-            if self.element.eleFunction == eleFunction.invisible{ //只有点可以============================================
+            if self.element.eleFunction == TetrisEleFunction.invisible{ //只有点可以============================================
                 btn.backgroundColor = colorRecordArray.firstObject as? UIColor
             }else{
                 btn.backgroundColor = BGC
@@ -514,7 +515,7 @@ class MainView: UIView{
     
     //元素的btn整体下降,Line行号[Int] y，y之上的都下降，因为消除了
     fileprivate func downmoveElementBtn(_ lines: [Int]){
-        let linesT = lines.sorted(by: getSort)
+        let linesT = lines.sorted(by: tetrisGetSort)
         
         for line in linesT{
             let yy = line
@@ -542,7 +543,7 @@ class MainView: UIView{
     
     //根据坐标，返回btn
     fileprivate func getBtn(_ x: Int, y: Int) -> UIButton{
-        let tag = setTag(x, j: y)
+        let tag = TetrisCalculate.setTag(x, j: y)
         var btn = UIButton()
         for sub in self.subviews{
             if sub.tag == tag{

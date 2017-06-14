@@ -84,7 +84,7 @@ class TetrisGameViewController: UIViewController, controllerViewDelegate, mainVi
     //设置暂停的弹层
     func setPauseView(){
         //结束点ps按钮 无反应
-        guard self.mainView!.isGaming != gameType.gameOver else{
+        guard self.mainView!.isGaming != TetrisGameType.gameOver else{
             return
         }
         
@@ -136,12 +136,12 @@ class TetrisGameViewController: UIViewController, controllerViewDelegate, mainVi
     func setEleRange(){
         if typeArray.count == 0{
             for _ in 0 ..< 12{
-                typeArray.append(getRandomNo(minE, max: maxE))
+                typeArray.append(TetrisCalculate.getRandomNo(minE, max: maxE))
             }
 //            typeArray = [22, 15, 4, 9, 21, 22, 3, 6, 11, 12, 13]
         }else{
             typeArray.remove(at: 0)
-            typeArray.append(getRandomNo(minE, max: maxE))
+            typeArray.append(TetrisCalculate.getRandomNo(minE, max: maxE))
         }
         
         //-1的标志，去掉死循环的
@@ -161,7 +161,7 @@ class TetrisGameViewController: UIViewController, controllerViewDelegate, mainVi
     }
 
     func progress9(){
-        var rangeDlt = randomNo(1, max: 5)
+        var rangeDlt = TetrisCalculate.randomNo(1, max: 5)
         if typeArray[rangeDlt+1] == -1{
             rangeDlt += 1
         }
@@ -184,7 +184,7 @@ class TetrisGameViewController: UIViewController, controllerViewDelegate, mainVi
                 //有重复的，重新随机添加，新添加的也不能重复
                 var a = nextNo
                 while a == need || a == no{
-                    a = getRandomNo(minE, max: maxE)
+                    a = TetrisCalculate.getRandomNo(minE, max: maxE)
                 }
                 typeArray[i] = a
             }
@@ -193,7 +193,7 @@ class TetrisGameViewController: UIViewController, controllerViewDelegate, mainVi
         
         //没有的话就自动添加一个21 或者 22
         if !have{
-            var rangeDlt = randomNo(1, max: 6)
+            var rangeDlt = TetrisCalculate.randomNo(1, max: 6)
             if typeArray[rangeDlt+1] == -1{
                 rangeDlt += 1
             }
@@ -221,7 +221,7 @@ class TetrisGameViewController: UIViewController, controllerViewDelegate, mainVi
                 //有重复的，重新随机添加，新添加的也不能是重复
                 var a = nextNo
                 while a == need || a == no{
-                    a = getRandomNo(minE, max: maxE)
+                    a = TetrisCalculate.getRandomNo(minE, max: maxE)
                 }
                 typeArray[i] = a
             }
@@ -229,7 +229,7 @@ class TetrisGameViewController: UIViewController, controllerViewDelegate, mainVi
         
         //没有的话就自动添加一个15 或者 4
         if !have{
-            let rangeDlt = randomNo(1, max: 6)
+            let rangeDlt = TetrisCalculate.randomNo(1, max: 6)
             var dlt = 0
             if typeArray[rangeDlt+1] == -1{
                 dlt = 1
@@ -262,7 +262,7 @@ class TetrisGameViewController: UIViewController, controllerViewDelegate, mainVi
     //去掉-1的标示
     func dropCircle(){
         typeArray.remove(at: 1)
-        typeArray.append(getRandomNo(minE, max: maxE))
+        typeArray.append(TetrisCalculate.getRandomNo(minE, max: maxE))
     }
     
 //=======================协议===========================
@@ -294,7 +294,7 @@ class TetrisGameViewController: UIViewController, controllerViewDelegate, mainVi
     //获取下一个元素
     func getTheNextOne() {
         //判断相当于重新开始
-        if self.mainView!.isGaming == gameType.gameOver{
+        if self.mainView!.isGaming == TetrisGameType.gameOver{
             self.typeArray = [Int]() //初始化
         }
         self.getEle()

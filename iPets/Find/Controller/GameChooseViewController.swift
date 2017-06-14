@@ -1,15 +1,15 @@
 //
-//  FindViewController.swift
+//  GameChooseViewController.swift
 //  iPets
 //
-//  Created by maocaiyuan on 2017/6/9.
+//  Created by maocaiyuan on 2017/6/13.
 //  Copyright © 2017年 maocaiyuan. All rights reserved.
 //
 
 import UIKit
 
-class FindViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-
+class GameChooseViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
     fileprivate var mainTabelView: UITableView? //整个table
     fileprivate var findData: NSMutableArray? //数据
     
@@ -27,28 +27,18 @@ class FindViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func setUpEles(){
-        self.title = "发现"                        //页面title和底部title
-        self.navigationItem.title = "发现"        //再次设置顶部title,这样才可以和tabbar上的title不一样
+        self.title = "游戏选择"                        //页面title和底部title
         self.view.backgroundColor = UIColor.white //背景色
     }
     
     func setData(){
         findData = NSMutableArray()
         
-        let oneOne = FindDataModel(icon: "FriendsCircle", title: "附近寻宠")
-        
-        let twoOne = FindDataModel(icon: "ScanBook_HL", title: "热点新闻")
-        let twoTwo = FindDataModel(icon: "Shake_icon_tvHL", title: "热点视频")
-        
-        let threeOne = FindDataModel(icon: "RichScan", title: "扫一扫")
-        let threeTwo = FindDataModel(icon: "shake", title: "摇一摇")
-        
-        let fourOne = FindDataModel(icon: "MoreGame", title: "游戏")
+        let oneOne = FindDataModel(icon: "MoreGame", title: "俄罗斯方块")
+        let twoOne = FindDataModel(icon: "MoreGame", title: "扫雷")
         
         findData!.add([oneOne])
-        findData!.add([twoOne, twoTwo])
-        findData!.add([threeOne, threeTwo])
-        findData!.add([fourOne])
+        findData!.add([twoOne])
     }
     
     //设置tableView
@@ -106,50 +96,19 @@ class FindViewController: UIViewController, UITableViewDelegate, UITableViewData
             
         case 0:
             switch indexPath.row {
-            //附近寻宠
+            
             case 0:
-                let vc = FindPetsViewController()
-                vc.hidesBottomBarWhenPushed = true
-                self.navigationController?.pushViewController(vc, animated: true)
-                
+                let gameVc = TetrisGameViewController()
+                gameVc.hidesBottomBarWhenPushed = true
+                self.navigationController?.pushViewController(gameVc, animated: true)
             default:
                 break
             }
-        
+            
         case 1:
             switch indexPath.row {
-            //视频
-            case 1:
-                let vc = VideoViewController()
-                vc.hidesBottomBarWhenPushed = true
-                self.navigationController?.pushViewController(vc, animated: true)
-            //新闻
             case 0:
-                let vc = NewsRootViewController()
-                vc.hidesBottomBarWhenPushed = true
-                self.navigationController?.pushViewController(vc, animated: true)
-                
-            default:
-                break
-            }
-            
-        case 2:
-            switch indexPath.row {
-            //扫一扫
-            case 0:
-                let TDCodeVc = RichScanViewController()
-                TDCodeVc.hidesBottomBarWhenPushed = true
-                self.navigationController?.pushViewController(TDCodeVc, animated: true)
-                
-            default:
-                break
-            }
-            
-        case 3:
-            switch indexPath.row {
-            //游戏
-            case 0:
-                let gameVc = GameChooseViewController()
+                let gameVc = MineMainViewController()
                 gameVc.hidesBottomBarWhenPushed = true
                 self.navigationController?.pushViewController(gameVc, animated: true)
                 
@@ -172,4 +131,5 @@ class FindViewController: UIViewController, UITableViewDelegate, UITableViewData
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+
 }
