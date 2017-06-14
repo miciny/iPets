@@ -56,7 +56,5 @@ class SearchTableViewCell: UITableViewCell {
             searchRecodeLabel.text = searchRecode.record!
             self.addSubview(searchRecodeLabel)
         }
-        
     }
-
 }

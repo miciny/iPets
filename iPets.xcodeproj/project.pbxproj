@@ -50,6 +50,9 @@
 		E14408451EEFEB6A00C8E23B /* MineConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14408411EEFEB6A00C8E23B /* MineConstant.swift */; };
 		E14408471EEFED6C00C8E23B /* GameChooseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14408461EEFED6C00C8E23B /* GameChooseViewController.swift */; };
 		E14408491EF0EA7F00C8E23B /* A_comme_amour.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E14408481EF0EA7F00C8E23B /* A_comme_amour.mp3 */; };
+		E144084C1EF125FF00C8E23B /* MCYMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E144084B1EF125FF00C8E23B /* MCYMapViewController.swift */; };
+		E14BF6691EF13A9B00B6C88B /* MapFuncs.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14BF6681EF13A9B00B6C88B /* MapFuncs.swift */; };
+		E14BF66B1EF1452000B6C88B /* MCYClockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14BF66A1EF1452000B6C88B /* MCYClockView.swift */; };
 		E17528541ED3E8AE00269EDF /* CycleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E175284F1ED3E8AE00269EDF /* CycleView.swift */; };
 		E17528551ED3E8AE00269EDF /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17528501ED3E8AE00269EDF /* SearchTableViewCell.swift */; };
 		E17528561ED3E8AE00269EDF /* SellBuyCollectionFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17528511ED3E8AE00269EDF /* SellBuyCollectionFooterView.swift */; };
@@ -225,6 +228,9 @@
 		E14408411EEFEB6A00C8E23B /* MineConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MineConstant.swift; sourceTree = "<group>"; };
 		E14408461EEFED6C00C8E23B /* GameChooseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameChooseViewController.swift; sourceTree = "<group>"; };
 		E14408481EF0EA7F00C8E23B /* A_comme_amour.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = A_comme_amour.mp3; sourceTree = "<group>"; };
+		E144084B1EF125FF00C8E23B /* MCYMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCYMapViewController.swift; sourceTree = "<group>"; };
+		E14BF6681EF13A9B00B6C88B /* MapFuncs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapFuncs.swift; sourceTree = "<group>"; };
+		E14BF66A1EF1452000B6C88B /* MCYClockView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCYClockView.swift; sourceTree = "<group>"; };
 		E175284F1ED3E8AE00269EDF /* CycleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CycleView.swift; sourceTree = "<group>"; };
 		E17528501ED3E8AE00269EDF /* SearchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
 		E17528511ED3E8AE00269EDF /* SellBuyCollectionFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SellBuyCollectionFooterView.swift; sourceTree = "<group>"; };
@@ -588,6 +594,16 @@
 			path = ../../../../Users/miciny/ToGitHub/iPets/iPets/SDKs/MCYGamesSDK/Mine;
 			sourceTree = DEVELOPER_DIR;
 		};
+		E144084A1EF125DD00C8E23B /* MCYMapSDK */ = {
+			isa = PBXGroup;
+			children = (
+				E144084B1EF125FF00C8E23B /* MCYMapViewController.swift */,
+				E14BF6681EF13A9B00B6C88B /* MapFuncs.swift */,
+			);
+			name = MCYMapSDK;
+			path = ../../../../Users/miciny/ToGitHub/iPets/iPets/SDKs/MCYMapSDK;
+			sourceTree = DEVELOPER_DIR;
+		};
 		E17528481ED3E74C00269EDF /* Chat */ = {
 			isa = PBXGroup;
 			children = (
@@ -829,6 +845,7 @@
 				E17528D31ED40A5A00269EDF /* InternetExplorerViewController.swift */,
 				E17528D41ED40A5A00269EDF /* RichScanViewController.swift */,
 				E14407F21EEE73CF00C8E23B /* MCYTableView.swift */,
+				E14BF66A1EF1452000B6C88B /* MCYClockView.swift */,
 			);
 			name = Controller;
 			path = ../../../../Users/miciny/ToGitHub/iPets/iPets/Universal/Controller;
@@ -874,6 +891,7 @@
 		E1DE0E341EEA8DBB00CF580D /* SDKs */ = {
 			isa = PBXGroup;
 			children = (
+				E144084A1EF125DD00C8E23B /* MCYMapSDK */,
 				E144081D1EEFE05500C8E23B /* MCYGamesSDK */,
 				E10B34E51EEAA60700D65C9F /* MCYViewSDK */,
 				E1DE0E5B1EEA910C00CF580D /* MCYNewsSDK */,
@@ -1182,6 +1200,7 @@
 				E1DE0E691EEA918600CF580D /* VideoSlider.swift in Sources */,
 				E17528AF1ED406D000269EDF /* ContectorModel.swift in Sources */,
 				E126FD151CFD6E7700DAFF84 /* TabbarViewController.swift in Sources */,
+				E14BF66B1EF1452000B6C88B /* MCYClockView.swift in Sources */,
 				E1DE0E631EEA918600CF580D /* AVSDKExtension.swift in Sources */,
 				E17528781ED4049900269EDF /* SettingTableViewCell.swift in Sources */,
 				E17528661ED4034D00269EDF /* SearchResultViewController.swift in Sources */,
@@ -1260,6 +1279,7 @@
 				E17528F61ED40B1800269EDF /* PinYinString.swift in Sources */,
 				E17528BE1ED406DC00269EDF /* ContectorInfoTableViewCell.swift in Sources */,
 				E17528721ED4048E00269EDF /* MeDataModel.swift in Sources */,
+				E144084C1EF125FF00C8E23B /* MCYMapViewController.swift in Sources */,
 				E1DE0EA81EEA94BA00CF580D /* NetConstant.swift in Sources */,
 				E1DE0E8A1EEA928600CF580D /* ImageCollectionViewCell.swift in Sources */,
 				E1DE0E761EEA91BA00CF580D /* DBConstants.swift in Sources */,
@@ -1286,6 +1306,7 @@
 				E1DE0EA91EEA94BA00CF580D /* NewsConstants.swift in Sources */,
 				E14408421EEFEB6A00C8E23B /* MineMainViewController.swift in Sources */,
 				E1DE0EB11EEA94C000CF580D /* JsonToModule.swift in Sources */,
+				E14BF6691EF13A9B00B6C88B /* MapFuncs.swift in Sources */,
 				E1DE0E771EEA91BA00CF580D /* SaveCacheDataModel.swift in Sources */,
 				E1DE0E7F1EEA91FA00CF580D /* NetFuncs.swift in Sources */,
 				E1DE0EBB1EEA94CC00CF580D /* NewsRootViewController.swift in Sources */,

@@ -29,6 +29,7 @@ class AudioPlayer: NSObject, AVAudioPlayerDelegate{
     func playAudio(){
         
         guard self.audioPath != nil else {
+            print("mp3地址错误")
             return
         }
         

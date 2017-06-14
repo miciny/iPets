@@ -15,6 +15,8 @@ class SellBuyViewController: UIViewController, UIScrollViewDelegate, UICollectio
     let customPresentAnimationController = CustomPresentAnimationController()
     let customDismissAnimationController = CustomDismissAnimationController()
     
+    var leftBarBtn = UIBarButtonItem()
+    
     fileprivate let cellReuseIdentifier = "collectionCell"
     fileprivate let headerReuseIdentifier = "collectionHeader"
     fileprivate let footerReuseIdentifier = "collectionFooter"
@@ -48,6 +50,11 @@ class SellBuyViewController: UIViewController, UIScrollViewDelegate, UICollectio
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        leftBarBtn.title = realCity
+    }
+    
     func setUpEles(){
         self.view.backgroundColor = UIColor.white //背景色
         self.automaticallyAdjustsScrollViewInsets = false //解决scrollView自动偏移64的问题
@@ -57,7 +64,7 @@ class SellBuyViewController: UIViewController, UIScrollViewDelegate, UICollectio
         self.navigationItem.rightBarButtonItem = addItem
         
         //左上角位置按钮
-        let leftBarBtn = UIBarButtonItem(title: "北京", style: .plain, target: self,
+        leftBarBtn = UIBarButtonItem(title: realCity, style: .plain, target: self,
                                          action: #selector(SellBuyViewController.addressButtonClicked))
         self.navigationItem.leftBarButtonItem = leftBarBtn
         
@@ -84,7 +91,9 @@ class SellBuyViewController: UIViewController, UIScrollViewDelegate, UICollectio
     }
     
     func addressButtonClicked(){
-        
+        let map = MCYMapViewController()
+        map.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(map, animated: true)
     }
     
     //点击右上角的添加按钮
@@ -258,7 +267,6 @@ class SellBuyViewController: UIViewController, UIScrollViewDelegate, UICollectio
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let dic = ((cellData![indexPath.section] as! NSArray)[1] as! NSArray)[indexPath.row] as! NSDictionary
         let model = SellBuyCollectionModel(dic: dic)
-//        ToastView().showToast(model.name!)
         
         //进入网页
         let iePage = InternetExplorerViewController()
@@ -283,7 +291,7 @@ class SellBuyViewController: UIViewController, UIScrollViewDelegate, UICollectio
         
         var size = CGSize(width: 0, height: 0)
         if(section == cellData!.count-1){
-            size = CGSize(width: Width, height: 50)
+            size = CGSize(width: Width, height: 400)
         }
         return size
     }

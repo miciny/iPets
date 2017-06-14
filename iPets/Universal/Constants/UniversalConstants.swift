@@ -72,3 +72,5 @@ func getMainColor() -> UIColor{
     return color
 }
 
+var realCity = "北京"
+
