@@ -64,6 +64,31 @@ class JsonCache: NSObject {
         
         return isSaved
     }
+    
+    //保存json到tempJsonDir目录
+    class func savaJsonToCacheDirAddress(_ json: JSON, name: String) -> Bool {
+        let dirPath = getDirInCache(tempJsonDir)
+        var isSaved = Bool()
+        
+        do{
+            let path = dirPath.strings(byAppendingPaths: [name + ".json"])[0]
+            let str = try json.rawData()
+            
+            do {
+                try str.write(to: URL(fileURLWithPath: path), options: .atomic)
+                isSaved = true
+            }catch let error as NSError{
+                print(error)
+                isSaved = false
+            }
+            
+        }catch let error as NSError{
+            print(error)
+            isSaved = false
+        }
+        
+        return isSaved
+    }
 
     
     // 从cache读取json

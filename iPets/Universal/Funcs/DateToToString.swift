@@ -19,7 +19,7 @@ class DateToToString: NSObject {
     }
     
     
-    class func stringToData(_ string: String, format: String) -> Date {
+    class func stringToDate(_ string: String, format: String) -> Date {
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = format
@@ -56,7 +56,7 @@ class DateToToString: NSObject {
         let timeNow = Date()
         
         //获取今天过的时间
-        let todayL = DateToToString.stringToData("\(timeNow.currentYear)-\(timeNow.currentMonth)-\(timeNow.currentDay) 00:00:00",
+        let todayL = DateToToString.stringToDate("\(timeNow.currentYear)-\(timeNow.currentMonth)-\(timeNow.currentDay) 00:00:00",
                                                  format: "yyyy-MM-dd HH:mm:ss")
         let todaySecond = timeNow.timeIntervalSince(todayL)
         
@@ -81,7 +81,7 @@ class DateToToString: NSObject {
         let timeNow = Date()
         
         //获取今天过的时间
-        let todayL = DateToToString.stringToData("\(timeNow.currentYear)-\(timeNow.currentMonth)-\(timeNow.currentDay) 00:00:00",
+        let todayL = DateToToString.stringToDate("\(timeNow.currentYear)-\(timeNow.currentMonth)-\(timeNow.currentDay) 00:00:00",
                                                  format: "yyyy-MM-dd HH:mm:ss")
         let todaySecond = timeNow.timeIntervalSince(todayL)
         

@@ -17,9 +17,9 @@ class MainChatTableViewCell: UITableViewCell {
         super.init(coder: aDecoder)
     }
     
-    init(data: MainChatListViewDataModel, reuseIdentifier cellId:String){
+    init(data: MainChatListViewDataModel, reuseIdentifier cellId: String){
         self.mainChatItem = data
-        super.init(style: UITableViewCellStyle.default, reuseIdentifier:cellId)
+        super.init(style: UITableViewCellStyle.default, reuseIdentifier: cellId)
         rebuildCell()
     }
     

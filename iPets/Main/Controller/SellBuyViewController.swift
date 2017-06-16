@@ -20,6 +20,7 @@ class SellBuyViewController: UIViewController, UIScrollViewDelegate, UICollectio
     fileprivate let cellReuseIdentifier = "collectionCell"
     fileprivate let headerReuseIdentifier = "collectionHeader"
     fileprivate let footerReuseIdentifier = "collectionFooter"
+    
     fileprivate var collectionView: UICollectionView?
     fileprivate var headerView: MCYRefreshView? //自己写的
     
@@ -52,7 +53,11 @@ class SellBuyViewController: UIViewController, UIScrollViewDelegate, UICollectio
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        leftBarBtn.title = realCity
+        if let realCity = realCity{
+            leftBarBtn.title = realCity
+        }else{
+            leftBarBtn.title = "北京"
+        }
     }
     
     func setUpEles(){
@@ -60,12 +65,12 @@ class SellBuyViewController: UIViewController, UIScrollViewDelegate, UICollectio
         self.automaticallyAdjustsScrollViewInsets = false //解决scrollView自动偏移64的问题
         
         //右上角添加按钮
-        let addItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(SellBuyViewController.addButtonClicked))
+        let addItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(self.addButtonClicked))
         self.navigationItem.rightBarButtonItem = addItem
         
         //左上角位置按钮
         leftBarBtn = UIBarButtonItem(title: realCity, style: .plain, target: self,
-                                         action: #selector(SellBuyViewController.addressButtonClicked))
+                                         action: #selector(self.addressButtonClicked))
         self.navigationItem.leftBarButtonItem = leftBarBtn
         
         //伪搜索框
@@ -110,7 +115,7 @@ class SellBuyViewController: UIViewController, UIScrollViewDelegate, UICollectio
     func setUpData(){
         
         let items = [
-            ["name":"小型萌宠","pic":"123_01.png"],
+            ["name":"天气情况","pic":"night.jpeg"],
             ["name":"大型家宠","pic":"123_02.png"],
             ["name":"精品小店","pic":"123_03.png"],
             ["name":"身边宠店","pic":"123_01.png"],
@@ -150,12 +155,11 @@ class SellBuyViewController: UIViewController, UIScrollViewDelegate, UICollectio
         layout.minimumInteritemSpacing = 0 //左右
         
         collectionView = UICollectionView(frame: CGRect(x: 0, y: 64, width: Width, height: Height-64-49), collectionViewLayout: layout)
-        collectionView?.backgroundColor = UIColor.white
         
         headerView =  MCYRefreshView(subView: collectionView!, target: self, imageName: "tableview_pull_refresh")  //添加下拉刷新
         
         //注册一个cell
-        collectionView!.register(SellBuyCollectionViewCell.self, forCellWithReuseIdentifier:cellReuseIdentifier)
+        collectionView!.register(SellBuyCollectionViewCell.self, forCellWithReuseIdentifier: cellReuseIdentifier)
         //注册一个headView
         collectionView!.register(SellBuyCollectionHeaderView.self, forSupplementaryViewOfKind:UICollectionElementKindSectionHeader, withReuseIdentifier: headerReuseIdentifier)
         //注册一个footView
@@ -164,7 +168,6 @@ class SellBuyViewController: UIViewController, UIScrollViewDelegate, UICollectio
         collectionView?.delegate = self
         collectionView?.dataSource = self
         collectionView?.backgroundColor = UIColor.clear
-        
         self.view.addSubview(collectionView!)
         
         setUpData()
@@ -181,10 +184,9 @@ class SellBuyViewController: UIViewController, UIScrollViewDelegate, UICollectio
     }
     
     //collection的内容
-    var originY = CGFloat()
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellReuseIdentifier, for: indexPath) as! SellBuyCollectionViewCell
-//        cell.backgroundColor = UIColor.grayColor()
         
         //先清空内部原有的元素
         for subview in cell.subviews {
@@ -193,18 +195,6 @@ class SellBuyViewController: UIViewController, UIScrollViewDelegate, UICollectio
         
         let dic = ((cellData![indexPath.section] as! NSArray)[1] as! NSArray)[indexPath.row] as! NSDictionary
         let model = SellBuyCollectionModel(dic: dic)
-        
-        //布局
-        if indexPath.section == 1{
-            let offsetX = (Width)/4
-            let offsetY = (Width)/4+15
-            if indexPath.row == 0{
-                originY = cell.frame.origin.y
-                cell.frame = CGRect(x: 0, y: originY, width: (Width)/2, height: (Width)/2+30)
-            }else{
-                cell.frame.origin = CGPoint(x: Width/2 + offsetX*(CGFloat((indexPath.row-1)%2)), y: originY+offsetY*(CGFloat(indexPath.row/3)))
-            }
-        }
 
         cell.dataPic?.image = UIImage(named: model.picture!)
         cell.dataPic?.frame = CGRect(x: 10, y: 10, width: cell.frame.width-20, height: cell.frame.height-35)
@@ -268,6 +258,13 @@ class SellBuyViewController: UIViewController, UIScrollViewDelegate, UICollectio
         let dic = ((cellData![indexPath.section] as! NSArray)[1] as! NSArray)[indexPath.row] as! NSDictionary
         let model = SellBuyCollectionModel(dic: dic)
         
+        if indexPath.section == 0 && indexPath.row == 0{
+            let weather = WeatherViewController()
+            weather.hidesBottomBarWhenPushed = true
+            self.present(weather, animated: true, completion: nil)
+            return
+        }
+        
         //进入网页
         let iePage = InternetExplorerViewController()
         iePage.hidesBottomBarWhenPushed = true
@@ -300,7 +297,7 @@ class SellBuyViewController: UIViewController, UIScrollViewDelegate, UICollectio
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         //设置每一个cell的宽高
-        return CGSize(width: (Width)/4, height: (Width)/4+15)
+        return CGSize(width: (Width)/4-2, height: (Width)/4+15)
         
     }
     

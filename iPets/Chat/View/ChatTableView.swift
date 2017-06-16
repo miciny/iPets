@@ -67,7 +67,7 @@ class ChatTableView: UITableView, UITableViewDelegate, UITableViewDataSource{
                     }
                 })
                 
-                var last =  DateToToString.stringToData("1970-01-01 12:00:00", format: "yyyy-MM-dd HH:mm:ss") //上一个消息的时间
+                var last =  DateToToString.stringToDate("1970-01-01 12:00:00", format: "yyyy-MM-dd HH:mm:ss") //上一个消息的时间
                 var currentSection = NSMutableArray()
                 
                 for i in 0 ..< count{
