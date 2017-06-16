@@ -116,7 +116,7 @@ class SellBuyViewController: UIViewController, UIScrollViewDelegate, UICollectio
         
         let items = [
             ["name":"天气情况","pic":"night.jpeg"],
-            ["name":"大型家宠","pic":"123_02.png"],
+            ["name":"视频录像","pic":"day.jpeg"],
             ["name":"精品小店","pic":"123_03.png"],
             ["name":"身边宠店","pic":"123_01.png"],
             ["name":"我的家宠","pic":"123_02.png"],
@@ -258,11 +258,18 @@ class SellBuyViewController: UIViewController, UIScrollViewDelegate, UICollectio
         let dic = ((cellData![indexPath.section] as! NSArray)[1] as! NSArray)[indexPath.row] as! NSDictionary
         let model = SellBuyCollectionModel(dic: dic)
         
-        if indexPath.section == 0 && indexPath.row == 0{
-            let weather = WeatherViewController()
-            weather.hidesBottomBarWhenPushed = true
-            self.present(weather, animated: true, completion: nil)
-            return
+        if indexPath.section == 0{
+            if indexPath.row == 0{
+                let weather = WeatherViewController()
+                weather.hidesBottomBarWhenPushed = true
+                self.present(weather, animated: true, completion: nil)
+                return
+            }else if indexPath.row == 1{
+                let weather = MCYVideoRecordingViewController()
+                weather.hidesBottomBarWhenPushed = true
+                self.present(weather, animated: true, completion: nil)
+                return
+            }
         }
         
         //进入网页

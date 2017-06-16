@@ -24,6 +24,8 @@ class WeatherViewController: UIViewController, UIScrollViewDelegate {
     var maxTmpLb = UILabel() // 今天最高温度
     var minTmpLb = UILabel() // 今天最低温度
     
+    var headerView: UIView!
+    
     var mainScrollView = UIScrollView()
     
     var hourlyView = UIView() //添加三小时天气的view
@@ -55,7 +57,6 @@ class WeatherViewController: UIViewController, UIScrollViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        initLoadGesture() //手势滑动隐藏效果 可以参考
         self.modalTransitionStyle = .crossDissolve //进入页面时的动画效果
         
         self.initNetManager()
@@ -66,6 +67,8 @@ class WeatherViewController: UIViewController, UIScrollViewDelegate {
         self.setHourlyView()
         
         self.checkWeatherCache()
+        
+        self.setupHeaderView()
         
         // Do any additional setup after loading the view.
     }
@@ -82,6 +85,30 @@ class WeatherViewController: UIViewController, UIScrollViewDelegate {
         }else{
             isDay = false
         }
+    }
+    
+    //  headerView
+    func setupHeaderView() {
+        headerView = UIView(frame: CGRect(x: 0, y: 0, width: view.bounds.size.width, height: 64))
+        headerView.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5)
+        view.addSubview(headerView)
+        
+        let centerY = headerView.center.y + 5
+        let defaultWidth: CGFloat = 40
+        
+        //  返回、摄像头调整、时间、闪光灯四个按钮
+        let backButton = UIButton(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
+        backButton.setBackgroundImage(UIImage(named: "iw_back"), for: UIControlState())
+        backButton.addTarget(self, action: #selector(self.back), for: .touchUpInside)
+        backButton.center = CGPoint(x: 25, y: centerY+5)
+        headerView.addSubview(backButton)
+        
+        let changeButton = UIButton(frame: CGRect(x: 0, y: 0, width: defaultWidth, height: defaultWidth * 68 / 90))
+        changeButton.setBackgroundImage(UIImage(named: "iw_cameraSide"), for: UIControlState())
+        changeButton.center = CGPoint(x: Width-50, y: centerY+5)
+        changeButton.addTarget(self, action: #selector(self.addressClicked), for: .touchUpInside)
+        headerView.addSubview(changeButton)
+        
     }
     
     //初始化网络请求的manager
@@ -390,12 +417,6 @@ class WeatherViewController: UIViewController, UIScrollViewDelegate {
         self.checkAddressCache()
     }
     
-    func addChangeDirFunc(){
-        cityNameLb.isUserInteractionEnabled = true //打开点击事件
-        let cityNameLbClick = UITapGestureRecognizer(target: self, action: #selector(addressClicked))
-        cityNameLb.addGestureRecognizer(cityNameLbClick)
-    }
-    
 //==================================整个View 的 data
     func setLableData(){
         cityNameLb.text = cityName
@@ -490,20 +511,6 @@ class WeatherViewController: UIViewController, UIScrollViewDelegate {
         
     }
     
-    //添加滑动手势
-    func initLoadGesture(){
-        
-        //设置手势点击数,双击：点2下
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(_handleTapGesture))
-        tapGesture.numberOfTapsRequired = 2
-        self.view.addGestureRecognizer(tapGesture)
-    }
-    
-    //双击了
-    func _handleTapGesture(sender: UITapGestureRecognizer){
-        back()
-    }
-    
 /*---------------------------天气请求---------------------------*/
     func updateWeatherInfo(){
         
@@ -541,7 +548,6 @@ class WeatherViewController: UIViewController, UIScrollViewDelegate {
                         self.setDailyView()
                         self.setDailyScrollViewData()
                         self.setLableData()
-                        self.addChangeDirFunc()
                     }else{
                         self.nowTmpTextLb.text = "错误代码" + String(code)
                     }

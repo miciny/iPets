@@ -104,6 +104,14 @@
 		E16322D11EF29E650022F40D /* AddressJsonToModul.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16322D01EF29E650022F40D /* AddressJsonToModul.swift */; };
 		E16322D41EF29E990022F40D /* AddressDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16322D31EF29E990022F40D /* AddressDataModel.swift */; };
 		E16322DA1EF3BAC90022F40D /* MyCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16322D91EF3BAC90022F40D /* MyCollectionViewLayout.swift */; };
+		E16322DD1EF3E2EE0022F40D /* MCYVideoRecordingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16322DC1EF3E2EE0022F40D /* MCYVideoRecordingViewController.swift */; };
+		E16322E61EF3E7030022F40D /* iw_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = E16322DF1EF3E7030022F40D /* iw_selected.png */; };
+		E16322E71EF3E7030022F40D /* iw_unselected.png in Resources */ = {isa = PBXBuildFile; fileRef = E16322E01EF3E7030022F40D /* iw_unselected.png */; };
+		E16322E81EF3E7030022F40D /* iw_back.png in Resources */ = {isa = PBXBuildFile; fileRef = E16322E11EF3E7030022F40D /* iw_back.png */; };
+		E16322E91EF3E7030022F40D /* iw_cameraSide.png in Resources */ = {isa = PBXBuildFile; fileRef = E16322E21EF3E7030022F40D /* iw_cameraSide.png */; };
+		E16322EA1EF3E7030022F40D /* iw_flashOn.png in Resources */ = {isa = PBXBuildFile; fileRef = E16322E31EF3E7030022F40D /* iw_flashOn.png */; };
+		E16322EB1EF3E7030022F40D /* iw_flashOff.png in Resources */ = {isa = PBXBuildFile; fileRef = E16322E41EF3E7030022F40D /* iw_flashOff.png */; };
+		E16322EC1EF3E7030022F40D /* iw_playIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = E16322E51EF3E7030022F40D /* iw_playIcon.png */; };
 		E17528541ED3E8AE00269EDF /* CycleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E175284F1ED3E8AE00269EDF /* CycleView.swift */; };
 		E17528551ED3E8AE00269EDF /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17528501ED3E8AE00269EDF /* SearchTableViewCell.swift */; };
 		E17528561ED3E8AE00269EDF /* SellBuyCollectionFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17528511ED3E8AE00269EDF /* SellBuyCollectionFooterView.swift */; };
@@ -333,6 +341,14 @@
 		E16322D01EF29E650022F40D /* AddressJsonToModul.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressJsonToModul.swift; sourceTree = "<group>"; };
 		E16322D31EF29E990022F40D /* AddressDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressDataModel.swift; sourceTree = "<group>"; };
 		E16322D91EF3BAC90022F40D /* MyCollectionViewLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyCollectionViewLayout.swift; sourceTree = "<group>"; };
+		E16322DC1EF3E2EE0022F40D /* MCYVideoRecordingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCYVideoRecordingViewController.swift; sourceTree = "<group>"; };
+		E16322DF1EF3E7030022F40D /* iw_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iw_selected.png; sourceTree = "<group>"; };
+		E16322E01EF3E7030022F40D /* iw_unselected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iw_unselected.png; sourceTree = "<group>"; };
+		E16322E11EF3E7030022F40D /* iw_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iw_back.png; sourceTree = "<group>"; };
+		E16322E21EF3E7030022F40D /* iw_cameraSide.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iw_cameraSide.png; sourceTree = "<group>"; };
+		E16322E31EF3E7030022F40D /* iw_flashOn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iw_flashOn.png; sourceTree = "<group>"; };
+		E16322E41EF3E7030022F40D /* iw_flashOff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iw_flashOff.png; sourceTree = "<group>"; };
+		E16322E51EF3E7030022F40D /* iw_playIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iw_playIcon.png; sourceTree = "<group>"; };
 		E175284F1ED3E8AE00269EDF /* CycleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CycleView.swift; sourceTree = "<group>"; };
 		E17528501ED3E8AE00269EDF /* SearchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
 		E17528511ED3E8AE00269EDF /* SellBuyCollectionFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SellBuyCollectionFooterView.swift; sourceTree = "<group>"; };
@@ -788,6 +804,30 @@
 			name = night;
 			sourceTree = "<group>";
 		};
+		E16322DB1EF3E2A40022F40D /* MCYVideoRecordingSDK */ = {
+			isa = PBXGroup;
+			children = (
+				E16322DE1EF3E6E30022F40D /* Image */,
+				E16322DC1EF3E2EE0022F40D /* MCYVideoRecordingViewController.swift */,
+			);
+			name = MCYVideoRecordingSDK;
+			path = ../../../../Users/miciny/ToGitHub/iPets/iPets/SDKs/MCYVideoRecordingSDK;
+			sourceTree = DEVELOPER_DIR;
+		};
+		E16322DE1EF3E6E30022F40D /* Image */ = {
+			isa = PBXGroup;
+			children = (
+				E16322DF1EF3E7030022F40D /* iw_selected.png */,
+				E16322E01EF3E7030022F40D /* iw_unselected.png */,
+				E16322E11EF3E7030022F40D /* iw_back.png */,
+				E16322E21EF3E7030022F40D /* iw_cameraSide.png */,
+				E16322E31EF3E7030022F40D /* iw_flashOn.png */,
+				E16322E41EF3E7030022F40D /* iw_flashOff.png */,
+				E16322E51EF3E7030022F40D /* iw_playIcon.png */,
+			);
+			name = Image;
+			sourceTree = "<group>";
+		};
 		E17528481ED3E74C00269EDF /* Chat */ = {
 			isa = PBXGroup;
 			children = (
@@ -1076,6 +1116,7 @@
 		E1DE0E341EEA8DBB00CF580D /* SDKs */ = {
 			isa = PBXGroup;
 			children = (
+				E16322DB1EF3E2A40022F40D /* MCYVideoRecordingSDK */,
 				E163218E1EF2274A0022F40D /* MCYWeatherSDK */,
 				E144084A1EF125DD00C8E23B /* MCYMapSDK */,
 				E144081D1EEFE05500C8E23B /* MCYGamesSDK */,
@@ -1300,8 +1341,12 @@
 				E16322BD1EF29E0A0022F40D /* 24.png in Resources */,
 				E16322C61EF29E0A0022F40D /* 49.png in Resources */,
 				E16322AE1EF29E0A0022F40D /* 9.png in Resources */,
+				E16322E71EF3E7030022F40D /* iw_unselected.png in Resources */,
+				E16322E61EF3E7030022F40D /* iw_selected.png in Resources */,
+				E16322EC1EF3E7030022F40D /* iw_playIcon.png in Resources */,
 				E16322CC1EF29E0A0022F40D /* 58.png in Resources */,
 				E16322C51EF29E0A0022F40D /* 32.png in Resources */,
+				E16322EB1EF3E7030022F40D /* iw_flashOff.png in Resources */,
 				E16322BB1EF29E0A0022F40D /* 22.png in Resources */,
 				E16322AC1EF29E0A0022F40D /* 7.png in Resources */,
 				E16322AB1EF29E090022F40D /* 6.png in Resources */,
@@ -1315,9 +1360,11 @@
 				E16322C31EF29E0A0022F40D /* 30.png in Resources */,
 				E16322B31EF29E0A0022F40D /* 14.png in Resources */,
 				E16322B61EF29E0A0022F40D /* 17.png in Resources */,
+				E16322E91EF3E7030022F40D /* iw_cameraSide.png in Resources */,
 				E16322C11EF29E0A0022F40D /* 28.png in Resources */,
 				E10E44651CC62B3500D9992A /* Contacts.xcassets in Resources */,
 				E17529001ED40CE900269EDF /* Assets.xcassets in Resources */,
+				E16322EA1EF3E7030022F40D /* iw_flashOn.png in Resources */,
 				E10E44671CC62B3500D9992A /* Home.xcassets in Resources */,
 				E16322B21EF29E0A0022F40D /* 13.png in Resources */,
 				E17528C61ED4090B00269EDF /* Setting.xcassets in Resources */,
@@ -1328,6 +1375,7 @@
 				E16322A61EF29E090022F40D /* 1.png in Resources */,
 				E17528CA1ED4092B00269EDF /* FindPets.xcassets in Resources */,
 				E16322C81EF29E0A0022F40D /* 54.png in Resources */,
+				E16322E81EF3E7030022F40D /* iw_back.png in Resources */,
 				E16322BC1EF29E0A0022F40D /* 23.png in Resources */,
 				E16322CF1EF29E0A0022F40D /* 302.png in Resources */,
 				E163221B1EF2374D0022F40D /* night.jpeg in Resources */,
@@ -1437,6 +1485,7 @@
 				E1DE0E631EEA918600CF580D /* AVSDKExtension.swift in Sources */,
 				E17528781ED4049900269EDF /* SettingTableViewCell.swift in Sources */,
 				E17528661ED4034D00269EDF /* SearchResultViewController.swift in Sources */,
+				E16322DD1EF3E2EE0022F40D /* MCYVideoRecordingViewController.swift in Sources */,
 				E17528AC1ED406D000269EDF /* BubbleItem.swift in Sources */,
 				E1DE0E741EEA91BA00CF580D /* Cache.swift in Sources */,
 				E1DE0E6C1EEA919F00CF580D /* CanCopyImageView.swift in Sources */,
