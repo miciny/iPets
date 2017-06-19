@@ -11,10 +11,12 @@ import AVFoundation
 
 class AudioPlayer: NSObject, AVAudioPlayerDelegate{
     
-    var player: AVAudioPlayer! //播放器//不要把 AVAudioPlayer 当做局部变量 可能要用 AVAudioSession，否则木有声音啊
+    var player: AVAudioPlayer? //播放器//不要把 AVAudioPlayer 当做局部变量 可能要用 AVAudioSession，否则木有声音啊
     var audioPath: String! //录音存储路径
     
-    override init() {
+    var autoPlay: Bool //是否自动播放
+    
+    init(path: String, autoPlay: Bool) {
         //初始化录音器
         let session: AVAudioSession = AVAudioSession.sharedInstance()
         //设置录音类型
@@ -22,52 +24,55 @@ class AudioPlayer: NSObject, AVAudioPlayerDelegate{
         //设置支持后台
         try! session.setActive(true)
        
-        self.audioPath = Bundle.main.path(forResource: "A_comme_amour", ofType: "mp3")!
+        self.audioPath = path
+        self.autoPlay = autoPlay
     }
     
     //播放
     func playAudio(){
         
-        guard self.audioPath != nil else {
-            print("mp3地址错误")
-            return
-        }
-        
         if self.player != nil{
             self.player = nil
         }
         
-        
-        if let url = URL(string: self.audioPath){
+        if FileManager.default.fileExists(atPath: self.audioPath){
+            
+            let url = URL(fileURLWithPath: self.audioPath)
+            
             do{
                 try self.player = AVAudioPlayer(contentsOf: url)
                 
             }catch let error as NSError{
                 print("AVAudioPlayer error: \(error)")
             }
-        }else{
-            print("mp3地址错误")
+            
+            if self.player == nil {
+                ToastView().showToast("播放失败")
+            }else{
+                print("开始播放")
+                self.player?.delegate = self
+                self.player?.play()
+            }
+
+        }else {
+            ToastView().showToast("文件已销魂")
+            return
         }
         
-        self.player.delegate = self
-        if self.player == nil {
-            print("播放失败")
-        }else{
-            print("开始播放")
-            self.player.play()
-        }
     }
     
     //停止
     func stopAudio(){
-        self.player.stop()
+        self.player?.stop()
     }
     
     ///
     /// AVAudioPlayerDelegate
     ///
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
-        self.playAudio() //重新开始
+        if autoPlay{
+            self.playAudio() //重新开始
+        }
     }
     
 }

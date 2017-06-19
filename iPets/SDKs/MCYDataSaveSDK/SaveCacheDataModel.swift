@@ -112,7 +112,6 @@ class SaveCacheDataModel: NSObject {
         return imageData
     }
     
-    
 //===================================find pets============
     //保存图片到findPets目录
     func savaImageToFindPetsCacheDir(_ image: UIImage, imageName: String) -> Bool {

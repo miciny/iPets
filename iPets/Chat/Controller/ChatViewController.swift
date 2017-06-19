@@ -8,6 +8,7 @@
 
 import UIKit
 import AssetsLibrary
+import AVFoundation
 
 class ChatViewController: UIViewController, ChatDataSource, UITextViewDelegate, PassPhotosDelegate{
     
@@ -98,17 +99,22 @@ class ChatViewController: UIViewController, ChatDataSource, UITextViewDelegate, 
         
         //左侧声音图片
         voiceButton = UIImageView(frame:CGRect(x: 4, y: 8, width: 28, height: 28))
-        voiceButton.backgroundColor=UIColor.clear
+        voiceButton.backgroundColor = UIColor.clear
         voiceButton.image = UIImage(named: "Sound")
         sendView.addSubview(voiceButton)
         
         voiceButton.isUserInteractionEnabled = true
-        self.changeKeyboradView()
+        voiceButton.image = UIImage(named: "Sound")
+        if let tap = self.keyboradTap{
+            voiceButton.removeGestureRecognizer(tap)
+        }
+        voiceTap = UITapGestureRecognizer(target: self, action: #selector(self.changeAudioView))
+        voiceButton.addGestureRecognizer(voiceTap!)
         sendView.addSubview(voiceButton)
         
         // 右边＋按钮
         let addButton = UIImageView(frame:CGRect(x: Width-40, y: 4, width: 36, height: 36))
-        addButton.backgroundColor=UIColor.clear
+        addButton.backgroundColor = UIColor.clear
         addButton.image = UIImage(named: "AddMoreFuns")
         
         addButton.isUserInteractionEnabled = true
@@ -146,10 +152,15 @@ class ChatViewController: UIViewController, ChatDataSource, UITextViewDelegate, 
         if let superView = txtMsgView.superview{
             superView.addSubview(voiceBtn!)
             voiceBtn!.setTitle("按住 说话", for: .normal)
+            voiceBtn!.setTitle("松开 发送", for: .highlighted)
             voiceBtn!.setTitleColor(UIColor.black, for: .normal)
+            voiceBtn!.setTitleColor(UIColor.red, for: .highlighted)
             voiceBtn!.layer.cornerRadius = 8
             voiceBtn!.layer.borderColor = UIColor.lightGray.cgColor
             voiceBtn!.layer.borderWidth = 0.5
+            
+            voiceBtn!.addTarget(self, action: #selector(setUpRecorder), for: .touchDown)
+            voiceBtn!.addTarget(self, action: #selector(endRecord), for: .touchUpInside)
         }
         
         voiceButton.image = UIImage(named: "Keyboard")
@@ -175,6 +186,87 @@ class ChatViewController: UIViewController, ChatDataSource, UITextViewDelegate, 
         voiceButton.addGestureRecognizer(voiceTap!)
     }
     
+    
+    var recorder: AVAudioRecorder? //录音器
+    var aacPath: String?
+    func setUpRecorder(){
+        //初始化录音器
+        let session: AVAudioSession = AVAudioSession.sharedInstance()
+        //设置录音类型
+        try! session.setCategory(AVAudioSessionCategoryPlayAndRecord)
+        //设置支持后台
+        try! session.setActive(true)
+        //获取Document目录
+        let timeStr = DateToToString.dateToStringBySelf(Date(), format: "yyyyMMdd_HHmmss_ssss")
+        //组合录音文件路径,会自动替换
+        aacPath = (SaveCacheDataModel().createDirInChatCache(youInfo.nickname!) as! String) + "/" + timeStr + ".aac"
+        
+        //初始化字典并添加设置参数
+        let recorderSeetingsDic =
+            [
+                AVFormatIDKey: NSNumber(value: kAudioFormatMPEG4AAC as UInt32),
+                AVNumberOfChannelsKey: 2 as AnyObject, //录音的声道数，立体声为双声道
+                AVEncoderAudioQualityKey : AVAudioQuality.max.rawValue as AnyObject,
+                AVEncoderBitRateKey : 320000 as AnyObject,
+                AVSampleRateKey : 44100.0 as AnyObject //录音器每秒采集的录音样本数
+        ]
+        
+        self.beginRecord(urlStr: aacPath!, settings: recorderSeetingsDic)
+    }
+    
+    func beginRecord(urlStr: String, settings: [String: Any]){
+        //初始化录音器
+        let url = URL(fileURLWithPath: urlStr)
+        
+        if recorder != nil{
+            recorder = nil
+        }
+        
+        do{
+            recorder = try AVAudioRecorder(url: url, settings: settings)
+        }catch let e as NSError{
+            print(e)
+        }
+        
+        if recorder != nil {
+            //开启仪表计数功能
+            recorder!.isMeteringEnabled = true
+            //准备录音
+            recorder!.prepareToRecord()
+            //开始录音
+            recorder!.record()
+            
+            ToastView().showToast("开始录音")
+        }
+    }
+
+
+    func endRecord(){
+        //停止录音
+        let timeStr = String(Int((recorder?.currentTime)!))
+        recorder?.stop()
+        //录音器释放
+        recorder = nil
+        
+        ToastView().showToast("结束录音")
+        
+        let time = Date()
+        
+        let thisChat = MessageItem(voicePath: aacPath!, voiceLong: timeStr, user: myInfo, date: time, mtype: .mine)
+        self.Chats.add(thisChat)
+        
+        self.tableView.chatDataSource = self
+        self.tableView.reloadData()
+        
+        isChanged = true
+        
+        let sendedVoice = ChatData(chatType: ChatType.mine.rawValue, time: time, voicePath: aacPath!, voiceLong: timeStr)
+        self.chatDataArray?.append(sendedVoice)
+        
+        self.time = time
+        lable = "[语音]"
+    }
+
     
 //============================================发送和接受图片消息＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊
     //进入选择图片页面
@@ -231,7 +323,7 @@ class ChatViewController: UIViewController, ChatDataSource, UITextViewDelegate, 
                     }
                 })
                 
-                let sendedImage = ChatData(chatType: ChatType.mine.rawValue, chatBody: "", time: timeArray[j], chatImage: timestrArray[j])
+                let sendedImage = ChatData(chatType: ChatType.mine.rawValue, time: timeArray[j], chatImage: timestrArray[j])
                 
                 self.chatDataArray?.append(sendedImage)
             }
@@ -272,8 +364,8 @@ class ChatViewController: UIViewController, ChatDataSource, UITextViewDelegate, 
         }
         
         //MessageItem格式的 就可以展示了
-        let thisChat = MessageItem(body: msg as NSString, user: myInfo, date: time1, mtype: ChatType.mine)
-        let thatChat = MessageItem(body: "你说的是：\(msg)" as NSString, user: youInfo, date: self.time!, mtype: ChatType.someone)
+        let thisChat = MessageItem(body: msg, user: myInfo, date: time1, mtype: ChatType.mine)
+        let thatChat = MessageItem(body: "你说的是：\(msg)", user: youInfo, date: self.time!, mtype: ChatType.someone)
         Chats.add(thisChat)
         Chats.add(thatChat)
         
@@ -287,8 +379,8 @@ class ChatViewController: UIViewController, ChatDataSource, UITextViewDelegate, 
         globalQueue.async(execute: {
             
             //同步保存数据
-            let first1 = ChatData(chatType: ChatType.mine.rawValue, chatBody: msg, time: time1, chatImage: "")
-            let first2 = ChatData(chatType: ChatType.someone.rawValue, chatBody: "你说的是：\(msg)", time: self.time!, chatImage: "")
+            let first1 = ChatData(chatType: ChatType.mine.rawValue, time: time1, chatBody: msg)
+            let first2 = ChatData(chatType: ChatType.someone.rawValue, time: self.time!, chatBody: "你说的是：\(msg)")
             self.chatDataArray?.append(first1)
             self.chatDataArray?.append(first2)
             
@@ -423,26 +515,35 @@ class ChatViewController: UIViewController, ChatDataSource, UITextViewDelegate, 
             switch chatData[i].chatType {
                 //0 代表对方信息
             case ChatType.someone.rawValue:
-                if chatData[i].chatImage == "" {
-                    let mesy = MessageItem(body: chatData[i].chatBody as NSString, user: youInfo,  date: chatData[i].chatDate, mtype:ChatType.someone)
+                
+                if chatData[i].messageType == "0" {
+                    let mesy = MessageItem(body: chatData[i].chatBody, user: youInfo,  date: chatData[i].chatDate, mtype: ChatType.someone)
                     Chats.add(mesy)
-                }else{
+                }else if chatData[i].messageType == "1" {
                     let imageData = chatCacheImages.loadImageFromChatCacheDir(yourNickname, imageName: chatData[i].chatImage)
                     let image = ChangeValue.dataToImage(imageData)
                     
                     let mesy = MessageItem(image: image, imageName: chatData[i].chatImage, user: youInfo, date: chatData[i].chatDate, mtype: ChatType.someone )
                     Chats.add(mesy)
+                }else if chatData[i].messageType == "2" {
+                    
+                    let mesy = MessageItem(voicePath: chatData[i].voicePath, voiceLong: chatData[i].voiceLong, user: youInfo, date: chatData[i].chatDate, mtype: .someone)
+                    Chats.add(mesy)
                 }
                 //1代表我的信息
             case ChatType.mine.rawValue:
-                if chatData[i].chatImage == "" {
-                    let mesy = MessageItem(body: chatData[i].chatBody as NSString, user: myInfo,  date: chatData[i].chatDate, mtype:ChatType.mine)
+                
+                if chatData[i].messageType == "0" {
+                    let mesy = MessageItem(body: chatData[i].chatBody, user: myInfo,  date: chatData[i].chatDate, mtype:ChatType.mine)
                     Chats.add(mesy)
-                }else{
+                }else if chatData[i].messageType == "1"{
                     let imageData = chatCacheImages.loadImageFromChatCacheDir(yourNickname, imageName: chatData[i].chatImage)
                     let image = ChangeValue.dataToImage(imageData)
                     
                     let mesy = MessageItem(image: image, imageName: chatData[i].chatImage, user: myInfo, date: chatData[i].chatDate, mtype: ChatType.mine)
+                    Chats.add(mesy)
+                }else if chatData[i].messageType == "2" {
+                    let mesy = MessageItem(voicePath: chatData[i].voicePath, voiceLong: chatData[i].voiceLong, user: myInfo, date: chatData[i].chatDate, mtype: .mine)
                     Chats.add(mesy)
                 }
                 

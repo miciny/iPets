@@ -18,6 +18,8 @@ class ChatTableViewCell: UITableViewCell, MessageItemDelegate{
     var cellDelegate: ChatTableViewCellDelegate?
     var chatName: String!
     
+    var player: AudioPlayer?    //不要把 AVAudioPlayer 当做局部变量 可能要用 AVAudioSession，否则木有声音啊
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
@@ -86,7 +88,7 @@ class ChatTableViewCell: UITableViewCell, MessageItemDelegate{
         
         self.msgItem.delegate = self
         //判断气泡的类型和位置 , 图片就不显示气泡
-        if(!self.msgItem.view.isKind(of: UIImageView.self)){
+        if self.msgItem.messageType == .text {
             self.bubbleView = BubbleItem.init(mtype: type, frame: CGRect(x: x, y: y, width: width + self.msgItem.insets.left + self.msgItem.insets.right, height: height + self.msgItem.insets.top + self.msgItem.insets.bottom))
             self.addSubview(self.bubbleView.view)
             
@@ -95,7 +97,7 @@ class ChatTableViewCell: UITableViewCell, MessageItemDelegate{
             self.customView.frame = CGRect(x: self.msgItem.insets.left, y: self.msgItem.insets.top, width: width, height: height)
             self.bubbleView.view.addSubview(self.customView)
             
-        }else{
+        }else if self.msgItem.messageType == .image {
             //添加信息体的view
             self.customView = self.msgItem.view
             self.customView.frame = CGRect(x: x+self.msgItem.insets.left, y: y+self.msgItem.insets.top, width: width, height: height)
@@ -106,8 +108,59 @@ class ChatTableViewCell: UITableViewCell, MessageItemDelegate{
             self.customView.tag = 1
             self.customView.addGestureRecognizer(tap)
             self.addSubview(self.customView)
+            
+        }else if self.msgItem.messageType == .voice {
+            
+            self.bubbleView = BubbleItem.init(mtype: type, frame: CGRect(x: x, y: y, width: width + self.msgItem.insets.left + self.msgItem.insets.right, height: height + self.msgItem.insets.top + self.msgItem.insets.bottom))
+            self.addSubview(self.bubbleView.view)
+            
+            //添加信息体的view
+            self.customView = self.msgItem.view
+            self.customView.frame = CGRect(x: self.msgItem.insets.left, y: self.msgItem.insets.top, width: width, height: height)
+            self.bubbleView.view.addSubview(self.customView)
+            
+            
+            let timeLb = UILabel()
+            timeLb.font = UIFont.systemFont(ofSize: 13)
+            timeLb.textColor = UIColor.black
+            timeLb.textAlignment = .center
+            timeLb.backgroundColor = UIColor.clear
+            timeLb.text = (self.msgItem.voiceLong!) + "''"
+            timeLb.frame.size = CGSize(width: 30, height: 25)
+            
+            if self.msgItem.mtype == .mine{
+                timeLb.frame.origin = CGPoint(x: self.bubbleView.view.x-30, y: self.bubbleView.view.centerYY-15)
+            }else{
+                timeLb.frame.origin = CGPoint(x: self.bubbleView.view.maxXX, y: self.bubbleView.view.centerYY-15)
+            }
+            self.addSubview(timeLb)
+            
+            //图片点击事件
+            self.bubbleView.view.isUserInteractionEnabled = true
+            let tap = UITapGestureRecognizer(target: self, action: #selector(tapVoice))
+            self.bubbleView.view.tag = 2
+            self.bubbleView.view.addGestureRecognizer(tap)
         }
     }
+
+//========================================点击音频的处理理==================================
+    func tapVoice(){
+        if let plyer = self.player{
+            if plyer.audioPath == self.msgItem.voicePath!{
+                plyer.stopAudio()
+                self.player = nil
+            }else{
+                plyer.stopAudio()
+                self.player = nil
+                self.player = AudioPlayer(path: self.msgItem.voicePath!, autoPlay: false)
+                self.player?.playAudio()
+            }
+        }else{
+            self.player = AudioPlayer(path: self.msgItem.voicePath!, autoPlay: false)
+            self.player?.playAudio()
+        }
+    }
+    
     
 //========================================长安文字的代理==================================
     func lbLongPressed() {

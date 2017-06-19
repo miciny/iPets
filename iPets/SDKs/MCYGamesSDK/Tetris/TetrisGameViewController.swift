@@ -53,7 +53,7 @@ class TetrisGameViewController: UIViewController, controllerViewDelegate, mainVi
     
     // 播放音乐
     func playBGM(){
-        self.player = AudioPlayer()
+        self.player = AudioPlayer(path: Bundle.main.path(forResource: "A_comme_amour", ofType: "mp3")!, autoPlay: true)
         if BGMAllowed {
             self.player?.playAudio()
         }

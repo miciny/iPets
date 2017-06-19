@@ -5,6 +5,12 @@ enum ChatType: String{
     case someone = "0"
 }
 
+enum MessageType: String {
+    case text = "text"
+    case image = "image"
+    case voice = "voice"
+}
+
 protocol MessageItemDelegate {
     func lbLongPressed()  //长按了
     
@@ -21,7 +27,13 @@ class MessageItem: NSObject, CanCopyLabelDelegate, CanCopyImageDelegate{
     var mtype: ChatType
     var view: UIView
     var insets: UIEdgeInsets
-    var imageName: String?
+    
+    var imageName: String?  //图片消息
+    
+    var voicePath: String?  //语音消息
+    var voiceLong: String?     //语音时长
+    
+    var messageType: MessageType   //消息类型
     var delegate: MessageItemDelegate?
     
     //图片和文字与周围的间距
@@ -42,32 +54,37 @@ class MessageItem: NSObject, CanCopyLabelDelegate, CanCopyImageDelegate{
     }
     
     //初始化
-    init(user: UserInfo, date: Date, mtype: ChatType, view: UIView, insets: UIEdgeInsets, imageName: String?){
+    init(user: UserInfo, date: Date, mtype: ChatType, view: UIView,
+         insets: UIEdgeInsets, imageName: String?, voicePath: String?, voiceLong: String?, messageType: MessageType){
         self.view = view
         self.user = user
         self.date = date
         self.mtype = mtype
         self.insets = insets
+        self.voicePath = voicePath
         self.imageName = imageName
+        self.messageType = messageType
+        self.voiceLong = voiceLong
     }
     
     //文字类型消息
-    convenience init(body: NSString, user: UserInfo, date: Date, mtype: ChatType){
+    convenience init(body: String, user: UserInfo, date: Date, mtype: ChatType){
         let width =  Width-104-MessageItem.getTextInsetsMine().left-MessageItem.getTextInsetsMine().right
         let height : CGFloat = 10000.0
         let size =  sizeWithText(body as String, font: chatPageTextFont, maxSize: CGSize(width: width, height: height))
         
-        let label =  CanCopyLabel(frame:CGRect(x: 0, y: 0, width: size.width, height: size.height))
+        let label =  CanCopyLabel(frame: CGRect(x: 0, y: 0, width: size.width, height: size.height))
         label.canCopyLabelFrom = CanCopyLabelFrom.chat
         label.numberOfLines = 0
         label.lineBreakMode = NSLineBreakMode.byWordWrapping
-        label.text = (body.length != 0 ? body as String : "")
+        label.text = body
         label.font = chatPageTextFont
         label.backgroundColor = UIColor.clear
         
         let insets: UIEdgeInsets = (mtype == ChatType.mine ? MessageItem.getTextInsetsMine() : MessageItem.getTextInsetsSomeone())
         
-        self.init(user:user, date:date, mtype:mtype, view:label, insets:insets, imageName: nil)
+        self.init(user: user, date: date, mtype: mtype, view: label, insets: insets,
+                  imageName: nil, voicePath: nil, voiceLong: nil, messageType: .text)
         
         label.copyLabelDelegate = self
     }
@@ -94,14 +111,15 @@ class MessageItem: NSObject, CanCopyLabelDelegate, CanCopyImageDelegate{
             size.width = 170
         }
         
-        let imageView = CanCopyImageView(frame:CGRect(x: 0, y: 0, width: size.width, height: size.height))
+        let imageView = CanCopyImageView(frame: CGRect(x: 0, y: 0, width: size.width, height: size.height))
         imageView.image = image
         imageView.layer.cornerRadius = 5.0
         imageView.layer.masksToBounds = true
         
         let insets:UIEdgeInsets =  (mtype == ChatType.mine ? MessageItem.getImageInsetsMine() : MessageItem.getImageInsetsSomeone())
         
-        self.init(user:user, date:date, mtype:mtype, view:imageView, insets:insets, imageName: imageName)
+        self.init(user: user, date: date, mtype: mtype, view: imageView,
+                  insets: insets, imageName: imageName, voicePath: nil, voiceLong: nil, messageType: .image)
     }
     
     //图片长按
@@ -111,6 +129,41 @@ class MessageItem: NSObject, CanCopyLabelDelegate, CanCopyImageDelegate{
     
     func imageNoPressed() {
         self.delegate?.imageNoPressed()
+    }
+    
+    
+    
+    
+    //语音类型消息
+    convenience init(voicePath: String, voiceLong: String, user: UserInfo, date: Date, mtype: ChatType){
+        
+        let long = CGFloat(Int(voiceLong)!)
+        let width =  Width-104-MessageItem.getTextInsetsMine().left-MessageItem.getTextInsetsMine().right
+        
+        var vW = CGFloat()
+        
+        if long < 5{
+            vW = 1/8 * width
+        }else if long > 60 {
+            vW = width
+        }else{
+            vW = (long-5)/55 * (7*width/8) + 1/8 * width
+        }
+        
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: vW, height: 20))
+        
+        let btn =  UIImageView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
+        let btnB =  UILabel(frame: CGRect(x: 0, y: 0, width: vW, height: 20))
+        let image = UIImage(named: "SenderVoiceNodePlaying")
+        btn.image = image
+        
+        view.addSubview(btn)
+        view.addSubview(btnB)
+        
+        let insets: UIEdgeInsets = (mtype == ChatType.mine ? MessageItem.getTextInsetsMine() : MessageItem.getTextInsetsSomeone())
+        
+        self.init(user:user, date: date, mtype: mtype, view: view,
+                  insets: insets, imageName: nil, voicePath: voicePath, voiceLong: voiceLong, messageType: .voice)
     }
     
 }
