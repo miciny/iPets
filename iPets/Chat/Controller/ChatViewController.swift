@@ -31,6 +31,11 @@ class ChatViewController: UIViewController, ChatDataSource, UITextViewDelegate, 
     fileprivate var yourNickname: String!
     fileprivate var isOut = true //如果是进入的选择图片界面，就置成false，就不删除数据库了
     
+    fileprivate var voiceButton: UIImageView!
+    fileprivate var voiceBtn: UIButton?
+    fileprivate var voiceTap: UITapGestureRecognizer?
+    fileprivate var keyboradTap: UITapGestureRecognizer?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -92,28 +97,32 @@ class ChatViewController: UIViewController, ChatDataSource, UITextViewDelegate, 
         txtMsg.frame = CGRect(x: 5, y: gap, width: sendView.frame.width-130, height: singgleLineSize.height)
         
         //左侧声音图片
-        let voiceButton = UIImageView(frame:CGRect(x: 4, y: 8, width: 28, height: 28))
+        voiceButton = UIImageView(frame:CGRect(x: 4, y: 8, width: 28, height: 28))
         voiceButton.backgroundColor=UIColor.clear
         voiceButton.image = UIImage(named: "Sound")
         sendView.addSubview(voiceButton)
         
+        voiceButton.isUserInteractionEnabled = true
+        self.changeKeyboradView()
+        sendView.addSubview(voiceButton)
+        
         // 右边＋按钮
-        let addButton = UIImageView(frame:CGRect(x: sendView.frame.width-80, y: 4, width: 36, height: 36))
+        let addButton = UIImageView(frame:CGRect(x: Width-40, y: 4, width: 36, height: 36))
         addButton.backgroundColor=UIColor.clear
         addButton.image = UIImage(named: "AddMoreFuns")
         
         addButton.isUserInteractionEnabled = true
-        let addTap = UITapGestureRecognizer(target: self, action: #selector(ChatViewController.goToImageCollectionView))
+        let addTap = UITapGestureRecognizer(target: self, action: #selector(self.goToImageCollectionView))
         addButton.addGestureRecognizer(addTap)
         sendView.addSubview(addButton)
         
         //右边表情按钮
-        let emotionButton = UIImageView(frame:CGRect(x: Width-40, y: 4, width: 36, height: 36))
+        let emotionButton = UIImageView(frame:CGRect(x: sendView.frame.width-80, y: 4, width: 36, height: 36))
         emotionButton.backgroundColor=UIColor.clear
         emotionButton.image = UIImage(named: "Emotion")
         
         emotionButton.isUserInteractionEnabled = true
-        let motionTap = UITapGestureRecognizer(target: self, action: #selector(ChatViewController.motionAdd))
+        let motionTap = UITapGestureRecognizer(target: self, action: #selector(self.motionAdd))
         emotionButton.addGestureRecognizer(motionTap)
         sendView.addSubview(emotionButton)
         
@@ -123,8 +132,49 @@ class ChatViewController: UIViewController, ChatDataSource, UITextViewDelegate, 
     //选择表情
     func motionAdd(){
         
-        
     }
+    
+//============================================发送和接受语音消息＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊
+    
+    func changeAudioView(){
+        
+        txtMsgView.isHidden = true
+        txtMsg.resignFirstResponder()
+        
+        voiceBtn = UIButton()
+        voiceBtn!.frame = txtMsgView.frame
+        if let superView = txtMsgView.superview{
+            superView.addSubview(voiceBtn!)
+            voiceBtn!.setTitle("按住 说话", for: .normal)
+            voiceBtn!.setTitleColor(UIColor.black, for: .normal)
+            voiceBtn!.layer.cornerRadius = 8
+            voiceBtn!.layer.borderColor = UIColor.lightGray.cgColor
+            voiceBtn!.layer.borderWidth = 0.5
+        }
+        
+        voiceButton.image = UIImage(named: "Keyboard")
+        if let tap = self.voiceTap{
+            voiceButton.removeGestureRecognizer(tap)
+        }
+        keyboradTap = UITapGestureRecognizer(target: self, action: #selector(self.changeKeyboradView))
+        voiceButton.addGestureRecognizer(keyboradTap!)
+    }
+    
+    func changeKeyboradView(){
+        voiceBtn?.removeFromSuperview()
+        voiceBtn = nil
+        
+        txtMsgView.isHidden = false
+        txtMsg.becomeFirstResponder()
+        
+        voiceButton.image = UIImage(named: "Sound")
+        if let tap = self.keyboradTap{
+            voiceButton.removeGestureRecognizer(tap)
+        }
+        voiceTap = UITapGestureRecognizer(target: self, action: #selector(self.changeAudioView))
+        voiceButton.addGestureRecognizer(voiceTap!)
+    }
+    
     
 //============================================发送和接受图片消息＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊
     //进入选择图片页面

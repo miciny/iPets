@@ -180,6 +180,11 @@
 		E17528FD1ED40B7600269EDF /* CustomPresentAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17528FA1ED40B7600269EDF /* CustomPresentAnimationController.swift */; };
 		E17528FE1ED40B7600269EDF /* PushAndPopAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17528FB1ED40B7600269EDF /* PushAndPopAnimation.swift */; };
 		E17529001ED40CE900269EDF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E17528FF1ED40CE900269EDF /* Assets.xcassets */; };
+		E18C41981EF7760E00AFF37C /* MCYMusicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18C41931EF7760E00AFF37C /* MCYMusicViewController.swift */; };
+		E18C41991EF7760E00AFF37C /* MusicPlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18C41941EF7760E00AFF37C /* MusicPlayView.swift */; };
+		E18C419A1EF7760E00AFF37C /* UIMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18C41951EF7760E00AFF37C /* UIMaker.swift */; };
+		E18C419B1EF7760E00AFF37C /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18C41961EF7760E00AFF37C /* UIViewExtension.swift */; };
+		E18C419C1EF7760E00AFF37C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E18C41971EF7760E00AFF37C /* Images.xcassets */; };
 		E1ADD75D1ED6CD29000BCBC4 /* MyTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1ADD75C1ED6CD29000BCBC4 /* MyTimer.swift */; };
 		E1ADD75F1EDFE899000BCBC4 /* Temp.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E1ADD75E1EDFE899000BCBC4 /* Temp.xcassets */; };
 		E1DE0E631EEA918600CF580D /* AVSDKExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DE0E5C1EEA918600CF580D /* AVSDKExtension.swift */; };
@@ -417,6 +422,11 @@
 		E17528FA1ED40B7600269EDF /* CustomPresentAnimationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomPresentAnimationController.swift; sourceTree = "<group>"; };
 		E17528FB1ED40B7600269EDF /* PushAndPopAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushAndPopAnimation.swift; sourceTree = "<group>"; };
 		E17528FF1ED40CE900269EDF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		E18C41931EF7760E00AFF37C /* MCYMusicViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCYMusicViewController.swift; sourceTree = "<group>"; };
+		E18C41941EF7760E00AFF37C /* MusicPlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicPlayView.swift; sourceTree = "<group>"; };
+		E18C41951EF7760E00AFF37C /* UIMaker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIMaker.swift; sourceTree = "<group>"; };
+		E18C41961EF7760E00AFF37C /* UIViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
+		E18C41971EF7760E00AFF37C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		E1ADD75C1ED6CD29000BCBC4 /* MyTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyTimer.swift; sourceTree = "<group>"; };
 		E1ADD75E1EDFE899000BCBC4 /* Temp.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Temp.xcassets; sourceTree = "<group>"; };
 		E1DE0E5C1EEA918600CF580D /* AVSDKExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVSDKExtension.swift; sourceTree = "<group>"; };
@@ -1113,9 +1123,22 @@
 			path = ../../../../Users/miciny/ToGitHub/iPets/iPets/Universal/Animation;
 			sourceTree = DEVELOPER_DIR;
 		};
+		E18C418F1EF775BA00AFF37C /* MCYMusicSDK */ = {
+			isa = PBXGroup;
+			children = (
+				E18C41931EF7760E00AFF37C /* MCYMusicViewController.swift */,
+				E18C41941EF7760E00AFF37C /* MusicPlayView.swift */,
+				E18C41951EF7760E00AFF37C /* UIMaker.swift */,
+				E18C41961EF7760E00AFF37C /* UIViewExtension.swift */,
+				E18C41971EF7760E00AFF37C /* Images.xcassets */,
+			);
+			name = MCYMusicSDK;
+			sourceTree = "<group>";
+		};
 		E1DE0E341EEA8DBB00CF580D /* SDKs */ = {
 			isa = PBXGroup;
 			children = (
+				E18C418F1EF775BA00AFF37C /* MCYMusicSDK */,
 				E16322DB1EF3E2A40022F40D /* MCYVideoRecordingSDK */,
 				E163218E1EF2274A0022F40D /* MCYWeatherSDK */,
 				E144084A1EF125DD00C8E23B /* MCYMapSDK */,
@@ -1355,6 +1378,7 @@
 				E16322A81EF29E090022F40D /* 3.png in Resources */,
 				E16322A51EF29E090022F40D /* 0.png in Resources */,
 				E16322A71EF29E090022F40D /* 2.png in Resources */,
+				E18C419C1EF7760E00AFF37C /* Images.xcassets in Resources */,
 				E16322CB1EF29E0A0022F40D /* 57.png in Resources */,
 				E16322CD1EF29E0A0022F40D /* 99.png in Resources */,
 				E16322C31EF29E0A0022F40D /* 30.png in Resources */,
@@ -1475,6 +1499,7 @@
 				E17528B21ED406D000269EDF /* MessageItem.swift in Sources */,
 				E17528F11ED40B1800269EDF /* AutoLayout.swift in Sources */,
 				E17528D61ED40A5A00269EDF /* RichScanViewController.swift in Sources */,
+				E18C41981EF7760E00AFF37C /* MCYMusicViewController.swift in Sources */,
 				E17528831ED404A400269EDF /* PersonInfo_ChangeNameViewController.swift in Sources */,
 				E17528961ED406AD00269EDF /* FindPetsCellModel.swift in Sources */,
 				E17528871ED404FB00269EDF /* MeViewController.swift in Sources */,
@@ -1499,6 +1524,7 @@
 				E1DE0E781EEA91BA00CF580D /* SaveDataModel.swift in Sources */,
 				E17528BC1ED406DC00269EDF /* ChatTableViewCell.swift in Sources */,
 				E14408451EEFEB6A00C8E23B /* MineConstant.swift in Sources */,
+				E18C419A1EF7760E00AFF37C /* UIMaker.swift in Sources */,
 				E14408281EEFE23700C8E23B /* MainView.swift in Sources */,
 				E16322DA1EF3BAC90022F40D /* MyCollectionViewLayout.swift in Sources */,
 				E17528AD1ED406D000269EDF /* ChatData.swift in Sources */,
@@ -1538,6 +1564,7 @@
 				E17528F51ED40B1800269EDF /* GetMyInfo.swift in Sources */,
 				E1DE0E891EEA928600CF580D /* ImageCollectionModel.swift in Sources */,
 				E144083B1EEFE28400C8E23B /* TetrisElementsModules.swift in Sources */,
+				E18C41991EF7760E00AFF37C /* MusicPlayView.swift in Sources */,
 				E17528681ED4034D00269EDF /* SellBuyViewController.swift in Sources */,
 				E12A38B51EEA78BE00755C6C /* FindViewController.swift in Sources */,
 				E17528791ED4049900269EDF /* MeViewCell.swift in Sources */,
@@ -1576,6 +1603,7 @@
 				E17528601ED3E95300269EDF /* SearchRecordModel.swift in Sources */,
 				E144082A1EEFE23700C8E23B /* ControllerView.swift in Sources */,
 				E16322D41EF29E990022F40D /* AddressDataModel.swift in Sources */,
+				E18C419B1EF7760E00AFF37C /* UIViewExtension.swift in Sources */,
 				E1DE0EBA1EEA94CC00CF580D /* LocalH5NewsViewController.swift in Sources */,
 				E17528A11ED406C600269EDF /* ContectorListViewController.swift in Sources */,
 				E1DE0EAA1EEA94BA00CF580D /* NewsExtension.swift in Sources */,

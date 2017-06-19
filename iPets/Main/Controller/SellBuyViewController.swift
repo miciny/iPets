@@ -117,7 +117,7 @@ class SellBuyViewController: UIViewController, UIScrollViewDelegate, UICollectio
         let items = [
             ["name":"天气情况","pic":"night.jpeg"],
             ["name":"视频录像","pic":"day.jpeg"],
-            ["name":"精品小店","pic":"123_03.png"],
+            ["name":"音乐播放","pic":"123_03.png"],
             ["name":"身边宠店","pic":"123_01.png"],
             ["name":"我的家宠","pic":"123_02.png"],
             ["name":"入住商家","pic":"123_03.png"],
@@ -260,14 +260,19 @@ class SellBuyViewController: UIViewController, UIScrollViewDelegate, UICollectio
         
         if indexPath.section == 0{
             if indexPath.row == 0{
-                let weather = WeatherViewController()
-                weather.hidesBottomBarWhenPushed = true
-                self.present(weather, animated: true, completion: nil)
+                let vc = WeatherViewController()
+                vc.hidesBottomBarWhenPushed = true
+                self.present(vc, animated: true, completion: nil)
                 return
             }else if indexPath.row == 1{
-                let weather = MCYVideoRecordingViewController()
-                weather.hidesBottomBarWhenPushed = true
-                self.present(weather, animated: true, completion: nil)
+                let vc = MCYVideoRecordingViewController()
+                vc.hidesBottomBarWhenPushed = true
+                self.present(vc, animated: true, completion: nil)
+                return
+            }else if indexPath.row == 2{
+                let vc = MCYMusicViewController()
+                vc.hidesBottomBarWhenPushed = true
+                self.navigationController?.pushViewController(vc, animated: true)
                 return
             }
         }
