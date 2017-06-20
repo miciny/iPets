@@ -108,9 +108,17 @@ class FindViewController: UIViewController, UITableViewDelegate, UITableViewData
             switch indexPath.row {
             //附近寻宠
             case 0:
-                let vc = FindPetsViewController()
-                vc.hidesBottomBarWhenPushed = true
-                self.navigationController?.pushViewController(vc, animated: true)
+                
+                if let vc = findPetsViewController{
+                    vc.hidesBottomBarWhenPushed = true
+                    self.navigationController?.pushViewController(vc, animated: true)
+                    
+                }else{
+                    findPetsViewController = FindPetsViewController()
+                    findPetsViewController!.hidesBottomBarWhenPushed = true
+                    findPetsViewController!.refresh = true
+                    self.navigationController?.pushViewController(findPetsViewController!, animated: true)
+                }
                 
             default:
                 break

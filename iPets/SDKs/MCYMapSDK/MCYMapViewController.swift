@@ -25,6 +25,7 @@ class MCYMapViewController: UIViewController, MKMapViewDelegate, CLLocationManag
     var objectAnnotation: MKPointAnnotation? //大头针
     
     var city: String?
+    var wait: WaitView?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,6 +64,9 @@ class MCYMapViewController: UIViewController, MKMapViewDelegate, CLLocationManag
             locationManager.delegate = self
             locationManager.startUpdatingLocation()
             print("定位开始")
+            
+            wait = WaitView()
+            wait!.showWait("定位中")
         }else{
             ToastView().showToast("请打开定位权限！")
         }
@@ -109,6 +113,11 @@ class MCYMapViewController: UIViewController, MKMapViewDelegate, CLLocationManag
         guard latitude != nil else {
             ToastView().showToast("定位失败！")
             return
+        }
+        
+        if wait != nil{
+            wait!.hideView()
+            wait = nil
         }
         
         self.getLocationAlready = true

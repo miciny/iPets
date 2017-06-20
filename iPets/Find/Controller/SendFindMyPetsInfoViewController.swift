@@ -49,6 +49,9 @@ class SendFindMyPetsInfoViewController: UIViewController, UITableViewDelegate, U
     
     //返回
     func backToPrevious() {
+        if let vc = findPetsViewController{
+            vc.refresh = true
+        }
         self.dismiss(animated: true, completion: nil)
     }
     

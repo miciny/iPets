@@ -9,6 +9,8 @@
 import UIKit
 import MCYRefresher
 
+var findPetsViewController: FindPetsViewController?
+
 class FindPetsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate{
     
     fileprivate var cellData: NSMutableArray?
@@ -29,6 +31,8 @@ class FindPetsViewController: UIViewController, UITableViewDataSource, UITableVi
     
     private var moreView: FindPetsMoreView?
     
+    var refresh = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setUpEles()
@@ -39,7 +43,10 @@ class FindPetsViewController: UIViewController, UITableViewDataSource, UITableVi
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        self.refreshData()
+        if refresh{
+            self.refreshData()
+        }
+        refresh = false
     }
     
     //退出界面，菜单消失
@@ -196,6 +203,9 @@ class FindPetsViewController: UIViewController, UITableViewDataSource, UITableVi
         }else if cellDataTemp.count <= limited{
             self.mainTableView?.tableFooterView = UIView(frame: CGRect.zero)
         }
+        
+        let rec = CGRect(x: 0, y: 0, width: 1, height: 1)
+        self.mainTableView!.scrollRectToVisible(rec , animated: false)  //返回到顶部
     }
     
     //排序
