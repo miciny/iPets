@@ -249,8 +249,10 @@ class WeatherViewController: UIViewController, UIScrollViewDelegate {
             hourlyTimeLb.frame = CGRect(x: CGFloat(Int(Width/6) * (i)), y: 0, width: Width/6, height: 104/3)
             hourlyScrollInnerView.addSubview(hourlyTimeLb)
             
-            let imageX = (Width/6) * CGFloat(i) + Width/12 - 14
-            let hourlyCondImage = UIImageView(frame: CGRect(x: imageX, y: 104/3, width: 28, height: 28))
+            let hourlyCondImage = UIImageView()
+            hourlyCondImage.frame.size = CGSize(width: 28, height: 28)
+            hourlyCondImage.center.x = hourlyTimeLb.centerXX
+            hourlyCondImage.frame.origin.y = 104/3
             hourlyScrollInnerView.addSubview(hourlyCondImage)
             
             let hourlyTempLb = getLB(textColor: .white, backColor: .clear, textAlignment: .center, font: 15)

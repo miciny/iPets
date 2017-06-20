@@ -37,6 +37,10 @@ class ChatViewController: UIViewController, ChatDataSource, UITextViewDelegate, 
     fileprivate var voiceTap: UITapGestureRecognizer?
     fileprivate var keyboradTap: UITapGestureRecognizer?
     
+    
+    var recorder: AudioRecorder? //录音器
+    var aacPath: String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -53,7 +57,14 @@ class ChatViewController: UIViewController, ChatDataSource, UITextViewDelegate, 
     
     //退出时保存数据
     override func viewWillDisappear(_ animated: Bool) {
+        
         super.viewWillDisappear(true)
+        
+        if let _ = audioPlayer{
+            audioPlayer!.stopAudio()
+            audioPlayer = nil
+        }
+        
         globalQueue.async(execute: {
             //这里写需要放到子线程做的耗时的代码
             
@@ -169,6 +180,7 @@ class ChatViewController: UIViewController, ChatDataSource, UITextViewDelegate, 
         }
         keyboradTap = UITapGestureRecognizer(target: self, action: #selector(self.changeKeyboradView))
         voiceButton.addGestureRecognizer(keyboradTap!)
+        
     }
     
     func changeKeyboradView(){
@@ -184,67 +196,39 @@ class ChatViewController: UIViewController, ChatDataSource, UITextViewDelegate, 
         }
         voiceTap = UITapGestureRecognizer(target: self, action: #selector(self.changeAudioView))
         voiceButton.addGestureRecognizer(voiceTap!)
+        
+        recorder = nil
     }
     
-    
-    var recorder: AVAudioRecorder? //录音器
-    var aacPath: String?
     func setUpRecorder(){
-        //初始化录音器
-        let session: AVAudioSession = AVAudioSession.sharedInstance()
-        //设置录音类型
-        try! session.setCategory(AVAudioSessionCategoryPlayAndRecord)
-        //设置支持后台
-        try! session.setActive(true)
-        //获取Document目录
+        
+        if let _ = audioPlayer{
+            audioPlayer!.stopAudio()
+            audioPlayer = nil
+        }
+        
         let timeStr = DateToToString.dateToStringBySelf(Date(), format: "yyyyMMdd_HHmmss_ssss")
         //组合录音文件路径,会自动替换
         aacPath = (SaveCacheDataModel().createDirInChatCache(youInfo.nickname!) as! String) + "/" + timeStr + ".aac"
-        
-        //初始化字典并添加设置参数
-        let recorderSeetingsDic =
-            [
-                AVFormatIDKey: NSNumber(value: kAudioFormatMPEG4AAC as UInt32),
-                AVNumberOfChannelsKey: 2 as AnyObject, //录音的声道数，立体声为双声道
-                AVEncoderAudioQualityKey : AVAudioQuality.max.rawValue as AnyObject,
-                AVEncoderBitRateKey : 320000 as AnyObject,
-                AVSampleRateKey : 44100.0 as AnyObject //录音器每秒采集的录音样本数
-        ]
-        
-        self.beginRecord(urlStr: aacPath!, settings: recorderSeetingsDic)
-    }
-    
-    func beginRecord(urlStr: String, settings: [String: Any]){
-        //初始化录音器
-        let url = URL(fileURLWithPath: urlStr)
         
         if recorder != nil{
             recorder = nil
         }
         
-        do{
-            recorder = try AVAudioRecorder(url: url, settings: settings)
-        }catch let e as NSError{
-            print(e)
-        }
-        
-        if recorder != nil {
-            //开启仪表计数功能
-            recorder!.isMeteringEnabled = true
-            //准备录音
-            recorder!.prepareToRecord()
-            //开始录音
-            recorder!.record()
-            
-            ToastView().showToast("开始录音")
-        }
+        recorder = AudioRecorder(path: aacPath!)
+        self.beginRecord()
+    }
+    
+    
+    func beginRecord(){
+        recorder?.beginRecord()
     }
 
 
     func endRecord(){
         //停止录音
-        let timeStr = String(Int((recorder?.currentTime)!))
-        recorder?.stop()
+        let timeInt = recorder?.endRecord()
+        let timeStr = String(Int(timeInt!))
         //录音器释放
         recorder = nil
         

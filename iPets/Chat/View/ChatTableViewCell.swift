@@ -18,8 +18,6 @@ class ChatTableViewCell: UITableViewCell, MessageItemDelegate{
     var cellDelegate: ChatTableViewCellDelegate?
     var chatName: String!
     
-    var player: AudioPlayer?    //不要把 AVAudioPlayer 当做局部变量 可能要用 AVAudioSession，否则木有声音啊
-    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
@@ -145,19 +143,19 @@ class ChatTableViewCell: UITableViewCell, MessageItemDelegate{
 
 //========================================点击音频的处理理==================================
     func tapVoice(){
-        if let plyer = self.player{
+        if let plyer = audioPlayer{
             if plyer.audioPath == self.msgItem.voicePath!{
-                plyer.stopAudio()
-                self.player = nil
+                audioPlayer!.stopAudio()
+                audioPlayer = nil
             }else{
-                plyer.stopAudio()
-                self.player = nil
-                self.player = AudioPlayer(path: self.msgItem.voicePath!, autoPlay: false)
-                self.player?.playAudio()
+                audioPlayer!.stopAudio()
+                audioPlayer = nil
+                audioPlayer = AudioPlayer(path: self.msgItem.voicePath!, autoPlay: false)
+                audioPlayer?.playAudio()
             }
         }else{
-            self.player = AudioPlayer(path: self.msgItem.voicePath!, autoPlay: false)
-            self.player?.playAudio()
+            audioPlayer = AudioPlayer(path: self.msgItem.voicePath!, autoPlay: false)
+            audioPlayer?.playAudio()
         }
     }
     

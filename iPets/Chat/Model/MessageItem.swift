@@ -153,7 +153,8 @@ class MessageItem: NSObject, CanCopyLabelDelegate, CanCopyImageDelegate{
         let view = UIView(frame: CGRect(x: 0, y: 0, width: vW, height: 20))
         
         let btn =  UIImageView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
-        let btnB =  UILabel(frame: CGRect(x: 0, y: 0, width: vW, height: 20))
+        let btnB =  CanCopyLabel(frame: CGRect(x: 0, y: 0, width: vW, height: 20))
+        btnB.canCopyLabelFrom = CanCopyLabelFrom.chat
         let image = UIImage(named: "SenderVoiceNodePlaying")
         btn.image = image
         
