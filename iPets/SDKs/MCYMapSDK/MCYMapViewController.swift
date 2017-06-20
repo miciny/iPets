@@ -30,18 +30,22 @@ class MCYMapViewController: UIViewController, MKMapViewDelegate, CLLocationManag
         super.viewDidLoad()
 
         self.setUpEle()
+        self.setupMainMap()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
-        realCity = self.city!
+        if let city = self.city{
+            realCity = city
+        }
     }
     
+    
+    //设置页面
     func setUpEle(){
         self.title = "地图"
         self.view.backgroundColor = UIColor.white
-        
         
         //左上角联系人按钮按钮，一下方法添加图片，需要对图片进行遮罩处理，否则不会出现图片
         // 我们会发现出来的是一个纯色的图片，是因为iOS扁平化设计风格应用之后做成这样的，如果需要现实图片，我们可以设置一项
@@ -64,20 +68,8 @@ class MCYMapViewController: UIViewController, MKMapViewDelegate, CLLocationManag
         }
     }
     
-    func setMap(){
-        
-        guard !self.getLocationAlready else {
-            return
-        }
-        
-        self.getLocationAlready = true
-        
-        var center = CLLocation()
-        if latitude != nil {
-            center = CLLocation(latitude: latitude!, longitude: longitude!)
-        }else{
-            center = CLLocation(latitude: 41.2233, longitude: 131.233)
-        }
+    //设置地图
+    func setupMainMap(){
         
         self.mainMapView = MKMapView(frame: self.view.frame)
         self.mainMapView.delegate = self
@@ -85,26 +77,18 @@ class MCYMapViewController: UIViewController, MKMapViewDelegate, CLLocationManag
         
         //地图类型设置 - 标准地图
         self.mainMapView.mapType = MKMapType.standard
+        self.mainMapView.showsUserLocation = true   //关于定位偏移的
         
         //创建一个MKCoordinateSpan对象，设置地图的范围（越小越精确）
         let latDelta = 0.05
         let longDelta = 0.05
         currentLocationSpan = MKCoordinateSpanMake(latDelta, longDelta)
         
-        //使用自定义位置
-        let currentRegion = MKCoordinateRegion(center: center.coordinate, span: currentLocationSpan!)
-        
-        //设置显示区域
-        self.mainMapView.setRegion(currentRegion, animated: true)
-        
         //创建一个大头针对象
         objectAnnotation = MKPointAnnotation()
-        //设置大头针的显示位置
-        objectAnnotation!.coordinate = center.coordinate
-        
-        self.setAnnotationTitle(center)
         //添加大头针
         self.mainMapView.addAnnotation(objectAnnotation!)
+        
     }
     
     func setAnnotationTitle(_ coordinate: CLLocation){
@@ -120,32 +104,45 @@ class MCYMapViewController: UIViewController, MKMapViewDelegate, CLLocationManag
         }
     }
     
+    //设置地图上的大头针
     func setLocation(){
         guard latitude != nil else {
             ToastView().showToast("定位失败！")
             return
         }
         
+        self.getLocationAlready = true
+        
         let center = CLLocation(latitude: latitude!, longitude: longitude!)
         let currentRegion = MKCoordinateRegion(center: center.coordinate, span: currentLocationSpan!)
         
         //设置显示区域
         self.mainMapView.setRegion(currentRegion, animated: true)
-        
         objectAnnotation?.coordinate = center.coordinate
+        self.setAnnotationTitle(center)
     }
     
-    //更新用户的位置
+    
+    //更新用户的位置,CLLocationManager定位有算法便宜，得用mapview的的位置更新
     func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
+        let currLocation = userLocation.coordinate
         
+        longitude = currLocation.longitude
+        //获取纬度
+        latitude = currLocation.latitude
+        
+        self.setLocation()
     }
     
     
     //地图缩放级别发送改变时
-    func mapView(_ mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
+    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        guard self.getLocationAlready == true else {
+            return
+        }
         
+        currentLocationSpan = mapView.region.span
     }
-    
     
     //自定义大头针样式
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation)
@@ -175,18 +172,22 @@ class MCYMapViewController: UIViewController, MKMapViewDelegate, CLLocationManag
     
     
     //定位改变执行，可以得到新位置、旧位置
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        //获取最新的坐标
-        let currLocation: CLLocation = locations.last!
-        
-        longitude = currLocation.coordinate.longitude
-        //获取纬度
-        latitude = currLocation.coordinate.latitude
-        //获取海拔
-        altitude = currLocation.altitude
-        
-        self.setMap()
-    }
+//    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+//        
+//        guard longitude == nil else {
+//            return
+//        }
+//        
+//        //获取最新的坐标
+//        let currLocation: CLLocation = locations.last!
+//        //获取海拔
+//        altitude = currLocation.altitude
+//        
+//        longitude = currLocation.coordinate.longitude
+//        //获取纬度
+//        latitude = currLocation.coordinate.latitude
+//        
+//    }
     
 
     override func didReceiveMemoryWarning() {
