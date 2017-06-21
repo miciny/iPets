@@ -270,8 +270,8 @@ class MCYVideoRecordingViewController: UIViewController, AVCaptureFileOutputReco
             }, completionHandler: { (success, error) in
                 
                 theSuccess = success
-                mainQueue.async(execute: {
-                    
+                
+                mainQueue.async(execute: {    
                     if theSuccess {
                         ToastView().showToast("视频保存成功")
                         self.backAction()

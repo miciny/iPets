@@ -186,6 +186,7 @@
 		E18C41AC1EF8B99A00AFF37C /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18C41A81EF8B99A00AFF37C /* UIViewExtension.swift */; };
 		E18C41AE1EF8BA0E00AFF37C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E18C41AD1EF8BA0D00AFF37C /* Images.xcassets */; };
 		E18C41B01EF8BAB900AFF37C /* AudioRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18C41AF1EF8BAB900AFF37C /* AudioRecorder.swift */; };
+		E18C41B51EFA860700AFF37C /* BageValueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18C41B41EFA860700AFF37C /* BageValueView.swift */; };
 		E1ADD75D1ED6CD29000BCBC4 /* MyTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1ADD75C1ED6CD29000BCBC4 /* MyTimer.swift */; };
 		E1ADD75F1EDFE899000BCBC4 /* Temp.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E1ADD75E1EDFE899000BCBC4 /* Temp.xcassets */; };
 		E1DE0E631EEA918600CF580D /* AVSDKExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DE0E5C1EEA918600CF580D /* AVSDKExtension.swift */; };
@@ -429,6 +430,7 @@
 		E18C41A81EF8B99A00AFF37C /* UIViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		E18C41AD1EF8BA0D00AFF37C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		E18C41AF1EF8BAB900AFF37C /* AudioRecorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioRecorder.swift; sourceTree = "<group>"; };
+		E18C41B41EFA860700AFF37C /* BageValueView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BageValueView.swift; sourceTree = "<group>"; };
 		E1ADD75C1ED6CD29000BCBC4 /* MyTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyTimer.swift; sourceTree = "<group>"; };
 		E1ADD75E1EDFE899000BCBC4 /* Temp.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Temp.xcassets; sourceTree = "<group>"; };
 		E1DE0E5C1EEA918600CF580D /* AVSDKExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVSDKExtension.swift; sourceTree = "<group>"; };
@@ -535,6 +537,7 @@
 				E10B34E81EEAA65800D65C9F /* MyLoadingView.swift */,
 				E10B34E91EEAA65800D65C9F /* ToastView.swift */,
 				E10B34EA1EEAA65800D65C9F /* WaitView.swift */,
+				E18C41B41EFA860700AFF37C /* BageValueView.swift */,
 			);
 			name = MCYViewSDK;
 			sourceTree = "<group>";
@@ -1612,6 +1615,7 @@
 				E17528A11ED406C600269EDF /* ContectorListViewController.swift in Sources */,
 				E1DE0EAA1EEA94BA00CF580D /* NewsExtension.swift in Sources */,
 				E1DE0E831EEA926900CF580D /* ShowSinglePicView.swift in Sources */,
+				E18C41B51EFA860700AFF37C /* BageValueView.swift in Sources */,
 				E17528851ED404A400269EDF /* SettingViewController.swift in Sources */,
 				E1DE0EB51EEA94C000CF580D /* PicsDataModule.swift in Sources */,
 				E1DE0EA71EEA94BA00CF580D /* JsonCache.swift in Sources */,

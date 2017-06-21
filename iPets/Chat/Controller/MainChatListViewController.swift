@@ -32,6 +32,8 @@ class MainChatListViewController: UIViewController, UITableViewDelegate, UITable
         super.viewDidAppear(true)
         setData()
         self.mainTabelView?.reloadData()
+        
+//        self.navigationController?.tabBarItem.badgeValue = "99" //设置数的
     }
     
     //退出界面，菜单消失
@@ -100,7 +102,8 @@ class MainChatListViewController: UIViewController, UITableViewDelegate, UITable
             let icon = UIImage(data: iconDate)!
             let nickname = (chatList[i] as AnyObject).value(forKey: ChatListNameOfNickname) as! String
             
-            let singleChatList = MainChatListViewDataModel(pic: icon, name: title, lable: lable, time: time, nickname: nickname)
+            let singleChatList = MainChatListViewDataModel(pic: icon, name: title, lable: lable,
+                                                           time: time, nickname: nickname, unreadCount: 0)
             chatData!.add(singleChatList)
         }
         
@@ -158,7 +161,7 @@ class MainChatListViewController: UIViewController, UITableViewDelegate, UITable
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cellId = "MainChatListCell"
         let data = chatData![indexPath.row]
-        let cell =  MainChatTableViewCell(data:data as! MainChatListViewDataModel, reuseIdentifier:cellId)
+        let cell =  MainChatTableViewCell(data: data as! MainChatListViewDataModel, reuseIdentifier:cellId)
         
         return cell
     }
@@ -181,40 +184,67 @@ class MainChatListViewController: UIViewController, UITableViewDelegate, UITable
         return true
     }
     
-    //删除
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle,
-                   forRowAt indexPath: IndexPath) {
-        if editingStyle == UITableViewCellEditingStyle.delete {
-            
-            //删除图片的文件夹
-            let data = chatData![indexPath.row]
-            let item =  data as! MainChatListViewDataModel
-            
-            let chatsCache = SaveCacheDataModel()
-            chatsCache.deleteDirInChatCache(item.nickname)
-            
-            //删除plist文件
-            let chatsData = SaveDataModel()
-            chatsData.deleteChatsPListFile("\(item.nickname).plist") //删除plist文件
-            
-            //删除数据库
-            let chatList = SQLLine.SelectAllData(entityNameOfChatList)
-            
-            for i in 0 ..< chatList.count {
-                let title = (chatList[i] as AnyObject).value(forKey: ChatListNameOfNickname) as! String
-                if(title == item.nickname){
-                    if SQLLine.DeleteData(entityNameOfChatList, indexPath: i){
-                        print("删除"+title+"聊天数据库成功！")
-                    }else{
-                        print("删除"+title+"聊天数据库失败！")
-                    }
-                    break
+    //操作
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        
+    }
+    
+    //删除操作
+    func deleteChatData(indexPath: IndexPath){
+        //删除图片的文件夹
+        let data = chatData![indexPath.row]
+        let item =  data as! MainChatListViewDataModel
+        
+        let chatsCache = SaveCacheDataModel()
+        chatsCache.deleteDirInChatCache(item.nickname)
+        
+        //删除plist文件
+        let chatsData = SaveDataModel()
+        chatsData.deleteChatsPListFile("\(item.nickname).plist") //删除plist文件
+        
+        //删除数据库
+        let chatList = SQLLine.SelectAllData(entityNameOfChatList)
+        
+        for i in 0 ..< chatList.count {
+            let title = (chatList[i] as AnyObject).value(forKey: ChatListNameOfNickname) as! String
+            if(title == item.nickname){
+                if SQLLine.DeleteData(entityNameOfChatList, indexPath: i){
+                    print("删除"+title+"聊天数据库成功！")
+                }else{
+                    print("删除"+title+"聊天数据库失败！")
                 }
+                break
             }
-            
-            chatData?.removeObject(at: indexPath.row)  //删本地数据
-            tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
         }
+        
+        chatData?.removeObject(at: indexPath.row)  //删本地数据
+        self.mainTabelView!.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
+    }
+    
+    //标记未读
+    func unreadData(indexPath: IndexPath){
+        let data = chatData![indexPath.row]
+        let item =  data as! MainChatListViewDataModel
+        item.unreadCount = 1
+        
+        self.mainTabelView?.reloadData()
+    }
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        
+        //删除
+        let delete = UITableViewRowAction(style: .normal, title: "删除") { action, index in
+            self.deleteChatData(indexPath: indexPath)
+        }
+        delete.backgroundColor = UIColor.red
+        
+        //标记未读
+        let setUnread = UITableViewRowAction(style: .normal, title: "标记未读") { action, index in
+            self.unreadData(indexPath: indexPath)
+        }
+        setUnread.backgroundColor = UIColor.lightGray
+        
+        return [delete, setUnread]
     }
     
     override func didReceiveMemoryWarning() {
