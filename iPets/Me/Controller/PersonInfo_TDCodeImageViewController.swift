@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Social
 
 //选择的协议
 extension PersonInfo_TDCodeImageViewController: bottomMenuViewDelegate{
@@ -19,7 +20,7 @@ extension PersonInfo_TDCodeImageViewController: bottomMenuViewDelegate{
                 UIImageWriteToSavedPhotosAlbum(imageView!.image!, self,
                                                #selector(PersonInfo_TDCodeImageViewController.image), nil)
             case 1:
-                ToastView().showToast("扫描二维码")
+                self.share()
             default:
                 break
             }
@@ -54,7 +55,7 @@ class PersonInfo_TDCodeImageViewController: UIViewController {
     //右上角的点击事件
     func addButtonClicked(){
         let bottomMenu = MyBottomMenuView()
-        bottomMenu.showBottomMenu("", cancel: "取消", object: ["保存图片","扫描二维码"], eventFlag: 0, target: self)
+        bottomMenu.showBottomMenu("", cancel: "取消", object: ["保存图片","分享"], eventFlag: 0, target: self)
     }
     
     //页面添加展示图片的iamgeVIew
@@ -89,6 +90,59 @@ class PersonInfo_TDCodeImageViewController: UIViewController {
         }
         ToastView().showToast("保存成功！")
     }
+    
+    
+//=====================================分享=======================================
+    
+    var activityViewController: UIActivityViewController?
+    
+    func share(){
+        
+        if self.activityViewController != nil {
+            self.activityViewController = nil
+        }
+        
+        let title = (myInfo.username! + "的寻宠二维码")
+        let image = (imageView!.image)!
+        let url = (URL(fileURLWithPath: myOwnUrl))
+        
+        let activityItems: NSArray = [title, image, url]
+        
+        activityViewController = UIActivityViewController(activityItems: activityItems as! [Any], applicationActivities: nil)
+        //排除一些服务：例如复制到粘贴板，拷贝到通讯录
+        activityViewController!.excludedActivityTypes = [UIActivityType.copyToPasteboard,
+                                                        UIActivityType.assignToContact,
+                                                        UIActivityType(rawValue: "com.apple.reminders.RemindersEditorExtension"),
+                                                        UIActivityType(rawValue: "com.apple.mobilenotes.SharingExtension")]
+        
+        self.present(activityViewController!, animated: true, completion: nil)
+        
+        activityViewController!.completionWithItemsHandler =
+            {  (activityType: UIActivityType?,
+                completed: Bool,
+                returnedItems: [Any]?,
+                error: Error?) in
+                
+                print(activityType ?? "没有获取到分享路径")
+                
+                print(returnedItems ?? "没有获取到返回路径")
+                
+                if completed{
+                    ToastView().showToast("分享成功！")
+                }else{
+                    ToastView().showToast("用户取消！")
+                }
+                
+                if let e = error{
+                    print("分享错误")
+                    print(e)
+                }
+                
+                self.activityViewController = nil
+        }
+        
+    }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

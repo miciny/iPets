@@ -8,7 +8,10 @@ enum ChatBubbleTypingType{
 
 //点击头像进入个人信息页的代理
 protocol ChatTableViewDelegate {
+    
     func pushToPersonInfoView(name: String)
+    
+    func shartImage(image: UIImage)
 }
 
 class ChatTableView: UITableView, UITableViewDelegate, UITableViewDataSource{
@@ -217,7 +220,18 @@ extension ChatTableView: ChatTableViewCellDelegate{
     
     func showPic(_ pic: [UIImage], index: Int, imageDate: [Date], frame: CGRect) {
         let picView = PicsBrowserView()
+        picView.delegate = self
         picView.setUpSingleFramePicBrowser(pic, index: index, imageDate: imageDate, frame: frame)
+    }
+    
+    func shareImage(image: UIImage) {
+        self.pushDelegate?.shartImage(image: image)
+    }
+}
+
+extension ChatTableView: PicsBrowserViewDelegate{
+    func toShareImage(image: UIImage) {
+        self.pushDelegate?.shartImage(image: image)
     }
 }
 

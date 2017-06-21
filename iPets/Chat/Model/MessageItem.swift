@@ -19,6 +19,8 @@ protocol MessageItemDelegate {
     func imageLongPressed()
     
     func imageNoPressed()
+    
+    func shareImage(image: UIImage)
 }
 
 class MessageItem: NSObject, CanCopyLabelDelegate, CanCopyImageDelegate{
@@ -120,6 +122,8 @@ class MessageItem: NSObject, CanCopyLabelDelegate, CanCopyImageDelegate{
         
         self.init(user: user, date: date, mtype: mtype, view: imageView,
                   insets: insets, imageName: imageName, voicePath: nil, voiceLong: nil, messageType: .image)
+        
+        imageView.copyImageDelegate = self
     }
     
     //图片长按
@@ -129,6 +133,10 @@ class MessageItem: NSObject, CanCopyLabelDelegate, CanCopyImageDelegate{
     
     func imageNoPressed() {
         self.delegate?.imageNoPressed()
+    }
+    
+    func shareImageCCV(image: UIImage) {
+        self.delegate?.shareImage(image: image)
     }
     
     

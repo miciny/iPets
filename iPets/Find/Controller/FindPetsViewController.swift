@@ -8,6 +8,7 @@
 
 import UIKit
 import MCYRefresher
+import Social
 
 var findPetsViewController: FindPetsViewController?
 
@@ -28,6 +29,8 @@ class FindPetsViewController: UIViewController, UITableViewDataSource, UITableVi
     fileprivate var addActionView: ActionMenuView?  //此处定义，方便显示和消失的判断
     fileprivate let limited = 10 //每次加载的数量
     fileprivate var deledeIndex = -1 //删除的index
+    
+    var activityViewController: UIActivityViewController?//分享
     
     private var moreView: FindPetsMoreView?
     
@@ -361,12 +364,66 @@ class FindPetsViewController: UIViewController, UITableViewDataSource, UITableVi
     
 }
 
+extension FindPetsViewController: PicsBrowserViewDelegate{
+    func toShareImage(image: UIImage) {
+        self.share(image: image)
+    }
+    
+    func share(image: UIImage){
+        
+        if self.activityViewController != nil {
+            self.activityViewController = nil
+        }
+        
+        let title = (myInfo.username! + "的寻宠二维码")
+        let url = (URL(fileURLWithPath: myOwnUrl))
+        
+        let activityItems: NSArray = [title, image, url]
+        
+        activityViewController = UIActivityViewController(activityItems: activityItems as! [Any], applicationActivities: nil)
+        //排除一些服务：例如复制到粘贴板，拷贝到通讯录
+        activityViewController!.excludedActivityTypes = [UIActivityType.copyToPasteboard,
+                                                         UIActivityType.assignToContact,
+                                                         UIActivityType(rawValue: "com.apple.reminders.RemindersEditorExtension"),
+                                                         UIActivityType(rawValue: "com.apple.mobilenotes.SharingExtension")]
+        
+        self.present(activityViewController!, animated: true, completion: nil)
+        
+        activityViewController!.completionWithItemsHandler =
+            {  (activityType: UIActivityType?,
+                completed: Bool,
+                returnedItems: [Any]?,
+                error: Error?) in
+                
+                print(activityType ?? "没有获取到分享路径")
+                
+                print(returnedItems ?? "没有获取到返回路径")
+                
+                if completed{
+                    ToastView().showToast("分享成功！")
+                }else{
+                    ToastView().showToast("用户取消！")
+                }
+                
+                if let e = error{
+                    print("分享错误")
+                    print(e)
+                }
+                
+                self.activityViewController = nil
+        }
+        
+    }
+
+}
 
 
+//cell中的图 点击啥的
 extension FindPetsViewController: FindPetsCellViewDelegate{
     
     func showPic(_ pic: [UIImage], index: Int, frame: [CGRect]) {
         let picView = PicsBrowserView()
+        picView.delegate = self
         picView.setUpAllFramePicBrowser(pic, index: index, frame: frame)
         
         self.removerMoreView()
@@ -386,6 +443,7 @@ extension FindPetsViewController: FindPetsCellViewDelegate{
     }
 }
 
+//刷新 加载更多
 extension FindPetsViewController: MCYRefreshViewDelegate, MCYLoadMoreViewDelegate{
     //isLoadMore中的代理方法
     func loadingMore(){
@@ -409,6 +467,7 @@ extension FindPetsViewController: MCYRefreshViewDelegate, MCYLoadMoreViewDelegat
     }
 }
 
+//右上角操作
 extension FindPetsViewController: actionMenuViewDelegate{
     func menuClicked(_ tag: Int) {
         switch tag{
@@ -429,6 +488,7 @@ extension FindPetsViewController: actionMenuViewDelegate{
     }
 }
 
+//赞 评论
 extension FindPetsViewController: FindPetsMoreViewDelegate{
     
     func commend(index: Int) {

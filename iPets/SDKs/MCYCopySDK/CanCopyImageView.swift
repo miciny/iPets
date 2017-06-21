@@ -13,6 +13,8 @@ protocol CanCopyImageDelegate {
     func imageLongPressed()  //已经长按
     
     func imageNoPressed()  //弹层消失
+    
+    func shareImageCCV(image: UIImage)
 }
 
 
@@ -94,7 +96,7 @@ class CanCopyImageView: UIImageView {
     
     //分享
     func shareImage() {
-        
+        self.copyImageDelegate?.shareImageCCV(image: self.image!)
     }
     
     override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {

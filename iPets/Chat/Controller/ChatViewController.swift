@@ -8,6 +8,7 @@
 
 import UIKit
 import AssetsLibrary
+import Social
 import AVFoundation
 
 class ChatViewController: UIViewController, ChatDataSource, UITextViewDelegate, PassPhotosDelegate{
@@ -37,6 +38,7 @@ class ChatViewController: UIViewController, ChatDataSource, UITextViewDelegate, 
     fileprivate var voiceTap: UITapGestureRecognizer?
     fileprivate var keyboradTap: UITapGestureRecognizer?
     
+    var activityViewController: UIActivityViewController?
     
     var recorder: AudioRecorder? //录音器
     var aacPath: String?
@@ -654,5 +656,56 @@ extension ChatViewController: ChatTableViewDelegate{
         guestContectorVC.contectorName = name
         self.navigationController?.pushViewController(guestContectorVC, animated: true)
     }
+    
+    func shartImage(image: UIImage) {
+        self.share(image: image)
+    }
+    
+    func share(image: UIImage){
+        
+        if self.activityViewController != nil {
+            self.activityViewController = nil
+        }
+        
+        let title = (myInfo.username! + "的寻宠二维码")
+        let url = (URL(fileURLWithPath: myOwnUrl))
+        
+        let activityItems: NSArray = [title, image, url]
+        
+        activityViewController = UIActivityViewController(activityItems: activityItems as! [Any], applicationActivities: nil)
+        //排除一些服务：例如复制到粘贴板，拷贝到通讯录
+        activityViewController!.excludedActivityTypes = [UIActivityType.copyToPasteboard,
+                                                         UIActivityType.assignToContact,
+                                                         UIActivityType(rawValue: "com.apple.reminders.RemindersEditorExtension"),
+                                                         UIActivityType(rawValue: "com.apple.mobilenotes.SharingExtension")]
+        
+        self.present(activityViewController!, animated: true, completion: nil)
+        
+        activityViewController!.completionWithItemsHandler =
+            {  (activityType: UIActivityType?,
+                completed: Bool,
+                returnedItems: [Any]?,
+                error: Error?) in
+                
+                print(activityType ?? "没有获取到分享路径")
+                
+                print(returnedItems ?? "没有获取到返回路径")
+                
+                if completed{
+                    ToastView().showToast("分享成功！")
+                }else{
+                    ToastView().showToast("用户取消！")
+                }
+                
+                if let e = error{
+                    print("分享错误")
+                    print(e)
+                }
+                
+                self.activityViewController = nil
+        }
+        
+    }
+
 }
 

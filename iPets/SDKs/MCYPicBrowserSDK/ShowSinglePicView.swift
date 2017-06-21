@@ -8,11 +8,18 @@
 
 import UIKit
 import Kingfisher
+import Social
+
+protocol ShowSinglePicViewDelegate {
+    func toShareImage(image: UIImage)
+}
 
 class ShowSinglePicView: UIView, UIScrollViewDelegate{
     fileprivate var mainView : UIControl!
     fileprivate var imageView: UIImageView!
     fileprivate var scroll: UIScrollView! //进行缩放的
+    
+    var delegate: ShowSinglePicViewDelegate?
     
     override init(frame: CGRect){
         super.init(frame: frame)
@@ -94,7 +101,7 @@ class ShowSinglePicView: UIView, UIScrollViewDelegate{
     }
     
     //点击图片，消失
-    func tapedPic(_ sender: UITapGestureRecognizer){
+    func tapedPic(){
         self.backgroundColor = UIColor.clear
         self.mainView.backgroundColor = UIColor.clear
         //动画
@@ -125,6 +132,7 @@ class ShowSinglePicView: UIView, UIScrollViewDelegate{
         }
         ToastView().showToast("保存成功！")
     }
+    
 }
 
 //actionView选择的协议
@@ -134,7 +142,8 @@ extension ShowSinglePicView: bottomMenuViewDelegate{
         case 0:
             switch tag{
             case 0:
-                ToastView().showToast("未实现")
+                self.delegate?.toShareImage(image: imageView.image!)
+                self.tapedPic()
             case 1:
                 //保存图片到本地相册
                 UIImageWriteToSavedPhotosAlbum(self.imageView.image!, self,

@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol PicsBrowserViewDelegate {
+    func toShareImage(image: UIImage)
+}
+
 class PicsBrowserView: UIControl, UIScrollViewDelegate{
 
     //fileprivate var controlView: UIControl!
@@ -27,6 +31,8 @@ class PicsBrowserView: UIControl, UIScrollViewDelegate{
     fileprivate var timeLable: UILabel?
     fileprivate var imageDate: [Date]?
     fileprivate var images: [UIImage]?
+    
+    var delegate: PicsBrowserViewDelegate?
     
     override init(frame: CGRect){
         super.init(frame: frame)
@@ -253,7 +259,7 @@ class PicsBrowserView: UIControl, UIScrollViewDelegate{
     }
     
     //点击图片
-    func tapedPic(_ sender: UITapGestureRecognizer){
+    func tapedPic(){
         self.mainScrollview.backgroundColor = UIColor.clear
         self.backgroundColor = UIColor.clear
         
@@ -305,7 +311,8 @@ extension PicsBrowserView: bottomMenuViewDelegate{
         case 0:
             switch tag{
             case 0:
-                ToastView().showToast("未实现")
+                self.delegate?.toShareImage(image: self.showPics[curentPage].image!)
+                self.tapedPic()
             case 1:
                 //保存图片到本地相册
                 UIImageWriteToSavedPhotosAlbum(self.showPics[curentPage].image!, self,

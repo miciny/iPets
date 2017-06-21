@@ -13,6 +13,7 @@
 import WebKit
 import UIKit
 import Alamofire
+import Social
 import SwiftyJSON
 
 class LocalH5NewsViewController: UIViewController, WKUIDelegate, WKScriptMessageHandler{
@@ -21,6 +22,8 @@ class LocalH5NewsViewController: UIViewController, WKUIDelegate, WKScriptMessage
     fileprivate var webView: WKWebView!
     fileprivate let picView = ShowSinglePicView() //展示图片的
     fileprivate var loading: MyLoadingView?
+    
+    var activityViewController: UIActivityViewController?   //分享
     
     let newsID = "fxuapvw2034026-comos-ent-cms"
     
@@ -69,6 +72,7 @@ class LocalH5NewsViewController: UIViewController, WKUIDelegate, WKScriptMessage
     func setUpTitle(){
         self.title = "极速新闻"
         self.view.backgroundColor = UIColor.white
+        picView.delegate = self
     }
     
     //初始化webview
@@ -179,6 +183,61 @@ class LocalH5NewsViewController: UIViewController, WKUIDelegate, WKScriptMessage
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+}
+
+//=====================================分享=======================================
+
+extension LocalH5NewsViewController: ShowSinglePicViewDelegate{
+    
+    func toShareImage(image: UIImage) {
+        self.share(image: image)
+    }
+    
+    func share(image: UIImage){
+        
+        if self.activityViewController != nil {
+            self.activityViewController = nil
+        }
+        
+        let title = (myInfo.username! + "的图片")
+        let url = (URL(fileURLWithPath: myOwnUrl))
+        
+        let activityItems: NSArray = [title, image, url]
+        
+        activityViewController = UIActivityViewController(activityItems: activityItems as! [Any], applicationActivities: nil)
+        //排除一些服务：例如复制到粘贴板，拷贝到通讯录
+        activityViewController!.excludedActivityTypes = [UIActivityType.copyToPasteboard,
+                                                         UIActivityType.assignToContact,
+                                                         UIActivityType(rawValue: "com.apple.reminders.RemindersEditorExtension"),
+                                                         UIActivityType(rawValue: "com.apple.mobilenotes.SharingExtension")]
+        
+        self.present(activityViewController!, animated: true, completion: nil)
+        
+        activityViewController!.completionWithItemsHandler =
+            {  (activityType: UIActivityType?,
+                completed: Bool,
+                returnedItems: [Any]?,
+                error: Error?) in
+                
+                print(activityType ?? "没有获取到分享路径")
+                
+                print(returnedItems ?? "没有获取到返回路径")
+                
+                if completed{
+                    ToastView().showToast("分享成功！")
+                }else{
+                    ToastView().showToast("用户取消！")
+                }
+                
+                if let e = error{
+                    print("分享错误")
+                    print(e)
+                }
+                
+                self.activityViewController = nil
+        }
+    }
+
 }
 
 

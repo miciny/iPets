@@ -6,6 +6,8 @@ protocol ChatTableViewCellDelegate {
     func pushToPersonInfoView(name: String)
     
     func showPic(_ pic: [UIImage], index: Int, imageDate: [Date], frame: CGRect)
+    
+    func shareImage(image: UIImage)
 }
 
 //信息体加用户头像
@@ -177,9 +179,14 @@ class ChatTableViewCell: UITableViewCell, MessageItemDelegate{
         
     }
     
+    //分享图片
+    func shareImage(image: UIImage) {
+        self.cellDelegate?.shareImage(image: image)
+    }
+    
 
 //========================================头像点击事件==================================
-    func tapedIcon(_ sender: UITapGestureRecognizer){
+    func tapedIcon(){
         self.cellDelegate?.pushToPersonInfoView(name: self.msgItem.user.username!)        //进入个人信息页
     }
     
