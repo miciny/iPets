@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="12141" systemVersion="16E195" minimumToolsVersion="Xcode 7.0" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
-    <entity name="ChatList" syncable="YES">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="12141" systemVersion="16F73" minimumToolsVersion="Xcode 7.0" sourceLanguage="Swift" userDefinedModelVersionIdentifier="Contectors">
+    <entity name="ChatList" representedClassName=".ChatList" syncable="YES">
         <attribute name="icon" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="lable" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="nickname" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="time" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="unread" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
-    <entity name="Contectors" syncable="YES">
+    <entity name="Contectors" representedClassName=".Contectors" syncable="YES">
         <attribute name="address" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="http" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="icon" optional="YES" attributeType="Binary" syncable="YES"/>
@@ -16,20 +17,20 @@
         <attribute name="remark" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="sex" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
-    <entity name="MyAddress" syncable="YES">
+    <entity name="MyAddress" representedClassName=".MyAddress" syncable="YES">
         <attribute name="address" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="code" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="phone" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
-    <entity name="SearchRecord" syncable="YES">
+    <entity name="SearchRecord" representedClassName=".SearchRecord" syncable="YES">
         <attribute name="label" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="time" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
     </entity>
     <elements>
-        <element name="ChatList" positionX="-63" positionY="36" width="128" height="120"/>
-        <element name="Contectors" positionX="-63" positionY="36" width="128" height="150"/>
-        <element name="MyAddress" positionX="-63" positionY="27" width="128" height="105"/>
-        <element name="SearchRecord" positionX="-63" positionY="63" width="128" height="75"/>
+        <element name="ChatList" positionX="-63" positionY="36" width="128" height="133"/>
+        <element name="Contectors" positionX="99" positionY="21" width="128" height="150"/>
+        <element name="MyAddress" positionX="88" positionY="192" width="128" height="105"/>
+        <element name="SearchRecord" positionX="-65" positionY="198" width="128" height="75"/>
     </elements>
 </model>

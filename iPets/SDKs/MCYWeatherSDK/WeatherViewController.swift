@@ -60,8 +60,6 @@ class WeatherViewController: UIViewController, UIScrollViewDelegate {
         self.modalTransitionStyle = .crossDissolve //进入页面时的动画效果
         
         self.initNetManager()
-        self.checkIsDay()
-        self.setBackImg()
         
         self.setMainViewEle()
         self.setHourlyView()
@@ -79,9 +77,30 @@ class WeatherViewController: UIViewController, UIScrollViewDelegate {
     }
     
     func checkIsDay(){
+        
         let date = Date()
-        if date.currentHour > 7 && date.currentHour < 19{
+        
+        let srArray = sunrise.components(separatedBy: ":")
+        let ssArray = sunset.components(separatedBy: ":")
+        
+        let timeTmp = DateToToString.dateToStringBySelf(date, format: "HH:mm")
+        let timeTmpArray = timeTmp.components(separatedBy: ":")
+
+        
+        if ((Int(srArray[0]))! < (Int(timeTmpArray[0]))! && (Int(ssArray[0]))! > (Int(timeTmpArray[0]))!) {
             isDay = true
+        }else if((Int(srArray[0]))! == (Int(timeTmpArray[0]))! && (Int(ssArray[0]))! > (Int(timeTmpArray[0]))!){
+            if((Int(srArray[1]))! < (Int(timeTmpArray[1]))!){
+                isDay = true
+            }else{
+                isDay = false
+            }
+        }else if((Int(srArray[0]))! < (Int(timeTmpArray[0]))! && (Int(ssArray[0]))! == (Int(timeTmpArray[0]))!){
+            if((Int(ssArray[1]))! > (Int(timeTmpArray[1]))!){
+                isDay = true
+            }else{
+                isDay = false
+            }
         }else{
             isDay = false
         }
@@ -129,16 +148,14 @@ class WeatherViewController: UIViewController, UIScrollViewDelegate {
     
     
     func setBackImg(){
+        
         var img = UIImage()
         if(isDay){
             img = UIImage(named:"day.jpeg")!    //初始化图片
         }else{
             img = UIImage(named:"night.jpeg")!    //初始化图片
         }
-        vImg = UIImageView(image: img)   //初始化图片View
-        vImg.frame = CGRect(x: 0, y: 0, width: Width, height: Height)   //指定图片的位置以及显示的大小
-        self.view.addSubview(vImg)
-        
+        vImg.image = img
     }
     
     func back(){
@@ -157,6 +174,11 @@ class WeatherViewController: UIViewController, UIScrollViewDelegate {
     
 //==================================主View======================================
     func setMainViewEle(){
+        
+        vImg = UIImageView()   //初始化图片View
+        vImg.frame = CGRect(x: 0, y: 0, width: Width, height: Height)   //指定图片的位置以及显示的大小
+        self.view.addSubview(vImg)
+        
         mainScrollView.frame = CGRect(x: 0, y: 0, width: Width, height: Height)
         mainScrollView.backgroundColor = UIColor.clear
         mainScrollView.showsVerticalScrollIndicator = false
@@ -550,6 +572,10 @@ class WeatherViewController: UIViewController, UIScrollViewDelegate {
                         self.setDailyView()
                         self.setDailyScrollViewData()
                         self.setLableData()
+                        
+                        self.checkIsDay()
+                        self.setBackImg()
+                        
                     }else{
                         self.nowTmpTextLb.text = "错误代码" + String(code)
                     }

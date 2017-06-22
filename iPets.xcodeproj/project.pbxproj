@@ -166,7 +166,6 @@
 		E17528D11ED409B100269EDF /* iPets.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E17528CF1ED409B100269EDF /* iPets.xcdatamodeld */; };
 		E17528D51ED40A5A00269EDF /* InternetExplorerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17528D31ED40A5A00269EDF /* InternetExplorerViewController.swift */; };
 		E17528D61ED40A5A00269EDF /* RichScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17528D41ED40A5A00269EDF /* RichScanViewController.swift */; };
-		E17528E81ED40B0F00269EDF /* Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17528E61ED40B0F00269EDF /* Protocol.swift */; };
 		E17528E91ED40B0F00269EDF /* UniversalConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17528E71ED40B0F00269EDF /* UniversalConstants.swift */; };
 		E17528F11ED40B1800269EDF /* AutoLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17528EA1ED40B1800269EDF /* AutoLayout.swift */; };
 		E17528F21ED40B1800269EDF /* ChangeValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17528EB1ED40B1800269EDF /* ChangeValue.swift */; };
@@ -187,6 +186,14 @@
 		E18C41AE1EF8BA0E00AFF37C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E18C41AD1EF8BA0D00AFF37C /* Images.xcassets */; };
 		E18C41B01EF8BAB900AFF37C /* AudioRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18C41AF1EF8BAB900AFF37C /* AudioRecorder.swift */; };
 		E18C41B51EFA860700AFF37C /* BageValueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18C41B41EFA860700AFF37C /* BageValueView.swift */; };
+		E18C41BF1EFB990E00AFF37C /* Contectors+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18C41B71EFB990E00AFF37C /* Contectors+CoreDataClass.swift */; };
+		E18C41C01EFB990E00AFF37C /* Contectors+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18C41B81EFB990E00AFF37C /* Contectors+CoreDataProperties.swift */; };
+		E18C41C11EFB990E00AFF37C /* ChatList+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18C41B91EFB990E00AFF37C /* ChatList+CoreDataClass.swift */; };
+		E18C41C21EFB990E00AFF37C /* ChatList+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18C41BA1EFB990E00AFF37C /* ChatList+CoreDataProperties.swift */; };
+		E18C41C31EFB990E00AFF37C /* MyAddress+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18C41BB1EFB990E00AFF37C /* MyAddress+CoreDataClass.swift */; };
+		E18C41C41EFB990E00AFF37C /* MyAddress+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18C41BC1EFB990E00AFF37C /* MyAddress+CoreDataProperties.swift */; };
+		E18C41C51EFB990E00AFF37C /* SearchRecord+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18C41BD1EFB990E00AFF37C /* SearchRecord+CoreDataClass.swift */; };
+		E18C41C61EFB990E00AFF37C /* SearchRecord+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18C41BE1EFB990E00AFF37C /* SearchRecord+CoreDataProperties.swift */; };
 		E1ADD75D1ED6CD29000BCBC4 /* MyTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1ADD75C1ED6CD29000BCBC4 /* MyTimer.swift */; };
 		E1ADD75F1EDFE899000BCBC4 /* Temp.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E1ADD75E1EDFE899000BCBC4 /* Temp.xcassets */; };
 		E1DE0E631EEA918600CF580D /* AVSDKExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DE0E5C1EEA918600CF580D /* AVSDKExtension.swift */; };
@@ -200,7 +207,6 @@
 		E1DE0E6D1EEA919F00CF580D /* CanCopyLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DE0E6B1EEA919F00CF580D /* CanCopyLabel.swift */; };
 		E1DE0E741EEA91BA00CF580D /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DE0E6E1EEA91BA00CF580D /* Cache.swift */; };
 		E1DE0E751EEA91BA00CF580D /* CacheConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DE0E6F1EEA91BA00CF580D /* CacheConstants.swift */; };
-		E1DE0E761EEA91BA00CF580D /* DBConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DE0E701EEA91BA00CF580D /* DBConstants.swift */; };
 		E1DE0E771EEA91BA00CF580D /* SaveCacheDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DE0E711EEA91BA00CF580D /* SaveCacheDataModel.swift */; };
 		E1DE0E781EEA91BA00CF580D /* SaveDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DE0E721EEA91BA00CF580D /* SaveDataModel.swift */; };
 		E1DE0E791EEA91BA00CF580D /* SQLLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DE0E731EEA91BA00CF580D /* SQLLine.swift */; };
@@ -410,7 +416,6 @@
 		E17528D01ED409B100269EDF /* iPets.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = iPets.xcdatamodel; sourceTree = "<group>"; };
 		E17528D31ED40A5A00269EDF /* InternetExplorerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InternetExplorerViewController.swift; sourceTree = "<group>"; };
 		E17528D41ED40A5A00269EDF /* RichScanViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RichScanViewController.swift; sourceTree = "<group>"; };
-		E17528E61ED40B0F00269EDF /* Protocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Protocol.swift; sourceTree = "<group>"; };
 		E17528E71ED40B0F00269EDF /* UniversalConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UniversalConstants.swift; sourceTree = "<group>"; };
 		E17528EA1ED40B1800269EDF /* AutoLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoLayout.swift; sourceTree = "<group>"; };
 		E17528EB1ED40B1800269EDF /* ChangeValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeValue.swift; sourceTree = "<group>"; };
@@ -431,6 +436,14 @@
 		E18C41AD1EF8BA0D00AFF37C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		E18C41AF1EF8BAB900AFF37C /* AudioRecorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioRecorder.swift; sourceTree = "<group>"; };
 		E18C41B41EFA860700AFF37C /* BageValueView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BageValueView.swift; sourceTree = "<group>"; };
+		E18C41B71EFB990E00AFF37C /* Contectors+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Contectors+CoreDataClass.swift"; sourceTree = "<group>"; };
+		E18C41B81EFB990E00AFF37C /* Contectors+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Contectors+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		E18C41B91EFB990E00AFF37C /* ChatList+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ChatList+CoreDataClass.swift"; sourceTree = "<group>"; };
+		E18C41BA1EFB990E00AFF37C /* ChatList+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ChatList+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		E18C41BB1EFB990E00AFF37C /* MyAddress+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MyAddress+CoreDataClass.swift"; sourceTree = "<group>"; };
+		E18C41BC1EFB990E00AFF37C /* MyAddress+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MyAddress+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		E18C41BD1EFB990E00AFF37C /* SearchRecord+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SearchRecord+CoreDataClass.swift"; sourceTree = "<group>"; };
+		E18C41BE1EFB990E00AFF37C /* SearchRecord+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SearchRecord+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		E1ADD75C1ED6CD29000BCBC4 /* MyTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyTimer.swift; sourceTree = "<group>"; };
 		E1ADD75E1EDFE899000BCBC4 /* Temp.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Temp.xcassets; sourceTree = "<group>"; };
 		E1DE0E5C1EEA918600CF580D /* AVSDKExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVSDKExtension.swift; sourceTree = "<group>"; };
@@ -444,7 +457,6 @@
 		E1DE0E6B1EEA919F00CF580D /* CanCopyLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CanCopyLabel.swift; sourceTree = "<group>"; };
 		E1DE0E6E1EEA91BA00CF580D /* Cache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
 		E1DE0E6F1EEA91BA00CF580D /* CacheConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheConstants.swift; sourceTree = "<group>"; };
-		E1DE0E701EEA91BA00CF580D /* DBConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DBConstants.swift; sourceTree = "<group>"; };
 		E1DE0E711EEA91BA00CF580D /* SaveCacheDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaveCacheDataModel.swift; sourceTree = "<group>"; };
 		E1DE0E721EEA91BA00CF580D /* SaveDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaveDataModel.swift; sourceTree = "<group>"; };
 		E1DE0E731EEA91BA00CF580D /* SQLLine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SQLLine.swift; sourceTree = "<group>"; };
@@ -591,6 +603,7 @@
 		E14197E11CA1A81300EDD443 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				E18C41B61EFB98F400AFF37C /* XCCoreDataBaseClass */,
 				E17528FF1ED40CE900269EDF /* Assets.xcassets */,
 				E17528CF1ED409B100269EDF /* iPets.xcdatamodeld */,
 				E10E445F1CC62B0900D9992A /* resources */,
@@ -1093,7 +1106,6 @@
 		E17528E41ED40AE900269EDF /* Constants */ = {
 			isa = PBXGroup;
 			children = (
-				E17528E61ED40B0F00269EDF /* Protocol.swift */,
 				E17528E71ED40B0F00269EDF /* UniversalConstants.swift */,
 			);
 			name = Constants;
@@ -1138,6 +1150,22 @@
 			);
 			name = MCYMusicSDK;
 			path = ../../../../Users/miciny/ToGitHub/iPets/iPets/SDKs/MCYMusicSDK;
+			sourceTree = DEVELOPER_DIR;
+		};
+		E18C41B61EFB98F400AFF37C /* XCCoreDataBaseClass */ = {
+			isa = PBXGroup;
+			children = (
+				E18C41B71EFB990E00AFF37C /* Contectors+CoreDataClass.swift */,
+				E18C41B81EFB990E00AFF37C /* Contectors+CoreDataProperties.swift */,
+				E18C41B91EFB990E00AFF37C /* ChatList+CoreDataClass.swift */,
+				E18C41BA1EFB990E00AFF37C /* ChatList+CoreDataProperties.swift */,
+				E18C41BB1EFB990E00AFF37C /* MyAddress+CoreDataClass.swift */,
+				E18C41BC1EFB990E00AFF37C /* MyAddress+CoreDataProperties.swift */,
+				E18C41BD1EFB990E00AFF37C /* SearchRecord+CoreDataClass.swift */,
+				E18C41BE1EFB990E00AFF37C /* SearchRecord+CoreDataProperties.swift */,
+			);
+			name = XCCoreDataBaseClass;
+			path = ../../../../Users/miciny/ToGitHub/iPets/iPets/Resources/XCCoreDataBaseClass;
 			sourceTree = DEVELOPER_DIR;
 		};
 		E1DE0E341EEA8DBB00CF580D /* SDKs */ = {
@@ -1193,7 +1221,6 @@
 			children = (
 				E1DE0E6E1EEA91BA00CF580D /* Cache.swift */,
 				E1DE0E6F1EEA91BA00CF580D /* CacheConstants.swift */,
-				E1DE0E701EEA91BA00CF580D /* DBConstants.swift */,
 				E1DE0E711EEA91BA00CF580D /* SaveCacheDataModel.swift */,
 				E1DE0E721EEA91BA00CF580D /* SaveDataModel.swift */,
 				E1DE0E731EEA91BA00CF580D /* SQLLine.swift */,
@@ -1500,6 +1527,7 @@
 				E10B34ED1EEAA65800D65C9F /* MyLoadingView.swift in Sources */,
 				E17528F71ED40B1800269EDF /* UniversalFuncs.swift in Sources */,
 				E17528571ED3E8AE00269EDF /* SellBuyCollectionHeaderView.swift in Sources */,
+				E18C41C41EFB990E00AFF37C /* MyAddress+CoreDataProperties.swift in Sources */,
 				E10B34E21EEAA2D500D65C9F /* VideoViewController.swift in Sources */,
 				E175289A1ED406BB00269EDF /* FindPetsTableViewCell.swift in Sources */,
 				E17528901ED406A500269EDF /* FindPetsViewController.swift in Sources */,
@@ -1550,10 +1578,13 @@
 				E17528B31ED406D000269EDF /* UserInfo.swift in Sources */,
 				E1DE0EB41EEA94C000CF580D /* NewsHeaderDataModule.swift in Sources */,
 				E12A38B71EEA794000755C6C /* FindTableViewCell.swift in Sources */,
+				E18C41BF1EFB990E00AFF37C /* Contectors+CoreDataClass.swift in Sources */,
+				E18C41C01EFB990E00AFF37C /* Contectors+CoreDataProperties.swift in Sources */,
 				E17528B01ED406D000269EDF /* ContectorInfoViewDataModel.swift in Sources */,
 				E14408291EEFE23700C8E23B /* TipsView.swift in Sources */,
 				E126FD101CFD6E7700DAFF84 /* AppDelegate.swift in Sources */,
 				E17528951ED406AD00269EDF /* FindPetsCellFrameModel.swift in Sources */,
+				E18C41C31EFB990E00AFF37C /* MyAddress+CoreDataClass.swift in Sources */,
 				E1DE0E881EEA928600CF580D /* ImageChooseFuncs.swift in Sources */,
 				E17528541ED3E8AE00269EDF /* CycleView.swift in Sources */,
 				E1DE0E671EEA918600CF580D /* VideoFuncs.swift in Sources */,
@@ -1566,6 +1597,7 @@
 				E10B34EE1EEAA65800D65C9F /* ToastView.swift in Sources */,
 				E17528A21ED406C600269EDF /* MainChatListViewController.swift in Sources */,
 				E10B34EF1EEAA65800D65C9F /* WaitView.swift in Sources */,
+				E18C41C61EFB990E00AFF37C /* SearchRecord+CoreDataProperties.swift in Sources */,
 				E1ADD75D1ED6CD29000BCBC4 /* MyTimer.swift in Sources */,
 				E17528F31ED40B1800269EDF /* DateToToString.swift in Sources */,
 				E17528F51ED40B1800269EDF /* GetMyInfo.swift in Sources */,
@@ -1588,7 +1620,6 @@
 				E17528821ED404A400269EDF /* PersonInfo_TDCodeImageViewController.swift in Sources */,
 				E17528551ED3E8AE00269EDF /* SearchTableViewCell.swift in Sources */,
 				E14408361EEFE27900C8E23B /* TetrisConstant.swift in Sources */,
-				E17528E81ED40B0F00269EDF /* Protocol.swift in Sources */,
 				E1DE0E641EEA918600CF580D /* BaseVideoView.swift in Sources */,
 				E144082B1EEFE23700C8E23B /* PauseView.swift in Sources */,
 				E18C41A91EF8B99A00AFF37C /* MCYMusicViewController.swift in Sources */,
@@ -1601,7 +1632,6 @@
 				E1DE0EA81EEA94BA00CF580D /* NetConstant.swift in Sources */,
 				E16321921EF227930022F40D /* AddressPickerView.swift in Sources */,
 				E1DE0E8A1EEA928600CF580D /* ImageCollectionViewCell.swift in Sources */,
-				E1DE0E761EEA91BA00CF580D /* DBConstants.swift in Sources */,
 				E1DE0EA51EEA94BA00CF580D /* ArticleNetConstant.swift in Sources */,
 				E17528AE1ED406D000269EDF /* ContectorListViewDataModel.swift in Sources */,
 				E17528FD1ED40B7600269EDF /* CustomPresentAnimationController.swift in Sources */,
@@ -1633,10 +1663,13 @@
 				E1DE0E771EEA91BA00CF580D /* SaveCacheDataModel.swift in Sources */,
 				E1DE0E7F1EEA91FA00CF580D /* NetFuncs.swift in Sources */,
 				E1DE0EBB1EEA94CC00CF580D /* NewsRootViewController.swift in Sources */,
+				E18C41C21EFB990E00AFF37C /* ChatList+CoreDataProperties.swift in Sources */,
 				E14408341EEFE27900C8E23B /* TetrisCalculate.swift in Sources */,
 				E17528671ED4034D00269EDF /* SearchViewController.swift in Sources */,
+				E18C41C11EFB990E00AFF37C /* ChatList+CoreDataClass.swift in Sources */,
 				E17528FE1ED40B7600269EDF /* PushAndPopAnimation.swift in Sources */,
 				E144083C1EEFE28400C8E23B /* TetrisElementsObj.swift in Sources */,
+				E18C41C51EFB990E00AFF37C /* SearchRecord+CoreDataClass.swift in Sources */,
 				E17528B11ED406D000269EDF /* MainChatListViewDataModel.swift in Sources */,
 				E12A38B91EEA795700755C6C /* FindDataModel.swift in Sources */,
 				E17528BD1ED406DC00269EDF /* ContectorListTableViewCell.swift in Sources */,

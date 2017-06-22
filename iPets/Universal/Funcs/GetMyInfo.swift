@@ -14,20 +14,16 @@ class GetInfo: NSObject {
     class func getMyInfo() -> UserInfo{
         var myIcon = UIImage()
         var myName = String()
-        var myNickname = String()
         
         //从CoreData里读取数据,数据库肯定会有东西
-        let dataArray = SQLLine.SelectAllData(entityNameOfContectors)
         
-        for data in dataArray{
-            myNickname = (data as AnyObject).value(forKey: ContectorsNameOfNickname)! as! String
-            if myNickname == myNickname{
-                let myIconData = (data as AnyObject).value(forKey: ContectorsNameOfIcon)! as! Data
+        if let data = SQLLine.SelectedCordData("nickname='"+myNikename+"'", entityName: entityNameOfContectors){
+            if data.count == 1{
+                let myIconData = (data[0] as! Contectors).icon! as Data
                 myIcon = UIImage(data: myIconData)!
-                myName = (data as AnyObject).value(forKey: ContectorsNameOfName)! as! String
-                break
+                myName = (data[0] as! Contectors).name!
             }
         }
-        return UserInfo(name: myName, icon: myIcon, nickname: myNickname)
+        return UserInfo(name: myName, icon: myIcon, nickname: myNikename)
     }
 }

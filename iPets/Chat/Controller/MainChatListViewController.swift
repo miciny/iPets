@@ -19,6 +19,8 @@ class MainChatListViewController: UIViewController, UITableViewDelegate, UITable
                                                "添加朋友": "AddFriends",
                                                "扫一扫": "AddScan"]
     fileprivate var addActionView: ActionMenuView?  //此处定义，方便显示和消失的判断
+    
+    private var bageInt = Int()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +35,6 @@ class MainChatListViewController: UIViewController, UITableViewDelegate, UITable
         setData()
         self.mainTabelView?.reloadData()
         
-//        self.navigationController?.tabBarItem.badgeValue = "99" //设置数的
     }
     
     //退出界面，菜单消失
@@ -91,19 +92,23 @@ class MainChatListViewController: UIViewController, UITableViewDelegate, UITable
     
     func setData(){
         chatData = NSMutableArray()
+        bageInt = 0
         
         let chatList = SQLLine.SelectAllData(entityNameOfChatList)
         
         for i in 0 ..< chatList.count {
-            let title = (chatList[i] as AnyObject).value(forKey: ChatListNameOfTitle) as! String
-            let lable = (chatList[i] as AnyObject).value(forKey: ChatListNameOfLable) as! String
-            let time = (chatList[i] as AnyObject).value(forKey: ChatListNameOfTime) as! Date
-            let iconDate = (chatList[i] as AnyObject).value(forKey: ChatListNameOfIcon) as! Data
+            let title = (chatList[i] as! ChatList).title!
+            let lable = (chatList[i] as! ChatList).lable!
+            let time = (chatList[i] as! ChatList).time! as Date
+            let iconDate = (chatList[i] as! ChatList).icon! as Data
             let icon = UIImage(data: iconDate)!
-            let nickname = (chatList[i] as AnyObject).value(forKey: ChatListNameOfNickname) as! String
+            let nickname = (chatList[i] as! ChatList).nickname!
+            let unreadCount = Int((chatList[i] as! ChatList).unread!)!
+            
+            bageInt += unreadCount  //未读消息数
             
             let singleChatList = MainChatListViewDataModel(pic: icon, name: title, lable: lable,
-                                                           time: time, nickname: nickname, unreadCount: 0)
+                                                           time: time, nickname: nickname, unreadCount: unreadCount)
             chatData!.add(singleChatList)
         }
         
@@ -120,7 +125,25 @@ class MainChatListViewController: UIViewController, UITableViewDelegate, UITable
                 return ComparisonResult.orderedDescending
             }
         })
+
+        if bageInt>0 && bageInt<=99{
+            self.navigationController?.tabBarItem.badgeValue = String(bageInt) //设置数的
+            
+        }else if bageInt>99{
+            self.navigationController?.tabBarItem.badgeValue = "99+" //设置数的
+        }else{
+            self.navigationController?.tabBarItem.badgeValue = nil
+        }
+        
+        self.scheduleNotification()
     }
+    
+    //发送通知消息
+    func scheduleNotification(){
+        
+        UIApplication.shared.applicationIconBadgeNumber = bageInt
+    }
+    
 //＊＊＊＊＊＊＊＊＊＊＊＊初始化tableView以及代理方法＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊
     //设置tableView
     func setUpTable(){
@@ -173,6 +196,11 @@ class MainChatListViewController: UIViewController, UITableViewDelegate, UITable
         let data = chatData![indexPath.row]
         let item =  data as! MainChatListViewDataModel
         
+        //未读消息数
+        bageInt = bageInt - item.unreadCount
+        self.unreadData(indexPath: indexPath, str: "0")
+        self.scheduleNotification()
+        
         let chatView = ChatViewController()
         chatView.hidesBottomBarWhenPushed = true
         chatView.youInfo = UserInfo(name: item.name, icon: item.pic, nickname: item.nickname)
@@ -203,30 +231,24 @@ class MainChatListViewController: UIViewController, UITableViewDelegate, UITable
         chatsData.deleteChatsPListFile("\(item.nickname).plist") //删除plist文件
         
         //删除数据库
-        let chatList = SQLLine.SelectAllData(entityNameOfChatList)
-        
-        for i in 0 ..< chatList.count {
-            let title = (chatList[i] as AnyObject).value(forKey: ChatListNameOfNickname) as! String
-            if(title == item.nickname){
-                if SQLLine.DeleteData(entityNameOfChatList, indexPath: i){
-                    print("删除"+title+"聊天数据库成功！")
-                }else{
-                    print("删除"+title+"聊天数据库失败！")
-                }
-                break
-            }
+        if SQLLine.DeleteData(entityNameOfChatList, condition: "nickname='"+item.nickname+"'"){
+            print("删除"+item.nickname+"聊天数据库成功！")
+        }else{
+            print("删除"+item.nickname+"聊天数据库失败！")
         }
-        
+    
         chatData?.removeObject(at: indexPath.row)  //删本地数据
         self.mainTabelView!.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
     }
     
-    //标记未读
-    func unreadData(indexPath: IndexPath){
+    //标记未读, 1表示未读 0表示已读
+    func unreadData(indexPath: IndexPath, str: String){
         let data = chatData![indexPath.row]
         let item =  data as! MainChatListViewDataModel
-        item.unreadCount = 1
         
+        let _ = SQLLine.UpdateDataWithCondition("nickname='"+item.nickname+"'", entityName: entityNameOfChatList, changeValue: str as AnyObject, changeEntityName: "unread")
+        
+        self.setData()
         self.mainTabelView?.reloadData()
     }
     
@@ -239,11 +261,22 @@ class MainChatListViewController: UIViewController, UITableViewDelegate, UITable
         delete.backgroundColor = UIColor.red
         
         //标记未读
-        let setUnread = UITableViewRowAction(style: .normal, title: "标记未读") { action, index in
-            self.unreadData(indexPath: indexPath)
+        var setUnread = UITableViewRowAction()
+        let data = chatData![indexPath.row]
+        let item =  data as! MainChatListViewDataModel
+
+        if item.unreadCount <= 0{
+            setUnread = UITableViewRowAction(style: .normal, title: "标为未读") { action, index in
+                self.unreadData(indexPath: indexPath, str: "1")
+            }
+        }else{
+            setUnread = UITableViewRowAction(style: .normal, title: "标为已读") { action, index in
+                self.unreadData(indexPath: indexPath, str: "0")
+            }
         }
         setUnread.backgroundColor = UIColor.lightGray
         
+        //返回
         return [delete, setUnread]
     }
     

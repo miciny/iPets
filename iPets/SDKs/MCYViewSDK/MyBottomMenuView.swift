@@ -8,6 +8,12 @@
 
 import UIKit
 
+
+//底部菜单的代理
+protocol bottomMenuViewDelegate{
+    func buttonClicked(_ tag: Int, eventFlag: Int)
+}
+
 // 显示底部菜单
 class MyBottomMenuView: UIControl{
     

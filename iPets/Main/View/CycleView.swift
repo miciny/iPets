@@ -8,6 +8,15 @@
 
 import UIKit
 
+//自动滑动图的代理
+@objc protocol MCYAutoScrollViewDelegate: NSObjectProtocol{
+    func numbersOfPages()->Int
+    func imageNameOfIndex(_ index: Int) -> String!
+    @objc optional func didSelectedIndex(_ index: Int)
+    @objc optional func currentIndexDidChange(_ index: Int)
+}
+
+
 class HeaderCycleView: UIView, UIScrollViewDelegate{
     //MARK:- private 属性
     

@@ -28,6 +28,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //创建默认头像
         setDefaultData()
         
+        //开启通知
+        let settings = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+        application.registerUserNotificationSettings(settings)
+        
         return true
     }
     

@@ -8,6 +8,12 @@
 
 import UIKit
 
+
+//点击头图的协议
+protocol SellBuyHeaderDelegate {
+    func selectedPic(_ str: String)
+}
+
 // 主页的头图
 class SellBuyCollectionHeaderView: UICollectionReusableView, MCYAutoScrollViewDelegate {
 

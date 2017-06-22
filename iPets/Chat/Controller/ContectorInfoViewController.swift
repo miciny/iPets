@@ -49,36 +49,30 @@ class ContectorInfoViewController: UIViewController, UITableViewDelegate, UITabl
     func setData(){
         contectorInfoData = NSMutableArray()
         //获取联系人信息
-        let contectors = SQLLine.SelectAllData(entityNameOfContectors)
         
-        for i in 0 ..< contectors.count {
-            let name = (contectors[i] as AnyObject).value(forKey: ContectorsNameOfName) as! String
-            if(contectorName == name){
-                
-                //获取返回数据的信息
-                let nickname = (contectors[i] as AnyObject).value(forKey: ContectorsNameOfNickname) as! String
-                let sex = (contectors[i] as AnyObject).value(forKey: ContectorsNameOfSex) as! String
-                let remark = (contectors[i] as AnyObject).value(forKey: ContectorsNameOfRemark) as! String
-                let iconData = (contectors[i] as AnyObject).value(forKey: ContectorsNameOfIcon) as! Data
-                let icon = ChangeValue.dataToImage(iconData)
-                let address = (contectors[i] as AnyObject).value(forKey: ContectorsNameOfAddress) as! String
-                let http = (contectors[i] as AnyObject).value(forKey: ContectorsNameOfHttp) as! String
-                
-                //弄成contectorModel模型
-                contectorInfo = ContectorModel(name: name, sex: sex, nickname: nickname, icon: icon, remark: remark, address: address, http: http)
-                
-                //加入数据
-                let data1 = ContectorInfoViewDataModel(icon: icon, name: contectorName, nickname: nickname, sex: sex)
-                let data2 = ContectorInfoViewDataModel(remark: remark)
-                let data3 = ContectorInfoViewDataModel(address: address)
-                let data4 = ContectorInfoViewDataModel(http: http)
-                
-                contectorInfoData?.add([data1])
-                contectorInfoData?.add([data2])
-                contectorInfoData?.add([data3, data4])
-                
-                return
-            }
+        if let contectors = SQLLine.SelectedCordData("name='"+contectorName+"'", entityName: entityNameOfContectors){
+            //获取返回数据的信息
+            let nickname = (contectors[0] as! Contectors).nickname!
+            let sex = (contectors[0] as! Contectors).sex!
+            let remark = (contectors[0] as! Contectors).remark!
+            let iconData = (contectors[0] as! Contectors).icon!
+            let icon = ChangeValue.dataToImage(iconData as Data)
+            let address = (contectors[0] as! Contectors).address!
+            let http = (contectors[0]as! Contectors).http!
+            
+            //弄成contectorModel模型
+            contectorInfo = ContectorModel(name: contectorName, sex: sex, nickname: nickname, icon: icon, remark: remark, address: address, http: http)
+            
+            //加入数据
+            let data1 = ContectorInfoViewDataModel(icon: icon, name: contectorName, nickname: nickname, sex: sex)
+            let data2 = ContectorInfoViewDataModel(remark: remark)
+            let data3 = ContectorInfoViewDataModel(address: address)
+            let data4 = ContectorInfoViewDataModel(http: http)
+            
+            contectorInfoData?.add([data1])
+            contectorInfoData?.add([data2])
+            contectorInfoData?.add([data3, data4])
+
         }
     }
     
@@ -174,23 +168,22 @@ class ContectorInfoViewController: UIViewController, UITableViewDelegate, UITabl
     
     func sendMsg(){
         //同步存储到聊天主界面的数据库
-        let chatList = SQLLine.SelectAllData(entityNameOfChatList)
         var isExsit = false
         
         //看原来有没有这个聊天
-        for i in 0 ..< chatList.count {
-            let title = (chatList[i] as AnyObject).value(forKey: ChatListNameOfNickname) as! String
-            if(title == contectorInfo.nickname){
+        if let data = SQLLine.SelectedCordData("nickname='"+contectorInfo.nickname+"'", entityName: entityNameOfChatList){
+            if data.count == 1{
                 isExsit = true
-                break
             }
         }
+        
         //如果原先没有这个聊天
         if !isExsit{
             let icon = contectorInfo.icon
             let iconData = ChangeValue.imageToData(icon)
             
-            let _ = SQLLine.InsertChatListData(contectorInfo.name, lable: "", icon: iconData!, time: Date(), nickname: contectorInfo.nickname)
+            let _ = SQLLine.InsertChatListData(contectorInfo.name, lable: "", icon: iconData!, time: Date(), nickname: contectorInfo.nickname, unread: "0")
+            print(contectorInfo.name + "的聊天数据库保存成功")
         }
 
         //进入聊天页

@@ -43,11 +43,11 @@ class PersonInfoViewController: UIViewController, UITableViewDelegate, UITableVi
         
         //如果有数据，就读取数据
         for data in dataArray{
-            let nickName = (data as AnyObject).value(forKey: ContectorsNameOfNickname)! as! String
+            let nickName = (data as! Contectors).nickname!
             if nickName == myNikename{
-                sex = (data as AnyObject).value(forKey: ContectorsNameOfSex)! as! String
-                address = (data as AnyObject).value(forKey: ContectorsNameOfAddress)! as! String
-                motto = (data as AnyObject).value(forKey: ContectorsNameOfRemark)! as! String
+                sex = (data as! Contectors).sex!
+                address = (data as! Contectors).address!
+                motto = (data as! Contectors).remark!
                 break
             }
         }

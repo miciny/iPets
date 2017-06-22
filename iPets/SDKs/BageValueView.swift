@@ -12,17 +12,18 @@ class BageValueView: NSObject {
     
     class func nbView(str: String) -> UIView{
         let v = UILabel()
-        let min: CGFloat = 12
+        let min: CGFloat = 18
         
-        let font = UIFont.systemFont(ofSize: 10)
-        let size = sizeWithText(str, font: font, maxSize: CGSize(width: 20, height: 20))
+        let font = UIFont.systemFont(ofSize: 12)
+        let size = sizeWithText(str, font: font, maxSize: CGSize(width: 50, height: 50))
         
-        let w = (size.width+1) < min ? min: size.width+1
-        let h = (size.height+1) < min ? min : size.height+1
+        let w = (size.width+1) < min ? min: size.width+6
+        let h = (size.height+1) < min ? min : size.height
         
         v.frame.size = CGSize(width: w, height: h)
-        v.layer.cornerRadius = 8
+        v.layer.cornerRadius = h/2
         v.text = str
+        v.clipsToBounds = true
         v.textColor = UIColor.white
         v.backgroundColor = UIColor.red
         v.font = font

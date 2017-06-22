@@ -62,15 +62,13 @@ class PersonInfo_TDCodeImageViewController: UIViewController {
     func setUpPic(){
         
         //从CoreData里读取数据
-        let dataArray = SQLLine.SelectAllData(entityNameOfContectors)
         var myIconData = Data()
-        for i in 0 ..< dataArray.count{
-            let nickName = (dataArray[i] as AnyObject).value(forKey: ContectorsNameOfNickname)! as! String
-            if nickName == myNikename{
-                myIconData = (dataArray[i] as AnyObject).value(forKey: ContectorsNameOfIcon)! as! Data
-                break
+        if let data = SQLLine.SelectedCordData("nickname='"+myNikename+"'", entityName: entityNameOfContectors){
+            if data.count == 1{
+                myIconData = (data[0] as! Contectors).icon! as Data
             }
         }
+        
         let myIconImage = UIImage(data: myIconData)!
         
         //生成二维码，存储

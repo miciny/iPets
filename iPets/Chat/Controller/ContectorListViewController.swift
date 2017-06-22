@@ -59,9 +59,8 @@ class ContectorListViewController: UIViewController, UITableViewDelegate, UITabl
          //获取所有的联系人和首字母
         let allC = NSMutableArray()
         for i in 0 ..< contectors!.count {
-            let name = (contectors![i] as AnyObject).value(forKey: ContectorsNameOfName) as! String
-
-            let iconData = (contectors![i] as AnyObject).value(forKey: ContectorsNameOfIcon) as! Data
+            let name = (contectors![i] as! Contectors).name!
+            let iconData = (contectors![i] as! Contectors).icon! as Data
             let icon = ChangeValue.dataToImage(iconData)
             
             let nameC = PinYinString.firstCharactor(name)  //获取首字母,这个函数比较慢，放这儿，到时候直接获取首字母，不用计算了
@@ -75,6 +74,7 @@ class ContectorListViewController: UIViewController, UITableViewDelegate, UITabl
         
         calculateData()
     }
+    
     //排列
     func calculateData(){
         
@@ -186,7 +186,7 @@ class ContectorListViewController: UIViewController, UITableViewDelegate, UITabl
         
         let contectorsList = contectorsDataDic?.value(forKey: allKeys[indexPath.section]) as! NSArray
         let data = contectorsList[indexPath.row]
-        let cell =  ContectorListTableViewCell(data: data as! ContectorListViewDataModel, reuseIdentifier:cellId)
+        let cell = ContectorListTableViewCell(data: data as! ContectorListViewDataModel, reuseIdentifier:cellId)
         
         return cell
     }

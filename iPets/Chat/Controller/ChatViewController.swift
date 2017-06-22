@@ -540,19 +540,16 @@ class ChatViewController: UIViewController, ChatDataSource, UITextViewDelegate, 
     }
     
     func updataYourInfo(){
-        let dataArray = SQLLine.SelectAllData(entityNameOfContectors)
+        
         yourNickname = youInfo.nickname
-        //保存联系人
-        for data in dataArray{
-            let nickName = (data as AnyObject).value(forKey: ContectorsNameOfNickname)! as! String
-            if nickName == yourNickname{
-                let iconData = (data as AnyObject).value(forKey: ContectorsNameOfIcon)! as! Data
-                let icon = ChangeValue.dataToImage(iconData)
-                let name = (data as AnyObject).value(forKey: ContectorsNameOfName)! as! String
-                youInfo.icon = icon
-                youInfo.username = name
-                break
-            }
+        
+        if let data = SQLLine.SelectedCordData("nickname='"+yourNickname+"'", entityName: entityNameOfContectors){
+            let iconData = (data[0] as! Contectors).icon! as Data
+            let icon = ChangeValue.dataToImage(iconData)
+            let name = (data[0] as! Contectors).name!
+            
+            youInfo.icon = icon
+            youInfo.username = name
         }
     }
     
@@ -580,41 +577,28 @@ class ChatViewController: UIViewController, ChatDataSource, UITextViewDelegate, 
             return
         }
         
-        let chatList = SQLLine.SelectAllData(entityNameOfChatList)
-        
-        //没消息就删数据库
-        if(chatDataArray!.count == 0){
-            for i in 0 ..< chatList.count {
-                let title = (chatList[i] as AnyObject).value(forKey: ChatListNameOfNickname) as! String
-                if(title == yourNickname){
-                    let _ = SQLLine.DeleteData(entityNameOfChatList, indexPath: i)
-                    return
-                }
+        if chatDataArray!.count == 0{
+            //没消息就删数据库
+            if SQLLine.DeleteData(entityNameOfChatList, condition: "nickname='"+yourNickname+"'"){
+                print("删除"+yourNickname+"聊天数据库成功！")
+            }else{
+                print("删除"+yourNickname+"聊天数据库失败！")
             }
         }
         
         //如果没发送过，就不保存  更新头像和 聊天名
         if(!isChanged){
-            for i in 0 ..< chatList.count {
-                let title = (chatList[i] as AnyObject).value(forKey: ChatListNameOfNickname) as! String
-                if(title == yourNickname){
-                    let imageData = ChangeValue.imageToData(youInfo.icon!)
-                    let _ = SQLLine.UpdateChatListData(i, changeValue: imageData as AnyObject, changeEntityName: ChatListNameOfIcon)
-                    let _ = SQLLine.UpdateChatListData(i, changeValue: youInfo.username as AnyObject, changeEntityName: ChatListNameOfTitle)
-                    return
-                }
-            }
+            
+            let imageData = ChangeValue.imageToData(youInfo.icon!)
+            let _ = SQLLine.UpdateDataWithCondition("nickname='"+yourNickname+"'", entityName: entityNameOfChatList, changeValue: imageData as AnyObject, changeEntityName: "icon")
+            let _ = SQLLine.UpdateDataWithCondition("nickname='"+yourNickname+"'", entityName: entityNameOfChatList, changeValue: youInfo.username as AnyObject, changeEntityName: "title")
+            
+            return
         }
         
-        //有消息就写到数据库
-        for i in 0 ..< chatList.count {
-            let title = (chatList[i] as AnyObject).value(forKey: ChatListNameOfNickname) as! String
-            if(title == yourNickname){
-                let _ = SQLLine.UpdateChatListData(i, changeValue: time! as AnyObject, changeEntityName: ChatListNameOfTime)
-                let _ = SQLLine.UpdateChatListData(i, changeValue: lable! as String as AnyObject, changeEntityName: ChatListNameOfLable)
-                break
-            }
-        }
+        
+        let _ = SQLLine.UpdateDataWithCondition("nickname='"+yourNickname+"'", entityName: entityNameOfChatList, changeValue: time! as AnyObject, changeEntityName: "time")
+        let _ = SQLLine.UpdateDataWithCondition("nickname='"+yourNickname+"'", entityName: entityNameOfChatList, changeValue: lable! as AnyObject, changeEntityName: "lable")
     }
     
 //＊＊＊＊＊＊＊＊＊＊＊＊tableView初始化及代理＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊

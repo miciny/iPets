@@ -96,18 +96,19 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDe
         let recordListData = NSMutableArray()
         
         let hotData = ["二哈","金毛","仓鼠笼子","动物城","小米","大象鼻子","骆驼鸟","大象","老师","动物城","小米","大象"]
+        
         let recordListDataTemp = SQLLine.SelectAllData(entityNameOfSearchRecord)
         
         if(hotData.count > 0){
             searchTable.tableHeaderView = setHeaderView(hotData)
         }
         
-        if(recordListDataTemp.count>0){
+        if recordListDataTemp.count > 0 {
             
             //先排序
             for i in 0 ..< recordListDataTemp.count {
-                let str = ((recordListDataTemp[i] as AnyObject).value(forKey: SearchRecordNameOfLabel) as! String)
-                let date = ((recordListDataTemp[i] as AnyObject).value(forKey: SearchRecordNameOfTime) as! Date)
+                let str = (recordListDataTemp[i] as! SearchRecord).label!
+                let date = (recordListDataTemp[i] as! SearchRecord).time! as Date
                 recordListData.add([str, date])
             }
             
@@ -154,19 +155,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDe
         
         let info = isExist(searchBar.text!)
         
-        if !(info[0] as! Bool){
-            if SQLLine.InsertSearchrecordData(searchBar.text!, time: Date()){
-                print("插入搜索数据成功！")
-            }else{
-                print("插入搜索数据失败！")
-            }
-        }else{
-            if SQLLine.UpdateSearchrecordData(info[1] as! Int, changeValue: Date() as AnyObject, changeEntityName: SearchRecordNameOfTime){
-                print("更新搜索数据成功！")
-            }else{
-                print("更新搜索数据失败！")
-            }
-        }
+        self.updataDB(info: info, str: searchBar.text!)
         
         self.backToPrevious()
         self.delegate?.search(searchBar.text!)
@@ -232,14 +221,11 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDe
         if indexPath.row == 0 {
             return
         }else if indexPath.row == searchData.count-1{ //清除按钮
-            let data = SQLLine.SelectAllData(entityNameOfSearchRecord)
             
-            for _ in 0 ..< data.count {
-                if SQLLine.DeleteData(entityNameOfSearchRecord, indexPath: 0){
-                    print("删除搜索数据成功！")
-                }else{
-                    print("删除搜索数据失败！")
-                }
+            if SQLLine.DeleteAllData(entityNameOfSearchRecord){
+                print("删除搜索数据成功！")
+            }else{
+                print("删除搜索数据失败！")
             }
             
             setUpData()
@@ -249,23 +235,8 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDe
             
             let data = searchData[indexPath.row] as? SearchRecordModel
             let labelText = data?.record
-            
             let info = isExist(labelText!)
-            
-            if !(info[0] as! Bool){
-                if SQLLine.InsertSearchrecordData(labelText!, time: Date()){
-                    print("新增搜索数据成功！")
-                }else{
-                    print("新增搜索数据失败！")
-                }
-                
-            }else{
-                if SQLLine.UpdateSearchrecordData(info[1] as! Int, changeValue: Date() as AnyObject, changeEntityName: SearchRecordNameOfTime){
-                    print("更新搜索数据成功！")
-                }else{
-                    print("更新搜索数据失败！")
-                }
-            }
+            self.updataDB(info: info, str: labelText!)
             
             self.backToPrevious()
             self.delegate?.search(labelText!)
@@ -332,41 +303,44 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDe
         
         let label = sender.view as! UILabel
         let info = isExist(label.text!)
+        self.updataDB(info: info, str: label.text!)
         
-        if !(info[0] as! Bool){
-            if SQLLine.InsertSearchrecordData(label.text!, time: Date()){
+        self.backToPrevious()
+        self.delegate?.search(label.text!)
+    }
+    
+    func updataDB(info: Bool, str: String){
+        if !info{
+            if SQLLine.InsertSearchrecordData(str, time: Date()){
                 print("新增搜索数据成功！")
             }else{
                 print("新增搜索数据失败！")
             }
             
         }else{
-            if SQLLine.UpdateSearchrecordData(info[1] as! Int, changeValue: Date() as AnyObject, changeEntityName: SearchRecordNameOfTime){
+            if SQLLine.UpdateDataWithCondition("label='"+str+"'", entityName: entityNameOfSearchRecord,
+                                               changeValue: Date() as AnyObject, changeEntityName: "time"){
                 print("更新搜索数据成功！")
             }else{
                 print("更新搜索数据失败！")
             }
-
+            
         }
-        
-        self.backToPrevious()
-        
-        self.delegate?.search(label.text!)
+
     }
     
     //数据库是否存在
-    func isExist(_ label: String) -> NSArray{
-        let recordListData = SQLLine.SelectAllData(entityNameOfSearchRecord)
-        var flag = false
-        var tag = 0
+    func isExist(_ label: String) -> Bool{
         
-        for i in 0 ..< recordListData.count {
-            if label == ((recordListData[i] as AnyObject).value(forKey: SearchRecordNameOfLabel) as! String){
-                flag = true
-                tag = i
+        if let data = SQLLine.SelectedCordData("label='"+label+"'", entityName: entityNameOfSearchRecord){
+            if data.count>0{
+                return true
+            }else{
+                return false
             }
+        }else{
+            return false
         }
-        return [flag, tag]
     }
     
     //滑动，收起键盘

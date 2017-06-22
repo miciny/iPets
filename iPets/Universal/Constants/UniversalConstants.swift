@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import CoreData
 
+let myNikename = "Xue"
 
 let mainQueue = DispatchQueue.main              //主线程
 let globalQueue = DispatchQueue(label: "globalQueue")              //分支线程

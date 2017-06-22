@@ -14,6 +14,17 @@ protocol ChatTableViewDelegate {
     func shartImage(image: UIImage)
 }
 
+
+/*
+ 数据提供协议
+ */
+protocol ChatDataSource{
+    
+    func rowsForChatTable( _ tableView: ChatTableView) -> Int
+    
+    func chatTableView(_ tableView: ChatTableView, dataForRow:Int)-> MessageItem
+}
+
 class ChatTableView: UITableView, UITableViewDelegate, UITableViewDataSource{
     
     var bubbleSection: NSMutableArray! //对话体

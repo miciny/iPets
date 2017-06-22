@@ -34,12 +34,6 @@ class MainChatTableViewCell: UITableViewCell {
         }
         self.addSubview(chatIcon)
         
-        if mainChatItem.unreadCount > 0{
-            let bageView = BageValueView.nbView(str: String(mainChatItem.unreadCount))
-            bageView.center = CGPoint(x: chatIcon.maxXX, y: chatIcon.y)
-            self.addSubview(bageView)
-        }
-        
         //聊天栏，名字
         let nameSize = sizeWithText(self.mainChatItem.name, font: chatListPageTitleFont, maxSize: CGSize(width: Width*2/3, height: chatIcon.frame.height/2))
         let chatName = UILabel(frame: CGRect(x: chatIcon.frame.maxX+10, y: chatIcon.frame.origin.y,
@@ -76,6 +70,12 @@ class MainChatTableViewCell: UITableViewCell {
             chatTimeLb.textAlignment = .center
             chatTimeLb.text = str
             self.addSubview(chatTimeLb)
+        }
+        
+        if mainChatItem.unreadCount > 0{
+            let bageView = BageValueView.nbView(str: String(mainChatItem.unreadCount))
+            bageView.center = CGPoint(x: chatIcon.maxXX-5, y: chatIcon.y+5)
+            self.addSubview(bageView)
         }
     }
 

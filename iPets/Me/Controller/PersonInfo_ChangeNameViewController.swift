@@ -82,16 +82,9 @@ class PersonInfo_ChangeNameViewController: UIViewController, UITextFieldDelegate
     
     //保存
     func saveName() {
-        //从CoreData里读取数据
-        let dataArray = SQLLine.SelectAllData(entityNameOfContectors)
-        var result = Bool()
-        for i in 0 ..< dataArray.count{
-            let nickName = (dataArray[i] as AnyObject).value(forKey: ContectorsNameOfNickname)! as! String
-            if nickName == myNikename{
-                result = SQLLine.UpdateContectorsData(i, changeValue: nameTextField.text! as AnyObject, changeEntityName: ContectorsNameOfName)
-                break
-            }
-        }
+        var result = false
+        
+        result = SQLLine.UpdateDataWithCondition("nickname='"+myNikename+"'", entityName: entityNameOfContectors, changeValue: nameTextField.text! as AnyObject, changeEntityName: "name")
         
         myInfo = UserInfo(name: nameTextField.text!, icon: myInfo.icon, nickname: myInfo.nickname)
         
@@ -102,7 +95,6 @@ class PersonInfo_ChangeNameViewController: UIViewController, UITextFieldDelegate
         }else{
             ToastView().showToast("保存失败！")
         }
-
     }
     
     //返回

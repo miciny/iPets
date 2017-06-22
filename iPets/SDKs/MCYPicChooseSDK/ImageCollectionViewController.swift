@@ -9,6 +9,13 @@
 import UIKit
 import Photos
 
+
+//发送图片，选择多张图片的协议
+protocol PassPhotosDelegate{
+    func passPhotos(_ selected: [ImageCollectionModel])
+}
+
+
 class ImageCollectionViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     fileprivate var assetsLibrary: PHPhotoLibrary! //资源库管理类
