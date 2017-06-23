@@ -194,6 +194,10 @@
 		E18C41C41EFB990E00AFF37C /* MyAddress+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18C41BC1EFB990E00AFF37C /* MyAddress+CoreDataProperties.swift */; };
 		E18C41C51EFB990E00AFF37C /* SearchRecord+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18C41BD1EFB990E00AFF37C /* SearchRecord+CoreDataClass.swift */; };
 		E18C41C61EFB990E00AFF37C /* SearchRecord+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18C41BE1EFB990E00AFF37C /* SearchRecord+CoreDataProperties.swift */; };
+		E18C41CC1EFCB58100AFF37C /* MainChatListViewDataSettingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18C41CB1EFCB58100AFF37C /* MainChatListViewDataSettingModel.swift */; };
+		E18C41CE1EFCD06500AFF37C /* ChatInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18C41CD1EFCD06400AFF37C /* ChatInfoViewController.swift */; };
+		E18C41D01EFCD0D800AFF37C /* ChatInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18C41CF1EFCD0D800AFF37C /* ChatInfoTableViewCell.swift */; };
+		E18C41D21EFCD0F100AFF37C /* ChatInfoViewDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18C41D11EFCD0F100AFF37C /* ChatInfoViewDataModel.swift */; };
 		E1ADD75D1ED6CD29000BCBC4 /* MyTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1ADD75C1ED6CD29000BCBC4 /* MyTimer.swift */; };
 		E1ADD75F1EDFE899000BCBC4 /* Temp.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E1ADD75E1EDFE899000BCBC4 /* Temp.xcassets */; };
 		E1DE0E631EEA918600CF580D /* AVSDKExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DE0E5C1EEA918600CF580D /* AVSDKExtension.swift */; };
@@ -444,6 +448,10 @@
 		E18C41BC1EFB990E00AFF37C /* MyAddress+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MyAddress+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		E18C41BD1EFB990E00AFF37C /* SearchRecord+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SearchRecord+CoreDataClass.swift"; sourceTree = "<group>"; };
 		E18C41BE1EFB990E00AFF37C /* SearchRecord+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SearchRecord+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		E18C41CB1EFCB58100AFF37C /* MainChatListViewDataSettingModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainChatListViewDataSettingModel.swift; sourceTree = "<group>"; };
+		E18C41CD1EFCD06400AFF37C /* ChatInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatInfoViewController.swift; sourceTree = "<group>"; };
+		E18C41CF1EFCD0D800AFF37C /* ChatInfoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatInfoTableViewCell.swift; sourceTree = "<group>"; };
+		E18C41D11EFCD0F100AFF37C /* ChatInfoViewDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatInfoViewDataModel.swift; sourceTree = "<group>"; };
 		E1ADD75C1ED6CD29000BCBC4 /* MyTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyTimer.swift; sourceTree = "<group>"; };
 		E1ADD75E1EDFE899000BCBC4 /* Temp.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Temp.xcassets; sourceTree = "<group>"; };
 		E1DE0E5C1EEA918600CF580D /* AVSDKExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVSDKExtension.swift; sourceTree = "<group>"; };
@@ -1017,12 +1025,14 @@
 			children = (
 				E17528AB1ED406D000269EDF /* UserInfo.swift */,
 				E17528A91ED406D000269EDF /* MainChatListViewDataModel.swift */,
+				E18C41CB1EFCB58100AFF37C /* MainChatListViewDataSettingModel.swift */,
 				E17528A51ED406D000269EDF /* ChatData.swift */,
 				E17528A61ED406D000269EDF /* ContectorListViewDataModel.swift */,
-				E17528A71ED406D000269EDF /* ContectorModel.swift */,
-				E17528A81ED406D000269EDF /* ContectorInfoViewDataModel.swift */,
 				E17528A41ED406D000269EDF /* BubbleItem.swift */,
 				E17528AA1ED406D000269EDF /* MessageItem.swift */,
+				E17528A71ED406D000269EDF /* ContectorModel.swift */,
+				E17528A81ED406D000269EDF /* ContectorInfoViewDataModel.swift */,
+				E18C41D11EFCD0F100AFF37C /* ChatInfoViewDataModel.swift */,
 			);
 			name = Model;
 			path = ../../../../Users/miciny/ToGitHub/iPets/iPets/Chat/Model;
@@ -1037,6 +1047,7 @@
 				E17528B51ED406DC00269EDF /* ChatTableView.swift */,
 				E17528B61ED406DC00269EDF /* ChatTableViewCell.swift */,
 				E17528B81ED406DC00269EDF /* ContectorInfoTableViewCell.swift */,
+				E18C41CF1EFCD0D800AFF37C /* ChatInfoTableViewCell.swift */,
 			);
 			name = View;
 			path = ../../../../Users/miciny/ToGitHub/iPets/iPets/Chat/View;
@@ -1047,6 +1058,7 @@
 			children = (
 				E175289E1ED406C600269EDF /* MainChatListViewController.swift */,
 				E175289C1ED406C600269EDF /* ChatViewController.swift */,
+				E18C41CD1EFCD06400AFF37C /* ChatInfoViewController.swift */,
 				E175289D1ED406C600269EDF /* ContectorListViewController.swift */,
 				E175289F1ED406C600269EDF /* ContectorInfoViewController.swift */,
 			);
@@ -1545,6 +1557,7 @@
 				E17528781ED4049900269EDF /* SettingTableViewCell.swift in Sources */,
 				E17528661ED4034D00269EDF /* SearchResultViewController.swift in Sources */,
 				E16322DD1EF3E2EE0022F40D /* MCYVideoRecordingViewController.swift in Sources */,
+				E18C41D21EFCD0F100AFF37C /* ChatInfoViewDataModel.swift in Sources */,
 				E17528AC1ED406D000269EDF /* BubbleItem.swift in Sources */,
 				E1DE0E741EEA91BA00CF580D /* Cache.swift in Sources */,
 				E1DE0E6C1EEA919F00CF580D /* CanCopyImageView.swift in Sources */,
@@ -1574,6 +1587,7 @@
 				E1DE0E821EEA926900CF580D /* PicsBrowserView.swift in Sources */,
 				E17528771ED4049900269EDF /* PersonInfoTableViewCell.swift in Sources */,
 				E1DE0E6D1EEA919F00CF580D /* CanCopyLabel.swift in Sources */,
+				E18C41CC1EFCB58100AFF37C /* MainChatListViewDataSettingModel.swift in Sources */,
 				E1DE0EAB1EEA94BA00CF580D /* TabNetConstant.swift in Sources */,
 				E17528B31ED406D000269EDF /* UserInfo.swift in Sources */,
 				E1DE0EB41EEA94C000CF580D /* NewsHeaderDataModule.swift in Sources */,
@@ -1582,6 +1596,7 @@
 				E18C41C01EFB990E00AFF37C /* Contectors+CoreDataProperties.swift in Sources */,
 				E17528B01ED406D000269EDF /* ContectorInfoViewDataModel.swift in Sources */,
 				E14408291EEFE23700C8E23B /* TipsView.swift in Sources */,
+				E18C41CE1EFCD06500AFF37C /* ChatInfoViewController.swift in Sources */,
 				E126FD101CFD6E7700DAFF84 /* AppDelegate.swift in Sources */,
 				E17528951ED406AD00269EDF /* FindPetsCellFrameModel.swift in Sources */,
 				E18C41C31EFB990E00AFF37C /* MyAddress+CoreDataClass.swift in Sources */,
@@ -1672,6 +1687,7 @@
 				E18C41C51EFB990E00AFF37C /* SearchRecord+CoreDataClass.swift in Sources */,
 				E17528B11ED406D000269EDF /* MainChatListViewDataModel.swift in Sources */,
 				E12A38B91EEA795700755C6C /* FindDataModel.swift in Sources */,
+				E18C41D01EFCD0D800AFF37C /* ChatInfoTableViewCell.swift in Sources */,
 				E17528BD1ED406DC00269EDF /* ContectorListTableViewCell.swift in Sources */,
 				E14407F11EEE690800C8E23B /* FindPetsMoreView.swift in Sources */,
 				E17528581ED3E8AE00269EDF /* SellBuyCollectionViewCell.swift in Sources */,

@@ -94,8 +94,16 @@ class MainChatListViewController: UIViewController, UITableViewDelegate, UITable
         chatData = NSMutableArray()
         bageInt = 0
         
+        let topData = NSMutableArray()
+        let otherData = NSMutableArray()
+        
         let chatList = SQLLine.SelectAllData(entityNameOfChatList)
         
+        //聊天的设置数据保存
+        let chatsData = SaveDataModel()
+        let chatSettingData = chatsData.loadChatSettingDataFromTempDirectory()
+
+        //获取到数据
         for i in 0 ..< chatList.count {
             let title = (chatList[i] as! ChatList).title!
             let lable = (chatList[i] as! ChatList).lable!
@@ -103,13 +111,49 @@ class MainChatListViewController: UIViewController, UITableViewDelegate, UITable
             let iconDate = (chatList[i] as! ChatList).icon! as Data
             let icon = UIImage(data: iconDate)!
             let nickname = (chatList[i] as! ChatList).nickname!
-            let unreadCount = Int((chatList[i] as! ChatList).unread!)!
+            let unreadCount = (chatList[i] as! ChatList).unread! as! Int
             
             bageInt += unreadCount  //未读消息数
             
             let singleChatList = MainChatListViewDataModel(pic: icon, name: title, lable: lable,
-                                                           time: time, nickname: nickname, unreadCount: unreadCount)
-            chatData!.add(singleChatList)
+                                                           time: time, nickname: nickname, unreadCount: unreadCount,
+                                                           isTop: false)
+            
+            //获得设置的置顶消息
+            for data in chatSettingData{
+                let nickName = data.nickname
+                if nickName == nickname{
+                    if data.top == "1" {
+                        singleChatList.isTop = true
+                        topData.add(singleChatList)
+                    }else{
+                        otherData.add(singleChatList)
+                    }
+                    break
+                }
+            }
+        }
+        
+        if topData.count > 0 {
+            topData.sort(comparator: { (m1, m2) -> ComparisonResult in
+                if((m1 as! MainChatListViewDataModel).time.timeIntervalSince1970 > (m2 as! MainChatListViewDataModel).time.timeIntervalSince1970){
+                    return ComparisonResult.orderedAscending
+                }else{
+                    return ComparisonResult.orderedDescending
+                }
+            })
+            chatData?.addObjects(from: topData as! [Any])
+        }
+        
+        if otherData.count > 0 {
+            otherData.sort(comparator: { (m1, m2) -> ComparisonResult in
+                if((m1 as! MainChatListViewDataModel).time.timeIntervalSince1970 > (m2 as! MainChatListViewDataModel).time.timeIntervalSince1970){
+                    return ComparisonResult.orderedAscending
+                }else{
+                    return ComparisonResult.orderedDescending
+                }
+            })
+            chatData?.addObjects(from: otherData as! [Any])
         }
         
         //排序，按时间倒序
@@ -117,14 +161,6 @@ class MainChatListViewController: UIViewController, UITableViewDelegate, UITable
         guard chatData!.count > 0 else {
             return
         }
-        
-        chatData?.sort(comparator: { (m1, m2) -> ComparisonResult in
-            if((m1 as! MainChatListViewDataModel).time.timeIntervalSince1970 > (m2 as! MainChatListViewDataModel).time.timeIntervalSince1970){
-                return ComparisonResult.orderedAscending
-            }else{
-                return ComparisonResult.orderedDescending
-            }
-        })
 
         if bageInt>0 && bageInt<=99{
             self.navigationController?.tabBarItem.badgeValue = String(bageInt) //设置数的
@@ -198,7 +234,7 @@ class MainChatListViewController: UIViewController, UITableViewDelegate, UITable
         
         //未读消息数
         bageInt = bageInt - item.unreadCount
-        self.unreadData(indexPath: indexPath, str: "0")
+        self.unreadData(indexPath: indexPath, str: 0)
         self.scheduleNotification()
         
         let chatView = ChatViewController()
@@ -242,7 +278,7 @@ class MainChatListViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     //标记未读, 1表示未读 0表示已读
-    func unreadData(indexPath: IndexPath, str: String){
+    func unreadData(indexPath: IndexPath, str: Int){
         let data = chatData![indexPath.row]
         let item =  data as! MainChatListViewDataModel
         
@@ -267,11 +303,11 @@ class MainChatListViewController: UIViewController, UITableViewDelegate, UITable
 
         if item.unreadCount <= 0{
             setUnread = UITableViewRowAction(style: .normal, title: "标为未读") { action, index in
-                self.unreadData(indexPath: indexPath, str: "1")
+                self.unreadData(indexPath: indexPath, str: 1)
             }
         }else{
             setUnread = UITableViewRowAction(style: .normal, title: "标为已读") { action, index in
-                self.unreadData(indexPath: indexPath, str: "0")
+                self.unreadData(indexPath: indexPath, str: 0)
             }
         }
         setUnread.backgroundColor = UIColor.lightGray

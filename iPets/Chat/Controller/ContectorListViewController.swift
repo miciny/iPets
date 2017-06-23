@@ -62,9 +62,10 @@ class ContectorListViewController: UIViewController, UITableViewDelegate, UITabl
             let name = (contectors![i] as! Contectors).name!
             let iconData = (contectors![i] as! Contectors).icon! as Data
             let icon = ChangeValue.dataToImage(iconData)
+            let nickame = (contectors![i] as! Contectors).nickname!
             
             let nameC = PinYinString.firstCharactor(name)  //获取首字母,这个函数比较慢，放这儿，到时候直接获取首字母，不用计算了
-            let singleContect = ContectorListViewDataModel(name: name, icon: icon)
+            let singleContect = ContectorListViewDataModel(name: name, icon: icon, nickname: nickame)
             
             contectorsList!.add([singleContect, nameC])
             allC.add(nameC)
@@ -201,16 +202,15 @@ class ContectorListViewController: UIViewController, UITableViewDelegate, UITabl
             let contectorsList = contectorsDataDicSearch?.value(forKey: "$") as! NSArray
             let data = contectorsList[indexPath.row] as! ContectorListViewDataModel
             let guestContectorVC = ContectorInfoViewController()
-            guestContectorVC.contectorName = data.name
+            guestContectorVC.contectorNickName = data.nickname
             
             searchBar.isActive = false
             self.navigationController?.pushViewController(guestContectorVC, animated: true)
         }else{
             let contectorsList = contectorsDataDic?.value(forKey: allKeys[indexPath.section]) as! NSArray
-            
             let data = contectorsList[indexPath.row] as! ContectorListViewDataModel
             let guestContectorVC = ContectorInfoViewController()
-            guestContectorVC.contectorName = data.name
+            guestContectorVC.contectorNickName = data.nickname
             self.navigationController?.pushViewController(guestContectorVC, animated: true)
         }
         

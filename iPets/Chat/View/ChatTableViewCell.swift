@@ -187,7 +187,7 @@ class ChatTableViewCell: UITableViewCell, MessageItemDelegate{
 
 //========================================头像点击事件==================================
     func tapedIcon(){
-        self.cellDelegate?.pushToPersonInfoView(name: self.msgItem.user.username!)        //进入个人信息页
+        self.cellDelegate?.pushToPersonInfoView(name: self.msgItem.user.nickname!)        //进入个人信息页
     }
     
     
@@ -213,7 +213,7 @@ class ChatTableViewCell: UITableViewCell, MessageItemDelegate{
             let singleChatData = chatsData.loadChatsDataFromTempDirectory(self.chatName+".plist", key: self.chatName)
             for i in 0 ..< singleChatData.count {
                 if singleChatData[i].chatImage != "" {
-                    let imageName = "H"+singleChatData[i].chatImage
+                    let imageName = "H"+singleChatData[i].chatImage!
                     let imageData = chatCacheImages.loadImageFromChatCacheDir(self.chatName, imageName: imageName)
                     let image = ChangeValue.dataToImage(imageData)
                     imageArray!.append(image)

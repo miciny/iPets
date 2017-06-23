@@ -6,7 +6,7 @@
         <attribute name="nickname" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="time" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="unread" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="unread" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
     </entity>
     <entity name="Contectors" representedClassName=".Contectors" syncable="YES">
         <attribute name="address" optional="YES" attributeType="String" syncable="YES"/>

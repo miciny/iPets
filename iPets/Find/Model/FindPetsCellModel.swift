@@ -37,7 +37,7 @@ class FindPetsCellModel: NSObject {
     }
     
     //从nsobject解析回来
-    init(coder aDecoder:NSCoder!){
+    init(coder aDecoder: NSCoder!){
         self.name = aDecoder.decodeObject(forKey: "name") as! String
         self.text = aDecoder.decodeObject(forKey: "text") as? String
         self.picture = aDecoder.decodeObject(forKey: "picture") as? [String]
@@ -48,13 +48,13 @@ class FindPetsCellModel: NSObject {
     }
     
     //编码成object
-    func encodeWithCoder(_ aCoder:NSCoder!){
-        aCoder.encode(name,forKey:"name")
-        aCoder.encode(text,forKey:"text")
-        aCoder.encode(picture,forKey:"picture")
-        aCoder.encode(date,forKey:"date")
-        aCoder.encode(nickname,forKey:"nickname")
-        aCoder.encode(video,forKey:"video")
-        aCoder.encode(from,forKey:"from")
+    func encodeWithCoder(_ aCoder: NSCoder!){
+        aCoder.encode(name, forKey:"name")
+        aCoder.encode(text, forKey:"text")
+        aCoder.encode(picture, forKey:"picture")
+        aCoder.encode(date, forKey:"date")
+        aCoder.encode(nickname, forKey:"nickname")
+        aCoder.encode(video, forKey:"video")
+        aCoder.encode(from, forKey:"from")
     }
 }

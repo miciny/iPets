@@ -10,6 +10,52 @@ import UIKit
 
 class SaveDataModel: NSObject {
     
+//＊＊＊＊＊＊＊＊＊＊＊＊＊聊天设置数据＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊
+    //聊天设置保存数据
+    func saveChatSettingToTempDirectory(settingData: [MainChatListViewDataSettingModel]){
+        let data = NSMutableData()
+        let archiver = NSKeyedArchiver(forWritingWith: data)  //申明一个归档处理对象
+        //这里的key每个都要不相同，不然会有很大的问题
+        archiver.encode(settingData, forKey: "ChatSettingData")
+        archiver.finishEncoding()  //编码结束
+        
+        let path = self.getChatSettingDataFilePath()
+        data.write(toFile: path, atomically: true)
+    }
+    
+    //聊天读取数据
+    func loadChatSettingDataFromTempDirectory() -> [MainChatListViewDataSettingModel] {
+        var dataChatData = [MainChatListViewDataSettingModel]()
+        
+        //获取本地数据文件地址
+        let path = self.getChatSettingDataFilePath()
+        //声明文件管理器
+        let defaultManager = FileManager.default
+        
+        //通过文件地址判断数据文件是否存在
+        if defaultManager.fileExists(atPath: path) {
+            do {
+                let data = try Data(contentsOf: URL(fileURLWithPath: path))  //读取文件数据
+                let unarchiver = NSKeyedUnarchiver(forReadingWith: data)   //解码器
+                dataChatData = unarchiver.decodeObject(forKey: "ChatSettingData") as! [MainChatListViewDataSettingModel]  //通过归档时设置的关键字还原
+                unarchiver.finishDecoding()  //结束解码
+            }catch let e as NSError{
+                print("聊天数据读取失败！")
+                print(e)
+            }
+            
+        }else{
+            print("聊天设置文件不存在")
+        }
+        return dataChatData
+    }
+    
+    //获取聊天数据文件地址
+    func getChatSettingDataFilePath() -> String{
+        return self.getChatDirectory().appendingPathComponent("ChatSettingData.plist")
+    }
+    
+    
 //＊＊＊＊＊＊＊＊＊＊＊＊＊聊天数据＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊
     //聊天保存数据
     func saveChatsToTempDirectory(chatData: [ChatData], fileName: String, key: String){
@@ -22,7 +68,6 @@ class SaveDataModel: NSObject {
         let path = getChatDataFilePath(fileName)
         data.write(toFile: path, atomically: true)
     }
-    
     
     //删除聊天文件
     func deleteChatsPListFile(_ fileName: String){

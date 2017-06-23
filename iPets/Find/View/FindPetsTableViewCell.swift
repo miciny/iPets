@@ -167,7 +167,7 @@ class FindPetsTableViewCell: UITableViewCell, UIAlertViewDelegate{
     }
     
     func goPersonInfo(){
-        let name = self.nameView.text!
+        let name = self.modelFrame.myCellModel.nickname
         self.delegate?.pushToPersonInfoView(name: name)
     }
     

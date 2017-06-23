@@ -17,16 +17,18 @@ class MainChatListViewDataModel: NSObject {
     var time: Date //聊天的时间
     var nickname: String
     var unreadCount: Int
+    var isTop: Bool
     
     var height: CGFloat
     
-    init(pic: UIImage?, name: String, lable: String?, time: Date, nickname: String, unreadCount: Int){
+    init(pic: UIImage?, name: String, lable: String?, time: Date, nickname: String, unreadCount: Int, isTop: Bool){
         self.pic = pic
         self.nickname = nickname
         self.name = name
         self.lable = lable
         self.time = time
         self.unreadCount = unreadCount
+        self.isTop = isTop
         self.height = 80
     }
 }

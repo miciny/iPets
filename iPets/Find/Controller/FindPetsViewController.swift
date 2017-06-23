@@ -433,7 +433,7 @@ extension FindPetsViewController: FindPetsCellViewDelegate{
         self.removerMoreView()
         
         let guestContectorVC = ContectorInfoViewController()
-        guestContectorVC.contectorName = name
+        guestContectorVC.contectorNickName = name
         guestContectorVC.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(guestContectorVC, animated: true)
     }

@@ -161,7 +161,7 @@ class SQLLine: NSObject{
     //======================================chatlist================================
     
     //chatlist插入一条数据
-    class func InsertChatListData(_ title: String, lable: String, icon: Data, time: Date, nickname: String, unread: String) -> Bool{
+    class func InsertChatListData(_ title: String, lable: String, icon: Data, time: Date, nickname: String, unread: Int) -> Bool{
         let allDataSource = (UIApplication.shared.delegate as! AppDelegate).managedObjectContext
         let row = NSEntityDescription.insertNewObject(forEntityName: entityNameOfChatList, into: allDataSource) as! ChatList
         
@@ -170,7 +170,7 @@ class SQLLine: NSObject{
         row.icon = icon as NSData
         row.time = time as NSDate
         row.nickname = nickname
-        row.unread = unread
+        row.unread = unread as NSNumber
         
         return saveData()
     }

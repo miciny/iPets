@@ -66,6 +66,7 @@ class ContectorInfoTableViewCell: UITableViewCell {
             thisRemark.font = gusetLabelFont
             thisRemark.textAlignment = .left
             thisRemark.text = remark
+            self.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
             self.addSubview(thisRemark)
         }
         
@@ -95,6 +96,7 @@ class ContectorInfoTableViewCell: UITableViewCell {
             thisHttp.font = gusetLabelFont
             thisHttp.textAlignment = .left
             thisHttp.text = http
+            self.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
             self.addSubview(thisHttp)
         }
     }
@@ -111,7 +113,7 @@ class ContectorInfoTableViewCell: UITableViewCell {
         
         return lb
     }
-    
+
 
     override func awakeFromNib() {
         super.awakeFromNib()

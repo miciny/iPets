@@ -10,7 +10,7 @@ import UIKit
 
 class ContectorInfoViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    var contectorName: String!
+    var contectorNickName: String!
     fileprivate var contectorInfo: ContectorModel!
     fileprivate var mainTabelView: UITableView? //整个table
     fileprivate var contectorInfoData: NSMutableArray?
@@ -50,9 +50,9 @@ class ContectorInfoViewController: UIViewController, UITableViewDelegate, UITabl
         contectorInfoData = NSMutableArray()
         //获取联系人信息
         
-        if let contectors = SQLLine.SelectedCordData("name='"+contectorName+"'", entityName: entityNameOfContectors){
+        if let contectors = SQLLine.SelectedCordData("nickname='"+contectorNickName+"'", entityName: entityNameOfContectors){
             //获取返回数据的信息
-            let nickname = (contectors[0] as! Contectors).nickname!
+            let name = (contectors[0] as! Contectors).name!
             let sex = (contectors[0] as! Contectors).sex!
             let remark = (contectors[0] as! Contectors).remark!
             let iconData = (contectors[0] as! Contectors).icon!
@@ -61,10 +61,10 @@ class ContectorInfoViewController: UIViewController, UITableViewDelegate, UITabl
             let http = (contectors[0]as! Contectors).http!
             
             //弄成contectorModel模型
-            contectorInfo = ContectorModel(name: contectorName, sex: sex, nickname: nickname, icon: icon, remark: remark, address: address, http: http)
+            contectorInfo = ContectorModel(name: name, sex: sex, nickname: contectorNickName, icon: icon, remark: remark, address: address, http: http)
             
             //加入数据
-            let data1 = ContectorInfoViewDataModel(icon: icon, name: contectorName, nickname: nickname, sex: sex)
+            let data1 = ContectorInfoViewDataModel(icon: icon, name: name, nickname: contectorNickName, sex: sex)
             let data2 = ContectorInfoViewDataModel(remark: remark)
             let data3 = ContectorInfoViewDataModel(address: address)
             let data4 = ContectorInfoViewDataModel(http: http)
@@ -88,46 +88,19 @@ class ContectorInfoViewController: UIViewController, UITableViewDelegate, UITabl
     
     //计算每个cell高度
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        var height = CGFloat(44)
-        switch indexPath.section {
-        case 0:  //个人头像栏
-            height = 100
-        case 2: //地区 个人相册栏
-            switch indexPath.row {
-            case 1:
-                height = 90
-            default:
-                height = 44
-            }
-        default:
-            height = 44
-        }
-        
-        return height
+        let section =  self.contectorInfoData![indexPath.section] as! NSArray
+        let data = section[indexPath.row] as! ContectorInfoViewDataModel
+        return data.height
     }
     
     //每个cell内容
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cellId = "GuestContectorCell"
-        let section : NSArray =  self.contectorInfoData![indexPath.section] as! NSArray
+        let section =  self.contectorInfoData![indexPath.section] as! NSArray
         let data = section[indexPath.row]
         
         let cell =  ContectorInfoTableViewCell(data: data as! ContectorInfoViewDataModel, reuseIdentifier: cellId)
-        
-        switch indexPath.section {
-        case 0:
-            break
-        case 2:
-            switch indexPath.row {
-            case 0:
-                break
-            default:
-                cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator  //显示后面的小箭头
-            }
-        default:
-            cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator  //显示后面的小箭头
-        }
-        
+
         return cell
     }
     
@@ -179,11 +152,21 @@ class ContectorInfoViewController: UIViewController, UITableViewDelegate, UITabl
         
         //如果原先没有这个聊天
         if !isExsit{
+            //数据库
             let icon = contectorInfo.icon
             let iconData = ChangeValue.imageToData(icon)
             
-            let _ = SQLLine.InsertChatListData(contectorInfo.name, lable: "", icon: iconData!, time: Date(), nickname: contectorInfo.nickname, unread: "0")
+            let _ = SQLLine.InsertChatListData(contectorInfo.name, lable: "", icon: iconData!, time: Date(), nickname: contectorInfo.nickname, unread: 0)
             print(contectorInfo.name + "的聊天数据库保存成功")
+            
+            //聊天的设置数据保存
+            let chatsData = SaveDataModel()
+            var chatSettingData = chatsData.loadChatSettingDataFromTempDirectory()
+            
+            let settingData = MainChatListViewDataSettingModel(nickname: contectorInfo.nickname, top: "0", chatBIMPath: nil)
+            chatSettingData.append(settingData)
+            
+            chatsData.saveChatSettingToTempDirectory(settingData: chatSettingData)
         }
 
         //进入聊天页

@@ -29,6 +29,9 @@ class BageValueView: NSObject {
         v.font = font
         v.textAlignment = .center
         
+        v.layer.borderWidth = 1
+        v.layer.borderColor = UIColor.white.cgColor
+        
         return v
     }
     

@@ -503,33 +503,33 @@ class ChatViewController: UIViewController, ChatDataSource, UITextViewDelegate, 
             case ChatType.someone.rawValue:
                 
                 if chatData[i].messageType == "0" {
-                    let mesy = MessageItem(body: chatData[i].chatBody, user: youInfo,  date: chatData[i].chatDate, mtype: ChatType.someone)
+                    let mesy = MessageItem(body: chatData[i].chatBody!, user: youInfo,  date: chatData[i].chatDate, mtype: ChatType.someone)
                     Chats.add(mesy)
                 }else if chatData[i].messageType == "1" {
-                    let imageData = chatCacheImages.loadImageFromChatCacheDir(yourNickname, imageName: chatData[i].chatImage)
+                    let imageData = chatCacheImages.loadImageFromChatCacheDir(yourNickname, imageName: chatData[i].chatImage!)
                     let image = ChangeValue.dataToImage(imageData)
                     
-                    let mesy = MessageItem(image: image, imageName: chatData[i].chatImage, user: youInfo, date: chatData[i].chatDate, mtype: ChatType.someone )
+                    let mesy = MessageItem(image: image, imageName: chatData[i].chatImage!, user: youInfo, date: chatData[i].chatDate, mtype: ChatType.someone )
                     Chats.add(mesy)
                 }else if chatData[i].messageType == "2" {
                     
-                    let mesy = MessageItem(voicePath: chatData[i].voicePath, voiceLong: chatData[i].voiceLong, user: youInfo, date: chatData[i].chatDate, mtype: .someone)
+                    let mesy = MessageItem(voicePath: chatData[i].voicePath!, voiceLong: chatData[i].voiceLong!, user: youInfo, date: chatData[i].chatDate, mtype: .someone)
                     Chats.add(mesy)
                 }
                 //1代表我的信息
             case ChatType.mine.rawValue:
                 
                 if chatData[i].messageType == "0" {
-                    let mesy = MessageItem(body: chatData[i].chatBody, user: myInfo,  date: chatData[i].chatDate, mtype:ChatType.mine)
+                    let mesy = MessageItem(body: chatData[i].chatBody!, user: myInfo,  date: chatData[i].chatDate, mtype:ChatType.mine)
                     Chats.add(mesy)
                 }else if chatData[i].messageType == "1"{
-                    let imageData = chatCacheImages.loadImageFromChatCacheDir(yourNickname, imageName: chatData[i].chatImage)
+                    let imageData = chatCacheImages.loadImageFromChatCacheDir(yourNickname, imageName: chatData[i].chatImage!)
                     let image = ChangeValue.dataToImage(imageData)
                     
-                    let mesy = MessageItem(image: image, imageName: chatData[i].chatImage, user: myInfo, date: chatData[i].chatDate, mtype: ChatType.mine)
+                    let mesy = MessageItem(image: image, imageName: chatData[i].chatImage!, user: myInfo, date: chatData[i].chatDate, mtype: ChatType.mine)
                     Chats.add(mesy)
                 }else if chatData[i].messageType == "2" {
-                    let mesy = MessageItem(voicePath: chatData[i].voicePath, voiceLong: chatData[i].voiceLong, user: myInfo, date: chatData[i].chatDate, mtype: .mine)
+                    let mesy = MessageItem(voicePath: chatData[i].voicePath!, voiceLong: chatData[i].voiceLong!, user: myInfo, date: chatData[i].chatDate, mtype: .mine)
                     Chats.add(mesy)
                 }
                 
@@ -614,6 +614,23 @@ class ChatViewController: UIViewController, ChatDataSource, UITextViewDelegate, 
         self.tableView.pushDelegate = self
         self.tableView.reloadData()
         
+        //左上角联系人按钮按钮，一下方法添加图片，需要对图片进行遮罩处理，否则不会出现图片
+        // 我们会发现出来的是一个纯色的图片，是因为iOS扁平化设计风格应用之后做成这样的，如果需要现实图片，我们可以设置一项
+        var image = UIImage(named:"ChatSetting")
+        image = image?.withRenderingMode(UIImageRenderingMode.alwaysOriginal)
+        let contectItem = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(goChatInfoView))
+        
+        let spacer = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)  //用于消除左边空隙，要不然按钮顶不到最前面
+        spacer.width = -5
+        
+        self.navigationItem.rightBarButtonItems = [spacer, contectItem]
+        
+    }
+    
+    func goChatInfoView(){
+        let vc = ChatInfoViewController()
+        vc.contectorNickName = yourNickname
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     //行数
@@ -637,7 +654,7 @@ class ChatViewController: UIViewController, ChatDataSource, UITextViewDelegate, 
 extension ChatViewController: ChatTableViewDelegate{
     func pushToPersonInfoView(name: String) {
         let guestContectorVC = ContectorInfoViewController()
-        guestContectorVC.contectorName = name
+        guestContectorVC.contectorNickName = name
         self.navigationController?.pushViewController(guestContectorVC, animated: true)
     }
     

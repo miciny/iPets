@@ -11,9 +11,11 @@ import UIKit
 class ContectorListViewDataModel: NSObject {
     var name: String
     var icon: UIImage?
+    var nickname: String
     
-    init(name: String, icon: UIImage?){
+    init(name: String, icon: UIImage?, nickname: String){
         self.name = name
         self.icon = icon
+        self.nickname = nickname
     }
 }

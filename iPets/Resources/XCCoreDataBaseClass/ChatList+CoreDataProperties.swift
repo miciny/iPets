@@ -21,6 +21,6 @@ extension ChatList {
     @NSManaged public var nickname: String?
     @NSManaged public var time: NSDate?
     @NSManaged public var title: String?
-    @NSManaged public var unread: String?
+    @NSManaged public var unread: NSNumber?
 
 }
