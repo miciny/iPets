@@ -18,7 +18,8 @@ class FindPetsViewController: UIViewController, UITableViewDataSource, UITableVi
     fileprivate var mainTableView: MCYTableView!
     fileprivate let cellID = "FindPetsCell"
     
-    fileprivate var headerView: MCYRefreshView? //自己写的
+    fileprivate var refreshView: MCYRefreshView? //自己写的
+    fileprivate var headerView: FindPetsTableHeaderView?
     fileprivate var footerView: MCYLoadMoreView?
     
     //右上角添加按钮的事件
@@ -32,6 +33,7 @@ class FindPetsViewController: UIViewController, UITableViewDataSource, UITableVi
     
     var activityViewController: UIActivityViewController?//分享
     
+    fileprivate var picker: UIImagePickerController?
     private var moreView: FindPetsMoreView?
     
     var refresh = false
@@ -59,6 +61,8 @@ class FindPetsViewController: UIViewController, UITableViewDataSource, UITableVi
             addActionView?.hideView()
         }
         VideoFuncs.viewWillDisappearStopVideo() //停止视频
+        
+        self.removerMoreView()
     }
     
     //初始化title 背景等
@@ -116,9 +120,11 @@ class FindPetsViewController: UIViewController, UITableViewDataSource, UITableVi
         let cell = FindPetsTableViewCell.self
         mainTableView!.register(cell, forCellReuseIdentifier: cellID)
         
-        mainTableView.tableHeaderView = FindPetsTableHeaderView(frame: CGRect(x: 0, y: 0, width: Width, height: Width+50))
+        headerView = FindPetsTableHeaderView(frame: CGRect(x: 0, y: 0, width: Width, height: Width+50))
+        mainTableView.tableHeaderView = headerView
+        headerView?.delegate = self
         
-        headerView = MCYRefreshView(subView: mainTableView!, target: self, imageName: "tableview_pull_refresh")  //添加下拉刷新
+        refreshView = MCYRefreshView(subView: mainTableView!, target: self, imageName: "tableview_pull_refresh")  //添加下拉刷新
     }
     
     //加载更多数据
@@ -211,6 +217,8 @@ class FindPetsViewController: UIViewController, UITableViewDataSource, UITableVi
         
         let rec = CGRect(x: 0, y: 0, width: 1, height: 1)
         self.mainTableView!.scrollRectToVisible(rec , animated: false)  //返回到顶部
+        
+        headerView?.refreshInfo()
     }
     
     //排序
@@ -410,12 +418,87 @@ extension FindPetsViewController: PicsBrowserViewDelegate{
                     print("分享错误")
                     print(e)
                 }
-                
                 self.activityViewController = nil
         }
-        
     }
+}
 
+//顶部header
+extension FindPetsViewController: FindPetsTableHeaderViewDelegate{
+    func goMyInfoView() {
+        self.removerMoreView()
+
+        let guestContectorVC = ContectorInfoViewController()
+        guestContectorVC.contectorNickName = myInfo.nickname!
+        guestContectorVC.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(guestContectorVC, animated: true)
+    }
+    
+    
+    func changeBIM() {
+        let bottomMenu = MyBottomMenuView()
+        bottomMenu.showBottomMenu("更换相册封面", cancel: "取消", object: ["拍照", "相册选择"], eventFlag: 0, target: self)
+    }
+}
+
+//选择的协议
+extension FindPetsViewController : bottomMenuViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate{
+    
+    func buttonClicked(_ tag: Int, eventFlag: Int) {
+        switch eventFlag{
+        case 0:
+            switch tag{
+            case 0:
+                takePhoto()
+            case 1:
+                localPhoto()
+            default:
+                break
+            }
+        default:
+            break
+        }
+    }
+    
+    //拍照
+    func takePhoto(){
+        let sourceType : UIImagePickerControllerSourceType = UIImagePickerControllerSourceType.camera
+        if(UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera)){
+            picker = UIImagePickerController()
+            picker?.delegate = self
+            picker!.allowsEditing = true
+            picker?.sourceType = sourceType
+            self.present(picker!, animated:true, completion: nil)
+        }else{
+            print("模拟器中无法打开照相机，请在真机上使用")
+        }
+    }
+    
+    //选取当地的照片，想要页面中为，在info。plist 中Localized resources can be mixed 为YES
+    func localPhoto(){
+        picker = UIImagePickerController()
+        picker!.sourceType = UIImagePickerControllerSourceType.photoLibrary
+        picker!.allowsEditing = true
+        picker!.delegate = self
+        self.present(picker!, animated:true, completion: nil)
+    }
+    
+    //选取图片之后
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: Any]){
+        let type : NSString = info["UIImagePickerControllerMediaType"] as! NSString
+        if(type.isEqual(to: "public.image")){
+            
+            let image = info["UIImagePickerControllerEditedImage"] as! UIImage
+            
+            //保存图片到本地沙盒
+            let saveCache = SaveCacheDataModel()
+            let result = saveCache.savaImageToFindPetsCacheDir(image, imageName: "headerBIM.png")
+            if result {
+                headerView?.refreshBIM()
+            }
+        }
+        picker.dismiss(animated: true, completion: nil)
+    }
 }
 
 
@@ -462,7 +545,7 @@ extension FindPetsViewController: MCYRefreshViewDelegate, MCYLoadMoreViewDelegat
         
         //这里做你想做的事
         let _ = delay(0.5){
-            self.headerView?.endRefresh()
+            self.refreshView?.endRefresh()
             ToastView().showToast("刷新完成！")
         }
     }

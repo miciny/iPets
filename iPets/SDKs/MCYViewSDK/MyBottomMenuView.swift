@@ -43,7 +43,7 @@ class MyBottomMenuView: UIControl{
     fileprivate var object: NSArray!
     private let gap: CGFloat = 7  // 取消与上面按钮的间隔
     
-    func showBottomMenu(_ title: String, cancel: String, object: NSArray, eventFlag: Int ,target: bottomMenuViewDelegate){
+    func showBottomMenu(_ title: String, cancel: String, object: NSArray, eventFlag: Int, target: bottomMenuViewDelegate){
         self.title = title
         self.cancel = cancel
         self.object = object

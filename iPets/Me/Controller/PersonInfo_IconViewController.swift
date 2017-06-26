@@ -29,8 +29,8 @@ extension PersonInfo_IconViewController : bottomMenuViewDelegate{
 
 class PersonInfo_IconViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate{
 
-    fileprivate var imageView : UIImageView?
-    fileprivate var picker:UIImagePickerController?
+    fileprivate var imageView: UIImageView?
+    fileprivate var picker: UIImagePickerController?
     
     var image: UIImage?
     
@@ -104,7 +104,7 @@ class PersonInfo_IconViewController: UIViewController, UIImagePickerControllerDe
             
             imageView!.image = image    //展示
             myInfo = UserInfo(name: myInfo.username, icon: image, nickname: myInfo.nickname) //把改变的image保存到icon
-            picker.dismiss(animated: true, completion:nil)
+            picker.dismiss(animated: true, completion: nil)
         }
     }
     
