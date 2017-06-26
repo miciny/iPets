@@ -106,7 +106,7 @@ class FindPetsViewController: UIViewController, UITableViewDataSource, UITableVi
         mainTableView = MCYTableView()
         cellData = NSMutableArray()
         
-        mainTableView!.frame = CGRect(x: 0, y: 0, width: Width, height: Height) //49为tabbar高度
+        mainTableView!.frame = CGRect(x: 0, y: -100, width: Width, height: Height+100) //49为tabbar高度
         mainTableView!.delegate = self
         mainTableView!.dataSource = self
         mainTableView!.backgroundColor = UIColor.white
@@ -115,6 +115,8 @@ class FindPetsViewController: UIViewController, UITableViewDataSource, UITableVi
         //注册cell
         let cell = FindPetsTableViewCell.self
         mainTableView!.register(cell, forCellReuseIdentifier: cellID)
+        
+        mainTableView.tableHeaderView = FindPetsTableHeaderView(frame: CGRect(x: 0, y: 0, width: Width, height: Width+50))
         
         headerView = MCYRefreshView(subView: mainTableView!, target: self, imageName: "tableview_pull_refresh")  //添加下拉刷新
     }
@@ -396,7 +398,6 @@ extension FindPetsViewController: PicsBrowserViewDelegate{
                 error: Error?) in
                 
                 print(activityType ?? "没有获取到分享路径")
-                
                 print(returnedItems ?? "没有获取到返回路径")
                 
                 if completed{

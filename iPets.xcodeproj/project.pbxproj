@@ -200,6 +200,7 @@
 		E18C41D21EFCD0F100AFF37C /* ChatInfoViewDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18C41D11EFCD0F100AFF37C /* ChatInfoViewDataModel.swift */; };
 		E1ADD75D1ED6CD29000BCBC4 /* MyTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1ADD75C1ED6CD29000BCBC4 /* MyTimer.swift */; };
 		E1ADD75F1EDFE899000BCBC4 /* Temp.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E1ADD75E1EDFE899000BCBC4 /* Temp.xcassets */; };
+		E1C2ED1B1EFD235100F2F3BB /* FindPetsTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1C2ED1A1EFD235100F2F3BB /* FindPetsTableHeaderView.swift */; };
 		E1DE0E631EEA918600CF580D /* AVSDKExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DE0E5C1EEA918600CF580D /* AVSDKExtension.swift */; };
 		E1DE0E641EEA918600CF580D /* BaseVideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DE0E5D1EEA918600CF580D /* BaseVideoView.swift */; };
 		E1DE0E651EEA918600CF580D /* SetMaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DE0E5E1EEA918600CF580D /* SetMaskView.swift */; };
@@ -454,6 +455,7 @@
 		E18C41D11EFCD0F100AFF37C /* ChatInfoViewDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatInfoViewDataModel.swift; sourceTree = "<group>"; };
 		E1ADD75C1ED6CD29000BCBC4 /* MyTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyTimer.swift; sourceTree = "<group>"; };
 		E1ADD75E1EDFE899000BCBC4 /* Temp.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Temp.xcassets; sourceTree = "<group>"; };
+		E1C2ED1A1EFD235100F2F3BB /* FindPetsTableHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindPetsTableHeaderView.swift; sourceTree = "<group>"; };
 		E1DE0E5C1EEA918600CF580D /* AVSDKExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVSDKExtension.swift; sourceTree = "<group>"; };
 		E1DE0E5D1EEA918600CF580D /* BaseVideoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseVideoView.swift; sourceTree = "<group>"; };
 		E1DE0E5E1EEA918600CF580D /* SetMaskView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetMaskView.swift; sourceTree = "<group>"; };
@@ -1003,6 +1005,7 @@
 				E17528981ED406BB00269EDF /* FindPetsTableViewCell.swift */,
 				E17528991ED406BB00269EDF /* SendFindMyPetsInfoTableViewCell.swift */,
 				E14407F01EEE690800C8E23B /* FindPetsMoreView.swift */,
+				E1C2ED1A1EFD235100F2F3BB /* FindPetsTableHeaderView.swift */,
 			);
 			name = View;
 			path = ../../../../Users/miciny/ToGitHub/iPets/iPets/Find/View;
@@ -1674,6 +1677,7 @@
 				E14408421EEFEB6A00C8E23B /* MineMainViewController.swift in Sources */,
 				E1DE0EB11EEA94C000CF580D /* JsonToModule.swift in Sources */,
 				E14BF6691EF13A9B00B6C88B /* MapFuncs.swift in Sources */,
+				E1C2ED1B1EFD235100F2F3BB /* FindPetsTableHeaderView.swift in Sources */,
 				E18C41A41EF7E1D600AFF37C /* AudioPlayer.swift in Sources */,
 				E1DE0E771EEA91BA00CF580D /* SaveCacheDataModel.swift in Sources */,
 				E1DE0E7F1EEA91FA00CF580D /* NetFuncs.swift in Sources */,

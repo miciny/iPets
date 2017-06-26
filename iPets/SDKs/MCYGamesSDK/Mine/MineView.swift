@@ -119,8 +119,29 @@ class MineView: UIView {
         }
         
         //排序完了之后比较
-        self.minePosition?.sort(comparator: MineCalculate.mineGetSort())
-        self.markedMinePosition!.sort(comparator: MineCalculate.mineGetSort())
+        self.minePosition?.sort(comparator: {
+            (s1: AnyObject!, s2: AnyObject!) -> ComparisonResult in
+            let str1 = s1 as! Int
+            let str2 = s2 as! Int
+            if str1 < str2 {
+                return ComparisonResult.orderedAscending
+            }else{
+                return ComparisonResult.orderedDescending
+            }
+        } as! (Any, Any) -> ComparisonResult)
+        
+        self.markedMinePosition!.sort(comparator:
+            {
+                (s1: AnyObject!, s2: AnyObject!) -> ComparisonResult in
+                let str1 = s1 as! Int
+                let str2 = s2 as! Int
+                if str1 < str2 {
+                    return ComparisonResult.orderedAscending
+                }else{
+                    return ComparisonResult.orderedDescending
+                }
+                } as! (Any, Any) -> ComparisonResult)
+        
         if self.minePosition == self.markedMinePosition{
             self.delegate?.GameVictory()
         }

@@ -27,15 +27,15 @@ class FindViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func setUpEles(){
-        self.title = "发现"                        //页面title和底部title
-        self.navigationItem.title = "发现"        //再次设置顶部title,这样才可以和tabbar上的title不一样
-        self.view.backgroundColor = UIColor.white //背景色
+        self.title = "发现"                           //页面title和底部title
+        self.navigationItem.title = "发现"            //再次设置顶部title,这样才可以和tabbar上的title不一样
+        self.view.backgroundColor = UIColor.white    //背景色
     }
     
     func setData(){
         findData = NSMutableArray()
         
-        let oneOne = FindDataModel(icon: "FriendsCircle", title: "附近寻宠")
+        let oneOne = FindDataModel(icon: "FriendsCircle", title: "宠物圈")
         
         let twoOne = FindDataModel(icon: "ScanBook_HL", title: "热点新闻")
         let twoTwo = FindDataModel(icon: "Shake_icon_tvHL", title: "热点视频")

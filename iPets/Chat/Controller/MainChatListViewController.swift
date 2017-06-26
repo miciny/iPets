@@ -272,6 +272,18 @@ class MainChatListViewController: UIViewController, UITableViewDelegate, UITable
         }else{
             print("删除"+item.nickname+"聊天数据库失败！")
         }
+        
+        //聊天的设置数据
+        var chatSettingData = chatsData.loadChatSettingDataFromTempDirectory()
+        for i in 0 ..< chatSettingData.count{
+            let data = chatSettingData[i]
+            let nickname = data.nickname
+            if nickname == item.nickname{
+                chatSettingData.remove(at: i)
+                break
+            }
+        }
+        chatsData.saveChatSettingToTempDirectory(settingData: chatSettingData)
     
         chatData?.removeObject(at: indexPath.row)  //删本地数据
         self.mainTabelView!.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
