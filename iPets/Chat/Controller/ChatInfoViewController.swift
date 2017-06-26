@@ -14,6 +14,7 @@ class ChatInfoViewController: UIViewController, UITableViewDelegate, UITableView
     
     fileprivate var mainTabelView: UITableView? //整个table
     fileprivate var dataSource: NSMutableArray?
+    fileprivate var picker: UIImagePickerController?
     
     private var topS: UISwitch?
     private var noticeS: UISwitch?
@@ -118,12 +119,9 @@ class ChatInfoViewController: UIViewController, UITableViewDelegate, UITableView
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         mainTabelView!.deselectRow(at: indexPath, animated: true)  //被选择后，会变灰，这么做还原
         
-        switch indexPath.section{
-        //标签
-        case 1:
-            break
-        default:
-            break
+        if indexPath.section == 2 && indexPath.row == 0{
+            let bottomMenu = MyBottomMenuView()
+            bottomMenu.showBottomMenu("", cancel: "取消", object: ["拍照", "相册选择"], eventFlag: 0, target: self)
         }
     }
     
@@ -161,6 +159,86 @@ class ChatInfoViewController: UIViewController, UITableViewDelegate, UITableView
         }
         chatsData.saveChatSettingToTempDirectory(settingData: chatSettingData)
     }
+}
 
-
+//选择的协议
+extension ChatInfoViewController: bottomMenuViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate{
+    
+    func buttonClicked(_ tag: Int, eventFlag: Int) {
+        switch eventFlag{
+        case 0:
+            switch tag{
+            case 0:
+                takePhoto()
+            case 1:
+                localPhoto()
+            default:
+                break
+            }
+        default:
+            break
+        }
+    }
+    
+    //拍照
+    func takePhoto(){
+        let sourceType : UIImagePickerControllerSourceType = UIImagePickerControllerSourceType.camera
+        if(UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera)){
+            picker = UIImagePickerController()
+            picker?.delegate = self
+            picker!.allowsEditing = true
+            picker?.sourceType = sourceType
+            self.present(picker!, animated:true, completion: nil)
+        }else{
+            print("模拟器中无法打开照相机，请在真机上使用")
+        }
+    }
+    
+    //选取当地的照片，想要页面中为，在info。plist 中Localized resources can be mixed 为YES
+    func localPhoto(){
+        picker = UIImagePickerController()
+        picker!.sourceType = UIImagePickerControllerSourceType.photoLibrary
+        picker!.allowsEditing = true
+        picker!.delegate = self
+        self.present(picker!, animated: true, completion: nil)
+    }
+    
+    //选取图片之后
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: Any]){
+        let type : NSString = info["UIImagePickerControllerMediaType"] as! NSString
+        if(type.isEqual(to: "public.image")){
+            
+            let image = info["UIImagePickerControllerEditedImage"] as! UIImage
+            
+            //保存图片到本地沙盒
+            let saveCache = SaveCacheDataModel()
+            let result = saveCache.savaImageToChatCacheDir(contectorNickName, image: image, imageName: "BIM.png")
+            if result {
+                self.bimChanged()
+            }
+        }
+        picker.dismiss(animated: true, completion: nil)
+        self.picker = nil
+    }
+    
+    func bimChanged(){
+        
+        //聊天的设置数据保存
+        let chatsData = SaveDataModel()
+        var chatSettingData = chatsData.loadChatSettingDataFromTempDirectory()
+        
+        //获得设置的置顶消息
+        for i in 0 ..< chatSettingData.count{
+            let data = chatSettingData[i]
+            let nickname = data.nickname
+            if nickname == contectorNickName{
+                data.chatBIMPath = "BIM.png"
+                
+                chatSettingData.remove(at: i)
+                chatSettingData.append(data)
+                break
+            }
+        }
+        chatsData.saveChatSettingToTempDirectory(settingData: chatSettingData)
+    }
 }

@@ -498,6 +498,7 @@ extension FindPetsViewController : bottomMenuViewDelegate, UINavigationControlle
             }
         }
         picker.dismiss(animated: true, completion: nil)
+        self.picker = nil
     }
 }
 

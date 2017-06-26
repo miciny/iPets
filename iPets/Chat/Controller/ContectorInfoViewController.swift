@@ -171,6 +171,19 @@ class ContectorInfoViewController: UIViewController, UITableViewDelegate, UITabl
 
         //进入聊天页
         let chatView = ChatViewController()
+        //获得设置的置顶消息
+        let chatsData = SaveDataModel()
+        let chatSettingData = chatsData.loadChatSettingDataFromTempDirectory()
+        for data in chatSettingData{
+            let nickName = data.nickname
+            if nickName == contectorInfo.nickname{
+                if data.chatBIMPath != nil{
+                    chatView.backImageView = UIImageView() //设置了说明有背景图片
+                }
+                break
+            }
+        }
+
         chatView.youInfo = UserInfo(name: contectorInfo.name, icon: contectorInfo.icon, nickname: contectorInfo.nickname)
         chatView.hidesBottomBarWhenPushed = true
         

@@ -119,7 +119,7 @@ class ChatTableView: UITableView, UITableViewDelegate, UITableViewDataSource{
         let data: AnyObject = dataTmp[dataTmp.count-1]
         let item =  data as! MessageItem
         
-        let offsetY = self.contentSize.height - self.frame.size.height + 44 + item.insets.bottom
+        let offsetY = self.contentSize.height - self.frame.size.height - 10 + item.insets.bottom
         //如果不足一屏幕，不滑动
         if(offsetY < 0){
             return

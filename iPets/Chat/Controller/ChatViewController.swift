@@ -38,16 +38,22 @@ class ChatViewController: UIViewController, ChatDataSource, UITextViewDelegate, 
     fileprivate var voiceTap: UITapGestureRecognizer?
     fileprivate var keyboradTap: UITapGestureRecognizer?
     
+    var backImageView: UIImageView? //设置了说明有背景图片
+    
     var activityViewController: UIActivityViewController?
     
     var recorder: AudioRecorder? //录音器
     var aacPath: String?
     
+    var offset = CGFloat(0)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.automaticallyAdjustsScrollViewInsets = false
         
         Chats = NSMutableArray()
         chatDataArray = [ChatData]()
+        offset = self.view.frame.size.height - 256
         
         initData()
         
@@ -77,6 +83,12 @@ class ChatViewController: UIViewController, ChatDataSource, UITextViewDelegate, 
                 print("与"+self.yourNickname+"的聊天数据保存成功")
             })
         })
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.refreshBIM()
     }
     
 //＊＊＊＊＊＊＊＊＊＊＊＊初始化页面＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊
@@ -380,7 +392,6 @@ class ChatViewController: UIViewController, ChatDataSource, UITextViewDelegate, 
     
     //键盘的return键
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        let offset: CGFloat = self.view.frame.size.height - 266
         
         //发送按钮 ， 发送直接返回
         if (text == "\n"){
@@ -425,7 +436,6 @@ class ChatViewController: UIViewController, ChatDataSource, UITextViewDelegate, 
         
         if(textView.text == "\n"){
             textView.text = ""
-            let offset: CGFloat = self.view.frame.size.height - 266
             //底部发送框
             let sendViewHeight = 8+gap*2+singgleLineSize.height
             sendView.frame = CGRect(x: 0, y: offset-sendViewHeight, width: self.view.frame.size.width, height: sendViewHeight)
@@ -438,12 +448,11 @@ class ChatViewController: UIViewController, ChatDataSource, UITextViewDelegate, 
 
     //弹起输入框
     func textViewDidBeginEditing(_ textView: UITextView) {
-        let offset: CGFloat = self.view.frame.size.height - 266
         
         if offset > 0 {
             //弹起tableView和输入框
             let frame = sendView.frame
-            tableView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: offset-44)
+            tableView.frame = CGRect(x: 0, y: 64, width: self.view.frame.width, height: offset-110)
             sendView.frame = CGRect(x: 0, y: offset-frame.height, width: self.view.frame.size.width, height: frame.height)
             tableView.moveToBottomAuto()
         }
@@ -474,7 +483,7 @@ class ChatViewController: UIViewController, ChatDataSource, UITextViewDelegate, 
             
             let frame = self.sendView.frame
             self.sendView.frame = CGRect(x: 0, y: self.view.frame.size.height-frame.height, width: self.view.frame.size.width, height: frame.height)
-            self.tableView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.size.height-self.sendView.frame.height)
+            self.tableView.frame = CGRect(x: 0, y: 64, width: self.view.frame.width, height: Height-self.sendView.frame.height-64)
             self.tableView.moveToBottomAuto()
         }
     }
@@ -604,7 +613,16 @@ class ChatViewController: UIViewController, ChatDataSource, UITextViewDelegate, 
 //＊＊＊＊＊＊＊＊＊＊＊＊tableView初始化及代理＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊
     //设置tableView
     func setupChatTable(){
-        self.tableView = ChatTableView(frame:CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height-44), style: .plain, chatTitle: self.yourNickname)
+        
+        //背景图
+        if let backImageView = backImageView{
+            backImageView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height-44)
+            self.view.addSubview(backImageView)
+            self.refreshBIM()
+        }
+        
+        //table
+        self.tableView = ChatTableView(frame: CGRect(x: 0, y: 64, width: Width, height: Height-105), style: .plain, chatTitle: self.yourNickname)
         //创建一个重用的单元格
         self.tableView!.register(ChatTableViewCell.self, forCellReuseIdentifier: "ChatCell")
         self.view.addSubview(self.tableView)
@@ -631,6 +649,15 @@ class ChatViewController: UIViewController, ChatDataSource, UITextViewDelegate, 
         let vc = ChatInfoViewController()
         vc.contectorNickName = yourNickname
         self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func refreshBIM(){
+        if let bim = self.backImageView{
+            let saveCache = SaveCacheDataModel()
+            let imageViewData = saveCache.loadImageFromChatCacheDir(self.yourNickname, imageName: "BIM.png")
+            let imageView = ChangeValue.dataToImage(imageViewData)
+            bim.image = imageView
+        }
     }
     
     //行数

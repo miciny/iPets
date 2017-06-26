@@ -240,6 +240,20 @@ class MainChatListViewController: UIViewController, UITableViewDelegate, UITable
         let chatView = ChatViewController()
         chatView.hidesBottomBarWhenPushed = true
         chatView.youInfo = UserInfo(name: item.name, icon: item.pic, nickname: item.nickname)
+        
+        //获得设置的置顶消息
+        let chatsData = SaveDataModel()
+        let chatSettingData = chatsData.loadChatSettingDataFromTempDirectory()
+        for data in chatSettingData{
+            let nickName = data.nickname
+            if nickName == item.nickname{
+                if data.chatBIMPath != nil{
+                    chatView.backImageView = UIImageView() //设置了说明有背景图片
+                }
+                break
+            }
+        }
+        
         self.navigationController?.pushViewController(chatView, animated: true)
     }
     
