@@ -12,6 +12,8 @@ protocol ChatTableViewDelegate {
     func pushToPersonInfoView(name: String)
     
     func shartImage(image: UIImage)
+    
+    func tapedPic()
 }
 
 
@@ -233,6 +235,10 @@ extension ChatTableView: ChatTableViewCellDelegate{
     
     func shareImage(image: UIImage) {
         self.pushDelegate?.shartImage(image: image)
+    }
+    
+    func tapedPic() {
+        self.pushDelegate?.tapedPic()
     }
 }
 

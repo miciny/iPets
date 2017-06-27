@@ -109,7 +109,6 @@ class MainChatListViewController: UIViewController, UITableViewDelegate, UITable
             let nickname = (chatList[i] as! ChatList).nickname!
             let unreadCount = (chatList[i] as! ChatList).unread! as! Int
             
-            bageInt += unreadCount  //未读消息数
             
             let singleChatList = MainChatListViewDataModel(pic: icon, name: title, lable: lable,
                                                            time: time, nickname: nickname, unreadCount: unreadCount,
@@ -123,6 +122,10 @@ class MainChatListViewController: UIViewController, UITableViewDelegate, UITable
                     topData.add(singleChatList)
                 }else{
                     otherData.add(singleChatList)
+                }
+                
+                if data.notNotice != "1"{
+                    bageInt += unreadCount  //未读消息数
                 }
             }
         }
@@ -226,7 +229,6 @@ class MainChatListViewController: UIViewController, UITableViewDelegate, UITable
         let item =  data as! MainChatListViewDataModel
         
         //未读消息数
-        bageInt = bageInt - item.unreadCount
         self.unreadData(indexPath: indexPath, str: 0)
         self.scheduleNotification()
         

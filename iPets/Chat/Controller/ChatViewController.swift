@@ -657,7 +657,6 @@ class ChatViewController: UIViewController, ChatDataSource, UITextViewDelegate, 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         txtMsg.resignFirstResponder()
     }
-    
 }
 
 
@@ -667,6 +666,10 @@ extension ChatViewController: ChatTableViewDelegate{
         let guestContectorVC = ContectorInfoViewController()
         guestContectorVC.contectorNickName = name
         self.navigationController?.pushViewController(guestContectorVC, animated: true)
+    }
+    
+    func tapedPic() {
+        txtMsg.resignFirstResponder()
     }
     
     func shartImage(image: UIImage) {

@@ -77,7 +77,14 @@ class MainChatTableViewCell: UITableViewCell {
         }
         
         if mainChatItem.unreadCount > 0{
-            let bageView = BageValueView.nbView(str: String(mainChatItem.unreadCount))
+            var bageView = UIView()
+            if let data = ChatFuncs.getSettingModel(mainChatItem.nickname){
+                if data.notNotice != nil && data.notNotice == "1"{
+                    bageView = BageValueView.redDotView()
+                }else{
+                    bageView = BageValueView.nbView(str: String(mainChatItem.unreadCount))
+                }
+            }
             bageView.center = CGPoint(x: chatIcon.maxXX-5, y: chatIcon.y+5)
             self.addSubview(bageView)
         }

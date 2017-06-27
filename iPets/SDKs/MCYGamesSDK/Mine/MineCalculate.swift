@@ -51,19 +51,6 @@ class MineCalculate: NSObject {
         return round
     }
     
-    //比较器，排序用
-    class func mineGetSort() -> Comparator{
-        let block = {(s1: AnyObject!, s2: AnyObject!) -> ComparisonResult in
-            let str1 = s1 as! Int
-            let str2 = s2 as! Int
-            if str1 < str2 {
-                return ComparisonResult.orderedAscending
-            }else{
-                return ComparisonResult.orderedDescending
-            }}
-        return block as! Comparator
-    }
-    
     //根据文字获得大小
     class func sizeWithText(_ text: NSString, font: UIFont, maxSize: CGSize) -> CGSize{
         let attrs : NSDictionary = [NSFontAttributeName:font]

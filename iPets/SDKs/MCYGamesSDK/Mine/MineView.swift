@@ -120,27 +120,22 @@ class MineView: UIView {
         
         //排序完了之后比较
         self.minePosition?.sort(comparator: {
-            (s1: AnyObject!, s2: AnyObject!) -> ComparisonResult in
-            let str1 = s1 as! Int
-            let str2 = s2 as! Int
-            if str1 < str2 {
+            (s1, s2) -> ComparisonResult in
+            if (s1 as! Int) < ( s2 as! Int){
                 return ComparisonResult.orderedAscending
             }else{
                 return ComparisonResult.orderedDescending
             }
-        } as! (Any, Any) -> ComparisonResult)
+        })
         
-        self.markedMinePosition!.sort(comparator:
-            {
-                (s1: AnyObject!, s2: AnyObject!) -> ComparisonResult in
-                let str1 = s1 as! Int
-                let str2 = s2 as! Int
-                if str1 < str2 {
-                    return ComparisonResult.orderedAscending
-                }else{
-                    return ComparisonResult.orderedDescending
-                }
-                } as! (Any, Any) -> ComparisonResult)
+        self.markedMinePosition!.sort(comparator:{
+            (s1, s2) -> ComparisonResult in
+            if (s1 as! Int) < ( s2 as! Int){
+                return ComparisonResult.orderedAscending
+            }else{
+                return ComparisonResult.orderedDescending
+            }
+        })
         
         if self.minePosition == self.markedMinePosition{
             self.delegate?.GameVictory()

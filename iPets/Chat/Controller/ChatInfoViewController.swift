@@ -59,13 +59,15 @@ class ChatInfoViewController: UIViewController, UITableViewDelegate, UITableView
             
             //获得设置的置顶消息
             var mesNotNotice = false
+            var notNotice = false
             if let data = ChatFuncs.getSettingModel(contectorNickName){
                 mesNotNotice = (data.top == "1") ? true : false
+                notNotice = (data.notNotice == "1") ? true : false
             }
             //加入数据
             let data1 = ChatInfoViewDataModel(icon: icon, name: name, nickname: contectorNickName)
             let data2 = ChatInfoViewDataModel(label: "消息置顶", isSwitch: mesNotNotice)
-            let data3 = ChatInfoViewDataModel(label: "消息免打扰", isSwitch: false)
+            let data3 = ChatInfoViewDataModel(label: "消息免打扰", isSwitch: notNotice)
             let data4 = ChatInfoViewDataModel(label: "设置聊天背景")
             
             dataSource?.add([data1])
@@ -103,6 +105,11 @@ class ChatInfoViewController: UIViewController, UITableViewDelegate, UITableView
             topS = cell.topSwitch
             topS?.addTarget(self, action: #selector(switchChanged), for: .valueChanged)
         }
+        if indexPath.section == 1 && indexPath.row == 1{
+            noticeS = cell.topSwitch
+            noticeS?.addTarget(self, action: #selector(switchChanged_Notice), for: .valueChanged)
+        }
+        
         return cell
     }
     
@@ -126,6 +133,30 @@ class ChatInfoViewController: UIViewController, UITableViewDelegate, UITableView
         return 15
     }
     
+    func switchChanged_Notice(){
+        //聊天的设置数据保存
+        let chatsData = SaveDataModel()
+        var chatSettingData = chatsData.loadChatSettingDataFromTempDirectory()
+        
+        //获得设置的置顶消息
+        for i in 0 ..< chatSettingData.count{
+            let data = chatSettingData[i]
+            let nickname = data.nickname
+            if nickname == contectorNickName{
+                if (noticeS?.isOn)! {
+                    data.notNotice = "1"
+                }else{
+                    data.notNotice = "0"
+                }
+                
+                chatSettingData.remove(at: i)
+                chatSettingData.append(data)
+                break
+            }
+        }
+        chatsData.saveChatSettingToTempDirectory(settingData: chatSettingData)
+
+    }
     
     func switchChanged(){
         //聊天的设置数据保存

@@ -163,7 +163,8 @@ class ContectorInfoViewController: UIViewController, UITableViewDelegate, UITabl
             let chatsData = SaveDataModel()
             var chatSettingData = chatsData.loadChatSettingDataFromTempDirectory()
             
-            let settingData = MainChatListViewDataSettingModel(nickname: contectorInfo.nickname, top: "0", chatBIMPath: nil)
+            let settingData = MainChatListViewDataSettingModel(nickname: contectorInfo.nickname, top: "0",
+                                                               chatBIMPath: nil, notNotice: "0")
             chatSettingData.append(settingData)
             
             chatsData.saveChatSettingToTempDirectory(settingData: chatSettingData)

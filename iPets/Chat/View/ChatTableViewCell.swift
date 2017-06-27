@@ -8,6 +8,8 @@ protocol ChatTableViewCellDelegate {
     func showPic(_ pic: [UIImage], index: Int, imageDate: [Date], frame: CGRect)
     
     func shareImage(image: UIImage)
+    
+    func tapedPic()
 }
 
 //信息体加用户头像
@@ -193,6 +195,7 @@ class ChatTableViewCell: UITableViewCell, MessageItemDelegate{
     
 //========================================图片点击事件==================================
     func tapedPic(_ sender: UITapGestureRecognizer){
+        self.cellDelegate?.tapedPic()
         
         let wait = WaitView()
         wait.showWait("加载中")
