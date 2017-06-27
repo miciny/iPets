@@ -122,7 +122,6 @@ class PersonInfo_TDCodeImageViewController: UIViewController {
                 error: Error?) in
                 
                 print(activityType ?? "没有获取到分享路径")
-                
                 print(returnedItems ?? "没有获取到返回路径")
                 
                 if completed{
@@ -134,13 +133,10 @@ class PersonInfo_TDCodeImageViewController: UIViewController {
                 if let e = error{
                     print("分享错误")
                     print(e)
-                }
-                
+                }       
                 self.activityViewController = nil
         }
-        
     }
-    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

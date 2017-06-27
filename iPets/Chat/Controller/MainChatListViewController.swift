@@ -98,10 +98,6 @@ class MainChatListViewController: UIViewController, UITableViewDelegate, UITable
         let otherData = NSMutableArray()
         
         let chatList = SQLLine.SelectAllData(entityNameOfChatList)
-        
-        //聊天的设置数据保存
-        let chatsData = SaveDataModel()
-        let chatSettingData = chatsData.loadChatSettingDataFromTempDirectory()
 
         //获取到数据
         for i in 0 ..< chatList.count {
@@ -120,16 +116,13 @@ class MainChatListViewController: UIViewController, UITableViewDelegate, UITable
                                                            isTop: false)
             
             //获得设置的置顶消息
-            for data in chatSettingData{
-                let nickName = data.nickname
-                if nickName == nickname{
-                    if data.top == "1" {
-                        singleChatList.isTop = true
-                        topData.add(singleChatList)
-                    }else{
-                        otherData.add(singleChatList)
-                    }
-                    break
+            
+            if let data = ChatFuncs.getSettingModel(nickname){
+                if data.top == "1" {
+                    singleChatList.isTop = true
+                    topData.add(singleChatList)
+                }else{
+                    otherData.add(singleChatList)
                 }
             }
         }
@@ -242,18 +235,11 @@ class MainChatListViewController: UIViewController, UITableViewDelegate, UITable
         chatView.youInfo = UserInfo(name: item.name, icon: item.pic, nickname: item.nickname)
         
         //获得设置的置顶消息
-        let chatsData = SaveDataModel()
-        let chatSettingData = chatsData.loadChatSettingDataFromTempDirectory()
-        for data in chatSettingData{
-            let nickName = data.nickname
-            if nickName == item.nickname{
-                if data.chatBIMPath != nil{
-                    chatView.backImageView = UIImageView() //设置了说明有背景图片
-                }
-                break
+        if let data = ChatFuncs.getSettingModel(item.nickname){
+            if data.chatBIMPath != nil{
+                chatView.backImageView = UIImageView() //设置了说明有背景图片
             }
         }
-        
         self.navigationController?.pushViewController(chatView, animated: true)
     }
     

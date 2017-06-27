@@ -25,7 +25,6 @@ class ChatViewController: UIViewController, ChatDataSource, UITextViewDelegate, 
     fileprivate var time: Date?//保存最后一条消息的时间
     fileprivate var lable: String? //保存最后一条消息
     fileprivate var isChanged = false //是否发生过信息
-    fileprivate var tap = UITapGestureRecognizer() //键盘弹起时，注册该方法, 方便收起键盘
     
     //17.895
     fileprivate var singgleLineSize = CGSize()
@@ -407,8 +406,8 @@ class ChatViewController: UIViewController, ChatDataSource, UITextViewDelegate, 
         let singgleLineSize1 = sizeWithText("我爱你！", font: chatPageInputTextFont, maxSize: CGSize(width: sendView.frame.width-130, height: 1000))
         
         //获取行数，可能不是很准
-        let i = textViewSize.height/singgleLineSize1.height
-//        let size = txtMsg.sizeThatFits(CGSizeMake(CGRectGetWidth(txtMsg.frame), CGFloat(MAXFLOAT)))
+        let i = textViewSize.height / singgleLineSize1.height
+        
         if(i < 5){
             //底部发送框
             let sendViewHeight = singgleLineSize1.height*(i-1)+8+gap*2+singgleLineSize.height
@@ -451,28 +450,10 @@ class ChatViewController: UIViewController, ChatDataSource, UITextViewDelegate, 
         
         if offset > 0 {
             //弹起tableView和输入框
-            let frame = sendView.frame
-            tableView.frame = CGRect(x: 0, y: 64, width: self.view.frame.width, height: offset-110)
-            sendView.frame = CGRect(x: 0, y: offset-frame.height, width: self.view.frame.size.width, height: frame.height)
+            tableView.frame.size.height = offset-110
+            sendView.frame.origin.y = offset-sendView.frame.height
             tableView.moveToBottomAuto()
         }
-        
-        tap = UITapGestureRecognizer(target: self, action: #selector(ChatViewController.handleTap(_:)))
-        tableView.addGestureRecognizer(tap)
-    }
-    
-    //收起键盘
-    func handleTap(_ sender: UITapGestureRecognizer) {
-        if(sender.state == .ended) {
-            txtMsg.resignFirstResponder()
-        }
-        sender.cancelsTouchesInView = false
-    }
-    
-    //结束编辑时，
-    func textViewShouldEndEditing(_ textView: UITextView) -> Bool {
-        tableView.removeGestureRecognizer(tap)
-        return true
     }
     
     //收起键盘时，移动整个页面
@@ -480,10 +461,9 @@ class ChatViewController: UIViewController, ChatDataSource, UITextViewDelegate, 
         
         let _ = delay(0.1){
             //收回tableView和输入框
-            
             let frame = self.sendView.frame
-            self.sendView.frame = CGRect(x: 0, y: self.view.frame.size.height-frame.height, width: self.view.frame.size.width, height: frame.height)
-            self.tableView.frame = CGRect(x: 0, y: 64, width: self.view.frame.width, height: Height-self.sendView.frame.height-64)
+            self.sendView.frame.origin.y = self.view.frame.size.height-frame.height
+            self.tableView.frame.size.height = Height-self.sendView.frame.height-64
             self.tableView.moveToBottomAuto()
         }
     }
@@ -674,6 +654,10 @@ class ChatViewController: UIViewController, ChatDataSource, UITextViewDelegate, 
         super.didReceiveMemoryWarning()
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        txtMsg.resignFirstResponder()
+    }
+    
 }
 
 
@@ -729,11 +713,8 @@ extension ChatViewController: ChatTableViewDelegate{
                     print("分享错误")
                     print(e)
                 }
-                
                 self.activityViewController = nil
         }
-        
     }
-
 }
 

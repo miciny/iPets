@@ -201,6 +201,7 @@
 		E1ADD75D1ED6CD29000BCBC4 /* MyTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1ADD75C1ED6CD29000BCBC4 /* MyTimer.swift */; };
 		E1ADD75F1EDFE899000BCBC4 /* Temp.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E1ADD75E1EDFE899000BCBC4 /* Temp.xcassets */; };
 		E1C2ED1B1EFD235100F2F3BB /* FindPetsTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1C2ED1A1EFD235100F2F3BB /* FindPetsTableHeaderView.swift */; };
+		E1C2ED1D1F01F46B00F2F3BB /* ChatFuncs.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1C2ED1C1F01F46B00F2F3BB /* ChatFuncs.swift */; };
 		E1DE0E631EEA918600CF580D /* AVSDKExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DE0E5C1EEA918600CF580D /* AVSDKExtension.swift */; };
 		E1DE0E641EEA918600CF580D /* BaseVideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DE0E5D1EEA918600CF580D /* BaseVideoView.swift */; };
 		E1DE0E651EEA918600CF580D /* SetMaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DE0E5E1EEA918600CF580D /* SetMaskView.swift */; };
@@ -456,6 +457,7 @@
 		E1ADD75C1ED6CD29000BCBC4 /* MyTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyTimer.swift; sourceTree = "<group>"; };
 		E1ADD75E1EDFE899000BCBC4 /* Temp.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Temp.xcassets; sourceTree = "<group>"; };
 		E1C2ED1A1EFD235100F2F3BB /* FindPetsTableHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindPetsTableHeaderView.swift; sourceTree = "<group>"; };
+		E1C2ED1C1F01F46B00F2F3BB /* ChatFuncs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatFuncs.swift; sourceTree = "<group>"; };
 		E1DE0E5C1EEA918600CF580D /* AVSDKExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVSDKExtension.swift; sourceTree = "<group>"; };
 		E1DE0E5D1EEA918600CF580D /* BaseVideoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseVideoView.swift; sourceTree = "<group>"; };
 		E1DE0E5E1EEA918600CF580D /* SetMaskView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetMaskView.swift; sourceTree = "<group>"; };
@@ -1027,13 +1029,13 @@
 			isa = PBXGroup;
 			children = (
 				E17528AB1ED406D000269EDF /* UserInfo.swift */,
+				E17528A51ED406D000269EDF /* ChatData.swift */,
+				E17528A71ED406D000269EDF /* ContectorModel.swift */,
 				E17528A91ED406D000269EDF /* MainChatListViewDataModel.swift */,
 				E18C41CB1EFCB58100AFF37C /* MainChatListViewDataSettingModel.swift */,
-				E17528A51ED406D000269EDF /* ChatData.swift */,
 				E17528A61ED406D000269EDF /* ContectorListViewDataModel.swift */,
 				E17528A41ED406D000269EDF /* BubbleItem.swift */,
 				E17528AA1ED406D000269EDF /* MessageItem.swift */,
-				E17528A71ED406D000269EDF /* ContectorModel.swift */,
 				E17528A81ED406D000269EDF /* ContectorInfoViewDataModel.swift */,
 				E18C41D11EFCD0F100AFF37C /* ChatInfoViewDataModel.swift */,
 			);
@@ -1073,6 +1075,7 @@
 			isa = PBXGroup;
 			children = (
 				E17528C71ED4091D00269EDF /* Chat.xcassets */,
+				E1C2ED1C1F01F46B00F2F3BB /* ChatFuncs.swift */,
 			);
 			name = Resources;
 			path = ../../../../Users/miciny/ToGitHub/iPets/iPets/Chat/Resources;
@@ -1689,6 +1692,7 @@
 				E17528FE1ED40B7600269EDF /* PushAndPopAnimation.swift in Sources */,
 				E144083C1EEFE28400C8E23B /* TetrisElementsObj.swift in Sources */,
 				E18C41C51EFB990E00AFF37C /* SearchRecord+CoreDataClass.swift in Sources */,
+				E1C2ED1D1F01F46B00F2F3BB /* ChatFuncs.swift in Sources */,
 				E17528B11ED406D000269EDF /* MainChatListViewDataModel.swift in Sources */,
 				E12A38B91EEA795700755C6C /* FindDataModel.swift in Sources */,
 				E18C41D01EFCD0D800AFF37C /* ChatInfoTableViewCell.swift in Sources */,

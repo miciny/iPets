@@ -212,8 +212,8 @@ class ChatTableViewCell: UITableViewCell, MessageItemDelegate{
             
             let singleChatData = chatsData.loadChatsDataFromTempDirectory(self.chatName+".plist", key: self.chatName)
             for i in 0 ..< singleChatData.count {
-                if singleChatData[i].chatImage != "" {
-                    let imageName = "H"+singleChatData[i].chatImage!
+                if let image = singleChatData[i].chatImage{
+                    let imageName = "H"+image
                     let imageData = chatCacheImages.loadImageFromChatCacheDir(self.chatName, imageName: imageName)
                     let image = ChangeValue.dataToImage(imageData)
                     imageArray!.append(image)

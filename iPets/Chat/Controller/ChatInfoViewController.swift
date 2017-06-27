@@ -57,20 +57,11 @@ class ChatInfoViewController: UIViewController, UITableViewDelegate, UITableView
             let iconData = (contectors[0] as! Contectors).icon!
             let icon = ChangeValue.dataToImage(iconData as Data)
             
-            //聊天的设置数据保存
-            let chatsData = SaveDataModel()
-            let chatSettingData = chatsData.loadChatSettingDataFromTempDirectory()
-            
             //获得设置的置顶消息
             var mesNotNotice = false
-            for data in chatSettingData{
-                let nickname = data.nickname
-                if nickname == contectorNickName{
-                    mesNotNotice = (data.top == "1") ? true : false
-                    break
-                }
+            if let data = ChatFuncs.getSettingModel(contectorNickName){
+                mesNotNotice = (data.top == "1") ? true : false
             }
-            
             //加入数据
             let data1 = ChatInfoViewDataModel(icon: icon, name: name, nickname: contectorNickName)
             let data2 = ChatInfoViewDataModel(label: "消息置顶", isSwitch: mesNotNotice)
@@ -205,7 +196,7 @@ extension ChatInfoViewController: bottomMenuViewDelegate, UINavigationController
     
     //选取图片之后
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: Any]){
-        let type : NSString = info["UIImagePickerControllerMediaType"] as! NSString
+        let type = info["UIImagePickerControllerMediaType"] as! NSString
         if(type.isEqual(to: "public.image")){
             
             let image = info["UIImagePickerControllerEditedImage"] as! UIImage

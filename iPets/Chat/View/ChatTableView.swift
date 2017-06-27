@@ -25,7 +25,7 @@ protocol ChatDataSource{
     func chatTableView(_ tableView: ChatTableView, dataForRow:Int)-> MessageItem
 }
 
-class ChatTableView: UITableView, UITableViewDelegate, UITableViewDataSource{
+class ChatTableView: MCYTableView, UITableViewDelegate, UITableViewDataSource{
     
     var bubbleSection: NSMutableArray! //对话体
     var chatDataSource: ChatDataSource! //chat类型的数据
@@ -115,11 +115,7 @@ class ChatTableView: UITableView, UITableViewDelegate, UITableViewDataSource{
             return
         }
         
-        let dataTmp: [AnyObject] = bubbleSection[count-1] as! [AnyObject]
-        let data: AnyObject = dataTmp[dataTmp.count-1]
-        let item =  data as! MessageItem
-        
-        let offsetY = self.contentSize.height - self.frame.size.height - 10 + item.insets.bottom
+        let offsetY = self.contentSize.height - self.frame.size.height
         //如果不足一屏幕，不滑动
         if(offsetY < 0){
             return
@@ -145,7 +141,7 @@ class ChatTableView: UITableView, UITableViewDelegate, UITableViewDataSource{
             return
         }
         
-        let offsetY = self.contentSize.height - self.frame.size.height + 44 + item.insets.bottom
+        let offsetY = self.contentSize.height - self.frame.size.height
         //如果不足一屏幕，不滑动
         if(offsetY < 0){
             return
