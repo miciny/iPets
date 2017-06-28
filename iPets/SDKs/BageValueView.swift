@@ -32,12 +32,11 @@ class BageValueView: NSObject {
         return v
     }
     
-    class func redDotView() -> UIView{
+    class func redDotView(_ pi: CGFloat) -> UIView{
         
         let v = UIView()
-        let min: CGFloat = 12
-        v.frame.size = CGSize(width: min, height: min)
-        v.layer.cornerRadius = min/2
+        v.frame.size = CGSize(width: pi, height: pi)
+        v.layer.cornerRadius = pi/2
         v.clipsToBounds = true
         v.backgroundColor = UIColor.red
         

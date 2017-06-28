@@ -11,6 +11,7 @@ import UIKit
 class FindTableViewCell: UITableViewCell {
 
     var findItem: FindDataModel!
+    private var bageView: UIView?
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -31,13 +32,24 @@ class FindTableViewCell: UITableViewCell {
         title.center.y = 22
         self.addSubview(title)
         
-        if let icon = findItem.icon{
+        
+        //普通设置栏-头像 高度44
+        let myIcon = UIImageView(frame: CGRect(x: 20, y: 7, width: 30, height: 30))
+        myIcon.backgroundColor = UIColor.clear
+        myIcon.image = UIImage(named: findItem.icon)
+        self.addSubview(myIcon)
+        
+        
+        if let image = findItem.leftIcon{
             //普通设置栏-头像 高度44
-            let myIcon = UIImageView(frame: CGRect(x: 20, y: 7, width: 30, height: 30))
-            myIcon.backgroundColor = UIColor.clear
-            myIcon.image = UIImage(named: icon)
-            myIcon.layer.cornerRadius = 0
-            self.addSubview(myIcon)
+            let leftIcon = UIImageView(frame: CGRect(x: Width-65, y: 5, width: 34, height: 34))
+            leftIcon.backgroundColor = UIColor.clear
+            leftIcon.image = image
+            self.addSubview(leftIcon)
+            
+            bageView = BageValueView.redDotView(10)
+            bageView!.center = CGPoint(x: leftIcon.maxXX-2, y: leftIcon.y+2)
+            self.addSubview(bageView!)
         }
     }
     
@@ -54,5 +66,18 @@ class FindTableViewCell: UITableViewCell {
         return label
     }
 
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        
+        let originColor = bageView?.backgroundColor
+        super.setSelected(selected, animated: animated)
+        bageView?.backgroundColor = originColor
+    }
+    
+    override func setHighlighted(_ highlighted: Bool, animated: Bool) {
+        
+        let originColor = bageView?.backgroundColor
+        super.setHighlighted(highlighted, animated: animated)
+        bageView?.backgroundColor = originColor
+    }
 
 }

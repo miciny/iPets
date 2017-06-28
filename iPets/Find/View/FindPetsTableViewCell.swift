@@ -200,15 +200,8 @@ class FindPetsTableViewCell: UITableViewCell, UIAlertViewDelegate{
     }
     
     //先这样吧
-    func loadIcon() -> UIImage{
-        var icon = UIImage()
-        
-        if modelFrame.myCellModel.from == FindPetsDataFromType.me.rawValue{
-            icon = myInfo.icon!
-            
-        }else{
-            icon = UIImage(named: "defaultIcon")!
-        }
+    func loadIcon() -> UIImage?{
+        let icon = getUserIcon(nickname: modelFrame.myCellModel.nickname)
         return icon
     }
     

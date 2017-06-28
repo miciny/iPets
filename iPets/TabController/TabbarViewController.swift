@@ -82,3 +82,28 @@ class TabbarViewController: UITabBarController, UITabBarControllerDelegate {
     }
     
 }
+
+
+extension UITabBar{
+    
+    func showDotOnItemIndex(index: Int) {
+        self.removeBadgeOnItemIndex(index: index)
+        
+        let view = BageValueView.redDotView(10)
+        view.tag = 888 + index
+        
+        let tabFrame = self.frame
+        let percentX = (CGFloat(index) + 0.59) / 4
+        let x: CGFloat = CGFloat(ceilf(Float(percentX * tabFrame.size.width)))
+        let y: CGFloat = CGFloat(ceilf(Float(0.115 * tabFrame.size.height)))
+        view.center = CGPoint(x: CGFloat(x), y: CGFloat(y))
+        self.addSubview(view)
+    }
+    
+    //这个是移除小红点
+    func removeBadgeOnItemIndex(index: Int) {
+        if let view = self.viewWithTag(888 + index) {
+            view.removeFromSuperview()
+        }
+    }
+}

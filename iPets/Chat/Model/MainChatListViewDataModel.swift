@@ -29,6 +29,6 @@ class MainChatListViewDataModel: NSObject {
         self.time = time
         self.unreadCount = unreadCount
         self.isTop = isTop
-        self.height = 80
+        self.height = 70
     }
 }

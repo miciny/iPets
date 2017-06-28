@@ -131,12 +131,28 @@ class ContectorInfoViewController: UIViewController, UITableViewDelegate, UITabl
         
         let videoMsgBtn = UIButton(frame: CGRect(x: 10, y: sendMsgBtn.frame.height + 20 + 20, width: Width-20, height: 44))
         videoMsgBtn.backgroundColor = UIColor.white
-        videoMsgBtn.setTitle("视频聊天", for: UIControlState())
+        videoMsgBtn.setTitle("视频聊天（测试朋友圈）", for: UIControlState())
         videoMsgBtn.setTitleColor(UIColor.black, for: UIControlState())
+        videoMsgBtn.addTarget(self, action: #selector(sendCircle), for: .touchUpInside)
         videoMsgBtn.layer.cornerRadius = 5
         footerView.addSubview(videoMsgBtn)
         
         return footerView
+    }
+    
+    func sendCircle(){
+        let data = SaveDataModel()
+        data.setUserData(key: "Circle", value: contectorNickName as Any)
+        
+        
+        var oldData = data.loadFindMyPetsDataFromTempDirectory()
+        let myFindPetsInfo = FindPetsCellModel(name: contectorInfo.name, text: "这是我测试的数据，千万不要以为我不知道，我是真的可以做到的，啊哈哈哈哈哈哈哈哈！！！！", picture: nil, date: Date(), nickname: contectorNickName, video: nil, from: .other)
+        oldData.append(myFindPetsInfo)
+        //保存寻宠数据
+        data.saveFindMyPetsToTempDirectory(oldData)
+        
+        
+        ToastView().showToast("发送成功")
     }
     
     func sendMsg(){

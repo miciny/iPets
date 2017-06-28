@@ -30,7 +30,7 @@ class MainChatTableViewCell: UITableViewCell {
     
     func rebuildCell(){
         //聊天栏，图片
-        chatIcon.frame = CGRect(x: 10, y: 10, width: 60, height: 60)
+        chatIcon.frame = CGRect(x: 10, y: 8, width: mainChatItem.height-16, height: mainChatItem.height-16)
         chatIcon.backgroundColor = UIColor.gray
         chatIcon.layer.masksToBounds = true //不然设置边角没用
         chatIcon.layer.cornerRadius = 5
@@ -81,7 +81,7 @@ class MainChatTableViewCell: UITableViewCell {
             bageView = UIView()
             if let data = ChatFuncs.getSettingModel(mainChatItem.nickname){
                 if data.notNotice != nil && data.notNotice == "1"{
-                    bageView = BageValueView.redDotView()
+                    bageView = BageValueView.redDotView(12)
                 }else{
                     bageView = BageValueView.nbView(str: String(mainChatItem.unreadCount))
                 }
@@ -108,7 +108,6 @@ class MainChatTableViewCell: UITableViewCell {
         let originColor = bageView?.backgroundColor
         super.setHighlighted(highlighted, animated: animated)
         bageView?.backgroundColor = originColor
-        
     }
 
 }

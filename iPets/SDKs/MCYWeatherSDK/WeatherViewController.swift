@@ -78,6 +78,11 @@ class WeatherViewController: UIViewController, UIScrollViewDelegate {
     
     func checkIsDay(){
         
+        guard sunrise != "" else {
+            isDay = true
+            return
+        }
+        
         let date = Date()
         
         let srArray = sunrise.components(separatedBy: ":")

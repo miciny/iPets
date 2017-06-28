@@ -10,22 +10,26 @@ import UIKit
 
 class FindDataModel: NSObject {
     
-    var icon: String?
+    var icon: String
     var title: String
+    
+    var leftIcon: UIImage?
     var height: CGFloat
     
-    init(title: String, icon: String?, height: CGFloat){
+    init(title: String, icon: String, leftIcon: UIImage?,height: CGFloat){
         self.title = title      //
         self.icon = icon        //
         self.height = height    //高度
+        self.leftIcon = leftIcon
     }
     
     //普通设置栏
-    convenience init(icon: String?, title: String){
-        let title = title
-        let icon = icon
-        let height = CGFloat(44)
-        
-        self.init(title: title, icon: icon, height: height)
+    convenience init(icon: String, title: String){
+        self.init(title: title, icon: icon, leftIcon: nil, height: 44)
     }
+    
+    convenience init(icon: String, title: String, leftIcon: UIImage?){
+        self.init(title: title, icon: icon, leftIcon: leftIcon, height: 44)
+    }
+    
 }

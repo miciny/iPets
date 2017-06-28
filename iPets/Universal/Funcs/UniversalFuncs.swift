@@ -9,6 +9,22 @@
 import Foundation
 import UIKit
 
+//======================================根据nickname获得头像，指获取一个时使用================================
+func getUserIcon(nickname: String) -> UIImage?{
+    
+    let contectors = SQLLine.SelectAllData(entityNameOfContectors)
+    for c in contectors{
+        let n = (c as! Contectors).nickname! as String
+        if nickname == n{
+            let iconData = (c as! Contectors).icon! as Data
+            let icon = ChangeValue.dataToImage(iconData)
+            return icon
+        }
+    }
+    
+    return nil
+}
+
 
 
 //======================================延迟执行方法================================

@@ -12,6 +12,7 @@ class FindViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     fileprivate var mainTabelView: UITableView? //整个table
     fileprivate var findData: NSMutableArray? //数据
+    fileprivate var newData = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,8 +35,21 @@ class FindViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func setData(){
         findData = NSMutableArray()
+        newData = false
+        self.removeBadgeOnItemIndex(index: 2)
         
-        let oneOne = FindDataModel(icon: "FriendsCircle", title: "宠物圈")
+        var oneOne = FindDataModel(icon: "FriendsCircle", title: "宠物圈")
+        
+        let data = SaveDataModel()
+        if let nickname = data.getUserData(key: "Circle"){
+            if (nickname as! String) != ""{
+                if let icon = getUserIcon(nickname: nickname as! String){
+                    oneOne = FindDataModel(icon: "FriendsCircle", title: "宠物圈", leftIcon: icon)
+                    self.showDotOnItemIndex(index: 2)
+                    newData = true
+                }
+            }
+        }
         
         let twoOne = FindDataModel(icon: "ScanBook_HL", title: "热点新闻")
         let twoTwo = FindDataModel(icon: "Shake_icon_tvHL", title: "热点视频")
@@ -49,6 +63,15 @@ class FindViewController: UIViewController, UITableViewDelegate, UITableViewData
         findData!.add([twoOne, twoTwo])
         findData!.add([threeOne, threeTwo])
         findData!.add([fourOne])
+    }
+    
+    func showDotOnItemIndex(index: Int) {
+        self.tabBarController?.tabBar.showDotOnItemIndex(index: 2)
+    }
+    
+    //这个是移除小红点
+    func removeBadgeOnItemIndex(index: Int) {
+        self.tabBarController?.tabBar.removeBadgeOnItemIndex(index: 2)
     }
     
     //设置tableView
@@ -111,6 +134,14 @@ class FindViewController: UIViewController, UITableViewDelegate, UITableViewData
                 
                 if let vc = findPetsViewController{
                     vc.hidesBottomBarWhenPushed = true
+                    
+                    if newData{
+                        vc.refresh = newData
+                        
+                        let data = SaveDataModel()
+                        data.setUserData(key: "Circle", value: "")
+                    }
+                    
                     self.navigationController?.pushViewController(vc, animated: true)
                     
                 }else{

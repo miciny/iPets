@@ -10,6 +10,24 @@ import UIKit
 
 class SaveDataModel: NSObject {
     
+//＊＊＊＊＊＊＊＊＊＊＊＊＊用户配置文件＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊
+    
+    func setUserData(key: String, value: Any){
+        //1、 保存
+        UserDefaults.standard.set(value, forKey: key)
+        //2、同步
+        UserDefaults.standard.synchronize()
+    }
+    
+    func getUserData(key: String) -> Any?{
+        //取值
+        if let value = UserDefaults.standard.object(forKey: key){
+            return value
+        }else{
+            return nil
+        }
+    }
+    
 //＊＊＊＊＊＊＊＊＊＊＊＊＊聊天设置数据＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊
     //聊天设置保存数据
     func saveChatSettingToTempDirectory(settingData: [MainChatListViewDataSettingModel]){
