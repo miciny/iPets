@@ -21,9 +21,9 @@ protocol mainViewDelegate{
 }
 
 class MainView: UIView{
+    
     var isGaming: TetrisGameType! //1正在游戏,2暂停，3游戏结束
-
-    var timer: MyTimer!
+    var timer: MyTimer?
     
     fileprivate var _width = CGFloat(0)
     fileprivate var _height = CGFloat(0)
@@ -65,7 +65,7 @@ class MainView: UIView{
         self.turnAllBtnWhite()
         self.delegate?.getTheNextOne() //获取下一个元
         self.showElements()
-        self.timer.startTimer(interval: speed)
+        self.timer?.startTimer(interval: speed)
         
         speed = downSpeed //初始化速度
         self.isGaming = TetrisGameType.gaming
@@ -74,10 +74,10 @@ class MainView: UIView{
     //暂停游戏 继续游戏
     func pauseGame(){
         if isGaming == TetrisGameType.gaming{
-            self.timer.pauseTimer()
+            self.timer?.pauseTimer()
             isGaming = TetrisGameType.pausing
         }else if isGaming == TetrisGameType.pausing{
-            self.timer.startTimer(interval: speed)
+            self.timer?.startTimer(interval: speed)
             isGaming = TetrisGameType.gaming
         }else if isGaming == TetrisGameType.gameOver{
             self.restartGame()
@@ -99,8 +99,8 @@ class MainView: UIView{
     
     //重启定时器，就是按下时，立即生效 快速响应下降按钮
     func restratTimer(){
-        self.timer.pauseTimer()
-        self.timer.startTimer(interval: speed)
+        self.timer?.pauseTimer()
+        self.timer?.startTimer(interval: speed)
     }
     
     
@@ -131,7 +131,7 @@ class MainView: UIView{
     //定时器，自动往下走
     fileprivate func setTimer(){
         self.timer = MyTimer()
-        self.timer.setTimer(interval: speed, target: self, selector: #selector(autoMoveDown), repeats: true)
+        self.timer?.setTimer(interval: speed, target: self, selector: #selector(autoMoveDown), repeats: true)
     }
     
 //***********************************************关于元素的显示移动等******************************
@@ -147,11 +147,12 @@ class MainView: UIView{
     
     //向下移动
     @objc fileprivate func autoMoveDown(){
+        
         guard self.isGaming == TetrisGameType.gaming else {
             return
         }
-        
-        self.timer.pauseTimer()   //暂停计时器
+        print("向下移动")
+        self.timer?.pauseTimer()   //暂停计时器
         
         if !self.isDown(){
             self.notDown()
@@ -174,7 +175,7 @@ class MainView: UIView{
             self.element.elePoint.remove(at: 0)
             self.element.elePoint.append([x, y])
         }
-        self.timer.startTimer(interval: speed)   //如果还要往下走的话，就开启
+        self.timer?.startTimer(interval: speed)   //如果还要往下走的话，就开启
     }
     
     //到头的处理
@@ -196,7 +197,7 @@ class MainView: UIView{
         }else{ //游戏没结束
             dir = 0
             self.showElements() //显示下一个元素
-            self.timer.startTimer(interval: speed)
+            self.timer?.startTimer(interval: speed)
         }
     }
     

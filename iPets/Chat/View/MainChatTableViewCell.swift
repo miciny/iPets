@@ -12,6 +12,7 @@ class MainChatTableViewCell: UITableViewCell {
     
     var mainChatItem: MainChatListViewDataModel!
     let chatIcon = UIImageView()
+    var bageView: UIView?
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -77,7 +78,7 @@ class MainChatTableViewCell: UITableViewCell {
         }
         
         if mainChatItem.unreadCount > 0{
-            var bageView = UIView()
+            bageView = UIView()
             if let data = ChatFuncs.getSettingModel(mainChatItem.nickname){
                 if data.notNotice != nil && data.notNotice == "1"{
                     bageView = BageValueView.redDotView()
@@ -85,8 +86,8 @@ class MainChatTableViewCell: UITableViewCell {
                     bageView = BageValueView.nbView(str: String(mainChatItem.unreadCount))
                 }
             }
-            bageView.center = CGPoint(x: chatIcon.maxXX-5, y: chatIcon.y+5)
-            self.addSubview(bageView)
+            bageView!.center = CGPoint(x: chatIcon.maxXX-5, y: chatIcon.y+5)
+            self.addSubview(bageView!)
         }
     }
 
@@ -96,9 +97,18 @@ class MainChatTableViewCell: UITableViewCell {
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
+        
+        let originColor = bageView?.backgroundColor
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+        bageView?.backgroundColor = originColor
+    }
+    
+    override func setHighlighted(_ highlighted: Bool, animated: Bool) {
+        
+        let originColor = bageView?.backgroundColor
+        super.setHighlighted(highlighted, animated: animated)
+        bageView?.backgroundColor = originColor
+        
     }
 
 }

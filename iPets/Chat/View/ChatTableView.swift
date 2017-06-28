@@ -14,6 +14,7 @@ protocol ChatTableViewDelegate {
     func shartImage(image: UIImage)
     
     func tapedPic()
+    
 }
 
 

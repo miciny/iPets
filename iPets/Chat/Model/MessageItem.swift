@@ -38,6 +38,8 @@ class MessageItem: NSObject, CanCopyLabelDelegate, CanCopyImageDelegate{
     var messageType: MessageType   //消息类型
     var delegate: MessageItemDelegate?
     
+    var voiceImageView: UIImageView?
+    
     //图片和文字与周围的间距
     class func getTextInsetsMine() -> UIEdgeInsets{
         return UIEdgeInsets(top:15, left:15, bottom:25, right:20)
@@ -57,7 +59,8 @@ class MessageItem: NSObject, CanCopyLabelDelegate, CanCopyImageDelegate{
     
     //初始化
     init(user: UserInfo, date: Date, mtype: ChatType, view: UIView,
-         insets: UIEdgeInsets, imageName: String?, voicePath: String?, voiceLong: String?, messageType: MessageType){
+         insets: UIEdgeInsets, imageName: String?, voicePath: String?,
+         voiceLong: String?, messageType: MessageType, voiceImageView: UIImageView?){
         self.view = view
         self.user = user
         self.date = date
@@ -67,6 +70,7 @@ class MessageItem: NSObject, CanCopyLabelDelegate, CanCopyImageDelegate{
         self.imageName = imageName
         self.messageType = messageType
         self.voiceLong = voiceLong
+        self.voiceImageView = voiceImageView
     }
     
     //文字类型消息
@@ -86,7 +90,7 @@ class MessageItem: NSObject, CanCopyLabelDelegate, CanCopyImageDelegate{
         let insets: UIEdgeInsets = (mtype == ChatType.mine ? MessageItem.getTextInsetsMine() : MessageItem.getTextInsetsSomeone())
         
         self.init(user: user, date: date, mtype: mtype, view: label, insets: insets,
-                  imageName: nil, voicePath: nil, voiceLong: nil, messageType: .text)
+                  imageName: nil, voicePath: nil, voiceLong: nil, messageType: .text, voiceImageView: nil)
         
         label.copyLabelDelegate = self
     }
@@ -121,7 +125,8 @@ class MessageItem: NSObject, CanCopyLabelDelegate, CanCopyImageDelegate{
         let insets:UIEdgeInsets =  (mtype == ChatType.mine ? MessageItem.getImageInsetsMine() : MessageItem.getImageInsetsSomeone())
         
         self.init(user: user, date: date, mtype: mtype, view: imageView,
-                  insets: insets, imageName: imageName, voicePath: nil, voiceLong: nil, messageType: .image)
+                  insets: insets, imageName: imageName, voicePath: nil, voiceLong: nil,
+                  messageType: .image, voiceImageView: nil)
         
         imageView.copyImageDelegate = self
     }
@@ -160,19 +165,20 @@ class MessageItem: NSObject, CanCopyLabelDelegate, CanCopyImageDelegate{
         
         let view = UIView(frame: CGRect(x: 0, y: 0, width: vW, height: 20))
         
-        let btn =  UIImageView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
+        let voiceImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
         let btnB =  CanCopyLabel(frame: CGRect(x: 0, y: 0, width: vW, height: 20))
         btnB.canCopyLabelFrom = CanCopyLabelFrom.chat
-        let image = UIImage(named: "SenderVoiceNodePlaying")
-        btn.image = image
+        let voiceImage = UIImage(named: "SenderVoiceNodePlaying")
+        voiceImageView.image = voiceImage
         
-        view.addSubview(btn)
+        view.addSubview(voiceImageView)
         view.addSubview(btnB)
         
         let insets: UIEdgeInsets = (mtype == ChatType.mine ? MessageItem.getTextInsetsMine() : MessageItem.getTextInsetsSomeone())
         
         self.init(user:user, date: date, mtype: mtype, view: view,
-                  insets: insets, imageName: nil, voicePath: voicePath, voiceLong: voiceLong, messageType: .voice)
+                  insets: insets, imageName: nil, voicePath: voicePath, voiceLong: voiceLong,
+                  messageType: .voice, voiceImageView: voiceImageView)
     }
     
 }

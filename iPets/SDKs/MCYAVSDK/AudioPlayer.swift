@@ -9,16 +9,29 @@
 import UIKit
 import AVFoundation
 
-var audioPlayer: AudioPlayer?    //不要把 AVAudioPlayer 当做局部变量 可能要用 AVAudioSession，否则木有声音啊
+protocol AudioPlayerDelegate {
+    func beginPlay()
+    
+    func finishPlay()
+}
 
 class AudioPlayer: NSObject, AVAudioPlayerDelegate{
     
-    var player: AVAudioPlayer? //播放器//不要把 AVAudioPlayer 当做局部变量 可能要用 AVAudioSession，否则木有声音啊
-    var audioPath: String! //录音存储路径
+    static let shared = AudioPlayer.init()
+    private override init(){
+        super.init()
+    }
     
-    var autoPlay: Bool //是否自动播放
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
-    init(path: String, autoPlay: Bool) {
+    private var player: AVAudioPlayer? //播放器//不要把 AVAudioPlayer 当做局部变量 可能要用 AVAudioSession，否则木有声音啊
+    var audioPath: String? //录音存储路径
+    private var autoPlay: Bool! //是否自动播放
+    var delegate: AudioPlayerDelegate?
+    
+    func setUp(path: String, autoPlay: Bool) {
         //初始化录音器
         let session: AVAudioSession = AVAudioSession.sharedInstance()
         //设置录音类型
@@ -32,14 +45,14 @@ class AudioPlayer: NSObject, AVAudioPlayerDelegate{
     
     //播放
     func playAudio(){
-        
-        if self.player != nil{
-            self.player = nil
+        guard self.audioPath != nil else {
+            ToastView().showToast("没有音频路径")
+            return
         }
         
-        if FileManager.default.fileExists(atPath: self.audioPath){
+        if FileManager.default.fileExists(atPath: self.audioPath!){
             
-            let url = URL(fileURLWithPath: self.audioPath)
+            let url = URL(fileURLWithPath: self.audioPath!)
             
             do{
                 try self.player = AVAudioPlayer(contentsOf: url)
@@ -54,6 +67,7 @@ class AudioPlayer: NSObject, AVAudioPlayerDelegate{
                 print("开始播放")
                 self.player?.delegate = self
                 self.player?.play()
+                self.delegate?.beginPlay()
             }
 
         }else {
@@ -66,6 +80,9 @@ class AudioPlayer: NSObject, AVAudioPlayerDelegate{
     //停止
     func stopAudio(){
         self.player?.stop()
+        self.delegate?.finishPlay()
+        audioPath = nil
+        self.player = nil
     }
     
     ///
@@ -74,7 +91,11 @@ class AudioPlayer: NSObject, AVAudioPlayerDelegate{
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
         if autoPlay{
             self.playAudio() //重新开始
+            return
         }
+        self.delegate?.finishPlay()
+        audioPath = nil
+        self.player = nil
     }
     
 }

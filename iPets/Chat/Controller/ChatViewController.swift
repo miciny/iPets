@@ -67,10 +67,8 @@ class ChatViewController: UIViewController, ChatDataSource, UITextViewDelegate, 
         
         super.viewWillDisappear(true)
         
-        if let _ = audioPlayer{
-            audioPlayer!.stopAudio()
-            audioPlayer = nil
-        }
+        let plyer = AudioPlayer.shared
+        plyer.stopAudio()
         
         globalQueue.async(execute: {
             //这里写需要放到子线程做的耗时的代码
@@ -215,10 +213,9 @@ class ChatViewController: UIViewController, ChatDataSource, UITextViewDelegate, 
     
     func setUpRecorder(){
         
-        if let _ = audioPlayer{
-            audioPlayer!.stopAudio()
-            audioPlayer = nil
-        }
+        
+        let plyer = AudioPlayer.shared
+        plyer.stopAudio()
         
         let timeStr = DateToToString.dateToStringBySelf(Date(), format: "yyyyMMdd_HHmmss_ssss")
         //组合录音文件路径,会自动替换

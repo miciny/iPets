@@ -13,7 +13,7 @@ protocol ChatTableViewCellDelegate {
 }
 
 //信息体加用户头像
-class ChatTableViewCell: UITableViewCell, MessageItemDelegate{
+class ChatTableViewCell: UITableViewCell, MessageItemDelegate, AudioPlayerDelegate{
     
     var customView: UIView! //信息的view
     var bubbleView: BubbleItem! //背景气泡
@@ -21,6 +21,8 @@ class ChatTableViewCell: UITableViewCell, MessageItemDelegate{
     var msgItem: MessageItem!
     var cellDelegate: ChatTableViewCellDelegate?
     var chatName: String!
+    
+    var timer: MyTimer?
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -147,19 +149,40 @@ class ChatTableViewCell: UITableViewCell, MessageItemDelegate{
 
 //========================================点击音频的处理理==================================
     func tapVoice(){
-        if let plyer = audioPlayer{
-            if plyer.audioPath == self.msgItem.voicePath!{
-                audioPlayer!.stopAudio()
-                audioPlayer = nil
-            }else{
-                audioPlayer!.stopAudio()
-                audioPlayer = nil
-                audioPlayer = AudioPlayer(path: self.msgItem.voicePath!, autoPlay: false)
-                audioPlayer?.playAudio()
-            }
+        let plyer = AudioPlayer.shared
+        if plyer.audioPath != nil && plyer.audioPath == msgItem.voicePath!{
+            plyer.stopAudio()
         }else{
-            audioPlayer = AudioPlayer(path: self.msgItem.voicePath!, autoPlay: false)
-            audioPlayer?.playAudio()
+            plyer.stopAudio()
+            plyer.delegate = self
+            plyer.setUp(path: msgItem.voicePath!, autoPlay: false)
+            plyer.playAudio()
+        }
+    }
+    
+    func beginPlay() {
+        timer = MyTimer()
+        timer?.setTimer(interval: 0.3, target: self, selector: #selector(changeVoiceImage), repeats: true)
+        timer?.startTimer(interval: 0.3)
+        self.msgItem.voiceImageView?.tag = 1
+    }
+    
+    func finishPlay() {
+        self.msgItem.voiceImageView?.image = UIImage(named: "SenderVoiceNodePlaying")
+        timer?.stopTimer()
+        timer = nil
+    }
+    
+    func changeVoiceImage(){
+        if self.msgItem.voiceImageView?.tag == 1{
+            self.msgItem.voiceImageView?.image = UIImage(named: "SenderVoiceNodePlaying01")
+            self.msgItem.voiceImageView?.tag = 2
+        }else if self.msgItem.voiceImageView?.tag == 2{
+            self.msgItem.voiceImageView?.image = UIImage(named: "SenderVoiceNodePlaying02")
+            self.msgItem.voiceImageView?.tag = 3
+        }else if self.msgItem.voiceImageView?.tag == 3{
+            self.msgItem.voiceImageView?.image = UIImage(named: "SenderVoiceNodePlaying03")
+            self.msgItem.voiceImageView?.tag = 1
         }
     }
     

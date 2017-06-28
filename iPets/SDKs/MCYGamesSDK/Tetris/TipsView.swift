@@ -18,7 +18,7 @@ class TipsView: UIView {
     fileprivate var elements1 = TetrisElementsModules()
     fileprivate var element1: TetrisElementsObj!
     
-    fileprivate var timer: MyTimer!
+    var timer: MyTimer?
     fileprivate var wcount = Int(5) //横向格子数
     fileprivate var hcount = Int(15) //纵向格子数
     fileprivate var scoreLb: UILabel! //显示分数
@@ -134,7 +134,7 @@ class TipsView: UIView {
         self.element1 = self.elements1.getView(type)    //接下来的第一个
         
         if isMoving == true{
-            self.timer.pauseTimer()
+            self.timer?.pauseTimer()
             self.isMoving = false
             self.ele1Plus(dlt: 5)  //+5处理 //重新显示ele1 ele2 1+10 2+5
             self.ele2Plus(dlt: 5)  //+5处理
@@ -144,7 +144,7 @@ class TipsView: UIView {
             self.turnElementBtnWhite() //先把之前变白
             self.ele1Plus(dlt: 5)  //+5处理
             self.showNextEle()
-            self.timer.startTimer(interval: moveSpeed)
+            self.timer?.startTimer(interval: moveSpeed)
         }
         
         //第一次进来，显示的位置
@@ -185,7 +185,8 @@ class TipsView: UIView {
     //重新开始游戏 1只是结束，2结束加重新计分
     func restartRecord(over: Int){
         print("重置分数和元素")
-        self.timer.pauseTimer()
+        
+        self.timer?.pauseTimer()
         self.elementTemp = nil
         self.getEleFlag = false
         self.isMoving = false
@@ -234,7 +235,7 @@ class TipsView: UIView {
     
     //自动下降
     @objc fileprivate func autoMoveDown(){
-        self.timer.pauseTimer()   //暂停计时器
+        self.timer?.pauseTimer()   //暂停计时器
         
         guard self.elementTemp != nil else {
             return
@@ -245,7 +246,7 @@ class TipsView: UIView {
             self.notDown()
         }else{ //如果到头了
             self.isMoving = false
-            self.timer.pauseTimer()
+            self.timer?.pauseTimer()
         }
     }
     
@@ -289,7 +290,7 @@ class TipsView: UIView {
             self.element2.elePoint.append([x, y])
         }
         
-        self.timer.startTimer(interval: moveSpeed)   //如果还要往下走的话，就开启
+        self.timer?.startTimer(interval: moveSpeed)   //如果还要往下走的话，就开启
     }
     
     //显示下一个后，之前的那个自动往下移，直至移出屏幕的判断
@@ -310,8 +311,8 @@ class TipsView: UIView {
     //定时器，自动往下走
     fileprivate func setTimer(){
         self.timer = MyTimer()
-        self.timer.setTimer(interval: moveSpeed, target: self, selector: #selector(autoMoveDown), repeats: true)
-        self.timer.pauseTimer()
+        self.timer?.setTimer(interval: moveSpeed, target: self, selector: #selector(autoMoveDown), repeats: true)
+        self.timer?.pauseTimer()
     }
     
     

@@ -33,15 +33,20 @@ class TetrisGameViewController: UIViewController, controllerViewDelegate, mainVi
     
     //退出界面，菜单消失
     override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(true)
+        super.viewDidDisappear(animated)
         print("game over manul")
         
-        self.mainView?.pauseGame()
+        mainView?.isGaming = TetrisGameType.pausing
+        mainView?.timer?.stopTimer()
+        tipsView?.timer?.stopTimer()
+        mainView?.timer = nil
+        tipsView?.timer = nil
         mainView?.removeFromSuperview()
         tipsView?.removeFromSuperview()
         controllerViw?.removeFromSuperview()
         pauseView?.removeFromSuperview()
-        mainView?.timer.stopTimer()
+        
+        self.stopMusic()
         
         mainView = nil
         tipsView = nil
@@ -53,7 +58,8 @@ class TetrisGameViewController: UIViewController, controllerViewDelegate, mainVi
     
     // 播放音乐
     func playBGM(){
-        self.player = AudioPlayer(path: Bundle.main.path(forResource: "A_comme_amour", ofType: "mp3")!, autoPlay: true)
+        self.player = AudioPlayer.shared
+        self.player!.setUp(path: Bundle.main.path(forResource: "A_comme_amour", ofType: "mp3")!, autoPlay: true)
         if BGMAllowed {
             self.player?.playAudio()
         }
@@ -360,7 +366,5 @@ class TetrisGameViewController: UIViewController, controllerViewDelegate, mainVi
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-
 }
 
