@@ -93,9 +93,9 @@ extension UITabBar{
         view.tag = 888 + index
         
         let tabFrame = self.frame
-        let percentX = (CGFloat(index) + 0.59) / 4
+        let percentX = (CGFloat(index) + 0.64) / 4
         let x: CGFloat = CGFloat(ceilf(Float(percentX * tabFrame.size.width)))
-        let y: CGFloat = CGFloat(ceilf(Float(0.115 * tabFrame.size.height)))
+        let y: CGFloat = CGFloat(ceilf(Float(0.18 * tabFrame.size.height)))
         view.center = CGPoint(x: CGFloat(x), y: CGFloat(y))
         self.addSubview(view)
     }

@@ -32,7 +32,6 @@
 		E14197D51CA1A6BE00EDD443 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E14197D31CA1A6BE00EDD443 /* LaunchScreen.storyboard */; };
 		E14407F11EEE690800C8E23B /* FindPetsMoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14407F01EEE690800C8E23B /* FindPetsMoreView.swift */; };
 		E14407F31EEE73CF00C8E23B /* MCYTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14407F21EEE73CF00C8E23B /* MCYTableView.swift */; };
-		E14407F51EEEA0D600C8E23B /* ShopCarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14407F41EEEA0D600C8E23B /* ShopCarViewController.swift */; };
 		E14408281EEFE23700C8E23B /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14408231EEFE23700C8E23B /* MainView.swift */; };
 		E14408291EEFE23700C8E23B /* TipsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14408241EEFE23700C8E23B /* TipsView.swift */; };
 		E144082A1EEFE23700C8E23B /* ControllerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14408251EEFE23700C8E23B /* ControllerView.swift */; };
@@ -178,6 +177,7 @@
 		E17528FD1ED40B7600269EDF /* CustomPresentAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17528FA1ED40B7600269EDF /* CustomPresentAnimationController.swift */; };
 		E17528FE1ED40B7600269EDF /* PushAndPopAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17528FB1ED40B7600269EDF /* PushAndPopAnimation.swift */; };
 		E17529001ED40CE900269EDF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E17528FF1ED40CE900269EDF /* Assets.xcassets */; };
+		E1767A3E1F0498E400225D9E /* ShopCarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1767A3D1F0498E400225D9E /* ShopCarViewController.swift */; };
 		E18C41A41EF7E1D600AFF37C /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18C41A31EF7E1D600AFF37C /* AudioPlayer.swift */; };
 		E18C41A91EF8B99A00AFF37C /* MCYMusicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18C41A51EF8B99A00AFF37C /* MCYMusicViewController.swift */; };
 		E18C41AA1EF8B99A00AFF37C /* MusicPlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18C41A61EF8B99A00AFF37C /* MusicPlayView.swift */; };
@@ -288,7 +288,6 @@
 		E14197F01CA1AB9A00EDD443 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = iPets/Info.plist; sourceTree = SOURCE_ROOT; };
 		E14407F01EEE690800C8E23B /* FindPetsMoreView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindPetsMoreView.swift; sourceTree = "<group>"; };
 		E14407F21EEE73CF00C8E23B /* MCYTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCYTableView.swift; sourceTree = "<group>"; };
-		E14407F41EEEA0D600C8E23B /* ShopCarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopCarViewController.swift; sourceTree = "<group>"; };
 		E14408231EEFE23700C8E23B /* MainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		E14408241EEFE23700C8E23B /* TipsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TipsView.swift; sourceTree = "<group>"; };
 		E14408251EEFE23700C8E23B /* ControllerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControllerView.swift; sourceTree = "<group>"; };
@@ -434,6 +433,7 @@
 		E17528FA1ED40B7600269EDF /* CustomPresentAnimationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomPresentAnimationController.swift; sourceTree = "<group>"; };
 		E17528FB1ED40B7600269EDF /* PushAndPopAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushAndPopAnimation.swift; sourceTree = "<group>"; };
 		E17528FF1ED40CE900269EDF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		E1767A3D1F0498E400225D9E /* ShopCarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopCarViewController.swift; sourceTree = "<group>"; };
 		E18C41A31EF7E1D600AFF37C /* AudioPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
 		E18C41A51EF8B99A00AFF37C /* MCYMusicViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCYMusicViewController.swift; sourceTree = "<group>"; };
 		E18C41A61EF8B99A00AFF37C /* MusicPlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicPlayView.swift; sourceTree = "<group>"; };
@@ -599,6 +599,7 @@
 		E14197C91CA1A6BE00EDD443 /* iPets */ = {
 			isa = PBXGroup;
 			children = (
+				E1767A381F0497AA00225D9E /* Shopping */,
 				E10B34DC1EEA9E0100D65C9F /* LocalNews.js */,
 				E1DE0E341EEA8DBB00CF580D /* SDKs */,
 				E175284B1ED3E76D00269EDF /* Me */,
@@ -945,7 +946,6 @@
 				E17528651ED4034D00269EDF /* SellBuyViewController.swift */,
 				E17528631ED4034D00269EDF /* SearchResultViewController.swift */,
 				E17528641ED4034D00269EDF /* SearchViewController.swift */,
-				E14407F41EEEA0D600C8E23B /* ShopCarViewController.swift */,
 			);
 			name = Controller;
 			path = ../../../../Users/miciny/ToGitHub/iPets/iPets/Main/Controller;
@@ -1155,6 +1155,51 @@
 			);
 			name = Animation;
 			path = ../../../../Users/miciny/ToGitHub/iPets/iPets/Universal/Animation;
+			sourceTree = DEVELOPER_DIR;
+		};
+		E1767A381F0497AA00225D9E /* Shopping */ = {
+			isa = PBXGroup;
+			children = (
+				E1767A3C1F04980500225D9E /* Model */,
+				E1767A3B1F0497FC00225D9E /* Resource */,
+				E1767A3A1F0497F500225D9E /* Views */,
+				E1767A391F0497ED00225D9E /* Controller */,
+			);
+			name = Shopping;
+			path = ../../../../Users/miciny/ToGitHub/iPets/iPets/Shopping;
+			sourceTree = DEVELOPER_DIR;
+		};
+		E1767A391F0497ED00225D9E /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				E1767A3D1F0498E400225D9E /* ShopCarViewController.swift */,
+			);
+			name = Controller;
+			path = ../../../../Users/miciny/ToGitHub/iPets/iPets/Shopping/Controller;
+			sourceTree = DEVELOPER_DIR;
+		};
+		E1767A3A1F0497F500225D9E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Views;
+			path = ../../../../Users/miciny/ToGitHub/iPets/iPets/Shopping/View;
+			sourceTree = DEVELOPER_DIR;
+		};
+		E1767A3B1F0497FC00225D9E /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Resource;
+			path = ../../../../Users/miciny/ToGitHub/iPets/iPets/Shopping/Resources;
+			sourceTree = DEVELOPER_DIR;
+		};
+		E1767A3C1F04980500225D9E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
+			path = ../../../../Users/miciny/ToGitHub/iPets/iPets/Shopping/Model;
 			sourceTree = DEVELOPER_DIR;
 		};
 		E18C418F1EF775BA00AFF37C /* MCYMusicSDK */ = {
@@ -1584,12 +1629,12 @@
 				E17528AD1ED406D000269EDF /* ChatData.swift in Sources */,
 				E1DE0E9D1EEA94B200CF580D /* NewsTableViewCell.swift in Sources */,
 				E1DE0E791EEA91BA00CF580D /* SQLLine.swift in Sources */,
-				E14407F51EEEA0D600C8E23B /* ShopCarViewController.swift in Sources */,
 				E1DE0EBD1EEA94CC00CF580D /* WebViewController.swift in Sources */,
 				E14408431EEFEB6A00C8E23B /* MineView.swift in Sources */,
 				E16321911EF227930022F40D /* WeatherViewController.swift in Sources */,
 				E1DE0EB21EEA94C000CF580D /* LocalNewsDataModule.swift in Sources */,
 				E10B34EB1EEAA65800D65C9F /* ActionMenuView.swift in Sources */,
+				E1767A3E1F0498E400225D9E /* ShopCarViewController.swift in Sources */,
 				E1DE0E821EEA926900CF580D /* PicsBrowserView.swift in Sources */,
 				E17528771ED4049900269EDF /* PersonInfoTableViewCell.swift in Sources */,
 				E1DE0E6D1EEA919F00CF580D /* CanCopyLabel.swift in Sources */,
