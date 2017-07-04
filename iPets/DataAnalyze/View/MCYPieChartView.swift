@@ -16,7 +16,10 @@ import UIKit
 import Charts
 
 class MCYPieChartView: UIView {
+    
     var pieChart: PieChartView!
+    
+    let periodsFont = UIFont.systemFont(ofSize: standardFontNo+2) //周期字体
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -28,21 +31,26 @@ class MCYPieChartView: UIView {
     
     convenience init(frame: CGRect, title: String, holeText: String) {
         self.init()
-        setUpPieChart(frame, title: title, holeText: holeText)
+        
+        self.frame = frame
+        
+        setUpPieChart(title, holeText: holeText)
     }
     
-    func setUpPieChart(_ frame: CGRect, title: String, holeText:String){
+    func setUpPieChart(_ title: String, holeText: String){
+        
         pieChart = PieChartView()
-        pieChart.frame = frame
+        pieChart.frame.origin = CGPoint(x: 0, y: 0)
+        pieChart.frame.size = self.frame.size
         
         pieChart.usePercentValuesEnabled = true  //百分百显示
         pieChart.drawSlicesUnderHoleEnabled = false
         pieChart.holeRadiusPercent = 0.9 //图表中间的半径
         pieChart.transparentCircleRadiusPercent = 0.68
-        pieChart.descriptionText = title
+        pieChart.chartDescription?.text = title
         pieChart.setExtraOffsets(left: -10, top: 0, right: -10, bottom: -10)
         pieChart.noDataText = "无数据"
-        pieChart.userInteractionEnabled = false //不影响cell的交互
+        pieChart.isUserInteractionEnabled = false //不影响cell的交互
         
         pieChart.drawCenterTextEnabled = true
         
@@ -68,8 +76,8 @@ class MCYPieChartView: UIView {
         pieChart.highlightPerTapEnabled = false //点击之后高亮
         
         let l = pieChart.legend  // 图例，暂时不需要
-        l.horizontalAlignment = .Right
-        l.verticalAlignment = .Top
+        l.horizontalAlignment = .right
+        l.verticalAlignment = .top
         l.xEntrySpace = 7.0
         l.yEntrySpace = 0.0
         l.yOffset = 0.0
@@ -83,14 +91,14 @@ class MCYPieChartView: UIView {
         var xVals = [String]()
         let count = titles.count
         for i in 0 ..< count{
-            yVals.append(ChartDataEntry(value: values[i], xIndex: i))
+            yVals.append(ChartDataEntry(x: Double(i), y: values[i]))
         }
         
         for i in 0 ..< count{
             xVals.append(titles[i])
         }
         
-        let dataSet = PieChartDataSet(yVals: yVals, label: nil)
+        let dataSet = PieChartDataSet(values: yVals, label: nil)
         dataSet.sliceSpace = 0 //每个弧度的间隔
         var colors = [UIColor]()
         colors.append(UIColor.green)
@@ -98,7 +106,7 @@ class MCYPieChartView: UIView {
         colors.append(UIColor.yellow)
         dataSet.colors = colors
         
-        let data = PieChartData(xVals: xVals, dataSet: dataSet)
+        let data = PieChartData(dataSet: dataSet)
         data.setDrawValues(false) //不显示每个弧度的values
         
         pieChart.data = data

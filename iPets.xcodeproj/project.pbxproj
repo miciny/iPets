@@ -250,6 +250,7 @@
 		E1DE0EBB1EEA94CC00CF580D /* NewsRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DE0EB71EEA94CC00CF580D /* NewsRootViewController.swift */; };
 		E1DE0EBC1EEA94CC00CF580D /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DE0EB81EEA94CC00CF580D /* NewsViewController.swift */; };
 		E1DE0EBD1EEA94CC00CF580D /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DE0EB91EEA94CC00CF580D /* WebViewController.swift */; };
+		E1F638AD1F0B88B600E297FB /* GetAnalyseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F638AC1F0B88B600E297FB /* GetAnalyseData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -514,6 +515,7 @@
 		E1DE0EB71EEA94CC00CF580D /* NewsRootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsRootViewController.swift; sourceTree = "<group>"; };
 		E1DE0EB81EEA94CC00CF580D /* NewsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsViewController.swift; sourceTree = "<group>"; };
 		E1DE0EB91EEA94CC00CF580D /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		E1F638AC1F0B88B600E297FB /* GetAnalyseData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetAnalyseData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1265,6 +1267,7 @@
 		E1767A621F06475600225D9E /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				E1F638AC1F0B88B600E297FB /* GetAnalyseData.swift */,
 			);
 			name = Model;
 			path = ../../../../Users/miciny/ToGitHub/iPets/iPets/DataAnalyze/Model;
@@ -1725,6 +1728,7 @@
 				E17528951ED406AD00269EDF /* FindPetsCellFrameModel.swift in Sources */,
 				E18C41C31EFB990E00AFF37C /* MyAddress+CoreDataClass.swift in Sources */,
 				E1DE0E881EEA928600CF580D /* ImageChooseFuncs.swift in Sources */,
+				E1F638AD1F0B88B600E297FB /* GetAnalyseData.swift in Sources */,
 				E17528541ED3E8AE00269EDF /* CycleView.swift in Sources */,
 				E1DE0E671EEA918600CF580D /* VideoFuncs.swift in Sources */,
 				E17528611ED3E95300269EDF /* SellBuyCollectionModel.swift in Sources */,

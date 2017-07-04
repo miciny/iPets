@@ -39,10 +39,10 @@ class MCYPiePolyLineChartView: UIView {
         pieChart.drawSlicesUnderHoleEnabled = false
         pieChart.holeRadiusPercent = 0.5 //图表中间的半径
         pieChart.transparentCircleRadiusPercent = 0.5
-        pieChart.descriptionText = title
+        pieChart.chartDescription?.text = title
         pieChart.setExtraOffsets(left: 5, top: 5, right: 5, bottom: 5)
         pieChart.noDataText = "无数据"
-        pieChart.userInteractionEnabled = false //不影响cell的交互
+        pieChart.isUserInteractionEnabled = false //不影响cell的交互
         
         pieChart.drawCenterTextEnabled = true
         
@@ -52,15 +52,15 @@ class MCYPiePolyLineChartView: UIView {
         pieChart.highlightPerTapEnabled = false //点击之后高亮
         
         let l = pieChart.legend  // 图例，暂时不需要
-        l.horizontalAlignment = .Right
-        l.verticalAlignment = .Top
+        l.horizontalAlignment = .right
+        l.verticalAlignment = .top
         l.xEntrySpace = 7.0
         l.yEntrySpace = 0.0
         l.yOffset = 0.0
         l.enabled = false //显不显示
         
         self.addSubview(pieChart)
-        pieChart.animate(xAxisDuration: 1.4, easingOption: ChartEasingOption.EaseOutBack) //动画
+        pieChart.animate(xAxisDuration: 1.4, easingOption: ChartEasingOption.easeOutBack) //动画
     }
     
     func setPieChartData(_ dic: NSMutableDictionary, holeText: String){
@@ -78,11 +78,11 @@ class MCYPiePolyLineChartView: UIView {
             let key = titles[i] as! String
             let value = dic.value(forKey: key) as! Double
             
-            yVals.append(ChartDataEntry(value: value, xIndex: i))
+            yVals.append(ChartDataEntry(x: Double(i), y: value))
             xVals.append(key)
         }
         
-        let dataSet = PieChartDataSet(yVals: yVals, label: nil)
+        let dataSet = PieChartDataSet(values: yVals, label: nil)
         dataSet.sliceSpace = 0
         
         var colors = [UIColor]()
@@ -96,9 +96,9 @@ class MCYPiePolyLineChartView: UIView {
         dataSet.valueLinePart1OffsetPercentage = 0.8
         dataSet.valueLinePart1Length = 0.3
         dataSet.valueLinePart2Length = 0.4
-        dataSet.yValuePosition = .OutsideSlice
+        dataSet.yValuePosition = .outsideSlice
         
-        let data = PieChartData(xVals: xVals, dataSet: dataSet)
+        let data = PieChartData(dataSet: dataSet)
         
         let pFormatter = NumberFormatter()
         pFormatter.numberStyle = .percent
@@ -106,9 +106,9 @@ class MCYPiePolyLineChartView: UIView {
         pFormatter.multiplier = 1
         pFormatter.percentSymbol = "%"
         
-        data.setValueFormatter(pFormatter)
+        data.setValueFormatter(pFormatter as? IValueFormatter)
         data.setValueFont(UIFont(name: "HelveticaNeue-Light", size:11))
-        data.setValueTextColor(UIColor.blackColor())
+        data.setValueTextColor(UIColor.black)
         
         pieChart.data = data
         pieChart.highlightValues(nil)

@@ -16,7 +16,7 @@ import Foundation
 import UIKit
 import Charts
 
-open class BalloonMarker: ChartMaker{
+open class BalloonMarker: MarkerView{
     
     open var color: UIColor?
     open var arrowSize = CGSize(width: 15, height: 11)
@@ -31,7 +31,7 @@ open class BalloonMarker: ChartMaker{
     fileprivate var _drawAttributes = [String : AnyObject]()
     
     public init(color: UIColor, font: UIFont, insets: UIEdgeInsets){
-        super.init()
+        super.init(frame: CGRect.zero)
         
         self.color = color
         self.font = font
@@ -41,13 +41,15 @@ open class BalloonMarker: ChartMaker{
         _paragraphStyle?.alignment = .center
     }
     
-    open override var size: CGSize { return _size; }
+    required public init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     open override func draw(context: CGContext, point: CGPoint){
         if (labelns == nil){
             return
         }
-        context
+        
         var rect = CGRect(origin: point, size: _size)
         rect.origin.x -= _size.width / 2.0
         rect.origin.y -= _size.height
@@ -78,9 +80,10 @@ open class BalloonMarker: ChartMaker{
         context.restoreGState()
     }
     
-    open override func refreshContent(entry: ChartDataEntry, highlight: ChartHighlight){
-        let label = entry.value.description
-        labelns = NSString(format: "%.2f", Float(label as String)!)
+    open override func refreshContent(entry: ChartDataEntry, highlight: Highlight){
+        
+        let label = entry.y
+        labelns = NSString(format: "%.2f", Float(label))
         
         _drawAttributes.removeAll()
         _drawAttributes[NSFontAttributeName] = self.font

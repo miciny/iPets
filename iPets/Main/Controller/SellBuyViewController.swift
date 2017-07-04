@@ -274,6 +274,11 @@ class SellBuyViewController: UIViewController, UIScrollViewDelegate, UICollectio
                 vc.hidesBottomBarWhenPushed = true
                 self.navigationController?.pushViewController(vc, animated: true)
                 return
+            }else if indexPath.row == 3{
+                let vc = LineChartsViewController()
+                vc.hidesBottomBarWhenPushed = true
+                self.navigationController?.pushViewController(vc, animated: true)
+                return
             }
         }
         

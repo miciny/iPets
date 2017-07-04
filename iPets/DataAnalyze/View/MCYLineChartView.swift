@@ -38,12 +38,12 @@ class MCYLineChartView: UIView {
         lineChart.frame = frame
         lineChart.backgroundColor = UIColor(red: 255/255, green: 127/255, blue: 80/255, alpha: 1)
         
-        lineChart.descriptionText = title
-        lineChart.descriptionTextColor = UIColor.whiteColor()
-        lineChart.noDataTextDescription = "无数据"
+        lineChart.chartDescription?.text = title
+        lineChart.chartDescription?.textColor = UIColor.white
+        lineChart.noDataText = "无数据"
         lineChart.dragEnabled = false //不允许拖动
-        lineChart.descriptionFont = UIFont.systemFontOfSize(20)
-        lineChart.descriptionTextPosition = CGPoint(x: lineChart.frame.width-20, y: 0)
+        lineChart.chartDescription?.font = UIFont.systemFont(ofSize: 20)
+        lineChart.chartDescription?.position = CGPoint(x: lineChart.frame.width-20, y: 0)
         lineChart.layer.masksToBounds = true
         lineChart.layer.cornerRadius = 5
         lineChart.setScaleEnabled(scaleEnabled) //是否可放大
@@ -57,11 +57,11 @@ class MCYLineChartView: UIView {
         legend.enabled = false
         
         //X数据线
-        let XAxis = lineChart.xAxis
-        XAxis.labelTextColor=UIColor.whiteColor()
-        XAxis.labelPosition = ChartXAxis.LabelPosition.Bottom //x轴位置
-        XAxis.drawGridLinesEnabled = false
-        XAxis.drawAxisLineEnabled = false
+        let theXAxis = lineChart.xAxis
+        theXAxis.labelTextColor = UIColor.white
+        theXAxis.labelPosition = XAxis.LabelPosition.bottom //x轴位置
+        theXAxis.drawGridLinesEnabled = false
+        theXAxis.drawAxisLineEnabled = false
         
         //左侧数据线
         let leftAxis = lineChart.leftAxis
@@ -69,7 +69,7 @@ class MCYLineChartView: UIView {
         leftAxis.drawGridLinesEnabled = false
         leftAxis.drawLimitLinesBehindDataEnabled = true
         leftAxis.drawAxisLineEnabled = true
-        leftAxis.labelTextColor = UIColor.whiteColor()
+        leftAxis.labelTextColor = UIColor.white
         leftAxis.enabled = true
         
         lineChart.rightAxis.enabled = false
@@ -81,44 +81,39 @@ class MCYLineChartView: UIView {
         lineChart.marker = marker
         
         //        monthCostLine.legend.form = ChartLegend.ChartLegendForm.Line
-        lineChart.animate(xAxisDuration: 2.0, easingOption: ChartEasingOption.EaseInOutCubic)
+        lineChart.animate(xAxisDuration: 2.0, easingOption: ChartEasingOption.easeInOutCubic)
         self.addSubview(lineChart)
     }
     
-    func setLineChartData(_ xdata: NSArray, ydata: NSArray){
+    func setLineChartData(_ xdata: [Double], ydata: [Double]){
         let count = xdata.count
-        var xVals = [String]()
         var yVals = [ChartDataEntry]()
         var index = 0  // 添加Y数据时的位置
         
         for i in 0 ..< count{
-            xVals.append(xdata[i] as! String)
-        }
-        
-        for i in 0 ..< count{
-            yVals.append(ChartDataEntry(value: ydata[i] as! Double, xIndex: index))
+            yVals.append(ChartDataEntry(x: xdata[i], y: ydata[i]))
             index += 1
         }
         
-        let set1 = LineChartDataSet(yVals: yVals, label: nil)
+        let set1 = LineChartDataSet(values: yVals, label: nil)
         set1.lineDashLengths = [5, 0] // 线条格式
         set1.highlightLineDashLengths = [5, 2.5]
-        set1.setColor(UIColor.whiteColor())
-        set1.setCircleColor(UIColor.whiteColor())
+        set1.setColor(UIColor.white)
+        set1.setCircleColor(UIColor.white)
         set1.circleHoleColor = UIColor(red: 255/255, green: 127/255, blue: 80/255, alpha: 1)
         set1.lineWidth = 1.0
         set1.circleRadius = 3.0
         set1.drawCircleHoleEnabled = true
         set1.drawValuesEnabled = false
-        set1.valueFont = UIFont.systemFontOfSize(9)
+        set1.valueFont = UIFont.systemFont(ofSize: 9)
         set1.drawFilledEnabled = true
         set1.fillAlpha = 30/255.0
-        set1.fillColor = UIColor.whiteColor()
+        set1.fillColor = UIColor.white
         
         var dataSets = [ChartDataSet]()
         dataSets.append(set1)
         
-        lineChart.data = LineChartData(xVals: xVals, dataSets: dataSets)
-        lineChart.setVisibleXRangeMaximum(visibleXRangeMaximum)
+        lineChart.data = LineChartData(dataSets: dataSets)
+        lineChart.setVisibleXRangeMaximum(Double(visibleXRangeMaximum))
     }
 }
