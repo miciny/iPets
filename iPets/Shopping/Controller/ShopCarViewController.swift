@@ -13,11 +13,20 @@ class ShopCarViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setUpEle()
+        
+        self.setData()
     }
     
     func setUpEle(){
         self.title = "购物车"
         self.view.backgroundColor = UIColor.white
+    }
+    
+    func setData(){
+        let path = Bundle.main.path(forResource: "ShopCarTestData", ofType: "geojson")
+        
+//        let jsonData = NSData(contentsOfFile: path!)
+        print(path ?? "path no value")
     }
 
     override func didReceiveMemoryWarning() {

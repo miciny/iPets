@@ -118,7 +118,7 @@ class SellBuyViewController: UIViewController, UIScrollViewDelegate, UICollectio
             ["name":"天气情况","pic":"night.jpeg"],
             ["name":"视频录像","pic":"day.jpeg"],
             ["name":"音乐播放","pic":"123_03.png"],
-            ["name":"身边宠店","pic":"123_01.png"],
+            ["name":"数据分析","pic":"123_01.png"],
             ["name":"我的家宠","pic":"123_02.png"],
             ["name":"入住商家","pic":"123_03.png"],
             ["name":"宠物周边","pic":"123_01.png"],

@@ -14,6 +14,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Charts.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Kingfisher.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -42,17 +47,22 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>39C64A154F952F28C8596E29052CEB32</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>42D89AAD80EE568AC6D64A73D1CFF616</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>544212980401A6DA7806F65EAD8C6637</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>555341823A8E3F71D9A63234D5FD7AB9</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>7CF7F3FF2ECBF1E9D1481F2EBCA2E1CB</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -67,12 +77,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>DF393B7F69A02CB183F8104D8686524A</key>
+		<key>F243FE5673DE2AB2624D53402477C975</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E5DB6BCF5738F18C94539781F050CE8A</key>
+		<key>F307B842FF76B2DE6C55DB67C0885325</key>
 		<dict>
 			<key>primary</key>
 			<true/>

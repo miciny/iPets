@@ -178,6 +178,13 @@
 		E17528FE1ED40B7600269EDF /* PushAndPopAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17528FB1ED40B7600269EDF /* PushAndPopAnimation.swift */; };
 		E17529001ED40CE900269EDF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E17528FF1ED40CE900269EDF /* Assets.xcassets */; };
 		E1767A3E1F0498E400225D9E /* ShopCarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1767A3D1F0498E400225D9E /* ShopCarViewController.swift */; };
+		E1767A401F05257300225D9E /* ShopTestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1767A3F1F05257300225D9E /* ShopTestData.swift */; };
+		E1767A461F05EAB300225D9E /* ShopCarTestData.geojson in Resources */ = {isa = PBXBuildFile; fileRef = E1767A451F05EAB300225D9E /* ShopCarTestData.geojson */; };
+		E1767A641F0B738400225D9E /* BalloonMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1767A631F0B738400225D9E /* BalloonMarker.swift */; };
+		E1767A661F0B73C700225D9E /* MCYLineChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1767A651F0B73C700225D9E /* MCYLineChartView.swift */; };
+		E1767A691F0B741A00225D9E /* MCYPieChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1767A681F0B741A00225D9E /* MCYPieChartView.swift */; };
+		E1767A6B1F0B744500225D9E /* MCYPiePolyLineChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1767A6A1F0B744500225D9E /* MCYPiePolyLineChartView.swift */; };
+		E1767A6D1F0B855400225D9E /* LineChartsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1767A6C1F0B855400225D9E /* LineChartsViewController.swift */; };
 		E18C41A41EF7E1D600AFF37C /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18C41A31EF7E1D600AFF37C /* AudioPlayer.swift */; };
 		E18C41A91EF8B99A00AFF37C /* MCYMusicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18C41A51EF8B99A00AFF37C /* MCYMusicViewController.swift */; };
 		E18C41AA1EF8B99A00AFF37C /* MusicPlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18C41A61EF8B99A00AFF37C /* MusicPlayView.swift */; };
@@ -434,6 +441,14 @@
 		E17528FB1ED40B7600269EDF /* PushAndPopAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushAndPopAnimation.swift; sourceTree = "<group>"; };
 		E17528FF1ED40CE900269EDF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E1767A3D1F0498E400225D9E /* ShopCarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopCarViewController.swift; sourceTree = "<group>"; };
+		E1767A3F1F05257300225D9E /* ShopTestData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopTestData.swift; sourceTree = "<group>"; };
+		E1767A441F052B5400225D9E /* Directions.geojson */ = {isa = PBXFileReference; lastKnownFileType = text; path = Directions.geojson; sourceTree = "<group>"; };
+		E1767A451F05EAB300225D9E /* ShopCarTestData.geojson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ShopCarTestData.geojson; sourceTree = "<group>"; };
+		E1767A631F0B738400225D9E /* BalloonMarker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BalloonMarker.swift; sourceTree = "<group>"; };
+		E1767A651F0B73C700225D9E /* MCYLineChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCYLineChartView.swift; sourceTree = "<group>"; };
+		E1767A681F0B741A00225D9E /* MCYPieChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCYPieChartView.swift; sourceTree = "<group>"; };
+		E1767A6A1F0B744500225D9E /* MCYPiePolyLineChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCYPiePolyLineChartView.swift; sourceTree = "<group>"; };
+		E1767A6C1F0B855400225D9E /* LineChartsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineChartsViewController.swift; sourceTree = "<group>"; };
 		E18C41A31EF7E1D600AFF37C /* AudioPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
 		E18C41A51EF8B99A00AFF37C /* MCYMusicViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCYMusicViewController.swift; sourceTree = "<group>"; };
 		E18C41A61EF8B99A00AFF37C /* MusicPlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicPlayView.swift; sourceTree = "<group>"; };
@@ -599,8 +614,10 @@
 		E14197C91CA1A6BE00EDD443 /* iPets */ = {
 			isa = PBXGroup;
 			children = (
-				E1767A381F0497AA00225D9E /* Shopping */,
 				E10B34DC1EEA9E0100D65C9F /* LocalNews.js */,
+				E1767A451F05EAB300225D9E /* ShopCarTestData.geojson */,
+				E1767A5E1F06471400225D9E /* DataAnalyze */,
+				E1767A381F0497AA00225D9E /* Shopping */,
 				E1DE0E341EEA8DBB00CF580D /* SDKs */,
 				E175284B1ED3E76D00269EDF /* Me */,
 				E175284A1ED3E75F00269EDF /* Main */,
@@ -624,6 +641,7 @@
 				E14197F01CA1AB9A00EDD443 /* Info.plist */,
 				E14197D31CA1A6BE00EDD443 /* LaunchScreen.storyboard */,
 				E14197CE1CA1A6BE00EDD443 /* Main.storyboard */,
+				E1767A441F052B5400225D9E /* Directions.geojson */,
 			);
 			name = Resources;
 			path = ../../../../Users/miciny/ToGitHub/iPets/iPets/Resources;
@@ -1189,6 +1207,7 @@
 		E1767A3B1F0497FC00225D9E /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				E1767A3F1F05257300225D9E /* ShopTestData.swift */,
 			);
 			name = Resource;
 			path = ../../../../Users/miciny/ToGitHub/iPets/iPets/Shopping/Resources;
@@ -1200,6 +1219,55 @@
 			);
 			name = Model;
 			path = ../../../../Users/miciny/ToGitHub/iPets/iPets/Shopping/Model;
+			sourceTree = DEVELOPER_DIR;
+		};
+		E1767A5E1F06471400225D9E /* DataAnalyze */ = {
+			isa = PBXGroup;
+			children = (
+				E1767A621F06475600225D9E /* Model */,
+				E1767A611F06474C00225D9E /* Resources */,
+				E1767A601F06474600225D9E /* Views */,
+				E1767A5F1F06473C00225D9E /* Controllers */,
+			);
+			name = DataAnalyze;
+			path = ../../../../Users/miciny/ToGitHub/iPets/iPets/DataAnalyze;
+			sourceTree = DEVELOPER_DIR;
+		};
+		E1767A5F1F06473C00225D9E /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				E1767A6C1F0B855400225D9E /* LineChartsViewController.swift */,
+			);
+			name = Controllers;
+			path = ../../../../Users/miciny/ToGitHub/iPets/iPets/DataAnalyze/Controller;
+			sourceTree = DEVELOPER_DIR;
+		};
+		E1767A601F06474600225D9E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E1767A631F0B738400225D9E /* BalloonMarker.swift */,
+				E1767A651F0B73C700225D9E /* MCYLineChartView.swift */,
+				E1767A681F0B741A00225D9E /* MCYPieChartView.swift */,
+				E1767A6A1F0B744500225D9E /* MCYPiePolyLineChartView.swift */,
+			);
+			name = Views;
+			path = ../../../../Users/miciny/ToGitHub/iPets/iPets/DataAnalyze/View;
+			sourceTree = DEVELOPER_DIR;
+		};
+		E1767A611F06474C00225D9E /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Resources;
+			path = ../../../../Users/miciny/ToGitHub/iPets/iPets/DataAnalyze/Resources;
+			sourceTree = DEVELOPER_DIR;
+		};
+		E1767A621F06475600225D9E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
+			path = ../../../../Users/miciny/ToGitHub/iPets/iPets/DataAnalyze/Model;
 			sourceTree = DEVELOPER_DIR;
 		};
 		E18C418F1EF775BA00AFF37C /* MCYMusicSDK */ = {
@@ -1455,6 +1523,7 @@
 				E17528C81ED4091D00269EDF /* Chat.xcassets in Resources */,
 				E16322C01EF29E0A0022F40D /* 27.png in Resources */,
 				E10E446D1CC62BA700D9992A /* Navigation.xcassets in Resources */,
+				E1767A461F05EAB300225D9E /* ShopCarTestData.geojson in Resources */,
 				E16322B91EF29E0A0022F40D /* 20.png in Resources */,
 				E16322BE1EF29E0A0022F40D /* 25.png in Resources */,
 				E17528CD1ED4094700269EDF /* SellBuy.xcassets in Resources */,
@@ -1596,6 +1665,7 @@
 				E17528901ED406A500269EDF /* FindPetsViewController.swift in Sources */,
 				E17528B21ED406D000269EDF /* MessageItem.swift in Sources */,
 				E17528F11ED40B1800269EDF /* AutoLayout.swift in Sources */,
+				E1767A401F05257300225D9E /* ShopTestData.swift in Sources */,
 				E17528D61ED40A5A00269EDF /* RichScanViewController.swift in Sources */,
 				E17528831ED404A400269EDF /* PersonInfo_ChangeNameViewController.swift in Sources */,
 				E17528961ED406AD00269EDF /* FindPetsCellModel.swift in Sources */,
@@ -1625,12 +1695,14 @@
 				E14408451EEFEB6A00C8E23B /* MineConstant.swift in Sources */,
 				E14408281EEFE23700C8E23B /* MainView.swift in Sources */,
 				E18C41AB1EF8B99A00AFF37C /* UIMaker.swift in Sources */,
+				E1767A6B1F0B744500225D9E /* MCYPiePolyLineChartView.swift in Sources */,
 				E16322DA1EF3BAC90022F40D /* MyCollectionViewLayout.swift in Sources */,
 				E17528AD1ED406D000269EDF /* ChatData.swift in Sources */,
 				E1DE0E9D1EEA94B200CF580D /* NewsTableViewCell.swift in Sources */,
 				E1DE0E791EEA91BA00CF580D /* SQLLine.swift in Sources */,
 				E1DE0EBD1EEA94CC00CF580D /* WebViewController.swift in Sources */,
 				E14408431EEFEB6A00C8E23B /* MineView.swift in Sources */,
+				E1767A641F0B738400225D9E /* BalloonMarker.swift in Sources */,
 				E16321911EF227930022F40D /* WeatherViewController.swift in Sources */,
 				E1DE0EB21EEA94C000CF580D /* LocalNewsDataModule.swift in Sources */,
 				E10B34EB1EEAA65800D65C9F /* ActionMenuView.swift in Sources */,
@@ -1638,6 +1710,7 @@
 				E1DE0E821EEA926900CF580D /* PicsBrowserView.swift in Sources */,
 				E17528771ED4049900269EDF /* PersonInfoTableViewCell.swift in Sources */,
 				E1DE0E6D1EEA919F00CF580D /* CanCopyLabel.swift in Sources */,
+				E1767A691F0B741A00225D9E /* MCYPieChartView.swift in Sources */,
 				E18C41CC1EFCB58100AFF37C /* MainChatListViewDataSettingModel.swift in Sources */,
 				E1DE0EAB1EEA94BA00CF580D /* TabNetConstant.swift in Sources */,
 				E17528B31ED406D000269EDF /* UserInfo.swift in Sources */,
@@ -1682,6 +1755,7 @@
 				E17528811ED404A400269EDF /* PersonInfo_IconViewController.swift in Sources */,
 				E1DE0E7E1EEA91FA00CF580D /* LoadingPicView.swift in Sources */,
 				E17528561ED3E8AE00269EDF /* SellBuyCollectionFooterView.swift in Sources */,
+				E1767A661F0B73C700225D9E /* MCYLineChartView.swift in Sources */,
 				E10B34EC1EEAA65800D65C9F /* MyBottomMenuView.swift in Sources */,
 				E17528821ED404A400269EDF /* PersonInfo_TDCodeImageViewController.swift in Sources */,
 				E17528551ED3E8AE00269EDF /* SearchTableViewCell.swift in Sources */,
@@ -1698,6 +1772,7 @@
 				E1DE0EA81EEA94BA00CF580D /* NetConstant.swift in Sources */,
 				E16321921EF227930022F40D /* AddressPickerView.swift in Sources */,
 				E1DE0E8A1EEA928600CF580D /* ImageCollectionViewCell.swift in Sources */,
+				E1767A6D1F0B855400225D9E /* LineChartsViewController.swift in Sources */,
 				E1DE0EA51EEA94BA00CF580D /* ArticleNetConstant.swift in Sources */,
 				E17528AE1ED406D000269EDF /* ContectorListViewDataModel.swift in Sources */,
 				E17528FD1ED40B7600269EDF /* CustomPresentAnimationController.swift in Sources */,
