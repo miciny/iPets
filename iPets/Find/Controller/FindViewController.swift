@@ -17,7 +17,6 @@ class FindViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpEles()
-        setData()
         setUpTable()
     }
     
@@ -137,17 +136,20 @@ class FindViewController: UIViewController, UITableViewDelegate, UITableViewData
                     
                     if newData{
                         vc.refresh = newData
-                        
-                        let data = SaveDataModel()
-                        data.setUserData(key: "Circle", value: "")
+                        newData = false
                     }
                     
+                    let data = SaveDataModel()
+                    data.setUserData(key: "Circle", value: "")
                     self.navigationController?.pushViewController(vc, animated: true)
                     
                 }else{
                     findPetsViewController = FindPetsViewController()
                     findPetsViewController!.hidesBottomBarWhenPushed = true
                     findPetsViewController!.refresh = true
+                    
+                    let data = SaveDataModel()
+                    data.setUserData(key: "Circle", value: "")
                     self.navigationController?.pushViewController(findPetsViewController!, animated: true)
                 }
                 

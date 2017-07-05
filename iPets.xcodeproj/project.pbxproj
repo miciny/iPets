@@ -251,6 +251,9 @@
 		E1DE0EBC1EEA94CC00CF580D /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DE0EB81EEA94CC00CF580D /* NewsViewController.swift */; };
 		E1DE0EBD1EEA94CC00CF580D /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DE0EB91EEA94CC00CF580D /* WebViewController.swift */; };
 		E1F638AD1F0B88B600E297FB /* GetAnalyseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F638AC1F0B88B600E297FB /* GetAnalyseData.swift */; };
+		E1F638AF1F0BAC9500E297FB /* PostData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F638AE1F0BAC9500E297FB /* PostData.swift */; };
+		E1F638B51F0BAF7100E297FB /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F638B41F0BAF7100E297FB /* CalendarView.swift */; };
+		E1F638B71F0C973400E297FB /* DatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F638B61F0C973400E297FB /* DatePickerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -516,6 +519,9 @@
 		E1DE0EB81EEA94CC00CF580D /* NewsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsViewController.swift; sourceTree = "<group>"; };
 		E1DE0EB91EEA94CC00CF580D /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		E1F638AC1F0B88B600E297FB /* GetAnalyseData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetAnalyseData.swift; sourceTree = "<group>"; };
+		E1F638AE1F0BAC9500E297FB /* PostData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostData.swift; sourceTree = "<group>"; };
+		E1F638B41F0BAF7100E297FB /* CalendarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
+		E1F638B61F0C973400E297FB /* DatePickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1251,6 +1257,8 @@
 				E1767A651F0B73C700225D9E /* MCYLineChartView.swift */,
 				E1767A681F0B741A00225D9E /* MCYPieChartView.swift */,
 				E1767A6A1F0B744500225D9E /* MCYPiePolyLineChartView.swift */,
+				E1F638B41F0BAF7100E297FB /* CalendarView.swift */,
+				E1F638B61F0C973400E297FB /* DatePickerView.swift */,
 			);
 			name = Views;
 			path = ../../../../Users/miciny/ToGitHub/iPets/iPets/DataAnalyze/View;
@@ -1368,6 +1376,7 @@
 			children = (
 				E1DE0E7B1EEA91FA00CF580D /* LoadingPicView.swift */,
 				E1DE0E7C1EEA91FA00CF580D /* NetFuncs.swift */,
+				E1F638AE1F0BAC9500E297FB /* PostData.swift */,
 			);
 			name = MCYInternetSDK;
 			path = ../../../../Users/miciny/ToGitHub/iPets/iPets/SDKs/MCYInternetSDK;
@@ -1670,6 +1679,7 @@
 				E17528F11ED40B1800269EDF /* AutoLayout.swift in Sources */,
 				E1767A401F05257300225D9E /* ShopTestData.swift in Sources */,
 				E17528D61ED40A5A00269EDF /* RichScanViewController.swift in Sources */,
+				E1F638B51F0BAF7100E297FB /* CalendarView.swift in Sources */,
 				E17528831ED404A400269EDF /* PersonInfo_ChangeNameViewController.swift in Sources */,
 				E17528961ED406AD00269EDF /* FindPetsCellModel.swift in Sources */,
 				E17528871ED404FB00269EDF /* MeViewController.swift in Sources */,
@@ -1721,6 +1731,7 @@
 				E12A38B71EEA794000755C6C /* FindTableViewCell.swift in Sources */,
 				E18C41BF1EFB990E00AFF37C /* Contectors+CoreDataClass.swift in Sources */,
 				E18C41C01EFB990E00AFF37C /* Contectors+CoreDataProperties.swift in Sources */,
+				E1F638B71F0C973400E297FB /* DatePickerView.swift in Sources */,
 				E17528B01ED406D000269EDF /* ContectorInfoViewDataModel.swift in Sources */,
 				E14408291EEFE23700C8E23B /* TipsView.swift in Sources */,
 				E18C41CE1EFCD06500AFF37C /* ChatInfoViewController.swift in Sources */,
@@ -1813,6 +1824,7 @@
 				E14408341EEFE27900C8E23B /* TetrisCalculate.swift in Sources */,
 				E17528671ED4034D00269EDF /* SearchViewController.swift in Sources */,
 				E18C41C11EFB990E00AFF37C /* ChatList+CoreDataClass.swift in Sources */,
+				E1F638AF1F0BAC9500E297FB /* PostData.swift in Sources */,
 				E17528FE1ED40B7600269EDF /* PushAndPopAnimation.swift in Sources */,
 				E144083C1EEFE28400C8E23B /* TetrisElementsObj.swift in Sources */,
 				E18C41C51EFB990E00AFF37C /* SearchRecord+CoreDataClass.swift in Sources */,

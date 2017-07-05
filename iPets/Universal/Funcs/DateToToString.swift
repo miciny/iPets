@@ -56,8 +56,7 @@ class DateToToString: NSObject {
         let timeNow = Date()
         
         //获取今天过的时间
-        let todayL = DateToToString.stringToDate("\(timeNow.currentYear)-\(timeNow.currentMonth)-\(timeNow.currentDay) 00:00:00",
-                                                 format: "yyyy-MM-dd HH:mm:ss")
+        let todayL = DateToToString.stringToDate("\(timeNow.currentYear)-\(timeNow.currentMonth)-\(timeNow.currentDay) 00:00:00", format: "yyyy-MM-dd HH:mm:ss")
         let todaySecond = timeNow.timeIntervalSince(todayL)
         
         let yestodaySecond = todaySecond + 24*60*60  //那么昨天就是今天过的时间 加上一天

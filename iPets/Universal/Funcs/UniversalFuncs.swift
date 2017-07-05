@@ -9,6 +9,16 @@
 import Foundation
 import UIKit
 
+//字符串转成json
+func strToJson(_ str: String) -> AnyObject{
+    let data = str.data(using: String.Encoding.utf8)
+    
+    let deserialized = try! JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.allowFragments)
+    return deserialized as AnyObject
+}
+
+
+
 //======================================根据nickname获得头像，指获取一个时使用================================
 func getUserIcon(nickname: String) -> UIImage?{
     

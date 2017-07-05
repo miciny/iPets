@@ -21,6 +21,7 @@ class LineChartsViewController: UIViewController {
     fileprivate var refreshView: MCYRefreshView? //自己写的
     
     let waitView = WaitView()
+    var calendar: CalendarView?
     
     //line项数据源
     var months = [Double]()
@@ -45,6 +46,16 @@ class LineChartsViewController: UIViewController {
     
     func setEle(){
         self.title = "数据分析"
+        
+        //左上角联系人按钮按钮，一下方法添加图片，需要对图片进行遮罩处理，否则不会出现图片
+        // 我们会发现出来的是一个纯色的图片，是因为iOS扁平化设计风格应用之后做成这样的，如果需要现实图片，我们可以设置一项
+        var image = UIImage(named:"MoreSetting")
+        image = image?.withRenderingMode(UIImageRenderingMode.alwaysOriginal)
+        let contectItem = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(setDateView))
+        
+        let spacer = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)  //用于消除左边空隙，要不然按钮顶不到最前面
+        spacer.width = -5
+        self.navigationItem.rightBarButtonItems = [spacer, contectItem]
     }
     
     func calculateData(){
@@ -146,6 +157,21 @@ class LineChartsViewController: UIViewController {
         ToastView().showToast("刷新完成！")
     }
     
+    
+//==============================日期========================
+    func setDateView(){
+        if calendar != nil{
+            calendar?.removeFromSuperview()
+            calendar = nil
+            return
+        }
+        
+        let cframe = CGRect(x: 0, y: 0, width: Width, height: Height/2+50)
+        calendar = CalendarView(frame: cframe, target: self)
+        calendar!.tag = 1
+        scrollView.addSubview(calendar!)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -156,5 +182,14 @@ extension LineChartsViewController: MCYRefreshViewDelegate{
     
     func reFreshing(){
         self.calculateData()
+    }
+}
+
+//日历点击时的协议
+extension LineChartsViewController: CalendarViewDelegate{
+    
+    func itemClicked(_ dd: String , yyyymm: String) {
+        print(dd)
+        print(yyyymm)
     }
 }

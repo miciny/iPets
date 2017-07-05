@@ -85,8 +85,6 @@ class TetrisGameViewController: UIViewController, controllerViewDelegate, mainVi
         self.view.addSubview(self.tipsView!)
         self.view.addSubview(self.controllerViw!)
         
-        
-        
         //左上角联系人按钮按钮，一下方法添加图片，需要对图片进行遮罩处理，否则不会出现图片
         // 我们会发现出来的是一个纯色的图片，是因为iOS扁平化设计风格应用之后做成这样的，如果需要现实图片，我们可以设置一项
         var image = UIImage(named:"MoreSetting")
@@ -95,7 +93,6 @@ class TetrisGameViewController: UIViewController, controllerViewDelegate, mainVi
         
         let spacer = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)  //用于消除左边空隙，要不然按钮顶不到最前面
         spacer.width = -5
-        
         self.navigationItem.rightBarButtonItems = [spacer, contectItem]
     }
     

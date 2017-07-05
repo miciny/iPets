@@ -151,7 +151,6 @@ class ContectorInfoViewController: UIViewController, UITableViewDelegate, UITabl
         //保存寻宠数据
         data.saveFindMyPetsToTempDirectory(oldData)
         
-        
         ToastView().showToast("发送成功")
     }
     
