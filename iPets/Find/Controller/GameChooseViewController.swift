@@ -36,9 +36,11 @@ class GameChooseViewController: UIViewController, UITableViewDelegate, UITableVi
         
         let oneOne = FindDataModel(icon: "MoreGame", title: "俄罗斯方块")
         let twoOne = FindDataModel(icon: "MoreGame", title: "扫雷")
+        let threeOne = FindDataModel(icon: "MoreGame", title: "抽奖")
         
         findData!.add([oneOne])
         findData!.add([twoOne])
+        findData!.add([threeOne])
     }
     
     //设置tableView
@@ -109,6 +111,16 @@ class GameChooseViewController: UIViewController, UITableViewDelegate, UITableVi
             switch indexPath.row {
             case 0:
                 let gameVc = MineMainViewController()
+                gameVc.hidesBottomBarWhenPushed = true
+                self.navigationController?.pushViewController(gameVc, animated: true)
+                
+            default:
+                break
+            }
+        case 2:
+            switch indexPath.row {
+            case 0:
+                let gameVc = RollViewController()
                 gameVc.hidesBottomBarWhenPushed = true
                 self.navigationController?.pushViewController(gameVc, animated: true)
                 

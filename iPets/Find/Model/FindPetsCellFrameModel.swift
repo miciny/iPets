@@ -144,7 +144,7 @@ class FindPetsCellFrameModel: NSObject {
     
     //?
     func delete(){
-        guard myCellModel.from == FindPetsDataFromType.me.rawValue else {
+        guard myCellModel.nickname == myInfo.nickname else {
             return
         }
         

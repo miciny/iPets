@@ -134,6 +134,10 @@ func sizeWithText(_ text: String, font: UIFont, maxSize: CGSize) -> CGSize{
 
 //获得一个随机数
 func getIntRandomNum(_ max: Int, min: Int) -> Int {
+    guard max > min else {
+        return 0
+    }
+    
     let max: UInt32 = UInt32(max)
     let min: UInt32 = UInt32(min)
     return Int(arc4random_uniform(max - min) + min)
