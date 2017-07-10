@@ -380,46 +380,8 @@ extension FindPetsViewController: PicsBrowserViewDelegate{
     }
     
     func share(image: UIImage){
-        
-        if self.activityViewController != nil {
-            self.activityViewController = nil
-        }
-        
-        let title = (myInfo.username! + "的寻宠二维码")
-        let url = (URL(fileURLWithPath: myOwnUrl))
-        
-        let activityItems: NSArray = [title, image, url]
-        
-        activityViewController = UIActivityViewController(activityItems: activityItems as! [Any], applicationActivities: nil)
-        //排除一些服务：例如复制到粘贴板，拷贝到通讯录
-        activityViewController!.excludedActivityTypes = [UIActivityType.copyToPasteboard,
-                                                         UIActivityType.assignToContact,
-                                                         UIActivityType(rawValue: "com.apple.reminders.RemindersEditorExtension"),
-                                                         UIActivityType(rawValue: "com.apple.mobilenotes.SharingExtension")]
-        
-        self.present(activityViewController!, animated: true, completion: nil)
-        
-        activityViewController!.completionWithItemsHandler =
-            {  (activityType: UIActivityType?,
-                completed: Bool,
-                returnedItems: [Any]?,
-                error: Error?) in
-                
-                print(activityType ?? "没有获取到分享路径")
-                print(returnedItems ?? "没有获取到返回路径")
-                
-                if completed{
-                    ToastView().showToast("分享成功！")
-                }else{
-                    ToastView().showToast("用户取消！")
-                }
-                
-                if let e = error{
-                    print("分享错误")
-                    print(e)
-                }
-                self.activityViewController = nil
-        }
+        let activityViewController = shareImage(image: image)
+        self.present(activityViewController, animated: true, completion: nil)
     }
 }
 

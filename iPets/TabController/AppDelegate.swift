@@ -59,6 +59,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         myInfo = GetInfo.getMyInfo()
     }
     
+    func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
+        
+        switch shortcutItem.type {
+        case "UITouchText.share":
+            let items = ["hello 3D Touch"]
+            let activityVC = UIActivityViewController(
+                activityItems: items,
+                applicationActivities: nil)
+            self.window?.rootViewController?.present(activityVC, animated: true, completion: { () -> Void in
+                
+            })
+            
+        case "UITouchText.search":
+            let vc = WeatherViewController()
+            self.window?.rootViewController?.present(vc, animated: true, completion: { () -> Void in
+                
+            })
+        default:
+            break
+        }
+        
+    }
     
 
     func applicationWillResignActive(_ application: UIApplication) {
