@@ -19,15 +19,22 @@ class MainChatListViewController: UIViewController, UITableViewDelegate, UITable
                                                "添加朋友": "AddFriends",
                                                "扫一扫": "AddScan"]
     fileprivate var addActionView: ActionMenuView?  //此处定义，方便显示和消失的判断
-    
     private var bageInt = Int()
+    private var isCan3DTouch = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //3d touch
+        if traitCollection.forceTouchCapability == UIForceTouchCapability.available {
+            self.isCan3DTouch = true
+        } else {
+            self.isCan3DTouch = false
+        }
+        
         setUpEles()
         setData()
         setUpTable()
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -218,6 +225,11 @@ class MainChatListViewController: UIViewController, UITableViewDelegate, UITable
         let data = chatData![indexPath.row]
         let cell =  MainChatTableViewCell(data: data as! MainChatListViewDataModel, reuseIdentifier:cellId)
         
+        //3d touch //注册3D Touch
+        if self.isCan3DTouch {
+            registerForPreviewing(with: self, sourceView: cell.contentView)
+        }
+        
         return cell
     }
     
@@ -225,23 +237,7 @@ class MainChatListViewController: UIViewController, UITableViewDelegate, UITable
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         mainTabelView!.deselectRow(at: indexPath, animated: true)  //被选择后，会变灰，这么做还原
         
-        let data = chatData![indexPath.row]
-        let item =  data as! MainChatListViewDataModel
-        
-        //未读消息数
-        self.unreadData(indexPath: indexPath, str: 0)
-        self.scheduleNotification()
-        
-        let chatView = ChatViewController()
-        chatView.hidesBottomBarWhenPushed = true
-        chatView.youInfo = UserInfo(name: item.name, icon: item.pic, nickname: item.nickname)
-        
-        //获得设置的置顶消息
-        if let data = ChatFuncs.getSettingModel(item.nickname){
-            if data.chatBIMPath != nil{
-                chatView.backImageView = UIImageView() //设置了说明有背景图片
-            }
-        }
+        let chatView = touchSetChatView(indexPath: indexPath, peek: false)
         self.navigationController?.pushViewController(chatView, animated: true)
     }
     
@@ -330,9 +326,56 @@ class MainChatListViewController: UIViewController, UITableViewDelegate, UITable
         return [delete, setUnread]
     }
     
+    
+    func touchSetChatView(indexPath: IndexPath, peek: Bool) -> UIViewController{
+        let data = chatData![indexPath.row]
+        let item =  data as! MainChatListViewDataModel
+        
+        //未读消息数
+        if !peek{
+            self.unreadData(indexPath: indexPath, str: 0)
+            self.scheduleNotification()
+        }
+        
+        let chatView = ChatViewController()
+        chatView.hidesBottomBarWhenPushed = true
+        chatView.youInfo = UserInfo(name: item.name, icon: item.pic, nickname: item.nickname)
+        
+        //获得设置的置顶消息
+        if !peek{
+            if let data = ChatFuncs.getSettingModel(item.nickname){
+                if data.chatBIMPath != nil{
+                    chatView.backImageView = UIImageView() //设置了说明有背景图片
+                }
+            }
+        }
+        return chatView
+    }
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+}
+
+//===========================3d touch代理========================
+extension MainChatListViewController: UIViewControllerPreviewingDelegate{
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+        
+        let indexPathT = self.mainTabelView?.indexPath(for: previewingContext.sourceView.superview as! UITableViewCell)
+        var indexPathD = IndexPath(item: 0, section: 0)
+        if let indexPath = indexPathT{
+            indexPathD = indexPath
+        }
+        
+        let chatView = touchSetChatView(indexPath: indexPathD, peek: true)
+        return chatView
+    }
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+        self.navigationController?.pushViewController(viewControllerToCommit, animated: true)
     }
 }
 

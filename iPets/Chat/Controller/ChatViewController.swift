@@ -38,7 +38,6 @@ class ChatViewController: UIViewController, ChatDataSource, UITextViewDelegate, 
     fileprivate var keyboradTap: UITapGestureRecognizer?
     
     var backImageView: UIImageView? //设置了说明有背景图片
-    
     var activityViewController: UIActivityViewController?
     
     var recorder: AudioRecorder? //录音器
