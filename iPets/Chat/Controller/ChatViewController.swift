@@ -61,6 +61,16 @@ class ChatViewController: UIViewController, ChatDataSource, UITextViewDelegate, 
         self.tableView.moveToBottomFirst()
     }
     
+    //3d touch
+    override var previewActionItems: [UIPreviewActionItem] {
+        let action1 = UIPreviewAction(title: "删除", style: .default) { (action, previewViewController) in
+        }
+        let action2 = UIPreviewAction(title: "完成", style: .default) { (action, previewViewController) in
+        }
+        let actionItems = [action1, action2]
+        return actionItems
+    }
+    
     //退出时保存数据
     override func viewWillDisappear(_ animated: Bool) {
         
@@ -88,6 +98,7 @@ class ChatViewController: UIViewController, ChatDataSource, UITextViewDelegate, 
     }
     
 //＊＊＊＊＊＊＊＊＊＊＊＊初始化页面＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊
+    
     //底部发送栏
     func setupSendPanel(){
         self.title = youInfo.username //获取标题
@@ -211,8 +222,6 @@ class ChatViewController: UIViewController, ChatDataSource, UITextViewDelegate, 
     }
     
     func setUpRecorder(){
-        
-        
         let plyer = AudioPlayer.shared
         plyer.stopAudio()
         

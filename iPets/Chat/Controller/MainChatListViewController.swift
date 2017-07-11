@@ -39,7 +39,7 @@ class MainChatListViewController: UIViewController, UITableViewDelegate, UITable
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-        setData()
+        self.setData()
         self.mainTabelView?.reloadData()
         
     }
@@ -179,7 +179,6 @@ class MainChatListViewController: UIViewController, UITableViewDelegate, UITable
     
     //发送通知消息
     func scheduleNotification(){
-        
         UIApplication.shared.applicationIconBadgeNumber = bageInt
     }
     
@@ -227,7 +226,7 @@ class MainChatListViewController: UIViewController, UITableViewDelegate, UITable
         
         //3d touch //注册3D Touch
         if self.isCan3DTouch {
-            registerForPreviewing(with: self, sourceView: cell.contentView)
+            registerForPreviewing(with: self, sourceView: cell)  //sourceView很重要
         }
         
         return cell
@@ -327,14 +326,18 @@ class MainChatListViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     
+    //未读消息数
+    func setUnread(indexPath: IndexPath){
+        self.unreadData(indexPath: indexPath, str: 0)
+        self.scheduleNotification()
+    }
+    
     func touchSetChatView(indexPath: IndexPath, peek: Bool) -> UIViewController{
         let data = chatData![indexPath.row]
         let item =  data as! MainChatListViewDataModel
         
-        //未读消息数
         if !peek{
-            self.unreadData(indexPath: indexPath, str: 0)
-            self.scheduleNotification()
+            self.setUnread(indexPath: indexPath)
         }
         
         let chatView = ChatViewController()
@@ -342,11 +345,9 @@ class MainChatListViewController: UIViewController, UITableViewDelegate, UITable
         chatView.youInfo = UserInfo(name: item.name, icon: item.pic, nickname: item.nickname)
         
         //获得设置的置顶消息
-        if !peek{
-            if let data = ChatFuncs.getSettingModel(item.nickname){
-                if data.chatBIMPath != nil{
-                    chatView.backImageView = UIImageView() //设置了说明有背景图片
-                }
+        if let data = ChatFuncs.getSettingModel(item.nickname){
+            if data.chatBIMPath != nil{
+                chatView.backImageView = UIImageView() //设置了说明有背景图片
             }
         }
         return chatView
@@ -364,19 +365,20 @@ extension MainChatListViewController: UIViewControllerPreviewingDelegate{
     
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
         
-        let indexPathT = self.mainTabelView?.indexPath(for: previewingContext.sourceView.superview as! UITableViewCell)
-        var indexPathD = IndexPath(item: 0, section: 0)
-        if let indexPath = indexPathT{
-            indexPathD = indexPath
-        }
+        guard let indexPath = self.mainTabelView!.indexPathForRow(at: location) else { return nil }
+        let chatView = touchSetChatView(indexPath: indexPath, peek: true)
         
-        let chatView = touchSetChatView(indexPath: indexPathD, peek: true)
+        //按下会高亮
+        let cellRect = self.mainTabelView!.rectForRow(at: indexPath)
+        previewingContext.sourceRect = cellRect
+        
         return chatView
     }
     
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
         self.navigationController?.pushViewController(viewControllerToCommit, animated: true)
     }
+    
 }
 
 //===========================actionview 代理========================

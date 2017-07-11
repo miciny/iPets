@@ -28,6 +28,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //创建默认头像
         setDefaultData()
         
+        //3d touch
+        configShortCutItems()
+        
         //开启通知
         let settings = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
         application.registerUserNotificationSettings(settings)
@@ -59,27 +62,43 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         myInfo = GetInfo.getMyInfo()
     }
     
+//=====================================3d touch======================================
+    func configShortCutItems(){
+        //动态添加方式
+        
+        var icon1 = UIApplicationShortcutIcon(type: .add)
+        if #available(iOS 9.1, *) {
+            icon1 = UIApplicationShortcutIcon(type: .cloud)
+        }
+        let item1 = UIMutableApplicationShortcutItem(type: "weather", localizedTitle: "天气", localizedSubtitle: "查看本地天气", icon: icon1, userInfo: nil)
+        
+        
+        let icon2 = UIApplicationShortcutIcon(type: .share)
+        let item2 = UIMutableApplicationShortcutItem(type: "share", localizedTitle: "分享", localizedSubtitle: "分享我的爱宠", icon: icon2, userInfo: nil)
+        
+        
+        let icon3 = UIApplicationShortcutIcon(templateImageName: "shareIcon")
+        let item3 = UIMutableApplicationShortcutItem(type: "999", localizedTitle: "自定义", localizedSubtitle: nil, icon: icon3, userInfo: nil)
+        UIApplication.shared.shortcutItems = [item1,item2,item3]
+    }
+    
     func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
         
         switch shortcutItem.type {
-        case "UITouchText.share":
+        case "share":
             let items = ["hello 3D Touch"]
             let activityVC = UIActivityViewController(
                 activityItems: items,
                 applicationActivities: nil)
-            self.window?.rootViewController?.present(activityVC, animated: true, completion: { () -> Void in
-                
-            })
+            self.window?.rootViewController?.present(activityVC, animated: true, completion: nil)
             
-        case "UITouchText.search":
+        case "weather":
             let vc = WeatherViewController()
-            self.window?.rootViewController?.present(vc, animated: true, completion: { () -> Void in
-                
-            })
+            self.window?.rootViewController?.present(vc, animated: true, completion: nil)
+            
         default:
             break
         }
-        
     }
     
 
