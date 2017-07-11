@@ -33,6 +33,7 @@ class RollViewController: UIViewController {
     
     func setUpTitle(){
         self.title = "Uno"
+        self.view.backgroundColor = UIColor.white
         self.navigationItem.title = RollViewLike.getNoStr()  //标题为识别码
         
         self.resetBtn = UIBarButtonItem(title: "重置", style: .plain, target: self, action:
