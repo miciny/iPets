@@ -12,7 +12,7 @@ function playVideo(index) {
     window.webkit.messageHandlers.playVideo.postMessage(index);
 }
 
-//播放视频
+//微博
 function goWeibo(index) {
     window.webkit.messageHandlers.goWeibo.postMessage(index);
 }

@@ -95,7 +95,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDe
         searchData = NSMutableArray()
         let recordListData = NSMutableArray()
         
-        let hotData = ["二哈","金毛","仓鼠笼子","动物城","小米","大象鼻子","骆驼鸟","大象","老师","动物城","小米","大象"]
+        let hotData = ["二哈","金毛","仓鼠笼子","动物城","小米","大象鼻子","骆驼鸟","大象","老师"]
         
         let recordListDataTemp = SQLLine.SelectAllData(entityNameOfSearchRecord)
         

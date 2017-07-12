@@ -16,7 +16,7 @@ class MansAreaView: UIView {
     init(frame: CGRect, y: CGFloat, realManArray: NSMutableArray){
         super.init(frame: frame)
         
-        self.frame.size = CGSize(width: Width-40, height: 300)
+        self.frame.size = CGSize(width: Width-40, height: Height-RollConstans._width-40)
         self.frame.origin = CGPoint(x: 20, y: y)
         
         self.realManArray = realManArray
