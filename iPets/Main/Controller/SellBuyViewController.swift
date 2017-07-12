@@ -10,7 +10,7 @@ import UIKit
 import MCYRefresher
 
 
-class SellBuyViewController: UIViewController, UIScrollViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
+class SellBuyViewController: UIViewController, UIScrollViewDelegate, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{
     
     let customPresentAnimationController = CustomPresentAnimationController()
     let customDismissAnimationController = CustomDismissAnimationController()
@@ -35,6 +35,7 @@ class SellBuyViewController: UIViewController, UIScrollViewDelegate, UICollectio
                 "dog5.jpg"]
     
     fileprivate var cellData: NSMutableArray?
+    fileprivate var longPressGesture: UILongPressGestureRecognizer! //长按排序用
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -114,7 +115,7 @@ class SellBuyViewController: UIViewController, UIScrollViewDelegate, UICollectio
     //数据
     func setUpData(){
         
-        let items = [
+        let itemsOne = [
             ["name":"天气情况","pic":"night.jpeg"],
             ["name":"视频录像","pic":"day.jpeg"],
             ["name":"音乐播放","pic":"123_03.png"],
@@ -125,7 +126,7 @@ class SellBuyViewController: UIViewController, UIScrollViewDelegate, UICollectio
             ["name":"精品推荐","pic":"123_02.png"],
             ]
         
-        let itemsOne = [
+        let itemsTwo = [
             ["name":"小型萌宠","pic":"123_01.png"],
             ["name":"大型家宠","pic":"123_02.png"],
             ["name":"精品小店","pic":"123_03.png"],
@@ -133,15 +134,15 @@ class SellBuyViewController: UIViewController, UIScrollViewDelegate, UICollectio
             ["name":"我的家宠","pic":"123_02.png"],
             ]
         
-        let titles = ["头图",
+        let titles = [
                       "主荐萌宠",
                       "宠物分类",
                       "宠物周边",
                       "爱心失宠"]
         
         cellData = NSMutableArray()
-        cellData?.add([titles[0], items])
-        cellData?.add([titles[1], itemsOne])
+        cellData?.add([titles[0], itemsOne])
+        cellData?.add([titles[1], itemsTwo])
         
     }
     
@@ -170,45 +171,32 @@ class SellBuyViewController: UIViewController, UIScrollViewDelegate, UICollectio
         collectionView?.backgroundColor = UIColor.clear
         self.view.addSubview(collectionView!)
         
+        longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(self.handleLongGesture(_:)))
+        self.collectionView!.addGestureRecognizer(longPressGesture)
+        
         setUpData()
     }
     
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return cellData!.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
-        return ((cellData![section] as! NSArray)[1] as! NSArray).count
-    }
-    
-    //collection的内容
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellReuseIdentifier, for: indexPath) as! SellBuyCollectionViewCell
-        
-        //先清空内部原有的元素
-        for subview in cell.subviews {
-            subview.removeFromSuperview()
-        }
-        
-        let dic = ((cellData![indexPath.section] as! NSArray)[1] as! NSArray)[indexPath.row] as! NSDictionary
-        let model = SellBuyCollectionModel(dic: dic)
 
-        cell.dataPic?.image = UIImage(named: model.picture!)
-        cell.dataPic?.frame = CGRect(x: 10, y: 10, width: cell.frame.width-20, height: cell.frame.height-35)
+    //长按排序
+    func handleLongGesture(_ gesture: UILongPressGestureRecognizer) {
         
-        cell.dataLable?.text = model.name
-        let dataLableSize = sizeWithText(model.name!, font: sellBuyLabelFont, maxSize: CGSize(width: Width, height: 20))
-        cell.dataLable!.frame = CGRect(x: cell.frame.width/2-dataLableSize.width/2, y: (cell.dataPic?.frame)!.maxY+5, width: dataLableSize.width, height: 20)
-        
-        cell.addSubview(cell.dataPic!)
-        cell.addSubview(cell.dataLable!)
-        
-        return cell
+        switch(gesture.state) {
+            
+        case UIGestureRecognizerState.began:
+            guard let selectedIndexPath = self.collectionView!.indexPathForItem(at: gesture.location(in: self.collectionView)) else {
+                break
+            }
+            collectionView!.beginInteractiveMovementForItem(at: selectedIndexPath)
+        case UIGestureRecognizerState.changed:
+            collectionView!.updateInteractiveMovementTargetPosition(gesture.location(in: gesture.view!))
+        case UIGestureRecognizerState.ended:
+            collectionView!.endInteractiveMovement()
+        default:
+            collectionView!.cancelInteractiveMovement()
+        }
     }
-    
+
     
     //分组头部、尾部
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView{
@@ -323,6 +311,79 @@ class SellBuyViewController: UIViewController, UIScrollViewDelegate, UICollectio
         // Dispose of any resources that can be recreated.
     }
 
+}
+
+extension SellBuyViewController: UICollectionViewDataSource {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        // #warning Incomplete implementation, return the number of sections
+        return cellData!.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        // #warning Incomplete implementation, return the number of items
+        return ((cellData![section] as! NSArray)[1] as! NSArray).count
+    }
+    
+    //collection的内容
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellReuseIdentifier, for: indexPath) as! SellBuyCollectionViewCell
+        
+        //先清空内部原有的元素
+        for subview in cell.subviews {
+            subview.removeFromSuperview()
+        }
+        
+        let dic = ((cellData![indexPath.section] as! NSArray)[1] as! NSArray)[indexPath.row] as! NSDictionary
+        let model = SellBuyCollectionModel(dic: dic)
+        
+        cell.dataPic?.image = UIImage(named: model.picture!)
+        cell.dataPic?.frame = CGRect(x: 10, y: 10, width: cell.frame.width-20, height: cell.frame.height-35)
+        
+        cell.dataLable?.text = model.name
+        let dataLableSize = sizeWithText(model.name!, font: sellBuyLabelFont, maxSize: CGSize(width: Width, height: 20))
+        cell.dataLable!.frame = CGRect(x: cell.frame.width/2-dataLableSize.width/2, y: (cell.dataPic?.frame)!.maxY+5, width: dataLableSize.width, height: 20)
+        
+        cell.addSubview(cell.dataPic!)
+        cell.addSubview(cell.dataLable!)
+        
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, canMoveItemAt indexPath: IndexPath) -> Bool {
+        if indexPath.section == 1{
+            return true
+        }else{
+            return false
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        guard sourceIndexPath.section == destinationIndexPath.section else {
+            return
+        }
+        
+        let t = cellData![sourceIndexPath.section] as! NSArray
+        
+        let temp = (t[1] as! NSArray)
+        let tempA = NSMutableArray()
+        tempA.addObjects(from: temp as! [Any])
+        
+        let tempD = tempA[sourceIndexPath.row]
+        tempA.removeObject(at: sourceIndexPath.row)
+        tempA.insert(tempD, at: destinationIndexPath.row)
+        
+        cellData!.removeObject(at: sourceIndexPath.section)
+        cellData!.insert([t[0], tempA], at: sourceIndexPath.section)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, targetIndexPathForMoveFromItemAt originalIndexPath: IndexPath, toProposedIndexPath proposedIndexPath: IndexPath) -> IndexPath {
+        
+        guard originalIndexPath.section == proposedIndexPath.section else {
+            return originalIndexPath
+        }
+        return proposedIndexPath
+    }
 }
 
 //==================================================================================进入搜索页动画的协议

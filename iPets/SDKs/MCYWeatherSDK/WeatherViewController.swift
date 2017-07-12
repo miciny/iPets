@@ -16,6 +16,13 @@ let WeatherUrl = "http://jisutqybmf.market.alicloudapi.com/weather/query"
 
 class WeatherViewController: UIViewController, UIScrollViewDelegate {
     
+    
+    var isDay: Bool = true{
+        willSet{
+            self.setBackImg()
+        }
+    }
+    
     var vImg = UIImageView()
     var cityNameLb = UILabel() //城市名
     var nowTmpTextLb = UILabel() //天气状况文字
@@ -33,7 +40,6 @@ class WeatherViewController: UIViewController, UIScrollViewDelegate {
     
     var hourArray = NSMutableArray()
     var dayArray = NSMutableArray()
-    var isDay = Bool()
     var countDay = Int()
     var countHour = Int()
     
@@ -588,7 +594,6 @@ class WeatherViewController: UIViewController, UIScrollViewDelegate {
                         self.setLableData()
                         
                         self.checkIsDay()
-                        self.setBackImg()
                         
                     }else{
                         log.info("请求天气数据失败，错误代码：" + String(code))
@@ -614,7 +619,6 @@ class WeatherViewController: UIViewController, UIScrollViewDelegate {
                     self.setLableData()
                     
                     self.checkIsDay()
-                    self.setBackImg()
                     
                 }
                 
