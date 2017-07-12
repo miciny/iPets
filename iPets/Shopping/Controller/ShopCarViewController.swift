@@ -26,7 +26,7 @@ class ShopCarViewController: UIViewController {
         let path = Bundle.main.path(forResource: "ShopCarTestData", ofType: "geojson")
         
 //        let jsonData = NSData(contentsOfFile: path!)
-        print(path ?? "path no value")
+        log.info(path ?? "path no value")
     }
 
     override func didReceiveMemoryWarning() {

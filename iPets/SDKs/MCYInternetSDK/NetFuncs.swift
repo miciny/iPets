@@ -44,6 +44,7 @@ class NetFuncs: NSObject {
     //========================================获得网络请求的manage
     
     class func getDefaultAlamofireManager() -> SessionManager{
+        log.info("初始化netmanager")
         let configuration = URLSessionConfiguration.default
         configuration.timeoutIntervalForRequest = 5 //超时时间
         let netManager = Alamofire.SessionManager(configuration: configuration)

@@ -34,7 +34,7 @@ class TetrisGameViewController: UIViewController, controllerViewDelegate, mainVi
     //退出界面，菜单消失
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        print("game over manul")
+        log.info("game over manul")
         
         mainView?.isGaming = TetrisGameType.pausing
         mainView?.timer?.stopTimer()
@@ -128,8 +128,8 @@ class TetrisGameViewController: UIViewController, controllerViewDelegate, mainVi
     //随机两个 一个显示 一个是下一次显示的
     func getEle(){
         self.setEleRange()
-        print(typeArray)
-        print("获取下一个元素")
+        log.info(typeArray)
+        log.info("获取下一个元素")
         self.mainView?.getEle(typeArray[0])
         
         //显示第二个时，-1则显示第三个，不会出现两个-1连着的情况

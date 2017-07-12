@@ -57,14 +57,14 @@ class SQLLine: NSObject{
             if resultsList.count != 0 {//若结果为多条，则只删除第一条，可根据你的需要做改动
                 allDataSource.delete(resultsList[0] as! NSManagedObject)
                 try allDataSource.save()
-                print("删除成功~ ~")
+                log.info("删除成功~ ~")
                 flag = true
             }else{
-                print("删除失败！ 没有符合条件:" + condition)
+                log.info("删除失败！ 没有符合条件:" + condition)
                 flag = true
             }
         }catch{
-            print("删除失败!")
+            log.info("删除失败!")
             flag = false
         }
         
@@ -84,7 +84,7 @@ class SQLLine: NSObject{
                     allDataSource.delete(data[i] as! NSManagedObject)
                 }
                 try allDataSource.save()
-                print("删除成功~ ~")
+                log.info("删除成功~ ~")
                 flag = true
                 
             }catch _ as NSError{
@@ -124,14 +124,14 @@ class SQLLine: NSObject{
             if resultsList.count != 0 {
                 (resultsList[0] as AnyObject).setValue(changeValue, forKey: changeEntityName)
                 try allDataSource.save()
-                print("更新成功~ ~")
+                log.info("更新成功~ ~")
                 flag = true
             }else{
-                print("更新失败！ 没有符合条件:" + condition)
+                log.info("更新失败！ 没有符合条件:" + condition)
                 flag = true
             }
         }catch{
-            print("更新失败 !")
+            log.info("更新失败 !")
             flag = false
         }
         
@@ -152,7 +152,7 @@ class SQLLine: NSObject{
             let resultsList = try allDataSource.fetch(request) as NSArray
             return resultsList
         }catch{
-            print("查询失败 !")
+            log.info("查询失败 !")
             return nil
         }
     }

@@ -27,7 +27,7 @@ class DataFormat{
         case "common":
             return feedShowStyleType.common
         default:
-            print("feedShowStyle,未显示的类型"+feedShowStyle)
+            log.info("feedShowStyle,未显示的类型"+feedShowStyle)
             return feedShowStyleType.unkown
         }
     }
@@ -61,7 +61,7 @@ class DataFormat{
         case "consice":
             return newsType.consice
         default:
-            print("category,未显示的类型"+category)
+            log.info("category,未显示的类型"+category)
             return newsType.unkown
         }
     }
@@ -99,7 +99,7 @@ class DataFormat{
         case "科技":
             return requestChannel.news_tech
         default:
-            print("str,未显示的类型"+str)
+            log.info("str,未显示的类型"+str)
             return requestChannel.news_unkown
         }
     }

@@ -189,7 +189,7 @@ extension LineChartsViewController: MCYRefreshViewDelegate{
 extension LineChartsViewController: CalendarViewDelegate{
     
     func itemClicked(_ dd: String , yyyymm: String) {
-        print(dd)
-        print(yyyymm)
+        log.info(dd)
+        log.info(yyyymm)
     }
 }

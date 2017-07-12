@@ -232,7 +232,7 @@ class ShowPicViewController: UIViewController, UIScrollViewDelegate{
                         self.addEvent(self.showPics![curentPage])
                     }
                 })
-                print("加载第\(curentPage+1)张图")
+                log.info("加载第\(curentPage+1)张图")
             }
         }
     }
@@ -384,12 +384,12 @@ extension ShowPicViewController{
                         
                     }else{
                         ToastView().showToast("请求错误！")
-                        print(response.response ?? "")
+                        log.info(response.response ?? "")
                     }
                     
                 case .failure:
                     ToastView().showToast("无法连接！")
-                    print(response.response ?? "")
+                    log.info(response.response ?? "")
                 }
         }
     }

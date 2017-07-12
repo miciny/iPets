@@ -8,4 +8,5 @@ target 'iPets' do
     pod 'SwiftyJSON', :git => 'https://github.com/SwiftyJSON/SwiftyJSON.git'
     pod 'MCYRefresher', '~>1.0.6'
     pod 'Charts', '~> 3.0.2'
+    pod 'XCGLogger', '~> 5.0.1'
 end

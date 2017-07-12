@@ -30,7 +30,7 @@ class PostData: NSObject {
 //                    
 //                    if code == "200"{
 //                        User.updateuserData(0, changeValue: false, changeFieldName: userNameOfChanged)
-//                        print("上传用户信息成功！")
+//                        log.info("上传用户信息成功！")
 //                    }else{
 //                        let str = getErrorCodeToString(code)
 //                        MyToastView().showToast("\(str)")
@@ -65,7 +65,7 @@ class PostData: NSObject {
 //                        let code = String((response.response?.statusCode)!)
 //                        
 //                        if code == "200"{
-//                            print("上传用户头像成功！")
+//                            log.info("上传用户头像成功！")
 //                        }else{
 //                            let str = getErrorCodeToString(code)
 //                            MyToastView().showToast("\(str)")
@@ -77,8 +77,8 @@ class PostData: NSObject {
 //                }
 //                
 //            case .Failure(let encodingError):
-//                print("Failure")
-//                print(encodingError)
+//                log.info("Failure")
+//                log.info(encodingError)
 //            }
 //        }
 //    }

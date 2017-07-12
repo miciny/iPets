@@ -99,17 +99,17 @@ class SendFindMyPetsInfoViewController: UIViewController, UITableViewDelegate, U
                     let asset = self.selectedModel[j].asset!
                     getRetainImage(asset: asset, imageResult: { (image) in
                         if saveCache.savaImageToFindPetsCacheDir(image, imageName: "H\(timeStr)\(j).png"){
-                            print("保存高清图缓存成功！")
+                            log.info("保存高清图缓存成功！")
                         }else{
-                            print("保存高清图缓存失败！")
+                            log.info("保存高清图缓存失败！")
                         }
                     })
                     
                     //保存普清图
                     if saveCache.savaImageToFindPetsCacheDir(self.images[j], imageName: "\(timeStr)\(j).png"){
-                       print("保存普通图缓存成功！")
+                       log.info("保存普通图缓存成功！")
                     }else{
-                        print("保存普通图缓存失败！")
+                        log.info("保存普通图缓存失败！")
                     }
                     
                     nameArray.append("\(timeStr)\(j).png")

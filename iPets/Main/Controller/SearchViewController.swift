@@ -137,17 +137,17 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDe
     
     // 输入框内容改变触发事件
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        print("过滤：\(searchText)")
+        log.info("过滤：\(searchText)")
     }
     
     // 书签按钮触发事件
     func searchBarBookmarkButtonClicked(_ searchBar: UISearchBar) {
-        print("搜索历史")
+        log.info("搜索历史")
     }
     
     // 取消按钮触发事件
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        print("取消搜索")
+        log.info("取消搜索")
     }
     
     // 搜索触发事件
@@ -223,9 +223,9 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDe
         }else if indexPath.row == searchData.count-1{ //清除按钮
             
             if SQLLine.DeleteAllData(entityNameOfSearchRecord){
-                print("删除搜索数据成功！")
+                log.info("删除搜索数据成功！")
             }else{
-                print("删除搜索数据失败！")
+                log.info("删除搜索数据失败！")
             }
             
             setUpData()
@@ -312,17 +312,17 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDe
     func updataDB(info: Bool, str: String){
         if !info{
             if SQLLine.InsertSearchrecordData(str, time: Date()){
-                print("新增搜索数据成功！")
+                log.info("新增搜索数据成功！")
             }else{
-                print("新增搜索数据失败！")
+                log.info("新增搜索数据失败！")
             }
             
         }else{
             if SQLLine.UpdateDataWithCondition("label='"+str+"'", entityName: entityNameOfSearchRecord,
                                                changeValue: Date() as AnyObject, changeEntityName: "time"){
-                print("更新搜索数据成功！")
+                log.info("更新搜索数据成功！")
             }else{
-                print("更新搜索数据失败！")
+                log.info("更新搜索数据失败！")
             }
             
         }

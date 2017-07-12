@@ -63,7 +63,7 @@ class MCYMapViewController: UIViewController, MKMapViewDelegate, CLLocationManag
             //允许使用定位服务的话，开启定位服务更新
             locationManager.delegate = self
             locationManager.startUpdatingLocation()
-            print("定位开始")
+            log.info("定位开始")
             
             wait = WaitView()
             wait!.showWait("定位中")

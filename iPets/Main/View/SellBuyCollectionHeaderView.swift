@@ -60,11 +60,11 @@ class SellBuyCollectionHeaderView: UICollectionReusableView, MCYAutoScrollViewDe
     }
     
     func currentIndexDidChange(_ index: Int) {
-        print("autoScrollView currentIndex didChange :\(index)")
+        log.info("autoScrollView currentIndex didChange :\(index)")
     }
     
     func indexDidChange(_ index: Int) {
-        print("scrollView currentIndexDidChange :\(index)")
+        log.info("scrollView currentIndexDidChange :\(index)")
     }
 }
 

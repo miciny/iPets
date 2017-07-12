@@ -212,7 +212,7 @@ extension ChatInfoViewController: bottomMenuViewDelegate, UINavigationController
             picker?.sourceType = sourceType
             self.present(picker!, animated:true, completion: nil)
         }else{
-            print("模拟器中无法打开照相机，请在真机上使用")
+            log.info("模拟器中无法打开照相机，请在真机上使用")
         }
     }
     

@@ -120,7 +120,7 @@ class TipsView: UIView {
 //==========操作===================================================
     //随机一个元素 从viewController传
     func getEle(_ type: Int, type2: Int){
-        print("显示下两个元素")
+        log.info("显示下两个元素")
         
         if let temp = self.element1{
             if self.isMoving == true{  //如果获取新元素时，还在动，temp消除，重新显示ele1 ele2
@@ -184,7 +184,7 @@ class TipsView: UIView {
     
     //重新开始游戏 1只是结束，2结束加重新计分
     func restartRecord(over: Int){
-        print("重置分数和元素")
+        log.info("重置分数和元素")
         
         self.timer?.pauseTimer()
         self.elementTemp = nil

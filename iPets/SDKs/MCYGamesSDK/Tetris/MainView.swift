@@ -151,7 +151,7 @@ class MainView: UIView{
         guard self.isGaming == TetrisGameType.gaming else {
             return
         }
-        print("向下移动")
+        log.info("向下移动")
         self.timer?.pauseTimer()   //暂停计时器
         
         if !self.isDown(){
@@ -193,7 +193,7 @@ class MainView: UIView{
             isGaming = TetrisGameType.gameOver
             speed = downSpeed //速度可能出问题，这里初始化一下
             self.delegate?.restartRecord(over: 1)
-            print("游戏结束")
+            log.info("游戏结束")
         }else{ //游戏没结束
             dir = 0
             self.showElements() //显示下一个元素

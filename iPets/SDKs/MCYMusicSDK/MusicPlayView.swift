@@ -172,7 +172,7 @@ class MusicPlayView: UIView, AVAudioPlayerDelegate{
         if FileManager.default.fileExists(atPath: aacPath!){
             audioPlayer = try! AVAudioPlayer(contentsOf: URL(string: aacPath!)!)
             if audioPlayer == nil {
-                print("播放失败")
+                log.info("播放失败")
             }else{
                 self.audioPlayer.delegate = self //设置代理,为什么要在这里设置？？？？，要在init外设置？
                 audioPlayer?.play()
@@ -185,7 +185,7 @@ class MusicPlayView: UIView, AVAudioPlayerDelegate{
                 totalPlaybackTimeLabel.text = getFormateFromInt(audioPlayer.duration) //显示总时间
             }
         }else{
-            print("文件不存在")
+            log.info("文件不存在")
         }
         
     }

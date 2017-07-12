@@ -8,6 +8,9 @@
 
 import UIKit
 import CoreData
+import XCGLogger
+
+let log = XCGLogger.default
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -35,6 +38,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let settings = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
         application.registerUserNotificationSettings(settings)
         
+        //日志
+        log.setup(level: .debug, showThreadName: true, showLevel: true, showFileNames: true, showLineNumbers: true, writeToFile: "path/to/file", fileLevel: .debug)
+
         return true
     }
     
@@ -52,9 +58,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let defaultIconData = UIImagePNGRepresentation(defaultIcon!)
             
             if SQLLine.InsertContectorsData("毛彩元", icon: defaultIconData!, nickname: myNikename, sex: "男", remark: "my heart is yours", address: "北京", http: "www.baidu.com"){
-                print("创建默认用户成功！")
+                log.info("创建默认用户成功！")
             }else{
-                print("创建默认头像失败！")
+                log.info("创建默认头像失败！")
             }
         }
         

@@ -265,13 +265,13 @@ extension VideoViewController{
                         self.endFreshOrLoadMore(refresh)
                         
                         ToastView().showToast("请求错误！")
-                        print(response.response ?? "")
+                        log.info(response.response ?? "")
                     }
                     
                 case .failure:
                     self.endFreshOrLoadMore(refresh)
                     ToastView().showToast("无法连接！")
-                    print(response.response ?? "")
+                    log.info(response.response ?? "")
                 }
         }
     }

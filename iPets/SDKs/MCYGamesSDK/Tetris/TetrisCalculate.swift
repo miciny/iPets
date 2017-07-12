@@ -32,7 +32,7 @@ class TetrisCalculate: NSObject {
         let _min: UInt32 = 0
         let _max: UInt32 = UInt32((array.lastObject as AnyObject).lastObject as! Int) + 1
         let theNo = randomNo(_min, max: _max)  //随机到的编号
-        print("随机编号：" + String(theNo))
+        log.info("随机编号：" + String(theNo))
         var theEleNo = 0
         for i in 0 ..< array.count{
             let a = array[i] as! NSMutableArray
@@ -41,7 +41,7 @@ class TetrisCalculate: NSObject {
                 break
             }
         }
-        print("元素编号：" + String(theEleNo))
+        log.info("元素编号：" + String(theEleNo))
         return theEleNo
     }
     
@@ -66,7 +66,7 @@ class TetrisCalculate: NSObject {
             
             array.add(arrayT)
         }
-        //    print(array)
+        //    log.info(array)
         return array
     }
     

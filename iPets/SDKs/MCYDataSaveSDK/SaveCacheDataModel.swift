@@ -30,8 +30,8 @@ class SaveCacheDataModel: NSObject {
                 try
                     manager.createDirectory(atPath: findPetsDir, withIntermediateDirectories: true, attributes: nil)
             }catch let error as NSError{
-                print("创建"+dirName+"文件夹失败！")
-                print(error)
+                log.info("创建"+dirName+"文件夹失败！")
+                log.info(error)
             }
         }
         return findPetsDir as AnyObject
@@ -48,10 +48,10 @@ class SaveCacheDataModel: NSObject {
         if defaultManager.fileExists(atPath: singleChatDir) {
             do{
                 try defaultManager.removeItem(atPath: singleChatDir)
-                print("删除"+dirName+"缓存文件夹成功！")
+                log.info("删除"+dirName+"缓存文件夹成功！")
             }catch let error as NSError{
-                print("删除"+dirName+"缓存文件夹失败！")
-                print(error)
+                log.info("删除"+dirName+"缓存文件夹失败！")
+                log.info(error)
             }
         }
     }
@@ -65,10 +65,10 @@ class SaveCacheDataModel: NSObject {
         if !manager.fileExists(atPath: singleChatDir) {
             do{
                 try manager.createDirectory(atPath: singleChatDir, withIntermediateDirectories: true, attributes: nil)
-                print("创建"+dirName+"聊天的子文件夹成功！")
+                log.info("创建"+dirName+"聊天的子文件夹成功！")
             }catch let error as NSError{
-                print("创建"+dirName+"聊天的子文件夹失败！")
-                print(error)
+                log.info("创建"+dirName+"聊天的子文件夹失败！")
+                log.info(error)
             }
         }
         return singleChatDir as AnyObject
@@ -90,10 +90,10 @@ class SaveCacheDataModel: NSObject {
             do{
                 try imageData.write(to: URL(fileURLWithPath: chatDirPath.appendingPathComponent(imageName)), options: .atomicWrite)
                 isSaved = true
-                print("保存图片"+imageName+"到"+dirName+"目录成功！")
+                log.info("保存图片"+imageName+"到"+dirName+"目录成功！")
             }catch let error as NSError{
-                print("保存图片"+imageName+"到"+dirName+"目录失败！")
-                print(error)
+                log.info("保存图片"+imageName+"到"+dirName+"目录失败！")
+                log.info(error)
                 isSaved = false
             }
         }
@@ -126,10 +126,10 @@ class SaveCacheDataModel: NSObject {
             do{
                 try imageData.write(to: URL(fileURLWithPath: imagePath.appendingPathComponent(imageName)), options: .atomicWrite)
                 isSaved = true
-                print("保存图片"+imageName+"到findPets目录成功！")
+                log.info("保存图片"+imageName+"到findPets目录成功！")
             }catch let error as NSError{
-                print(error)
-                print("保存图片"+imageName+"到findPets目录失败！")
+                log.info(error)
+                log.info("保存图片"+imageName+"到findPets目录失败！")
                 isSaved = false
             }
         }
@@ -157,10 +157,10 @@ class SaveCacheDataModel: NSObject {
                 do{
                     try
                         manager.removeItem(atPath: imagePath)
-                    print("从findpets删除高清图成功")
+                    log.info("从findpets删除高清图成功")
                 }catch let error as NSError{
-                    print("从findpets删除高清图失败！")
-                    print(error)
+                    log.info("从findpets删除高清图失败！")
+                    log.info(error)
                 }
                 
             }
@@ -170,10 +170,10 @@ class SaveCacheDataModel: NSObject {
                 do{
                     try
                         manager.removeItem(atPath: imagePath1)
-                    print("从findpets删除普通图成功！")
+                    log.info("从findpets删除普通图成功！")
                 }catch let error as NSError{
-                    print("从findpets删除普通图失败！")
-                    print(error)
+                    log.info("从findpets删除普通图失败！")
+                    log.info(error)
                 }
                 
             }

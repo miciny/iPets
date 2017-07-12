@@ -172,7 +172,7 @@ class ContectorInfoViewController: UIViewController, UITableViewDelegate, UITabl
             let iconData = ChangeValue.imageToData(icon)
             
             let _ = SQLLine.InsertChatListData(contectorInfo.name, lable: "", icon: iconData!, time: Date(), nickname: contectorInfo.nickname, unread: 0)
-            print(contectorInfo.name + "的聊天数据库保存成功")
+            log.info(contectorInfo.name + "的聊天数据库保存成功")
             
             //聊天的设置数据保存
             let chatsData = SaveDataModel()

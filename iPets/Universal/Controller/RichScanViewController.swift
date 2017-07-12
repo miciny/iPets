@@ -127,8 +127,8 @@ class RichScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDe
         }
         self.session.stopRunning()
         
-        print("扫描的结果是：")
-        print(stringValue ?? "扫描无结果")
+        log.info("扫描的结果是：")
+        log.info(stringValue ?? "扫描无结果")
         
         let webVc = InternetExplorerViewController()
         webVc.url = stringValue

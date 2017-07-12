@@ -33,8 +33,8 @@ class JsonCache: NSObject {
                 try
                     manager.createDirectory(atPath: findPetsDir, withIntermediateDirectories: true, attributes: nil)
             }catch let error as NSError{
-                print("创建失败！")
-                print(error)
+                log.info("创建失败！")
+                log.info(error)
             }
         }
         return findPetsDir as AnyObject
@@ -53,12 +53,12 @@ class JsonCache: NSObject {
                 try str.write(to: URL(fileURLWithPath: path), options: .atomic)
                 isSaved = true
             }catch let error as NSError{
-                print(error)
+                log.info(error)
                 isSaved = false
             }
             
         }catch let error as NSError{
-            print(error)
+            log.info(error)
             isSaved = false
         }
         
@@ -78,12 +78,12 @@ class JsonCache: NSObject {
                 try str.write(to: URL(fileURLWithPath: path), options: .atomic)
                 isSaved = true
             }catch let error as NSError{
-                print(error)
+                log.info(error)
                 isSaved = false
             }
             
         }catch let error as NSError{
-            print(error)
+            log.info(error)
             isSaved = false
         }
         
@@ -101,7 +101,8 @@ class JsonCache: NSObject {
                 let nsdata = try Data(contentsOf: URL(fileURLWithPath: jsonPath))
                 try json = JSON(data: nsdata)
             }catch let error as NSError{
-                print(error)
+                log.info("从cache读取json错误：" + jsonName + ".json文件")
+                log.info(error)
             }
         }else{
             json = nil

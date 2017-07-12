@@ -59,20 +59,21 @@ class WeatherViewController: UIViewController, UIScrollViewDelegate {
         super.viewDidLoad()
         self.modalTransitionStyle = .crossDissolve //进入页面时的动画效果
         
-        self.initNetManager()
-        
-        self.setMainViewEle()
-        self.setHourlyView()
-        
-        self.checkWeatherCache()
-        
-        self.setupHeaderView()
-        
         // Do any additional setup after loading the view.
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
+        log.info("进入天气页面")
+        
+        self.setMainViewEle()
+        self.setHourlyView()
+        self.initNetManager()
+        
+        self.checkWeatherCache()
+        
+        self.setupHeaderView()
         setBar()
     }
     
@@ -179,6 +180,7 @@ class WeatherViewController: UIViewController, UIScrollViewDelegate {
     
 //==================================主View======================================
     func setMainViewEle(){
+        log.info("设置天气主界面")
         
         vImg = UIImageView()   //初始化图片View
         vImg.frame = CGRect(x: 0, y: 0, width: Width, height: Height)   //指定图片的位置以及显示的大小
@@ -215,6 +217,8 @@ class WeatherViewController: UIViewController, UIScrollViewDelegate {
 
 //==================================小时 View======================================
     func setHourlyView(){
+        log.info("设置天气小时界面")
+        
         hourlyView = UIView(frame: CGRect(x: 0, y: 303.5, width: Width, height: CGFloat(127)))
         hourlyView.backgroundColor = UIColor.clear
         
@@ -543,6 +547,8 @@ class WeatherViewController: UIViewController, UIScrollViewDelegate {
 /*---------------------------天气请求---------------------------*/
     func updateWeatherInfo(){
         
+        log.info("请求天气数据")
+        
         let wait = WaitView()
         wait.showWait("请求中")
         
@@ -563,12 +569,15 @@ class WeatherViewController: UIViewController, UIScrollViewDelegate {
                 if let res = response.response{
                     let code = res.statusCode
                     if code == 200 {
+                        log.info("请求天气数据成功")
                         self.jsonResult = response.result.value! as AnyObject
                         
+                        log.info(self.jsonResult)
+                        
                         if JsonCache.savaJsonToCacheDirAddress(JSON(self.jsonResult), name: WeatherCache){
-                            print("天气数据保存成功！")
+                            log.info("天气数据保存成功！")
                         }else{
-                            print("天气数据保存失败！")
+                            log.info("天气数据保存失败！")
                             
                         }
                         
@@ -582,6 +591,7 @@ class WeatherViewController: UIViewController, UIScrollViewDelegate {
                         self.setBackImg()
                         
                     }else{
+                        log.info("请求天气数据失败，错误代码：" + String(code))
                         self.nowTmpTextLb.text = "错误代码" + String(code)
                     }
                 }else{
@@ -591,8 +601,9 @@ class WeatherViewController: UIViewController, UIScrollViewDelegate {
                 wait.hideView()
                 
             case .failure:
+                log.info("请求天气数据失败")
                 self.nowTmpTextLb.text = "请求失败"
-                print(response.result.error ?? "weather error nil")
+                log.info(response.result.error ?? "weather error nil")
                 
                 wait.hideView()
             }
@@ -614,8 +625,8 @@ class WeatherViewController: UIViewController, UIScrollViewDelegate {
         urlRequest.addValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
         
         netManager!.request(urlRequest).responseJSON { response in
+            
             switch response.result{
-                
             case .success:
                 
                 if let res = response.response{
@@ -624,9 +635,9 @@ class WeatherViewController: UIViewController, UIScrollViewDelegate {
                         
                         let json = JSON(response.result.value! as AnyObject)
                         if JsonCache.savaJsonToCacheDirAddress(json, name: AddressCache){
-                            print("地址数据保存成功！")
+                            log.info("地址数据保存成功！")
                         }else{
-                            print("地址数据保存失败！")
+                            log.info("地址数据保存失败！")
                             
                         }
                         let pickerView = AddressPickerView(data: json, target: self)
@@ -643,7 +654,7 @@ class WeatherViewController: UIViewController, UIScrollViewDelegate {
                 
             case .failure:
                 ToastView().showToast("请求失败")
-                print(response.result.error ?? "weather error nil")
+                log.info(response.result.error ?? "weather error nil")
                 
                 wait.hideView()
             }
@@ -666,6 +677,9 @@ class WeatherViewController: UIViewController, UIScrollViewDelegate {
     }
     
     func checkWeatherCache(){
+        
+        log.info("读取天气本地缓存")
+        
         if let json = JsonCache.loadjsonFromCacheDir(WeatherCache){
             let addressCode = json["result"]["citycode"].stringValue
             WeatherCityID = addressCode

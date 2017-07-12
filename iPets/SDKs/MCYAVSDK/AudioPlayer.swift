@@ -58,13 +58,13 @@ class AudioPlayer: NSObject, AVAudioPlayerDelegate{
                 try self.player = AVAudioPlayer(contentsOf: url)
                 
             }catch let error as NSError{
-                print("AVAudioPlayer error: \(error)")
+                log.info("AVAudioPlayer error: \(error)")
             }
             
             if self.player == nil {
                 ToastView().showToast("播放失败")
             }else{
-                print("开始播放")
+                log.info("开始播放")
                 self.player?.delegate = self
                 self.player?.play()
                 self.delegate?.beginPlay()
