@@ -53,7 +53,7 @@ class WeatherViewController: UIViewController, UIScrollViewDelegate {
     var measure = ""
     
     var netManager: SessionManager? //网络请求的manager
-    var jsonResult: AnyObject = "" as AnyObject
+    var jsonResult = JSON("")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -463,7 +463,7 @@ class WeatherViewController: UIViewController, UIScrollViewDelegate {
     
     //数据
     func setData(){
-        let json = JSON(self.jsonResult)
+        let json = self.jsonResult
         
         tempResult = json["result"]["temp"].stringValue //现在气温
         cityName = json["result"]["city"].stringValue //城市名称
@@ -570,11 +570,11 @@ class WeatherViewController: UIViewController, UIScrollViewDelegate {
                     let code = res.statusCode
                     if code == 200 {
                         log.info("请求天气数据成功")
-                        self.jsonResult = response.result.value! as AnyObject
+                        self.jsonResult = JSON(response.result.value!)
                         
                         log.info(self.jsonResult)
                         
-                        if JsonCache.savaJsonToCacheDirAddress(JSON(self.jsonResult), name: WeatherCache){
+                        if JsonCache.savaJsonToCacheDirAddress(self.jsonResult, name: WeatherCache){
                             log.info("天气数据保存成功！")
                         }else{
                             log.info("天气数据保存失败！")
@@ -601,9 +601,22 @@ class WeatherViewController: UIViewController, UIScrollViewDelegate {
                 wait.hideView()
                 
             case .failure:
-                log.info("请求天气数据失败")
-                self.nowTmpTextLb.text = "请求失败"
+                log.info("请求天气数据失败，显示本地缓存")
                 log.info(response.result.error ?? "weather error nil")
+                
+                if let json = JsonCache.loadjsonFromCacheDir(WeatherCache){
+                    self.jsonResult = json
+                    
+                    self.setData()
+                    self.setHourlyScrollViewData()
+                    self.setDailyView()
+                    self.setDailyScrollViewData()
+                    self.setLableData()
+                    
+                    self.checkIsDay()
+                    self.setBackImg()
+                    
+                }
                 
                 wait.hideView()
             }
