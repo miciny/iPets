@@ -21,6 +21,9 @@ class CoverFlowView: UIView {
     
     private var DISTNACE_TO_MAKE_MOVE_FOR_SWIPE: CGFloat = 60
     private let imageViewWidth = CGFloat(300)
+    
+    private let leftRadian = CGFloat(Double.pi/3)
+    private let rightRadian = CGFloat(-Double.pi/3)
 
     init(frame: CGRect, andImages: NSMutableArray, sideImageCount: Int, sideImageScale: CGFloat, middleImageScale: CGFloat) {
         super.init(frame: frame)
@@ -46,6 +49,7 @@ class CoverFlowView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    
     private func setUpGesture(){
         let gestureRecognizer = UIPanGestureRecognizer.init(target: self, action: #selector(self.handleGesture(_:)))
         self.addGestureRecognizer(gestureRecognizer)
@@ -56,21 +60,35 @@ class CoverFlowView: UIView {
     }
     
     @objc private func handleGesture(_ recognizer: UIPanGestureRecognizer){
+        
         if recognizer.state == UIGestureRecognizerState.changed{
             //get offset
             let offset = recognizer.translation(in: recognizer.view)
+            let isSwipingToLeftDirection = (offset.x > 0) ? false : true
             
             if abs(offset.x) > DISTNACE_TO_MAKE_MOVE_FOR_SWIPE {
-                let isSwipingToLeftDirection = (offset.x > 0) ? false : true
+                self.move(isSwipingToLeftDirection, xScale: 1)
                 self.moveOneStep(isSwipingToLeftDirection)
                 recognizer.setTranslation(CGPoint.zero, in: recognizer.view)
+            }else{
+                self.move(isSwipingToLeftDirection, xScale: abs(offset.x)/DISTNACE_TO_MAKE_MOVE_FOR_SWIPE)
             }
+        }else if recognizer.state == UIGestureRecognizerState.ended{
+            
+            let offset = recognizer.translation(in: recognizer.view)
+            let isSwipingToLeftDirection = (offset.x > 0) ? false : true
+            
+            self.move(isSwipingToLeftDirection, xScale: 1)
+            self.moveOneStep(isSwipingToLeftDirection)
         }
+        
     }
     
-    private func moveOneStep(_ isSwipingToLeftDirection: Bool){
+    //xScale 比例，完成一步需要1
+    private func move(_ isSwipingToLeftDirection: Bool, xScale: CGFloat){
+        
         //边界值
-        if ((self.currentRenderingImageIndex == 0 && !isSwipingToLeftDirection) || (self.currentRenderingImageIndex == self.images.count - 1 && isSwipingToLeftDirection)){
+        if ((self.currentRenderingImageIndex <= 0 && !isSwipingToLeftDirection) || (self.currentRenderingImageIndex >= self.images.count - 1 && isSwipingToLeftDirection)){
             return
         }
         
@@ -80,21 +98,55 @@ class CoverFlowView: UIView {
         for i in 0 ..< self.imageLayers.count {
             let originLayer = self.imageLayers.object(at: i) as! CALayer
             let targetTemplate = self.templateLayers.object(at: i + indexOffsetFromImageLayersToTemplates) as! CALayer
-
-            originLayer.position = targetTemplate.position
-            originLayer.zPosition = targetTemplate.zPosition
-            originLayer.transform = targetTemplate.transform
             
+            originLayer.position = CGPoint(x: xScale*(targetTemplate.position.x-originLayer.position.x)+originLayer.position.x,
+                                           y: xScale*(targetTemplate.position.y-originLayer.position.y)+originLayer.position.y)
+            originLayer.zPosition = targetTemplate.zPosition
+            
+            
+            var transR = leftRadian
             //set originlayer's bounds
-            var scale = CGFloat(1.0)
-            if (i + indexOffsetFromImageLayersToTemplates - 1 == self.sideVisibleImageCount) {
-                scale = self.middleImageScale / self.sideVisibleImageScale
-            } else if (((i + indexOffsetFromImageLayersToTemplates - 1 == self.sideVisibleImageCount - 1) && isSwipingToLeftDirection) || ((i + indexOffsetFromImageLayersToTemplates - 1 == self.sideVisibleImageCount + 1) && !isSwipingToLeftDirection)) {
-                scale = self.sideVisibleImageScale / self.middleImageScale
+            var scale = self.sideVisibleImageScale!
+            
+            let scaleOffset = abs(self.sideVisibleImageScale-self.middleImageScale)*xScale  //0 ---> 0.25(0.7-0.45)
+            
+            let indexX = i + indexOffsetFromImageLayersToTemplates - 1
+            
+            //目前两边向中间
+            if (indexX == self.sideVisibleImageCount) {
+                scale = self.sideVisibleImageScale+scaleOffset
+                
+                if isSwipingToLeftDirection{
+                    transR = rightRadian
+                }
+                originLayer.transform = CATransform3DMakeRotation(transR*(1-xScale), 0, 1, 0)
+                
+            //目前中间向右边
+            } else if ((indexX == self.sideVisibleImageCount - 1) && isSwipingToLeftDirection){
+                scale = self.middleImageScale-scaleOffset
+                originLayer.transform = CATransform3DMakeRotation(transR*(xScale), 0, 1, 0)
+                
+                print(originLayer.zPosition)
+            //目前中间向左边
+            } else if (indexX == self.sideVisibleImageCount + 1) && !isSwipingToLeftDirection{
+                
+                scale = self.middleImageScale-scaleOffset
+                transR = rightRadian
+                originLayer.transform = CATransform3DMakeRotation(transR*(xScale), 0, 1, 0)
             }
             
-            originLayer.bounds = CGRect(x: 0, y: 0, width: originLayer.bounds.size.width * scale, height: originLayer.bounds.size.height * scale)
-            self.adjustReflectionBounds(originLayer, scale: scale)
+            originLayer.bounds = CGRect(x: 0, y: 0,
+                                        width: imageViewWidth * scale,
+                                        height: imageViewWidth * scale)
+            
+            self.adjustReflectionBounds(originLayer, scale: 1)
+        }
+    }
+    
+    private func moveOneStep(_ isSwipingToLeftDirection: Bool){
+        //边界值
+        if ((self.currentRenderingImageIndex <= 0 && !isSwipingToLeftDirection) || (self.currentRenderingImageIndex >= self.images.count - 1 && isSwipingToLeftDirection)){
+            return
         }
         
         if (isSwipingToLeftDirection){
@@ -106,6 +158,7 @@ class CoverFlowView: UIView {
                 removeLayer.removeFromSuperlayer()
             }
             
+            //新增
             let num = self.images.count - self.sideVisibleImageCount - 1
             if (self.currentRenderingImageIndex < num){
                 let candidateImage = self.images.object(at: self.currentRenderingImageIndex  + self.sideVisibleImageCount + 1) as! UIImage
@@ -126,9 +179,8 @@ class CoverFlowView: UIView {
                 self.showImageAndReflection(candidateLayer)
             }
             
-        }else{//if the right, then move the rightest layer and insert one to left (if left is full)
+        }else{
             
-            //when to remove rightest, only when image in the rightest is indeed sitting in the template  imagelayer's rightes
             if (self.currentRenderingImageIndex + self.sideVisibleImageCount <= self.images.count - 1) {
                 let removeLayer = self.imageLayers.lastObject as! CALayer
                 self.imageLayers.remove(removeLayer)
@@ -156,10 +208,8 @@ class CoverFlowView: UIView {
                 //show the layer
                 self.showImageAndReflection(candidateLayer)
             }
-            
         }
         
-        //update index if you move to right, index--
         self.currentRenderingImageIndex = isSwipingToLeftDirection ? self.currentRenderingImageIndex + 1 : self.currentRenderingImageIndex - 1
     }
     
@@ -174,6 +224,7 @@ class CoverFlowView: UIView {
         // set originLayer's reflection bounds
         self.scaleBounds((reflectLayer?.sublayers?[0])!, x: scale, y: scale)
         // set originLayer's reflection position
+        
         reflectLayer?.position = CGPoint(x: layer.bounds.size.width/2, y: layer.bounds.size.height*1.5)
         // set originLayer's mask position
         reflectLayer?.mask?.position = CGPoint(x: (reflectLayer?.bounds.size.width)!/2, y: (reflectLayer?.bounds.size.height)!/2)
@@ -190,18 +241,16 @@ class CoverFlowView: UIView {
         let centerX = self.bounds.size.width/2
         let centerY = self.bounds.size.height/2
         
-        let leftRadian = CGFloat(Double.pi/3)
-        let rightRadian = CGFloat(-Double.pi/3)
-        
         let gapAmongSideImages: CGFloat = 30.0
         let gapBetweenMiddleAndSide: CGFloat = 100.0
+        let zPositionGap = CGFloat(30.0)
         
         //left
         for i in 0 ..< self.sideVisibleImageCount+1{
             let layer = CALayer()
             let x = centerX - gapBetweenMiddleAndSide - gapAmongSideImages * CGFloat(self.sideVisibleImageCount - i)
             layer.position = CGPoint(x: x, y: centerY)
-            layer.zPosition = CGFloat((i - self.sideVisibleImageCount - 1) * 10)
+            layer.zPosition = CGFloat(i - self.sideVisibleImageCount - 1) * zPositionGap
             layer.transform = CATransform3DMakeRotation(leftRadian, 0, 1, 0)
             
             self.templateLayers.add(layer)
@@ -218,7 +267,7 @@ class CoverFlowView: UIView {
             let layer = CALayer()
             let x = centerX + gapBetweenMiddleAndSide + gapAmongSideImages * CGFloat(i)
             layer.position = CGPoint(x: x, y: centerY)
-            layer.zPosition = CGFloat((i + 1) * -10)
+            layer.zPosition = CGFloat(i + 1) * -zPositionGap
             layer.transform = CATransform3DMakeRotation(rightRadian, 0, 1, 0)
             
             self.templateLayers.add(layer)
