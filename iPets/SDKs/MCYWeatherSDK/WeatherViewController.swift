@@ -16,9 +16,8 @@ let WeatherUrl = "http://jisutqybmf.market.alicloudapi.com/weather/query"
 
 class WeatherViewController: UIViewController, UIScrollViewDelegate {
     
-    
     var isDay: Bool = true{
-        willSet{
+        willSet{    //新值，设置时触发
             self.setBackImg()
         }
     }
