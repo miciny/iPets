@@ -256,7 +256,7 @@
 		E1DE0EBB1EEA94CC00CF580D /* NewsRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DE0EB71EEA94CC00CF580D /* NewsRootViewController.swift */; };
 		E1DE0EBC1EEA94CC00CF580D /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DE0EB81EEA94CC00CF580D /* NewsViewController.swift */; };
 		E1DE0EBD1EEA94CC00CF580D /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DE0EB91EEA94CC00CF580D /* WebViewController.swift */; };
-		E1E6968A1F16279B00A2EB26 /* CoverFlowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E696891F16279B00A2EB26 /* CoverFlowView.swift */; };
+		E1E696921F1DAD6E00A2EB26 /* MCYCoverFlowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E696911F1DAD6E00A2EB26 /* MCYCoverFlowView.swift */; };
 		E1F638AD1F0B88B600E297FB /* GetAnalyseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F638AC1F0B88B600E297FB /* GetAnalyseData.swift */; };
 		E1F638AF1F0BAC9500E297FB /* PostData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F638AE1F0BAC9500E297FB /* PostData.swift */; };
 		E1F638B51F0BAF7100E297FB /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F638B41F0BAF7100E297FB /* CalendarView.swift */; };
@@ -531,7 +531,7 @@
 		E1DE0EB71EEA94CC00CF580D /* NewsRootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsRootViewController.swift; sourceTree = "<group>"; };
 		E1DE0EB81EEA94CC00CF580D /* NewsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsViewController.swift; sourceTree = "<group>"; };
 		E1DE0EB91EEA94CC00CF580D /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
-		E1E696891F16279B00A2EB26 /* CoverFlowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoverFlowView.swift; sourceTree = "<group>"; };
+		E1E696911F1DAD6E00A2EB26 /* MCYCoverFlowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCYCoverFlowView.swift; sourceTree = "<group>"; };
 		E1F638AC1F0B88B600E297FB /* GetAnalyseData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetAnalyseData.swift; sourceTree = "<group>"; };
 		E1F638AE1F0BAC9500E297FB /* PostData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostData.swift; sourceTree = "<group>"; };
 		E1F638B41F0BAF7100E297FB /* CalendarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
@@ -1304,7 +1304,7 @@
 				E18C41A61EF8B99A00AFF37C /* MusicPlayView.swift */,
 				E18C41A71EF8B99A00AFF37C /* UIMaker.swift */,
 				E18C41A81EF8B99A00AFF37C /* UIViewExtension.swift */,
-				E1E696891F16279B00A2EB26 /* CoverFlowView.swift */,
+				E1E696911F1DAD6E00A2EB26 /* MCYCoverFlowView.swift */,
 			);
 			name = MCYMusicSDK;
 			path = ../../../../Users/miciny/ToGitHub/iPets/iPets/SDKs/MCYMusicSDK;
@@ -1830,9 +1830,9 @@
 				E14408371EEFE27900C8E23B /* TetrisSetting.swift in Sources */,
 				E144082E1EEFE24D00C8E23B /* TetrisGameViewController.swift in Sources */,
 				E17528601ED3E95300269EDF /* SearchRecordModel.swift in Sources */,
+				E1E696921F1DAD6E00A2EB26 /* MCYCoverFlowView.swift in Sources */,
 				E144082A1EEFE23700C8E23B /* ControllerView.swift in Sources */,
 				E16322D41EF29E990022F40D /* AddressDataModel.swift in Sources */,
-				E1E6968A1F16279B00A2EB26 /* CoverFlowView.swift in Sources */,
 				E1DE0EBA1EEA94CC00CF580D /* LocalH5NewsViewController.swift in Sources */,
 				E18C41AC1EF8B99A00AFF37C /* UIViewExtension.swift in Sources */,
 				E17528A11ED406C600269EDF /* ContectorListViewController.swift in Sources */,

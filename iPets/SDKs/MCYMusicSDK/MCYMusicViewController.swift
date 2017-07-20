@@ -16,7 +16,7 @@ import AVFoundation
 class MCYMusicViewController: UIViewController {
 
     var musicView: MusicPlayView!
-    var coverFlowView: CoverFlowView!
+    var coverFlowView: MCYCoverFlowView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,14 +39,15 @@ class MCYMusicViewController: UIViewController {
         musicView = MusicPlayView(frame: self.view.frame)
         self.view.addSubview(musicView)
         
-        let coverFlowViewFrame = CGRect(x: 0, y: 20, width: Width, height: Width)
+        let coverFlowViewFrame = CGRect(x: 0, y: 64, width: Width, height: Width)
         let addImages = NSMutableArray()
         for i in 0 ..< 15{
             if let image = UIImage(named: "icon_\(i)"){
                 addImages.add(image)
             }
         }
-        coverFlowView = CoverFlowView(frame: coverFlowViewFrame, andImages: addImages, sideImageCount: 3, sideImageScale: 0.45, middleImageScale: 0.7)
+        
+        coverFlowView = MCYCoverFlowView(frame: coverFlowViewFrame, andImages: addImages, sideImageCount: 3, sideImageScale: 0.75, middleImageScale: 1.0)
         self.view.addSubview(coverFlowView)
     }
     
