@@ -52,6 +52,9 @@ class NewsViewController: UIViewController, UITableViewDelegate, UITableViewData
     //网络获取数据后，显示
     func setData(_ json: JSON){
         let json = json
+        
+        log.info(json)
+        
         showData = NSMutableArray()
         let urlJson = json["feed"] //普通新闻的
         let headerJson = json["focus"] //头图的

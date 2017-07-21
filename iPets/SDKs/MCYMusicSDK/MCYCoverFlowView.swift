@@ -19,7 +19,7 @@ class MCYCoverFlowView: UIScrollView, UIScrollViewDelegate{
     private let leftRadian = CGFloat(Double.pi/2.5)
     private let rightRadian = CGFloat(-Double.pi/2.5)
     private var gapAmongSideImages: CGFloat = 30.0
-    private let gapBetweenMiddleAndSide: CGFloat = 100.0
+    private var gapBetweenMiddleAndSide: CGFloat = 100.0
     private let zPositionGap = CGFloat(10.0)
     
     private var views: NSMutableArray!
@@ -37,6 +37,7 @@ class MCYCoverFlowView: UIScrollView, UIScrollViewDelegate{
         self.currentRenderingImageIndex = 0
         self.images = NSMutableArray(array: andImages)
         
+        self.gapBetweenMiddleAndSide = (imageViewWidth/2) + (imageViewWidth*cos(leftRadian)/2)
         self.gapAmongSideImages = (self.width/2-self.gapBetweenMiddleAndSide)/CGFloat(self.sideVisibleImageCount+1)
         
         self.setUpSelf()

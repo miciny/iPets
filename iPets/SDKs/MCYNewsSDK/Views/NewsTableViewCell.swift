@@ -212,9 +212,12 @@ class NewsTableViewCell: UITableViewCell {
         //普通简介
         if newsItem.feedShowStyle == feedShowStyleType.common{
             if let intro = newsItem.intro{
-                let introLBSize = sizeWithText(intro, font: newsIntroFont, maxSize: CGSize(width: Width-introOrigin.x-20, height: Height))
+                let introLBSize = sizeWithText("测试", font: newsIntroFont, maxSize: CGSize(width: Width-titleOrigin.x-20, height: Height))
+                let introLBSize1 = sizeWithText(intro, font: newsIntroFont, maxSize: CGSize(width: Width-titleOrigin.x-20, height: introLBSize.height*2))
+                
                 let introLB = UILabel()
-                introLB.frame = CGRect(x: introOrigin.x, y: introOrigin.y, width: Width-introOrigin.x-20, height: introLBSize.height)
+                introLB.frame.origin = CGPoint(x: introOrigin.x, y: introOrigin.y)
+                introLB.frame.size = CGSize(width: introLBSize1.width, height: introLBSize1.height)
                 introLB.font = newsIntroFont
                 introLB.textColor = UIColor.lightGray
                 introLB.numberOfLines = 0
@@ -230,6 +233,7 @@ class NewsTableViewCell: UITableViewCell {
                 self.addSubview(picView)
             }
         }
+        
         
         if newsItem.category == newsType.video {
             //标签
