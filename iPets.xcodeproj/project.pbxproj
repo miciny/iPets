@@ -261,6 +261,7 @@
 		E1F638AF1F0BAC9500E297FB /* PostData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F638AE1F0BAC9500E297FB /* PostData.swift */; };
 		E1F638B51F0BAF7100E297FB /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F638B41F0BAF7100E297FB /* CalendarView.swift */; };
 		E1F638B71F0C973400E297FB /* DatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F638B61F0C973400E297FB /* DatePickerView.swift */; };
+		E1FA8C2F1F21D6030015BBC1 /* CoverFlowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1FA8C2E1F21D6030015BBC1 /* CoverFlowView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -536,6 +537,7 @@
 		E1F638AE1F0BAC9500E297FB /* PostData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostData.swift; sourceTree = "<group>"; };
 		E1F638B41F0BAF7100E297FB /* CalendarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		E1F638B61F0C973400E297FB /* DatePickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerView.swift; sourceTree = "<group>"; };
+		E1FA8C2E1F21D6030015BBC1 /* CoverFlowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoverFlowView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1304,6 +1306,7 @@
 				E18C41A61EF8B99A00AFF37C /* MusicPlayView.swift */,
 				E18C41A71EF8B99A00AFF37C /* UIMaker.swift */,
 				E18C41A81EF8B99A00AFF37C /* UIViewExtension.swift */,
+				E1FA8C2E1F21D6030015BBC1 /* CoverFlowView.swift */,
 				E1E696911F1DAD6E00A2EB26 /* MCYCoverFlowView.swift */,
 			);
 			name = MCYMusicSDK;
@@ -1755,6 +1758,7 @@
 				E10B34EB1EEAA65800D65C9F /* ActionMenuView.swift in Sources */,
 				E1767A3E1F0498E400225D9E /* ShopCarViewController.swift in Sources */,
 				E1DE0E821EEA926900CF580D /* PicsBrowserView.swift in Sources */,
+				E1FA8C2F1F21D6030015BBC1 /* CoverFlowView.swift in Sources */,
 				E17528771ED4049900269EDF /* PersonInfoTableViewCell.swift in Sources */,
 				E1DE0E6D1EEA919F00CF580D /* CanCopyLabel.swift in Sources */,
 				E1767A691F0B741A00225D9E /* MCYPieChartView.swift in Sources */,
