@@ -18,16 +18,17 @@ class CoverFlowView: UIView {
     private var imageLayers: NSMutableArray!
     private var templateLayers: NSMutableArray!
     private var currentRenderingImageIndex: Int!
+    private var currentImagesIndex: Int!
     
     private var DISTNACE_TO_MAKE_MOVE_FOR_SWIPE: CGFloat = 60
-    private let imageViewWidth = CGFloat(200)
+    private var imageViewWidth = CGFloat(180)
     
     private let leftRadian = CGFloat(Double.pi/3)
     private let rightRadian = CGFloat(-Double.pi/3)
     
     private let gapAmongSideImages: CGFloat = 30.0
     private let gapBetweenMiddleAndSide: CGFloat = 100.0
-    private let zPositionGap = CGFloat(10.0)
+    private let zPositionGap = CGFloat(1)
     
     init(frame: CGRect, andImages: NSMutableArray, sideImageCount: Int, sideImageScale: CGFloat, middleImageScale: CGFloat) {
         super.init(frame: frame)
@@ -39,7 +40,9 @@ class CoverFlowView: UIView {
         self.sideVisibleImageScale = sideImageScale
         self.middleImageScale = middleImageScale
         
+        self.imageViewWidth = Width/2
         self.currentRenderingImageIndex = 0
+        self.currentImagesIndex = 0
         self.images = NSMutableArray(array: andImages)
         self.imageLayers = NSMutableArray(capacity: self.sideVisibleImageCount * 2 + 1)
         self.templateLayers = NSMutableArray(capacity: (self.sideVisibleImageCount+1) * 2 + 1)
@@ -72,37 +75,47 @@ class CoverFlowView: UIView {
             let isSwipingToLeftDirection = (offset.x > 0) ? false : true
             
             if abs(offset.x) >= DISTNACE_TO_MAKE_MOVE_FOR_SWIPE {
-                self.move(isSwipingToLeftDirection, xScale: 1)
+                self.move(isSwipingToLeftDirection, xScale: 1, isSwiped: true)
                 self.moveOneStep(isSwipingToLeftDirection)
                 recognizer.setTranslation(CGPoint.zero, in: recognizer.view)
             }else{
-                self.move(isSwipingToLeftDirection, xScale: (offset.x)/DISTNACE_TO_MAKE_MOVE_FOR_SWIPE)
+                self.move(isSwipingToLeftDirection, xScale: (offset.x)/DISTNACE_TO_MAKE_MOVE_FOR_SWIPE, isSwiped: true)
             }
         }else if recognizer.state == UIGestureRecognizerState.ended{
             
             let offset = recognizer.translation(in: recognizer.view)
             let isSwipingToLeftDirection = (offset.x > 0) ? false : true
             
-            self.move(isSwipingToLeftDirection, xScale: 1)
-            self.moveOneStep(isSwipingToLeftDirection)
+            if abs(offset.x) > DISTNACE_TO_MAKE_MOVE_FOR_SWIPE/2{
+                self.move(isSwipingToLeftDirection, xScale: 1, isSwiped: true)
+                self.moveOneStep(isSwipingToLeftDirection)
+            }else{
+                self.move(!isSwipingToLeftDirection, xScale: 1, isSwiped: false)
+            }
         }
         
     }
     
     //xScale 比例，完成一步需要1
-    private func move(_ isSwipingToLeftDirection: Bool, xScale: CGFloat){
+    private func move(_ isSwipingToLeftDirection: Bool, xScale: CGFloat, isSwiped: Bool){
         
         //边界值
-        if ((self.currentRenderingImageIndex <= 0 && !isSwipingToLeftDirection) || (self.currentRenderingImageIndex >= self.images.count - 1 && isSwipingToLeftDirection)){
+        if isSwiped && ((self.currentRenderingImageIndex <= 0 && !isSwipingToLeftDirection) || (self.currentRenderingImageIndex >= self.images.count - 1 && isSwipingToLeftDirection)){
             return
         }
         
-        let offset = isSwipingToLeftDirection ?  -1 : 1
+        var offset = isSwipingToLeftDirection ?  -1 : 1
+        if !isSwiped{
+            offset = 0
+        }
+        
         let indexOffsetFromImageLayersToTemplates = (self.currentRenderingImageIndex - self.sideVisibleImageCount < 0) ? (self.sideVisibleImageCount + 1 + offset - self.currentRenderingImageIndex) : 1 + offset
         
         for i in 0 ..< self.imageLayers.count {
             let originLayer = self.imageLayers.object(at: i) as! UIView
             let targetTemplate = self.templateLayers.object(at: i + indexOffsetFromImageLayersToTemplates) as! CALayer
+            
+            originLayer.layer.zPosition = targetTemplate.zPosition
             
             var scale = self.sideVisibleImageScale!
             let scaleOffset = abs(self.sideVisibleImageScale-self.middleImageScale)*abs(xScale)  //0 ---> 0.25(0.7-0.45)
@@ -121,6 +134,8 @@ class CoverFlowView: UIView {
                 let r = CATransform3DMakeRotation(transR, 0, 1, 0)
                 originLayer.layer.transform = CATransform3DScale(r, scale, scale, 1)
                 dltX = self.gapBetweenMiddleAndSide
+                
+                self.currentImagesIndex = i
                 //目前中间向右边
             } else if ((indexX == self.sideVisibleImageCount - 1) && isSwipingToLeftDirection){
                 scale = self.middleImageScale-scaleOffset
@@ -140,7 +155,6 @@ class CoverFlowView: UIView {
             }
             
             originLayer.center.x = targetTemplate.position.x+xScale*(dltX) + (xScale>0 ? -dltX : dltX)
-            originLayer.layer.zPosition = targetTemplate.zPosition
         }
     }
     
@@ -159,21 +173,17 @@ class CoverFlowView: UIView {
                 let removeLayer = self.imageLayers.object(at: 0) as! UIView
                 self.imageLayers.remove(removeLayer)
                 removeLayer.removeFromSuperview()
+                self.currentImagesIndex = self.currentImagesIndex - 1
             }
             
             //新增
             let num = self.images.count - self.sideVisibleImageCount - 1
             if (self.currentRenderingImageIndex < num){
                 let candidateImage = self.images.object(at: self.currentRenderingImageIndex  + self.sideVisibleImageCount + 1) as! UIImage
-                
-                let candidateLayer = self.getSingleImage(image: candidateImage, tag: 0, scale: self.sideVisibleImageScale)
+                let candidateLayer = self.getSingleImage(image: candidateImage, scale: self.sideVisibleImageScale)
                 self.imageLayers.add(candidateLayer)
                 
-                let template = self.templateLayers.object(at: self.templateLayers.count - 2) as! CALayer
-                candidateLayer.center = template.position
-                candidateLayer.layer.zPosition = template.zPosition
-                candidateLayer.layer.transform = template.transform
-                self.addSubview(candidateLayer)
+                self.setSingleImage(templateLayerIndex: self.templateLayers.count - 2, imageLayerIndex: nil, imageLayer: candidateLayer)
             }
             
         }else{
@@ -186,25 +196,26 @@ class CoverFlowView: UIView {
             
             //check out whether we need to add layer to left, only when (currentIndex - sideCount > 0)
             if (self.currentRenderingImageIndex > self.sideVisibleImageCount){
-                let candidateImage = self.images.object(at: self.currentRenderingImageIndex - 1 - self.sideVisibleImageCount) as! UIImage
                 
-                let candidateLayer =  self.getSingleImage(image: candidateImage, tag: 0, scale: self.sideVisibleImageScale)
+                let candidateImage = self.images.object(at: self.currentRenderingImageIndex - 1 - self.sideVisibleImageCount) as! UIImage
+                let candidateLayer =  self.getSingleImage(image: candidateImage, scale: self.sideVisibleImageScale)
                 self.imageLayers.insert(candidateLayer, at: 0)
                 
-                let template = self.templateLayers.object(at: 1) as! CALayer
-                candidateLayer.center = template.position
-                candidateLayer.layer.zPosition = template.zPosition
-                candidateLayer.layer.transform = template.transform
-                self.addSubview(candidateLayer)
+                self.setSingleImage(templateLayerIndex: 1, imageLayerIndex: nil, imageLayer: candidateLayer)
+                
+                
+                self.currentImagesIndex = self.currentImagesIndex + 1
             }
         }
         
         self.currentRenderingImageIndex = isSwipingToLeftDirection ? self.currentRenderingImageIndex + 1 : self.currentRenderingImageIndex - 1
+        log.info("显示第\(Int(self.currentRenderingImageIndex))张")
+        log.info("数组中的第\(Int(self.currentImagesIndex))张")
     }
     
     
     
-    //=============================================设置图片数组 预位置=============================
+//=============================================设置图片数组 预位置=============================
     private func setupTemplateLayers(){
         
         let centerX = self.bounds.size.width/2
@@ -215,9 +226,10 @@ class CoverFlowView: UIView {
             let layer = CALayer()
             let x = centerX - gapBetweenMiddleAndSide - gapAmongSideImages * CGFloat(self.sideVisibleImageCount - i)
             layer.position = CGPoint(x: x, y: centerY)
-            layer.zPosition = CGFloat(i - self.sideVisibleImageCount - 1) * zPositionGap
+//            layer.zPosition = CGFloat(i - self.sideVisibleImageCount - 1) * zPositionGap
             let r = CATransform3DMakeRotation(leftRadian, 0, 1, 0)
-            layer.transform = CATransform3DScale(r, self.sideVisibleImageScale, self.sideVisibleImageScale, 1)
+            let rr = CATransform3DTranslate(r, 0, 0, CGFloat(i - self.sideVisibleImageCount - 1) * zPositionGap)
+            layer.transform = CATransform3DScale(rr, self.sideVisibleImageScale, self.sideVisibleImageScale, 1)
             
             self.templateLayers.add(layer)
         }
@@ -226,7 +238,8 @@ class CoverFlowView: UIView {
         let layer = CALayer()
         layer.position = CGPoint(x: centerX, y: centerY)
         let r = CATransform3DMakeRotation(0, 0, 1, 0)
-        layer.transform = CATransform3DScale(r, self.middleImageScale, self.middleImageScale, 1)
+        let rr = CATransform3DTranslate(r, 0, 0, 0)
+        layer.transform = CATransform3DScale(rr, self.middleImageScale, self.middleImageScale, 1)
         self.templateLayers.add(layer)
         
         
@@ -235,9 +248,10 @@ class CoverFlowView: UIView {
             let layer = CALayer()
             let x = centerX + gapBetweenMiddleAndSide + gapAmongSideImages * CGFloat(i)
             layer.position = CGPoint(x: x, y: centerY)
-            layer.zPosition = CGFloat(i + 1) * -zPositionGap
+//            layer.zPosition = CGFloat(i + 1) * -zPositionGap
             let r = CATransform3DMakeRotation(rightRadian, 0, 1, 0)
-            layer.transform = CATransform3DScale(r, self.sideVisibleImageScale, self.sideVisibleImageScale, 1)
+            let rr = CATransform3DTranslate(r, 0, 0, CGFloat(i + 1) * -zPositionGap)
+            layer.transform = CATransform3DScale(rr, self.sideVisibleImageScale, self.sideVisibleImageScale, 1)
             self.templateLayers.add(layer)
         }
     }
@@ -248,55 +262,69 @@ class CoverFlowView: UIView {
         let startingImageIndex = (self.currentRenderingImageIndex - self.sideVisibleImageCount <= 0) ? 0 : self.currentRenderingImageIndex - self.sideVisibleImageCount
         let endImageIndex = (self.currentRenderingImageIndex + self.sideVisibleImageCount < self.images.count )  ? (self.currentRenderingImageIndex + self.sideVisibleImageCount) : (self.images.count - 1)
         
-        //step2: set up images that ready for rendering
         for i in startingImageIndex ..< endImageIndex+1{
             let image = self.images[i] as! UIImage
             let scale = i==currentRenderingImageIndex ? self.middleImageScale : self.sideVisibleImageScale
-            let imageLayer = self.getSingleImage(image: image, tag: i, scale: scale!)
+            let imageLayer = self.getSingleImage(image: image, scale: scale!)
             self.imageLayers.add(imageLayer)
         }
         
-        //step3 : according to templates, set its geometry info to corresponding image layer
-        //1 means the extra layer in templates layer
         let indexOffsetFromImageLayersToTemplates = (self.currentRenderingImageIndex - self.sideVisibleImageCount < 0) ? (self.sideVisibleImageCount + 1 - self.currentRenderingImageIndex) : 1
-        
         for i in 0 ..< self.imageLayers.count{
-            let correspondingTemplateLayer = self.templateLayers.object(at: i + indexOffsetFromImageLayersToTemplates) as! CALayer
-            let imageLayer = self.imageLayers.object(at: i) as! UIView
-            
-            imageLayer.center = correspondingTemplateLayer.position
-            imageLayer.layer.zPosition = correspondingTemplateLayer.zPosition
-            imageLayer.layer.transform = correspondingTemplateLayer.transform
-            
-            self.addSubview(imageLayer)
+            self.setSingleImage(templateLayerIndex: i + indexOffsetFromImageLayersToTemplates, imageLayerIndex: i, imageLayer: nil)
         }
     }
-    
-    
     
     
     @objc private func tapedImage(_ sender: UITapGestureRecognizer){
-        let tag = sender.view?.tag
-        guard tag != self.currentRenderingImageIndex else {
+        let view = sender.view!.superview!
+        let index = self.imageLayers.index(of: view)
+        guard index != self.currentImagesIndex else {
             return
         }
+        
+        let dltIndex = index - self.currentImagesIndex
+        let d = dltIndex>0 ? true : false
+        for _ in 0 ..< abs(dltIndex){
+            self.move(d, xScale: 1, isSwiped: true)
+            self.moveOneStep(d)
+        }
     }
-
-    
     
     
     
 //=============================================UI=============================
-    private func getSingleImage(image: UIImage, tag: Int, scale: CGFloat) -> UIView{
+    
+    private func setSingleImage(templateLayerIndex: Int, imageLayerIndex: Int?, imageLayer: UIView?){
+        
+        let correspondingTemplateLayer = self.templateLayers.object(at: templateLayerIndex) as! CALayer
+        
+        var imageView = UIView()
+        
+        if let index = imageLayerIndex{
+            imageView = self.imageLayers.object(at: index) as! UIView
+        }
+        
+        if let layer = imageLayer{
+            imageView = layer
+        }
+        
+        imageView.center = correspondingTemplateLayer.position
+//        imageView.layer.zPosition = correspondingTemplateLayer.zPosition
+        imageView.layer.transform = correspondingTemplateLayer.transform
+        
+        self.addSubview(imageView)
+    }
+    
+    
+    private func getSingleImage(image: UIImage, scale: CGFloat) -> UIView{
         let view = UIView()
         view.frame = CGRect(x: 0, y: 0, width: imageViewWidth, height: imageViewWidth*2)
-        view.tag = tag
         
         let imageView = UIImageView()
         imageView.frame.size = CGSize(width: view.width, height: view.width)
         imageView.center = CGPoint(x: view.width/2, y: view.height/4)
         imageView.image = image
-        imageView.tag = tag
         view.addSubview(imageView)
         
         imageView.isUserInteractionEnabled = true
