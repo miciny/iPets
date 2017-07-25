@@ -47,7 +47,7 @@ class MCYMusicViewController: UIViewController {
             }
         }
         
-        coverFlowView = CoverFlowView(frame: coverFlowViewFrame, andImages: addImages, sideImageCount: 3, sideImageScale: 0.75, middleImageScale: 1.0)
+        coverFlowView = CoverFlowView(frame: coverFlowViewFrame, andImages: addImages, sideImageCount: 3, sideImageScale: 0.68, middleImageScale: 0.9)
         self.view.addSubview(coverFlowView)
     }
     
