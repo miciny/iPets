@@ -35,6 +35,8 @@
 	<string>Please Allow It</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Please Allow It</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Please Allow It</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Please Allow It</string>
 	<key>UILaunchStoryboardName</key>

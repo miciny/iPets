@@ -20,7 +20,7 @@ class CoverFlowView: UIView {
     private var currentRenderingImageIndex: Int!
     private var currentImagesIndex: Int!
     
-    private var DISTNACE_TO_MAKE_MOVE_FOR_SWIPE: CGFloat = 60
+    private var DISTNACE_TO_MAKE_MOVE_FOR_SWIPE: CGFloat = 30
     private var imageViewWidth = CGFloat(180)
     
     private let leftRadian = CGFloat(Double.pi/2.5)
