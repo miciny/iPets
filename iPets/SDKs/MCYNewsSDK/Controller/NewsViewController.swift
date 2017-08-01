@@ -53,7 +53,7 @@ class NewsViewController: UIViewController, UITableViewDelegate, UITableViewData
     func setData(_ json: JSON){
         let json = json
         
-        log.info(json)
+        logger.info(json)
         
         showData = NSMutableArray()
         let urlJson = json["feed"] //普通新闻的
@@ -351,13 +351,13 @@ extension NewsViewController{
                         self.endFreshOrLoadMore(refresh)
                         
                         ToastView().showToast("请求错误！")
-                        log.info(response.response ?? "")
+                        logger.info(response.response ?? "")
                     }
                     
                 case .failure:
                     self.endFreshOrLoadMore(refresh)
                     ToastView().showToast("无法连接！")
-                    log.info(response.response ?? "")
+                    logger.info(response.response ?? "")
                 }
         }
     }

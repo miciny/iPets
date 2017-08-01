@@ -127,7 +127,7 @@ class PauseView: UIView {
         
         //字体名称都有哪些 我们可以通过如下方法得到
 //        let arr = UIFont.familyNames
-//        log.info(arr)
+//        logger.info(arr)
         return lb
     }
     

@@ -295,7 +295,7 @@ extension LocalH5NewsViewController{
         
 //        let template = try! Template(string: html)
 //        let rendering = try! template.render()
-//        log.info(html)
+//        logger.info(html)
         self.webView.loadHTMLString(html, baseURL: nil)
     }
     
@@ -416,12 +416,12 @@ extension LocalH5NewsViewController{
                         
                     }else{
                         ToastView().showToast("请求错误！")
-                        log.info(response.response ?? "")
+                        logger.info(response.response ?? "")
                     }
                     
                 case .failure:
                     ToastView().showToast("无法连接！")
-                    log.info(response.response ?? "")
+                    logger.info(response.response ?? "")
                 }
         }
     }

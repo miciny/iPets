@@ -214,8 +214,8 @@ class CoverFlowView: UIView {
         }
         
         self.currentRenderingImageIndex = isSwipingToLeftDirection ? self.currentRenderingImageIndex + 1 : self.currentRenderingImageIndex - 1
-        log.info("显示第\(Int(self.currentRenderingImageIndex))张")
-        log.info("数组中的第\(Int(self.currentImagesIndex))张")
+        logger.info("显示第\(Int(self.currentRenderingImageIndex))张")
+        logger.info("数组中的第\(Int(self.currentImagesIndex))张")
     }
     
     
@@ -287,7 +287,7 @@ class CoverFlowView: UIView {
             
             if (subView.presentation()?.hitTest(touchPoint)) != nil {
                 let index = self.imageLayers.index(of: subView)
-                log.info("点击第\(Int(self.currentRenderingImageIndex + index - self.currentImagesIndex))张")
+                logger.info("点击第\(Int(self.currentRenderingImageIndex + index - self.currentImagesIndex))张")
                 
                 guard index != self.currentImagesIndex else {
                     return

@@ -53,7 +53,7 @@ class AudioRecorder: NSObject {
         do{
             recorder = try AVAudioRecorder(url: url, settings: self.recorderSeetingsDic!)
         }catch let e as NSError{
-            log.info(e)
+            logger.info(e)
         }
         
         if recorder != nil {

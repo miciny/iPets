@@ -265,9 +265,9 @@ class MainChatListViewController: UIViewController, UITableViewDelegate, UITable
         
         //删除数据库
         if SQLLine.DeleteData(entityNameOfChatList, condition: "nickname='"+item.nickname+"'"){
-            log.info("删除"+item.nickname+"聊天数据库成功！")
+            logger.info("删除"+item.nickname+"聊天数据库成功！")
         }else{
-            log.info("删除"+item.nickname+"聊天数据库失败！")
+            logger.info("删除"+item.nickname+"聊天数据库失败！")
         }
         
         //聊天的设置数据

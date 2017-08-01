@@ -379,7 +379,7 @@ class MCYVideoRecordingViewController: UIViewController, AVCaptureFileOutputReco
             do {
                 try camera?.lockForConfiguration()
             } catch let error as NSError {
-                log.info("开启闪光灯失败 ： \(error)")
+                logger.info("开启闪光灯失败 ： \(error)")
             }
             
             camera?.torchMode = AVCaptureTorchMode.on
@@ -391,7 +391,7 @@ class MCYVideoRecordingViewController: UIViewController, AVCaptureFileOutputReco
             do {
                 try camera?.lockForConfiguration()
             } catch let error as NSError {
-                log.info("关闭闪光灯失败： \(error)")
+                logger.info("关闭闪光灯失败： \(error)")
             }
             
             camera?.torchMode = AVCaptureTorchMode.off

@@ -60,7 +60,7 @@ class ShowSinglePicView: UIView, UIScrollViewDelegate{
         
         //加载图片
         NetFuncs.loadPic(imageView: imageView, picUrl: imageURL) { (image) in
-            log.info(image ?? "no image found")
+            logger.info(image ?? "no image found")
             self.addEvent(image)
             UIView.animate(withDuration: 0.5, animations: {
                 self.imageView.frame = toFrame

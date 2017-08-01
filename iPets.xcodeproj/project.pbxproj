@@ -192,7 +192,6 @@
 		E18C41AC1EF8B99A00AFF37C /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18C41A81EF8B99A00AFF37C /* UIViewExtension.swift */; };
 		E18C41AE1EF8BA0E00AFF37C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E18C41AD1EF8BA0D00AFF37C /* Images.xcassets */; };
 		E18C41B01EF8BAB900AFF37C /* AudioRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18C41AF1EF8BAB900AFF37C /* AudioRecorder.swift */; };
-		E18C41B51EFA860700AFF37C /* BageValueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18C41B41EFA860700AFF37C /* BageValueView.swift */; };
 		E18C41BF1EFB990E00AFF37C /* Contectors+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18C41B71EFB990E00AFF37C /* Contectors+CoreDataClass.swift */; };
 		E18C41C01EFB990E00AFF37C /* Contectors+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18C41B81EFB990E00AFF37C /* Contectors+CoreDataProperties.swift */; };
 		E18C41C11EFB990E00AFF37C /* ChatList+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18C41B91EFB990E00AFF37C /* ChatList+CoreDataClass.swift */; };
@@ -257,6 +256,21 @@
 		E1DE0EBC1EEA94CC00CF580D /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DE0EB81EEA94CC00CF580D /* NewsViewController.swift */; };
 		E1DE0EBD1EEA94CC00CF580D /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DE0EB91EEA94CC00CF580D /* WebViewController.swift */; };
 		E1E696921F1DAD6E00A2EB26 /* MCYCoverFlowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E696911F1DAD6E00A2EB26 /* MCYCoverFlowView.swift */; };
+		E1F23EBC1F3078120019CFED /* BageValueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F23EBB1F3078120019CFED /* BageValueView.swift */; };
+		E1F23EC11F3078D20019CFED /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F23EBE1F3078D20019CFED /* Colors.swift */; };
+		E1F23EC21F3078D20019CFED /* Float+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F23EBF1F3078D20019CFED /* Float+String.swift */; };
+		E1F23EC31F3078D20019CFED /* UIView+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F23EC01F3078D20019CFED /* UIView+Constraints.swift */; };
+		E1F23ECD1F3079750019CFED /* Activation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F23EC61F3079750019CFED /* Activation.swift */; };
+		E1F23ECE1F3079750019CFED /* HandWrittingCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F23EC71F3079750019CFED /* HandWrittingCache.swift */; };
+		E1F23ECF1F3079750019CFED /* Dataset.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F23EC81F3079750019CFED /* Dataset.swift */; };
+		E1F23ED01F3079750019CFED /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F23EC91F3079750019CFED /* Error.swift */; };
+		E1F23ED11F3079750019CFED /* NeuralNet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F23ECA1F3079750019CFED /* NeuralNet.swift */; };
+		E1F23ED21F3079750019CFED /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F23ECB1F3079750019CFED /* Storage.swift */; };
+		E1F23ED31F3079750019CFED /* Structure.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F23ECC1F3079750019CFED /* Structure.swift */; };
+		E1F23ED71F30798E0019CFED /* HandWrittingMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F23ED41F30798E0019CFED /* HandWrittingMainView.swift */; };
+		E1F23ED81F30798E0019CFED /* HandWrittingMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F23ED51F30798E0019CFED /* HandWrittingMainViewController.swift */; };
+		E1F23ED91F30798E0019CFED /* ShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F23ED61F30798E0019CFED /* ShadowView.swift */; };
+		E1F23EDB1F307C020019CFED /* neuralnet-mnist-trained in Resources */ = {isa = PBXBuildFile; fileRef = E1F23EDA1F307C020019CFED /* neuralnet-mnist-trained */; };
 		E1F638AD1F0B88B600E297FB /* GetAnalyseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F638AC1F0B88B600E297FB /* GetAnalyseData.swift */; };
 		E1F638AF1F0BAC9500E297FB /* PostData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F638AE1F0BAC9500E297FB /* PostData.swift */; };
 		E1F638B51F0BAF7100E297FB /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F638B41F0BAF7100E297FB /* CalendarView.swift */; };
@@ -296,7 +310,7 @@
 		E10E44631CC62B3500D9992A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		E10E44641CC62B3500D9992A /* Me.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Me.xcassets; sourceTree = "<group>"; };
 		E10E446C1CC62BA700D9992A /* Navigation.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Navigation.xcassets; sourceTree = "<group>"; };
-		E126FD0A1CFD6E7700DAFF84 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		E126FD0A1CFD6E7700DAFF84 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AppDelegate.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		E126FD0F1CFD6E7700DAFF84 /* TabbarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabbarViewController.swift; sourceTree = "<group>"; };
 		E12A38B41EEA78BE00755C6C /* FindViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindViewController.swift; sourceTree = "<group>"; };
 		E12A38B61EEA794000755C6C /* FindTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindTableViewCell.swift; sourceTree = "<group>"; };
@@ -442,7 +456,7 @@
 		E17528D41ED40A5A00269EDF /* RichScanViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RichScanViewController.swift; sourceTree = "<group>"; };
 		E17528E71ED40B0F00269EDF /* UniversalConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UniversalConstants.swift; sourceTree = "<group>"; };
 		E17528EA1ED40B1800269EDF /* AutoLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoLayout.swift; sourceTree = "<group>"; };
-		E17528EB1ED40B1800269EDF /* ChangeValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeValue.swift; sourceTree = "<group>"; };
+		E17528EB1ED40B1800269EDF /* ChangeValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ChangeValue.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		E17528EC1ED40B1800269EDF /* DateToToString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateToToString.swift; sourceTree = "<group>"; };
 		E17528ED1ED40B1800269EDF /* Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		E17528EE1ED40B1800269EDF /* GetMyInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetMyInfo.swift; sourceTree = "<group>"; };
@@ -461,14 +475,13 @@
 		E1767A681F0B741A00225D9E /* MCYPieChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCYPieChartView.swift; sourceTree = "<group>"; };
 		E1767A6A1F0B744500225D9E /* MCYPiePolyLineChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCYPiePolyLineChartView.swift; sourceTree = "<group>"; };
 		E1767A6C1F0B855400225D9E /* LineChartsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineChartsViewController.swift; sourceTree = "<group>"; };
-		E18C41A31EF7E1D600AFF37C /* AudioPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
+		E18C41A31EF7E1D600AFF37C /* AudioPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AudioPlayer.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		E18C41A51EF8B99A00AFF37C /* MCYMusicViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCYMusicViewController.swift; sourceTree = "<group>"; };
 		E18C41A61EF8B99A00AFF37C /* MusicPlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicPlayView.swift; sourceTree = "<group>"; };
 		E18C41A71EF8B99A00AFF37C /* UIMaker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIMaker.swift; sourceTree = "<group>"; };
 		E18C41A81EF8B99A00AFF37C /* UIViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		E18C41AD1EF8BA0D00AFF37C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		E18C41AF1EF8BAB900AFF37C /* AudioRecorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioRecorder.swift; sourceTree = "<group>"; };
-		E18C41B41EFA860700AFF37C /* BageValueView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BageValueView.swift; sourceTree = "<group>"; };
+		E18C41AF1EF8BAB900AFF37C /* AudioRecorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AudioRecorder.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		E18C41B71EFB990E00AFF37C /* Contectors+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Contectors+CoreDataClass.swift"; sourceTree = "<group>"; };
 		E18C41B81EFB990E00AFF37C /* Contectors+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Contectors+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		E18C41B91EFB990E00AFF37C /* ChatList+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ChatList+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -500,7 +513,7 @@
 		E1DE0E621EEA918600CF580D /* VideoSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoSlider.swift; sourceTree = "<group>"; };
 		E1DE0E6A1EEA919F00CF580D /* CanCopyImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CanCopyImageView.swift; sourceTree = "<group>"; };
 		E1DE0E6B1EEA919F00CF580D /* CanCopyLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CanCopyLabel.swift; sourceTree = "<group>"; };
-		E1DE0E6E1EEA91BA00CF580D /* Cache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
+		E1DE0E6E1EEA91BA00CF580D /* Cache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Cache.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		E1DE0E6F1EEA91BA00CF580D /* CacheConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheConstants.swift; sourceTree = "<group>"; };
 		E1DE0E711EEA91BA00CF580D /* SaveCacheDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaveCacheDataModel.swift; sourceTree = "<group>"; };
 		E1DE0E721EEA91BA00CF580D /* SaveDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaveDataModel.swift; sourceTree = "<group>"; };
@@ -533,6 +546,21 @@
 		E1DE0EB81EEA94CC00CF580D /* NewsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsViewController.swift; sourceTree = "<group>"; };
 		E1DE0EB91EEA94CC00CF580D /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		E1E696911F1DAD6E00A2EB26 /* MCYCoverFlowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCYCoverFlowView.swift; sourceTree = "<group>"; };
+		E1F23EBB1F3078120019CFED /* BageValueView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BageValueView.swift; path = MCYViewSDK/BageValueView.swift; sourceTree = "<group>"; };
+		E1F23EBE1F3078D20019CFED /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		E1F23EBF1F3078D20019CFED /* Float+String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Float+String.swift"; sourceTree = "<group>"; };
+		E1F23EC01F3078D20019CFED /* UIView+Constraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Constraints.swift"; sourceTree = "<group>"; };
+		E1F23EC61F3079750019CFED /* Activation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Activation.swift; sourceTree = "<group>"; };
+		E1F23EC71F3079750019CFED /* HandWrittingCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HandWrittingCache.swift; sourceTree = "<group>"; };
+		E1F23EC81F3079750019CFED /* Dataset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dataset.swift; sourceTree = "<group>"; };
+		E1F23EC91F3079750019CFED /* Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
+		E1F23ECA1F3079750019CFED /* NeuralNet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NeuralNet.swift; sourceTree = "<group>"; };
+		E1F23ECB1F3079750019CFED /* Storage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
+		E1F23ECC1F3079750019CFED /* Structure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Structure.swift; sourceTree = "<group>"; };
+		E1F23ED41F30798E0019CFED /* HandWrittingMainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HandWrittingMainView.swift; sourceTree = "<group>"; };
+		E1F23ED51F30798E0019CFED /* HandWrittingMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HandWrittingMainViewController.swift; sourceTree = "<group>"; };
+		E1F23ED61F30798E0019CFED /* ShadowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShadowView.swift; sourceTree = "<group>"; };
+		E1F23EDA1F307C020019CFED /* neuralnet-mnist-trained */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "neuralnet-mnist-trained"; sourceTree = "<group>"; };
 		E1F638AC1F0B88B600E297FB /* GetAnalyseData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetAnalyseData.swift; sourceTree = "<group>"; };
 		E1F638AE1F0BAC9500E297FB /* PostData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostData.swift; sourceTree = "<group>"; };
 		E1F638B41F0BAF7100E297FB /* CalendarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
@@ -595,12 +623,12 @@
 		E10B34E51EEAA60700D65C9F /* MCYViewSDK */ = {
 			isa = PBXGroup;
 			children = (
+				E1F23EBB1F3078120019CFED /* BageValueView.swift */,
 				E10B34E61EEAA65800D65C9F /* ActionMenuView.swift */,
 				E10B34E71EEAA65800D65C9F /* MyBottomMenuView.swift */,
 				E10B34E81EEAA65800D65C9F /* MyLoadingView.swift */,
 				E10B34E91EEAA65800D65C9F /* ToastView.swift */,
 				E10B34EA1EEAA65800D65C9F /* WaitView.swift */,
-				E18C41B41EFA860700AFF37C /* BageValueView.swift */,
 			);
 			name = MCYViewSDK;
 			sourceTree = "<group>";
@@ -638,6 +666,7 @@
 		E14197C91CA1A6BE00EDD443 /* iPets */ = {
 			isa = PBXGroup;
 			children = (
+				E1F23EDA1F307C020019CFED /* neuralnet-mnist-trained */,
 				E10B34DC1EEA9E0100D65C9F /* LocalNews.js */,
 				E1767A451F05EAB300225D9E /* ShopCarTestData.geojson */,
 				E1767A5E1F06471400225D9E /* DataAnalyze */,
@@ -1346,6 +1375,7 @@
 		E1DE0E341EEA8DBB00CF580D /* SDKs */ = {
 			isa = PBXGroup;
 			children = (
+				E1F23EBA1F30779A0019CFED /* HandWritting */,
 				E18C418F1EF775BA00AFF37C /* MCYMusicSDK */,
 				E16322DB1EF3E2A40022F40D /* MCYVideoRecordingSDK */,
 				E163218E1EF2274A0022F40D /* MCYWeatherSDK */,
@@ -1500,6 +1530,51 @@
 			path = ../../../../Users/miciny/ToGitHub/iPets/iPets/SDKs/MCYNewsSDK/Resources;
 			sourceTree = DEVELOPER_DIR;
 		};
+		E1F23EBA1F30779A0019CFED /* HandWritting */ = {
+			isa = PBXGroup;
+			children = (
+				E1F23EC51F30794F0019CFED /* NerualNet */,
+				E1F23EC41F30793F0019CFED /* ViewController */,
+				E1F23EBD1F3078AF0019CFED /* Extensions */,
+			);
+			name = HandWritting;
+			path = ../../../../Users/miciny/ToGitHub/iPets/iPets/SDKs/HandWritting;
+			sourceTree = DEVELOPER_DIR;
+		};
+		E1F23EBD1F3078AF0019CFED /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				E1F23EBE1F3078D20019CFED /* Colors.swift */,
+				E1F23EBF1F3078D20019CFED /* Float+String.swift */,
+				E1F23EC01F3078D20019CFED /* UIView+Constraints.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
+		E1F23EC41F30793F0019CFED /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				E1F23ED41F30798E0019CFED /* HandWrittingMainView.swift */,
+				E1F23ED51F30798E0019CFED /* HandWrittingMainViewController.swift */,
+				E1F23ED61F30798E0019CFED /* ShadowView.swift */,
+			);
+			name = ViewController;
+			sourceTree = "<group>";
+		};
+		E1F23EC51F30794F0019CFED /* NerualNet */ = {
+			isa = PBXGroup;
+			children = (
+				E1F23EC61F3079750019CFED /* Activation.swift */,
+				E1F23EC71F3079750019CFED /* HandWrittingCache.swift */,
+				E1F23EC81F3079750019CFED /* Dataset.swift */,
+				E1F23EC91F3079750019CFED /* Error.swift */,
+				E1F23ECA1F3079750019CFED /* NeuralNet.swift */,
+				E1F23ECB1F3079750019CFED /* Storage.swift */,
+				E1F23ECC1F3079750019CFED /* Structure.swift */,
+			);
+			name = NerualNet;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1603,6 +1678,7 @@
 				E10E44671CC62B3500D9992A /* Home.xcassets in Resources */,
 				E16322B21EF29E0A0022F40D /* 13.png in Resources */,
 				E17528C61ED4090B00269EDF /* Setting.xcassets in Resources */,
+				E1F23EDB1F307C020019CFED /* neuralnet-mnist-trained in Resources */,
 				E16322AA1EF29E090022F40D /* 5.png in Resources */,
 				E10E44691CC62B3500D9992A /* Me.xcassets in Resources */,
 				E16322181EF2374D0022F40D /* day.jpeg in Resources */,
@@ -1710,6 +1786,7 @@
 				E175289A1ED406BB00269EDF /* FindPetsTableViewCell.swift in Sources */,
 				E17528901ED406A500269EDF /* FindPetsViewController.swift in Sources */,
 				E17528B21ED406D000269EDF /* MessageItem.swift in Sources */,
+				E1F23ED81F30798E0019CFED /* HandWrittingMainViewController.swift in Sources */,
 				E17528F11ED40B1800269EDF /* AutoLayout.swift in Sources */,
 				E1D3C84D1F0F7382003AAE3C /* MansAreaView.swift in Sources */,
 				E1767A401F05257300225D9E /* ShopTestData.swift in Sources */,
@@ -1731,6 +1808,7 @@
 				E1D3C84E1F0F7382003AAE3C /* PrizeAreaView.swift in Sources */,
 				E17528AC1ED406D000269EDF /* BubbleItem.swift in Sources */,
 				E1DE0E741EEA91BA00CF580D /* Cache.swift in Sources */,
+				E1F23ED01F3079750019CFED /* Error.swift in Sources */,
 				E1DE0E6C1EEA919F00CF580D /* CanCopyImageView.swift in Sources */,
 				E1DE0E751EEA91BA00CF580D /* CacheConstants.swift in Sources */,
 				E175289B1ED406BB00269EDF /* SendFindMyPetsInfoTableViewCell.swift in Sources */,
@@ -1739,7 +1817,9 @@
 				E17528FC1ED40B7600269EDF /* CustomDismissAnimationController.swift in Sources */,
 				E1DE0E681EEA918600CF580D /* VideoPlayerView.swift in Sources */,
 				E1DE0E8B1EEA928600CF580D /* ImageCollectionViewController.swift in Sources */,
+				E1F23ECD1F3079750019CFED /* Activation.swift in Sources */,
 				E17528911ED406A500269EDF /* SendFindMyPetsInfoViewController.swift in Sources */,
+				E1F23ECE1F3079750019CFED /* HandWrittingCache.swift in Sources */,
 				E1DE0E781EEA91BA00CF580D /* SaveDataModel.swift in Sources */,
 				E17528BC1ED406DC00269EDF /* ChatTableViewCell.swift in Sources */,
 				E14408451EEFEB6A00C8E23B /* MineConstant.swift in Sources */,
@@ -1747,6 +1827,7 @@
 				E18C41AB1EF8B99A00AFF37C /* UIMaker.swift in Sources */,
 				E1767A6B1F0B744500225D9E /* MCYPiePolyLineChartView.swift in Sources */,
 				E16322DA1EF3BAC90022F40D /* MyCollectionViewLayout.swift in Sources */,
+				E1F23ED31F3079750019CFED /* Structure.swift in Sources */,
 				E17528AD1ED406D000269EDF /* ChatData.swift in Sources */,
 				E1DE0E9D1EEA94B200CF580D /* NewsTableViewCell.swift in Sources */,
 				E1DE0E791EEA91BA00CF580D /* SQLLine.swift in Sources */,
@@ -1764,11 +1845,15 @@
 				E1767A691F0B741A00225D9E /* MCYPieChartView.swift in Sources */,
 				E18C41CC1EFCB58100AFF37C /* MainChatListViewDataSettingModel.swift in Sources */,
 				E1DE0EAB1EEA94BA00CF580D /* TabNetConstant.swift in Sources */,
+				E1F23ED71F30798E0019CFED /* HandWrittingMainView.swift in Sources */,
 				E17528B31ED406D000269EDF /* UserInfo.swift in Sources */,
 				E1DE0EB41EEA94C000CF580D /* NewsHeaderDataModule.swift in Sources */,
 				E12A38B71EEA794000755C6C /* FindTableViewCell.swift in Sources */,
+				E1F23EBC1F3078120019CFED /* BageValueView.swift in Sources */,
+				E1F23EC11F3078D20019CFED /* Colors.swift in Sources */,
 				E18C41BF1EFB990E00AFF37C /* Contectors+CoreDataClass.swift in Sources */,
 				E18C41C01EFB990E00AFF37C /* Contectors+CoreDataProperties.swift in Sources */,
+				E1F23ED21F3079750019CFED /* Storage.swift in Sources */,
 				E1F638B71F0C973400E297FB /* DatePickerView.swift in Sources */,
 				E17528B01ED406D000269EDF /* ContectorInfoViewDataModel.swift in Sources */,
 				E14408291EEFE23700C8E23B /* TipsView.swift in Sources */,
@@ -1797,6 +1882,7 @@
 				E1D3C8551F0F7841003AAE3C /* RollConstans.swift in Sources */,
 				E144083B1EEFE28400C8E23B /* TetrisElementsModules.swift in Sources */,
 				E17528681ED4034D00269EDF /* SellBuyViewController.swift in Sources */,
+				E1F23ECF1F3079750019CFED /* Dataset.swift in Sources */,
 				E18C41AA1EF8B99A00AFF37C /* MusicPlayView.swift in Sources */,
 				E12A38B51EEA78BE00755C6C /* FindViewController.swift in Sources */,
 				E17528791ED4049900269EDF /* MeViewCell.swift in Sources */,
@@ -1804,7 +1890,9 @@
 				E17528801ED404A400269EDF /* Setting_CommonFuncViewController.swift in Sources */,
 				E17528BA1ED406DC00269EDF /* ChatTableHeaderViewCell.swift in Sources */,
 				E17528841ED404A400269EDF /* PersonInfoViewController.swift in Sources */,
+				E1F23EC31F3078D20019CFED /* UIView+Constraints.swift in Sources */,
 				E17528971ED406AD00269EDF /* SendFindMyPetsInfoModel.swift in Sources */,
+				E1F23EC21F3078D20019CFED /* Float+String.swift in Sources */,
 				E14407F31EEE73CF00C8E23B /* MCYTableView.swift in Sources */,
 				E17528811ED404A400269EDF /* PersonInfo_IconViewController.swift in Sources */,
 				E1DE0E7E1EEA91FA00CF580D /* LoadingPicView.swift in Sources */,
@@ -1819,6 +1907,7 @@
 				E18C41A91EF8B99A00AFF37C /* MCYMusicViewController.swift in Sources */,
 				E17528731ED4048E00269EDF /* SettingDataModel.swift in Sources */,
 				E14408441EEFEB6A00C8E23B /* MineCalculate.swift in Sources */,
+				E1F23ED91F30798E0019CFED /* ShadowView.swift in Sources */,
 				E17528F61ED40B1800269EDF /* PinYinString.swift in Sources */,
 				E17528BE1ED406DC00269EDF /* ContectorInfoTableViewCell.swift in Sources */,
 				E17528721ED4048E00269EDF /* MeDataModel.swift in Sources */,
@@ -1842,7 +1931,6 @@
 				E17528A11ED406C600269EDF /* ContectorListViewController.swift in Sources */,
 				E1DE0EAA1EEA94BA00CF580D /* NewsExtension.swift in Sources */,
 				E1DE0E831EEA926900CF580D /* ShowSinglePicView.swift in Sources */,
-				E18C41B51EFA860700AFF37C /* BageValueView.swift in Sources */,
 				E17528851ED404A400269EDF /* SettingViewController.swift in Sources */,
 				E1DE0EB51EEA94C000CF580D /* PicsDataModule.swift in Sources */,
 				E1DE0EA71EEA94BA00CF580D /* JsonCache.swift in Sources */,
@@ -1855,6 +1943,7 @@
 				E1DE0EA91EEA94BA00CF580D /* NewsConstants.swift in Sources */,
 				E14408421EEFEB6A00C8E23B /* MineMainViewController.swift in Sources */,
 				E1DE0EB11EEA94C000CF580D /* JsonToModule.swift in Sources */,
+				E1F23ED11F3079750019CFED /* NeuralNet.swift in Sources */,
 				E14BF6691EF13A9B00B6C88B /* MapFuncs.swift in Sources */,
 				E1C2ED1B1EFD235100F2F3BB /* FindPetsTableHeaderView.swift in Sources */,
 				E18C41A41EF7E1D600AFF37C /* AudioPlayer.swift in Sources */,

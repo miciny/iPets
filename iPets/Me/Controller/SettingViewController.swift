@@ -55,9 +55,9 @@ class SettingViewController: UIViewController, UITableViewDelegate, UITableViewD
         let appversion = majorVersion as! String //版本号
         let buildversion = minorVersion as! String  //构建号
         
-        log.info("app version: "+appversion)
-        log.info("build version: "+buildversion)
-        log.info("iOS version: "+iosversion)
+        logger.info("app version: "+appversion)
+        logger.info("build version: "+buildversion)
+        logger.info("iOS version: "+iosversion)
         
         infoData = NSMutableArray()
         

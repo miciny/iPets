@@ -432,7 +432,7 @@ extension FindPetsViewController : bottomMenuViewDelegate, UINavigationControlle
             picker?.sourceType = sourceType
             self.present(picker!, animated:true, completion: nil)
         }else{
-            log.info("模拟器中无法打开照相机，请在真机上使用")
+            logger.info("模拟器中无法打开照相机，请在真机上使用")
         }
     }
     

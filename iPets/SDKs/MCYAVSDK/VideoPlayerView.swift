@@ -238,7 +238,7 @@ class VideoPlayerView: NSObject, AVPlayerViewControllerDelegate{
             if completion{
                self.resume()
             }else{
-                log.info("1")
+                logger.info("1")
             }
         })
     }
@@ -317,7 +317,7 @@ class VideoPlayerView: NSObject, AVPlayerViewControllerDelegate{
     
     //显示进度条
     func showBarView(){
-        log.info("显示进度条")
+        logger.info("显示进度条")
         self.barView!.isHidden = false
         self.barView!.frame.origin.y = (self.controlView?.maxYY)! - self.barView!.height
         
@@ -634,7 +634,7 @@ class VideoPlayerView: NSObject, AVPlayerViewControllerDelegate{
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if (context == &PlayerItemStatusContext) {
             if (self.playerItem!.status == AVPlayerItemStatus.readyToPlay) {
-                log.info("准备播放完毕，开始播放")
+                logger.info("准备播放完毕，开始播放")
                 self.loadingIndicator!.stopAnimating()
                 
                 self.isPlaying = true
@@ -725,7 +725,7 @@ class VideoPlayerView: NSObject, AVPlayerViewControllerDelegate{
     func play(){
         self.delegate?.prepareToPlay()
         
-        log.info("播放准备中。。。")
+        logger.info("播放准备中。。。")
         self.isPlayed = true
         self.loadingIndicator!.startAnimating()
         //左下角播放按钮图片改变
@@ -738,7 +738,7 @@ class VideoPlayerView: NSObject, AVPlayerViewControllerDelegate{
     
     func pause(){
         self.delegate?.pauseVideo()
-        log.info("暂停播放")
+        logger.info("暂停播放")
         self.isPlaying = false
         
         //暂停时一直显示进度条
@@ -757,7 +757,7 @@ class VideoPlayerView: NSObject, AVPlayerViewControllerDelegate{
     
     func stop(){
         self.delegate?.stopVideo()
-        log.info("结束播放")
+        logger.info("结束播放")
         self.isPlaying = false
         self.isPlayed = false
         
@@ -788,7 +788,7 @@ class VideoPlayerView: NSObject, AVPlayerViewControllerDelegate{
     //继续播放
     func resume(){
         self.delegate?.resumeVideo()
-        log.info("继续播放")
+        logger.info("继续播放")
         self.isPlaying = true
         
         //继续播放时要设置的东西

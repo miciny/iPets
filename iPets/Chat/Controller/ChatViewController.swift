@@ -86,7 +86,7 @@ class ChatViewController: UIViewController, ChatDataSource, UITextViewDelegate, 
             self.saveChatList()
             
             mainQueue.async(execute: {
-                log.info("与"+self.yourNickname+"的聊天数据保存成功")
+                logger.info("与"+self.yourNickname+"的聊天数据保存成功")
             })
         })
     }
@@ -312,16 +312,16 @@ class ChatViewController: UIViewController, ChatDataSource, UITextViewDelegate, 
             
             for j in 0 ..< selected.count{
                 if saveCache.savaImageToChatCacheDir(self.yourNickname, image: picArray[j], imageName: timestrArray[j]){
-                    log.info("保存普清图缓存成功！")
+                    logger.info("保存普清图缓存成功！")
                 }else{
-                    log.info("保存普清图缓存失败！")
+                    logger.info("保存普清图缓存失败！")
                 }
                 
                 getRetainImage(asset: selected[j].asset, imageResult: { (image) in
                     if saveCache.savaImageToChatCacheDir(self.yourNickname, image: image, imageName: "H"+timestrArray[j]){
-                        log.info("保存高清图缓存成功！")
+                        logger.info("保存高清图缓存成功！")
                     }else{
-                        log.info("保存高清图缓存失败！")
+                        logger.info("保存高清图缓存失败！")
                     }
                 })
                 
@@ -574,9 +574,9 @@ class ChatViewController: UIViewController, ChatDataSource, UITextViewDelegate, 
         if chatDataArray!.count == 0{
             //没消息就删数据库
             if SQLLine.DeleteData(entityNameOfChatList, condition: "nickname='"+yourNickname+"'"){
-                log.info("删除"+yourNickname+"聊天数据库成功！")
+                logger.info("删除"+yourNickname+"聊天数据库成功！")
             }else{
-                log.info("删除"+yourNickname+"聊天数据库失败！")
+                logger.info("删除"+yourNickname+"聊天数据库失败！")
             }
         }
         

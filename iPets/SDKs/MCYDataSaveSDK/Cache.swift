@@ -28,8 +28,8 @@ class Cache: NSObject {
                                 total += fileSize
                                 
                             }catch  let errer as NSError{
-                                log.info("获取缓存失败")
-                                log.info(errer)
+                                logger.info("获取缓存失败")
+                                logger.info(errer)
                             }
                         }
                     }
@@ -55,8 +55,8 @@ class Cache: NSObject {
                     do{
                         try fileManager.removeItem(atPath: cachePath)
                     }catch let errer as NSError{
-                        log.info("清除缓存失败")
-                        log.info(errer)
+                        logger.info("清除缓存失败")
+                        logger.info(errer)
                         result = false
                     }
                 }

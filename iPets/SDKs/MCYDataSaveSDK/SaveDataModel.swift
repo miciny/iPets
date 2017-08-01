@@ -58,12 +58,12 @@ class SaveDataModel: NSObject {
                 dataChatData = unarchiver.decodeObject(forKey: "ChatSettingData") as! [MainChatListViewDataSettingModel]  //通过归档时设置的关键字还原
                 unarchiver.finishDecoding()  //结束解码
             }catch let e as NSError{
-                log.info("聊天数据读取失败！")
-                log.info(e)
+                logger.info("聊天数据读取失败！")
+                logger.info(e)
             }
             
         }else{
-            log.info("聊天设置文件不存在")
+            logger.info("聊天设置文件不存在")
         }
         return dataChatData
     }
@@ -97,10 +97,10 @@ class SaveDataModel: NSObject {
         if defaultManager.fileExists(atPath: path) {
             do{
                 try defaultManager.removeItem(atPath: path)
-                    log.info("删除本地"+fileName+".plist文件成功！")
+                    logger.info("删除本地"+fileName+".plist文件成功！")
             }catch let error as NSError{
-                log.info("删除本地"+fileName+".plist文件失败！")
-                log.info(error)
+                logger.info("删除本地"+fileName+".plist文件失败！")
+                logger.info(error)
             }
         }
     }
@@ -122,12 +122,12 @@ class SaveDataModel: NSObject {
                 dataChatData = unarchiver.decodeObject(forKey: key) as! [ChatData]  //通过归档时设置的关键字还原
                 unarchiver.finishDecoding()  //结束解码
             }catch let e as NSError{
-                log.info("聊天数据读取失败！")
-                log.info(e)
+                logger.info("聊天数据读取失败！")
+                logger.info(e)
             }
             
         }else{
-            log.info(fileName+"的ChatData文件不存在")
+            logger.info(fileName+"的ChatData文件不存在")
         }
         return dataChatData
     }
@@ -222,7 +222,7 @@ class SaveDataModel: NSObject {
             //结束解码
             unarchiver.finishDecoding()
         }else{
-            log.info("FindMyPetsData 文件不存在")
+            logger.info("FindMyPetsData 文件不存在")
         }
         return dataFindPetsCellModel
     }

@@ -39,8 +39,8 @@ func getUserIcon(nickname: String) -> UIImage?{
 
 //======================================延迟执行方法================================
 
-// delay(2) { log.info("2 秒后输出") }
-// let task = delay(5) { log.info("拨打 110") }
+// delay(2) { logger.info("2 秒后输出") }
+// let task = delay(5) { logger.info("拨打 110") }
 // cancelTask(task)
 
 typealias Task = (_ cancel : Bool) -> Void
@@ -162,9 +162,9 @@ func shareImage(image: UIImage) -> UIActivityViewController{
             returnedItems: [Any]?,
             error: Error?) in
             
-            log.info(activityType ?? "没有获取到分享路径")
+            logger.info(activityType ?? "没有获取到分享路径")
             
-            log.info(returnedItems ?? "没有获取到返回路径")
+            logger.info(returnedItems ?? "没有获取到返回路径")
             
             if completed{
                 ToastView().showToast("分享成功！")
@@ -173,8 +173,8 @@ func shareImage(image: UIImage) -> UIActivityViewController{
             }
             
             if let e = error{
-                log.info("分享错误")
-                log.info(e)
+                logger.info("分享错误")
+                logger.info(e)
             }
     }
     

@@ -57,7 +57,7 @@ class MapFuncs: NSObject {
                 complete()
                 
             }else{
-                log.info(error ?? "Error Nothing")
+                logger.info(error ?? "Error Nothing")
             }
         }
     }
