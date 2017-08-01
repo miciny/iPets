@@ -43,6 +43,8 @@ class HandWrittingMainViewController: UIViewController {
         
         let myQueue = DispatchQueue(label: "myQueue")  //
         var nn: NeuralNet!
+        let wait = WaitView()
+        wait.showWait("加载中")
         myQueue.async {
             
             do {
@@ -51,10 +53,12 @@ class HandWrittingMainViewController: UIViewController {
                 }
                 nn = try NeuralNet(url: url)
             } catch {
+                wait.hideView()
                 fatalError("\(error)")
             }
             
             mainQueue.async {
+                wait.hideView()
                 self.neuralNet = nn
             }
         }
