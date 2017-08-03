@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Alamofire
 
 
 class HandWrittingMainViewController: UIViewController {
@@ -31,9 +32,22 @@ class HandWrittingMainViewController: UIViewController {
     /// Timer used for snapshotting the sketch.
     fileprivate var timer = Timer()
     
+    
+    fileprivate var markFlag = false
+    fileprivate var markBtn: UIBarButtonItem?  //标记按钮
+    fileprivate var netManager: SessionManager? //网络请求的manager
+    fileprivate var markNumber = 0
+    fileprivate var selectView: UploadNumberSelectorView?
+    
     override func loadView() {
         self.title = "数字识别"
         self.view = mainView
+        self.netManager = NetFuncs.getDefaultAlamofireManager()
+        
+        self.markBtn = UIBarButtonItem(title: "上传", style: .plain, target: self, action:
+            #selector(self.markUpload))
+        self.navigationItem.rightBarButtonItem = self.markBtn
+        
     }
 
     override func viewDidLoad() {
@@ -290,7 +304,7 @@ extension HandWrittingMainViewController {
 
 extension HandWrittingMainViewController {
     
-    /// Called when the timer expires after the user stops drawing.
+    /// 停止计时器.
     @objc fileprivate func timerExpired() {
         // Perform classification
         classifyImage()
@@ -298,19 +312,33 @@ extension HandWrittingMainViewController {
         boundingBox = nil
     }
     
-    /// Attempts to classify the current sketch, displays the result, and clears the canvas.
+    /// 格式化线条，显示结果.
     private func classifyImage() {
-        // Clear canvas when finished
+        // 结束后清除
         defer { clearCanvas() }
         
-        // Extract and resize image from drawing canvas
         guard let imageArray = scanImage() else { return }
         
-        // Perform classification
+        // 获取神经网络的结果
         do {
             let output = try neuralNet.infer(imageArray)
             if let (label, confidence) = label(from: output) {
                 displayOutputLabel(label: label, confidence: confidence)
+                
+                //上传
+                if self.markFlag{
+                    if self.markNumber == label && confidence > 0.8{
+                        let str = self.setData(data: imageArray)
+                        self.uploadData(str: str)
+                    }else{
+                        self.confirmUpload(label, ok: {
+                            let str = self.setData(data: imageArray)
+                            self.uploadData(str: str)
+                        })
+                    }
+                }
+                
+                
             } else {
                 mainView.outputLabel.text = "Err"
             }
@@ -318,30 +346,29 @@ extension HandWrittingMainViewController {
             print(error)
         }
         
-        // Clear the canvas
         clearCanvas()
     }
     
-    /// Scans the current image from the canvas and returns the pixel data as Floats.
+    /// 扫描图片，返回Floats.
     private func scanImage() -> [Float]? {
         var pixelsArray = [Float]()
         guard let image = mainView.canvas.image, let box = boundingBox else {
             return nil
         }
         
-        // Extract drawing from canvas and remove surrounding whitespace
+        // 提取线条，去除白色外框
         let croppedImage = crop(image, to: box)
         
-        // Scale sketch to max 20px in both dimmensions
+        // 缩放至 20px
         let scaledImage = scale(croppedImage, to: CGSize(width: 20, height: 20))
         
-        // Center sketch in 28x28 white box
+        // 加到 28x28 的盒子里
         let character = addBorder(to: scaledImage)
         
-        // Dispaly character in view
+        // 显示
         mainView.networkInputCanvas.image = character
         
-        // Extract pixel data from scaled/cropped image
+        // 提取像素 scaled/cropped image
         guard let cgImage = character.cgImage else { return nil }
         guard let pixelData = cgImage.dataProvider?.data else { return nil }
         let data: UnsafePointer<UInt8> = CFDataGetBytePtr(pixelData)
@@ -352,7 +379,7 @@ extension HandWrittingMainViewController {
         var position = 0
         for _ in 0..<Int(character.size.height) {
             for _ in 0..<Int(character.size.width) {
-                // We only care about the alpha component
+                // 只管alpha component
                 let alpha = Float(data[position + 3])
                 // Scale alpha down to range [0, 1] and append to array
                 pixelsArray.append(alpha / 255)
@@ -366,17 +393,22 @@ extension HandWrittingMainViewController {
         return pixelsArray
     }
     
-    /// Extracts the output integer and confidence from the given neural network output.
+    /// 从神经网络给的输入提取整数和准确度.
     private func label(from output: [Float]) -> (label: Int, confidence: Float)? {
         guard let max = output.max() else { return nil }
         return (output.index(of: max)!, max)
     }
     
-    /// Displays the given label and confidence in the output view.
+    /// 显示返回的数字和准确度.
     private func displayOutputLabel(label: Int, confidence: Float) {
-        // Only display label if confidence > 50%
-        let labelStr = "\(label)"
-        let confidenceStr = "Confidence: \((confidence * 100).toString(decimalPlaces: 1))%"
+        
+        // Only display label if confidence > 70%
+        var labelStr = "\(label)"
+        let confidenceStr = "准确率: \((confidence * 100).toString(decimalPlaces: 1))%"
+        
+        if confidence < 0.7{
+            labelStr = "E"
+        }
         
         // Animate labels outward and change text
         UIView.animate(withDuration: 0.1, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0, options: [], animations: { 
@@ -395,3 +427,92 @@ extension HandWrittingMainViewController {
     
 }
 
+
+//上传
+extension HandWrittingMainViewController: UploadNumberSelectorViewDelegate{
+    
+    func markUpload(){
+        if self.markFlag == false{
+            self.markBtn?.title = "取消\(self.markNumber)"
+            self.markFlag = true
+            
+            selectView = UploadNumberSelectorView(frame: self.view.bounds, delegate: self)
+            self.view.addSubview(selectView!)
+            
+        }else{
+            self.markBtn?.title = "上传"
+            self.markFlag = false
+            
+            selectView?.removeFromSuperview()
+            selectView = nil
+        }
+        
+        
+    }
+    
+    func setNumber(i: Int){
+        self.markNumber = i
+        self.markBtn?.title = "取消\(self.markNumber)"
+    }
+    
+    
+    func setData(data: [Float]) -> String{
+        let finalArray = NSMutableDictionary()
+        let array = NSMutableDictionary()
+        let dataStr = data.description.components(separatedBy: "[")[1].components(separatedBy: "]")[0]
+        array.setValue(dataStr, forKey: "train_images")
+        array.setValue(self.markNumber, forKey: "train_labels")
+        
+        finalArray.setValue([array], forKey: "data")
+        
+        return dicToJson(finalArray)
+    }
+    
+    func uploadData(str: String){
+        let wait = WaitView()
+        wait.showWait("上传中")
+        
+        let url = URL(string: "http://10.69.58.56:8181/mcyAI/uploadData")
+        let paras = [
+            "data": str
+        ]
+        
+        self.netManager?.request(url!, method: HTTPMethod.post, parameters: paras)
+        .responseJSON(completionHandler: { (response) in
+            switch response.result{
+            case .success:
+                wait.hideView()
+                
+                let code = String((response.response?.statusCode)!)
+                if code == "200"{
+                    logger.info("上传训练数据成功！")
+                    ToastView().showToast("上传成功")
+                    
+                }else{
+                    ToastView().showToast("上传失败")
+                }
+                
+            case .failure:
+                ToastView().showToast("请求失败")
+                logger.info(response.result.error ?? "上传数据错误")
+                
+                wait.hideView()
+            }
+        })
+    }
+    
+    
+    func confirmUpload(_ realNumber: Int, ok: @escaping ()->()){
+        
+        let deleteAlertView = UIAlertController(title: "您确定要上传\(self.markNumber)？", message: "实际输入是\(realNumber)", preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+        let okAction = UIAlertAction(title: "确定", style: .default, handler:{
+            (UIAlertAction) -> Void in
+            ok()
+        })
+        
+        deleteAlertView.addAction(cancelAction)
+        deleteAlertView.addAction(okAction)// 当添加的UIAlertAction超过两个的时候，会自动变成纵向分布
+        self.present(deleteAlertView, animated: true, completion: nil)
+    }
+}

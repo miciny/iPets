@@ -204,6 +204,8 @@
 		E18C41CE1EFCD06500AFF37C /* ChatInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18C41CD1EFCD06400AFF37C /* ChatInfoViewController.swift */; };
 		E18C41D01EFCD0D800AFF37C /* ChatInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18C41CF1EFCD0D800AFF37C /* ChatInfoTableViewCell.swift */; };
 		E18C41D21EFCD0F100AFF37C /* ChatInfoViewDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18C41D11EFCD0F100AFF37C /* ChatInfoViewDataModel.swift */; };
+		E1ADCFAB1F32CB00007B3095 /* UploadNumberSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1ADCFAA1F32CB00007B3095 /* UploadNumberSelectorView.swift */; };
+		E1ADCFAD1F32D536007B3095 /* neuralnet-mnist-trained in Resources */ = {isa = PBXBuildFile; fileRef = E1ADCFAC1F32D536007B3095 /* neuralnet-mnist-trained */; };
 		E1ADD75D1ED6CD29000BCBC4 /* MyTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1ADD75C1ED6CD29000BCBC4 /* MyTimer.swift */; };
 		E1ADD75F1EDFE899000BCBC4 /* Temp.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E1ADD75E1EDFE899000BCBC4 /* Temp.xcassets */; };
 		E1C2ED1B1EFD235100F2F3BB /* FindPetsTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1C2ED1A1EFD235100F2F3BB /* FindPetsTableHeaderView.swift */; };
@@ -270,7 +272,6 @@
 		E1F23ED71F30798E0019CFED /* HandWrittingMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F23ED41F30798E0019CFED /* HandWrittingMainView.swift */; };
 		E1F23ED81F30798E0019CFED /* HandWrittingMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F23ED51F30798E0019CFED /* HandWrittingMainViewController.swift */; };
 		E1F23ED91F30798E0019CFED /* ShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F23ED61F30798E0019CFED /* ShadowView.swift */; };
-		E1F23EDB1F307C020019CFED /* neuralnet-mnist-trained in Resources */ = {isa = PBXBuildFile; fileRef = E1F23EDA1F307C020019CFED /* neuralnet-mnist-trained */; };
 		E1F638AD1F0B88B600E297FB /* GetAnalyseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F638AC1F0B88B600E297FB /* GetAnalyseData.swift */; };
 		E1F638AF1F0BAC9500E297FB /* PostData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F638AE1F0BAC9500E297FB /* PostData.swift */; };
 		E1F638B51F0BAF7100E297FB /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F638B41F0BAF7100E297FB /* CalendarView.swift */; };
@@ -494,6 +495,8 @@
 		E18C41CD1EFCD06400AFF37C /* ChatInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatInfoViewController.swift; sourceTree = "<group>"; };
 		E18C41CF1EFCD0D800AFF37C /* ChatInfoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatInfoTableViewCell.swift; sourceTree = "<group>"; };
 		E18C41D11EFCD0F100AFF37C /* ChatInfoViewDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatInfoViewDataModel.swift; sourceTree = "<group>"; };
+		E1ADCFAA1F32CB00007B3095 /* UploadNumberSelectorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadNumberSelectorView.swift; sourceTree = "<group>"; };
+		E1ADCFAC1F32D536007B3095 /* neuralnet-mnist-trained */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "neuralnet-mnist-trained"; sourceTree = "<group>"; };
 		E1ADD75C1ED6CD29000BCBC4 /* MyTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyTimer.swift; sourceTree = "<group>"; };
 		E1ADD75E1EDFE899000BCBC4 /* Temp.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Temp.xcassets; sourceTree = "<group>"; };
 		E1C2ED1A1EFD235100F2F3BB /* FindPetsTableHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindPetsTableHeaderView.swift; sourceTree = "<group>"; };
@@ -560,7 +563,6 @@
 		E1F23ED41F30798E0019CFED /* HandWrittingMainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HandWrittingMainView.swift; sourceTree = "<group>"; };
 		E1F23ED51F30798E0019CFED /* HandWrittingMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HandWrittingMainViewController.swift; sourceTree = "<group>"; };
 		E1F23ED61F30798E0019CFED /* ShadowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShadowView.swift; sourceTree = "<group>"; };
-		E1F23EDA1F307C020019CFED /* neuralnet-mnist-trained */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "neuralnet-mnist-trained"; sourceTree = "<group>"; };
 		E1F638AC1F0B88B600E297FB /* GetAnalyseData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetAnalyseData.swift; sourceTree = "<group>"; };
 		E1F638AE1F0BAC9500E297FB /* PostData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostData.swift; sourceTree = "<group>"; };
 		E1F638B41F0BAF7100E297FB /* CalendarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
@@ -666,7 +668,7 @@
 		E14197C91CA1A6BE00EDD443 /* iPets */ = {
 			isa = PBXGroup;
 			children = (
-				E1F23EDA1F307C020019CFED /* neuralnet-mnist-trained */,
+				E1ADCFAC1F32D536007B3095 /* neuralnet-mnist-trained */,
 				E10B34DC1EEA9E0100D65C9F /* LocalNews.js */,
 				E1767A451F05EAB300225D9E /* ShopCarTestData.geojson */,
 				E1767A5E1F06471400225D9E /* DataAnalyze */,
@@ -1557,6 +1559,7 @@
 				E1F23ED41F30798E0019CFED /* HandWrittingMainView.swift */,
 				E1F23ED51F30798E0019CFED /* HandWrittingMainViewController.swift */,
 				E1F23ED61F30798E0019CFED /* ShadowView.swift */,
+				E1ADCFAA1F32CB00007B3095 /* UploadNumberSelectorView.swift */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -1678,7 +1681,7 @@
 				E10E44671CC62B3500D9992A /* Home.xcassets in Resources */,
 				E16322B21EF29E0A0022F40D /* 13.png in Resources */,
 				E17528C61ED4090B00269EDF /* Setting.xcassets in Resources */,
-				E1F23EDB1F307C020019CFED /* neuralnet-mnist-trained in Resources */,
+				E1ADCFAD1F32D536007B3095 /* neuralnet-mnist-trained in Resources */,
 				E16322AA1EF29E090022F40D /* 5.png in Resources */,
 				E10E44691CC62B3500D9992A /* Me.xcassets in Resources */,
 				E16322181EF2374D0022F40D /* day.jpeg in Resources */,
@@ -1956,6 +1959,7 @@
 				E18C41C11EFB990E00AFF37C /* ChatList+CoreDataClass.swift in Sources */,
 				E1F638AF1F0BAC9500E297FB /* PostData.swift in Sources */,
 				E17528FE1ED40B7600269EDF /* PushAndPopAnimation.swift in Sources */,
+				E1ADCFAB1F32CB00007B3095 /* UploadNumberSelectorView.swift in Sources */,
 				E144083C1EEFE28400C8E23B /* TetrisElementsObj.swift in Sources */,
 				E18C41C51EFB990E00AFF37C /* SearchRecord+CoreDataClass.swift in Sources */,
 				E1C2ED1D1F01F46B00F2F3BB /* ChatFuncs.swift in Sources */,

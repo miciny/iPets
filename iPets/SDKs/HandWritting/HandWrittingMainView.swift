@@ -50,7 +50,7 @@ class HandWrittingMainView: UIView {
         titleLabel.textAlignment = .center
         
         // Instructions
-        instructionLabel.text = "Sketch a digit from 0 to 9"
+        instructionLabel.text = "手写数字0-9"
         instructionLabel.textColor = UIColor.darkGray
         instructionLabel.font = UIFont.systemFont(ofSize: 15)
         instructionLabel.textAlignment = .center
@@ -62,13 +62,13 @@ class HandWrittingMainView: UIView {
         snapshotBox.layer.cornerRadius = 3
         
         // Input title
-        inputTitleLabel.text = "Network input"
+        inputTitleLabel.text = "输入"
         inputTitleLabel.textColor = UIColor.darkGray
         inputTitleLabel.font = UIFont.systemFont(ofSize: 15)
         inputTitleLabel.textAlignment = .center
         
         // Output title
-        outputTitleLabel.text = "Network output"
+        outputTitleLabel.text = "输出"
         outputTitleLabel.textColor = UIColor.darkGray
         outputTitleLabel.font = UIFont.systemFont(ofSize: 15)
         outputTitleLabel.textAlignment = .center

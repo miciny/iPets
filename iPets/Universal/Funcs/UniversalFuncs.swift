@@ -17,6 +17,21 @@ func strToJson(_ str: String) -> AnyObject{
     return deserialized as AnyObject
 }
 
+// dic处理数据成json格式
+func dicToJson(_ dic: NSMutableDictionary) -> String {
+    let dataArray = dic
+    var str = String()
+    
+    do {
+        let dataFinal = try JSONSerialization.data(withJSONObject: dataArray, options:JSONSerialization.WritingOptions(rawValue:0))
+        let string = String(data: dataFinal, encoding: String.Encoding.utf8)
+        str = string! as String
+        
+    }catch{
+        
+    }
+    return str
+}
 
 
 //======================================根据nickname获得头像，指获取一个时使用================================
