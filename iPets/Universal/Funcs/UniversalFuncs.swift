@@ -24,9 +24,8 @@ func dicToJson(_ dic: NSMutableDictionary) -> String {
     
     do {
         let dataFinal = try JSONSerialization.data(withJSONObject: dataArray, options:JSONSerialization.WritingOptions(rawValue:0))
-        let string = String(data: dataFinal, encoding: String.Encoding.utf8)
+        let string = NSString(data: dataFinal, encoding: String.Encoding.utf8.rawValue)
         str = string! as String
-        
     }catch{
         
     }

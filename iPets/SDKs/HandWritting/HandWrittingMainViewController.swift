@@ -8,7 +8,7 @@
 
 import UIKit
 import Alamofire
-
+import SwiftyJSON
 
 class HandWrittingMainViewController: UIViewController {
     
@@ -457,15 +457,12 @@ extension HandWrittingMainViewController: UploadNumberSelectorViewDelegate{
     
     
     func setData(data: [Float]) -> String{
-        let finalArray = NSMutableDictionary()
         let array = NSMutableDictionary()
-        let dataStr = data.description.components(separatedBy: "[")[1].components(separatedBy: "]")[0]
-        array.setValue(dataStr, forKey: "train_images")
+        
+        array.setValue(data.description, forKey: "train_images")
         array.setValue(self.markNumber, forKey: "train_labels")
         
-        finalArray.setValue([array], forKey: "data")
-        
-        return dicToJson(finalArray)
+        return dicToJson(array)
     }
     
     func uploadData(str: String){
@@ -474,10 +471,12 @@ extension HandWrittingMainViewController: UploadNumberSelectorViewDelegate{
         
         let url = URL(string: "http://10.69.58.56:8181/mcyAI/uploadData")
         let paras = [
-            "data": str
+            "data": strToJson(str)
         ]
         
-        self.netManager?.request(url!, method: HTTPMethod.post, parameters: paras)
+        //fuck  JSONEncoding !!!!!!!!!
+        
+        self.netManager?.request(url!, method: HTTPMethod.post, parameters: paras, encoding: JSONEncoding.default)
         .responseJSON(completionHandler: { (response) in
             switch response.result{
             case .success:
