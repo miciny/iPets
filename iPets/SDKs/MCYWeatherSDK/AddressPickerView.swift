@@ -170,11 +170,11 @@ class AddressPickerView: UIView, UIPickerViewDelegate, UIPickerViewDataSource{
         }
     }
     
-    func cancelButtonClicked(){
+    @objc func cancelButtonClicked(){
         self.removeFromSuperview()
     }
     
-    func DoneButtonClicked(){
+    @objc func DoneButtonClicked(){
         self.removeFromSuperview()
         WeatherCityID = (cityId == nil ? "101010100" : cityId!)
         self.delegate?.doneClicked()

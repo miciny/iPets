@@ -168,7 +168,7 @@ class MyBottomMenuView: UIControl{
     }
     
     //隐藏view
-    func hideView(){
+    @objc func hideView(){
         UIView.animate(withDuration: 0.2, animations: {
             () -> ()in
             self.buttonView.frame = CGRect(x: 0, y: Height, width: Width, height: self.buttonView.frame.height)

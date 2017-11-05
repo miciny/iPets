@@ -143,10 +143,12 @@ import SwiftyJSON
 ```swift
 let json = JSON(data: dataFromNetworking)
 ```
+Or
 
 ```swift
 let json = JSON(jsonObject)
 ```
+Or
 
 ```swift
 if let dataFromString = jsonString.data(using: .utf8, allowLossyConversion: false) {
@@ -234,7 +236,7 @@ let json = JSON(["name", "age"])
 if let name = json[999].string {
     //Do something you want
 } else {
-    print(json[999].error) // "Array[999] is out of bounds"
+    print(json[999].error!) // "Array[999] is out of bounds"
 }
 ```
 
@@ -243,7 +245,7 @@ let json = JSON(["name":"Jack", "age": 25])
 if let name = json["address"].string {
     //Do something you want
 } else {
-    print(json["address"].error) // "Dictionary["address"] does not exist"
+    print(json["address"].error!) // "Dictionary["address"] does not exist"
 }
 ```
 
@@ -253,14 +255,14 @@ if let age = json[0].string {
     //Do something you want
 } else {
     print(json[0])       // "Array[0] failure, It is not an array"
-    print(json[0].error) // "Array[0] failure, It is not an array"
+    print(json[0].error!) // "Array[0] failure, It is not an array"
 }
 
 if let name = json["name"].string {
     //Do something you want
 } else {
     print(json["name"])       // "Dictionary[\"name"] failure, It is not an dictionary"
-    print(json["name"].error) // "Dictionary[\"name"] failure, It is not an dictionary"
+    print(json["name"].error!) // "Dictionary[\"name"] failure, It is not an dictionary"
 }
 ```
 
@@ -272,7 +274,7 @@ if let id = json["user"]["favourites_count"].number {
    //Do something you want
 } else {
    //Print the error
-   print(json["user"]["favourites_count"].error)
+   print(json["user"]["favourites_count"].error!)
 }
 ```
 
@@ -282,7 +284,7 @@ if let id = json["user"]["name"].string {
    //Do something you want
 } else {
    //Print the error
-   print(json["user"]["name"])
+   print(json["user"]["name"].error!)
 }
 ```
 
@@ -292,7 +294,7 @@ if let id = json["user"]["is_translator"].bool {
    //Do something you want
 } else {
    //Print the error
-   print(json["user"]["is_translator"])
+   print(json["user"]["is_translator"].error!)
 }
 ```
 
@@ -302,7 +304,7 @@ if let id = json["user"]["id"].int {
    //Do something you want
 } else {
    //Print the error
-   print(json["user"]["id"])
+   print(json["user"]["id"].error!)
 }
 ...
 ```
@@ -510,7 +512,7 @@ let representation = json.rawString(options: [.castNilToNSNull: true])
 // representation is "{\"1\":2,\"2\":\"two\",\"3\":null}", which represents {"1":2,"2":"two","3":null}
 ```
 
-## Work with Alamofire
+## Work with [Alamofire](https://github.com/Alamofire/Alamofire)
 
 SwiftyJSON nicely wraps the result of the Alamofire JSON response handler:
 
@@ -526,8 +528,12 @@ Alamofire.request(url, method: .get).validate().responseJSON { response in
 }
 ```
 
+We also provide an extension of Alamofire for serializing NSData to SwiftyJSON's JSON.
 
-## Work with Moya
+See: [Alamofire-SwiftyJSON](https://github.com/SwiftyJSON/Alamofire-SwiftyJSON)
+
+
+## Work with [Moya](https://github.com/Moya/Moya)
 
 SwiftyJSON parse data to JSON:
 

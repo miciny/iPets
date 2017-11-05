@@ -148,7 +148,7 @@ class MeViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                 let defaultIconData = UIImagePNGRepresentation(defaultIcon!)
                 let str = "毛彩元历史元我们的生活就是饿着么一个人的啊你不懂吗我就知道他晕了"
                 
-                for i in 0 ..< str.characters.count-1{
+                for i in 0 ..< str.count-1{
                     let strs = (str as NSString).substring(with: NSMakeRange(i, 2))
                     let _ = SQLLine.InsertContectorsData(strs, icon: defaultIconData!, nickname: "haha \(strs)", sex: strs, remark: "my heart \(strs)", address: "中国\(strs)", http: "www.baidu.com\(strs)")
                 }

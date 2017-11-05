@@ -13,7 +13,7 @@ class PinYinString: NSObject {
     
     class func charactorType(_ aString:String) -> Int{
         
-        let char = aString.substring(to: aString.characters.index(aString.startIndex, offsetBy: 1))
+        let char = aString[...aString.index(aString.startIndex, offsetBy: 0)] //
         
         let eRegex: String = "^[a-zA-z]+$"
         let eTest: NSPredicate = NSPredicate(format: "SELF MATCHES %@", eRegex)
@@ -41,7 +41,7 @@ class PinYinString: NSObject {
         //转化为大写拼音
         let pinYin = str.capitalized
         //获取并返回首字母
-        return pinYin.substring(to: pinYin.characters.index(pinYin.startIndex, offsetBy: 1))
+        return String(pinYin[...pinYin.index(pinYin.startIndex, offsetBy: 0)])
         
     }
     

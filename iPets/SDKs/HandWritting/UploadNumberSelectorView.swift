@@ -51,7 +51,7 @@ class UploadNumberSelectorView: UIView {
         }
     }
     
-    func tabBtn(_ sender: UIButton){
+    @objc func tabBtn(_ sender: UIButton){
         let i = sender.tag
         self.delegate?.setNumber(i: i)
         self.dismiss()

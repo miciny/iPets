@@ -51,7 +51,7 @@ class CanCopyImageView: UIImageView {
     }
     
     
-    func clickLabel() {
+    @objc func clickLabel() {
         
         guard isLongPressed == false else {
             return
@@ -78,7 +78,7 @@ class CanCopyImageView: UIImageView {
         menu?.setMenuVisible(true, animated: true)
     }
     
-    func menuWillHide(){
+    @objc func menuWillHide(){
         self.resignFirstResponder()
         isLongPressed = false
         self.copyImageDelegate?.imageNoPressed()
@@ -86,16 +86,16 @@ class CanCopyImageView: UIImageView {
     
     
     //复制
-    func collect() {
+    @objc func collect() {
     }
     
     //删除
-    func deleteImage() {
+    @objc func deleteImage() {
         
     }
     
     //分享
-    func shareImage() {
+    @objc func shareImage() {
         self.copyImageDelegate?.shareImageCCV(image: self.image!)
     }
     

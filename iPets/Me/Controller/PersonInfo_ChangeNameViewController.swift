@@ -81,7 +81,7 @@ class PersonInfo_ChangeNameViewController: UIViewController, UITextFieldDelegate
     }
     
     //保存
-    func saveName() {
+    @objc func saveName() {
         var result = false
         
         result = SQLLine.UpdateDataWithCondition("nickname='"+myNikename+"'", entityName: entityNameOfContectors, changeValue: nameTextField.text! as AnyObject, changeEntityName: "name")
@@ -98,7 +98,7 @@ class PersonInfo_ChangeNameViewController: UIViewController, UITextFieldDelegate
     }
     
     //返回
-    func backToPrevious() {
+    @objc func backToPrevious() {
         self.navigationController?.popViewController(animated: true)
     }
     

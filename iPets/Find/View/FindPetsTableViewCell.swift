@@ -166,7 +166,7 @@ class FindPetsTableViewCell: UITableViewCell, UIAlertViewDelegate{
         self.iconView.addGestureRecognizer(tap1)
     }
     
-    func goPersonInfo(){
+    @objc func goPersonInfo(){
         let name = self.modelFrame.myCellModel.nickname
         self.delegate?.pushToPersonInfoView(name: name)
     }
@@ -206,7 +206,7 @@ class FindPetsTableViewCell: UITableViewCell, UIAlertViewDelegate{
     }
     
     //点击处理,展示图片
-    func selectedPic(_ sender: UITapGestureRecognizer){
+    @objc func selectedPic(_ sender: UITapGestureRecognizer){
         let tag = (sender.view?.tag)! as Int
         //转化成相对于屏幕的绝对坐标
         var frames = [CGRect]()

@@ -196,8 +196,8 @@ You can set the priorities of your constraints using the `~` operator:
 
 ```swift
 constrain(view) { view in
-    view.width  >= 200 ~ 100
-    view.height >= 200 ~ 100
+    view.width  >= 200 ~ UILayoutPriority(100)
+    view.height >= 200 ~ .required
 }
 ```
 
@@ -221,13 +221,19 @@ Note that declaring compound attributes returns multiple constraints at once:
 var constraints: [NSLayoutConstraint]?
 
 constrain(view) { view in
-    constraints = (view.size == view.superview!.size ~ 100)
+    constraints = (view.size == view.superview!.size ~ .defaultLow)
 }
 ```
 
 ## Documentation
 
 Read the documentation [here](http://robb.github.io/Cartography/). For more information, see the [gh-pages](https://github.com/robb/Cartography/tree/gh-pages) branch.
+
+## Versioning
+
+For *Swift 3.x*: 1.1.0
+
+For *Swift 4.x*: 2.0.0
 
 ## Support
 
@@ -236,7 +242,7 @@ issue](https://github.com/robb/Cartography/issues/new) if you have questions.
 
 ## About Cartography
 
-Cartography was built by [Robb Böhnke][me] and was inspired by the excellent
+Cartography was built by [Robb Böhnke][me], is maintained by [Orta Therox][ot] and was inspired by the excellent
 [FLKAutoLayout] by [Florian Kugler][florian].
 
 [flkautolayout]: https://github.com/floriankugler/FLKAutoLayout
@@ -244,3 +250,4 @@ Cartography was built by [Robb Böhnke][me] and was inspired by the excellent
 [me]:            http://robb.is
 [twitter]:       https://twitter.com/dlx
 [email]:         mailto:robb@robb.is
+[ot]:            https://github.com/orta

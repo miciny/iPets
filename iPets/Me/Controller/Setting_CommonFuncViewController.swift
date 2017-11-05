@@ -45,7 +45,7 @@ class Setting_CommonFuncViewController: UIViewController, UITableViewDelegate, U
         return footerView
     }
     
-    func logOut(){
+    @objc func logOut(){
         ToastView().showToast("HeHe")
     }
     

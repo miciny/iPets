@@ -142,7 +142,7 @@ class NewsHeaderView: UIView, UIScrollViewDelegate{
     }
     
     //点击事件
-    func clickedNews(){
+    @objc func clickedNews(){
         let data = headerDataArray[currentPage!] as! NewsHeaderDataModule
         self.delegate?.newsClicked(data)
     }

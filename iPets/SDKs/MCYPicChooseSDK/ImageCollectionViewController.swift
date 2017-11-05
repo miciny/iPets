@@ -128,12 +128,12 @@ class ImageCollectionViewController: UIViewController, UICollectionViewDelegate,
     
     
     //返回
-    func backToPrevious() {
+    @objc func backToPrevious() {
         self.navigationController?.popViewController(animated: true)
     }
     
     //发送图片，聊天页
-    func sendPics(){
+    @objc func sendPics(){
         selectedImage = []
         for item in assetsImage{
             if item.isSelect {

@@ -168,13 +168,13 @@ class ChatViewController: UIViewController, ChatDataSource, UITextViewDelegate, 
     }
     
     //选择表情
-    func motionAdd(){
+    @objc func motionAdd(){
         
     }
     
 //============================================发送和接受语音消息＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊
     
-    func changeAudioView(){
+    @objc func changeAudioView(){
         
         txtMsgView.isHidden = true
         txtMsg.resignFirstResponder()
@@ -204,7 +204,7 @@ class ChatViewController: UIViewController, ChatDataSource, UITextViewDelegate, 
         
     }
     
-    func changeKeyboradView(){
+    @objc func changeKeyboradView(){
         voiceBtn?.removeFromSuperview()
         voiceBtn = nil
         
@@ -221,7 +221,7 @@ class ChatViewController: UIViewController, ChatDataSource, UITextViewDelegate, 
         recorder = nil
     }
     
-    func setUpRecorder(){
+    @objc func setUpRecorder(){
         let plyer = AudioPlayer.shared
         plyer.stopAudio()
         
@@ -243,7 +243,7 @@ class ChatViewController: UIViewController, ChatDataSource, UITextViewDelegate, 
     }
 
 
-    func endRecord(){
+    @objc func endRecord(){
         //停止录音
         let timeInt = recorder?.endRecord()
         let timeStr = String(Int(timeInt!))
@@ -272,7 +272,7 @@ class ChatViewController: UIViewController, ChatDataSource, UITextViewDelegate, 
     
 //============================================发送和接受图片消息＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊
     //进入选择图片页面
-    func goToImageCollectionView(){
+    @objc func goToImageCollectionView(){
         isOut = false
         
         let imagePickVc = ImageCollectionViewController()
@@ -630,7 +630,7 @@ class ChatViewController: UIViewController, ChatDataSource, UITextViewDelegate, 
         
     }
     
-    func goChatInfoView(){
+    @objc func goChatInfoView(){
         let vc = ChatInfoViewController()
         vc.contectorNickName = yourNickname
         self.navigationController?.pushViewController(vc, animated: true)

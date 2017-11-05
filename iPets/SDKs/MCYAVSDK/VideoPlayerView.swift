@@ -157,7 +157,7 @@ class VideoPlayerView: NSObject, AVPlayerViewControllerDelegate{
     }
     
     //全屏播放 , 手动旋转
-    func fullScreenPaly(){
+    @objc func fullScreenPaly(){
         removeScreenOrientationObserver() //先移除通知
         landscapeRightScreen(false)
         addScreenOrientationObserver() //添加旋转屏幕通知
@@ -197,12 +197,12 @@ class VideoPlayerView: NSObject, AVPlayerViewControllerDelegate{
     }
 
     //单击
-    func oneTab(_ sender: UIButton, event: UIEvent) {
+    @objc func oneTab(_ sender: UIButton, event: UIEvent) {
         self.perform(#selector(Tap(_:)), with: sender, afterDelay: 0.2)
     }
     
     //双击及点击事件
-    func twoTab(_ sender: UIButton, event: UIEvent){
+    @objc func twoTab(_ sender: UIButton, event: UIEvent){
         //播放时才有惦记事件
         guard self.isLoaded == true else{
             return
@@ -212,7 +212,7 @@ class VideoPlayerView: NSObject, AVPlayerViewControllerDelegate{
     }
     
     //单击点击事件
-    func Tap(_ sender: UIButton){
+    @objc func Tap(_ sender: UIButton){
         //播放时才有惦记事件
         guard self.isLoaded == true else{
             return
@@ -226,12 +226,12 @@ class VideoPlayerView: NSObject, AVPlayerViewControllerDelegate{
 //进度条
     
     /// 滑块拖动时的事件
-    func sliderValueChange(_ sender: UISlider) {
+    @objc func sliderValueChange(_ sender: UISlider) {
         pause()
     }
     
     // 滑块拖动后的事件
-    func sliderDragUp(_ sender: UISlider) {
+    @objc func sliderDragUp(_ sender: UISlider) {
         let time = Int64(Float(CMTimeGetSeconds(self.playerItem!.duration)) * (sender.value/100))
         let CMTime = CMTimeMake(time, 1)
         self.playerLayer?.player?.seek(to: CMTime, completionHandler: { (completion) in
@@ -254,7 +254,7 @@ class VideoPlayerView: NSObject, AVPlayerViewControllerDelegate{
     
     
     //隐藏进度条 或者显示 的动画  showStartTimer: 显示时是否启动timer
-    func hideOrShowBarViewAnimation(_ showStartTimer: Bool){
+    @objc func hideOrShowBarViewAnimation(_ showStartTimer: Bool){
         
         guard isAnimationDone == true else{
             return
@@ -360,7 +360,7 @@ class VideoPlayerView: NSObject, AVPlayerViewControllerDelegate{
     }
     
     //全屏播放 , 手动旋转
-    func smallScreenPaly(){
+    @objc func smallScreenPaly(){
         removeScreenOrientationObserver() //先移除通知
         portraitScreen(false)
         addScreenOrientationObserver() //添加旋转屏幕通知
@@ -374,7 +374,7 @@ class VideoPlayerView: NSObject, AVPlayerViewControllerDelegate{
     }
     
     //全屏时，调节音量
-    func changeVolume(){
+    @objc func changeVolume(){
         if dismissVolumeView(){
             startTimer() //开始计时
             return
@@ -424,7 +424,7 @@ class VideoPlayerView: NSObject, AVPlayerViewControllerDelegate{
         }
     }
     
-    func  changeVideoVolume(_ sender: UISlider){
+    @objc func  changeVideoVolume(_ sender: UISlider){
         let value = sender.value
         setSystemVolume(value)
     }
@@ -451,7 +451,7 @@ class VideoPlayerView: NSObject, AVPlayerViewControllerDelegate{
     
     
     //屏幕旋转通知事件
-    func deviceOrientChange(){
+    @objc func deviceOrientChange(){
         if self.barView?.isHidden == true{
             hideOrShowBarViewAnimation(false)
         }
@@ -587,7 +587,7 @@ class VideoPlayerView: NSObject, AVPlayerViewControllerDelegate{
         //创建AVPlayerLayer，必须把视频添加到AVPlayerLayer层，才能播放
         playerLayer = AVPlayerLayer()
         playerLayer!.player = player
-        playerLayer!.videoGravity = AVLayerVideoGravityResizeAspect //视频填充模式
+        playerLayer!.videoGravity = AVLayerVideoGravity.resizeAspect //视频填充模式
         resetPlyerFrame()
         self.mainView.layer.addSublayer(playerLayer!)
     }
@@ -701,7 +701,7 @@ class VideoPlayerView: NSObject, AVPlayerViewControllerDelegate{
     
     
     // 双击后时暂停还是播放，加载了视频，播放中就暂停，暂停了就播放
-    func pauseOrResume(){
+    @objc func pauseOrResume(){
         if self.isPlayed == true {
             if self.isPlaying == true{
                 pause()
@@ -755,7 +755,7 @@ class VideoPlayerView: NSObject, AVPlayerViewControllerDelegate{
     }
     
     
-    func stop(){
+    @objc func stop(){
         self.delegate?.stopVideo()
         logger.info("结束播放")
         self.isPlaying = false

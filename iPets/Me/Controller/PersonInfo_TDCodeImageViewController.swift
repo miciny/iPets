@@ -53,7 +53,7 @@ class PersonInfo_TDCodeImageViewController: UIViewController {
     }
     
     //右上角的点击事件
-    func addButtonClicked(){
+    @objc func addButtonClicked(){
         let bottomMenu = MyBottomMenuView()
         bottomMenu.showBottomMenu("", cancel: "取消", object: ["保存图片","分享"], eventFlag: 0, target: self)
     }
@@ -80,7 +80,7 @@ class PersonInfo_TDCodeImageViewController: UIViewController {
         self.view.addSubview(imageView!)
     }
 
-    func image(_ image: UIImage, didFinishSavingWithError: NSError?,contextInfo: AnyObject){
+    @objc func image(_ image: UIImage, didFinishSavingWithError: NSError?,contextInfo: AnyObject){
         
         if didFinishSavingWithError != nil{
             ToastView().showToast("保存出错！")

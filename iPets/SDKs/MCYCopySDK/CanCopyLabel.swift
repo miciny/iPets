@@ -57,7 +57,7 @@ class CanCopyLabel: UILabel {
     }
     
     
-    func clickLabel() {
+    @objc func clickLabel() {
         
         guard isLongPressed == false else {
             return
@@ -96,7 +96,7 @@ class CanCopyLabel: UILabel {
         menu?.setMenuVisible(true, animated: true)
     }
     
-    func menuWillHide(){
+    @objc func menuWillHide(){
         self.resignFirstResponder()
         isLongPressed = false
         
@@ -111,23 +111,23 @@ class CanCopyLabel: UILabel {
     
     
     //复制
-    func copyText() {
+    @objc func copyText() {
         UIPasteboard.general.string = self.text
         ToastView().showToast("复制成功！")
     }
     
     //删除
-    func deleteText() {
+    @objc func deleteText() {
        
     }
     
     //分享
-    func shareText() {
+    @objc func shareText() {
         
     }
     
     //收藏
-    func collectThis(){
+    @objc func collectThis(){
         
     }
     

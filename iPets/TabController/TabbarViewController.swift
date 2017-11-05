@@ -53,13 +53,13 @@ class TabbarViewController: UITabBarController, UITabBarControllerDelegate {
     self.tabBar.barTintColor = UIColor(red: 245/255, green: 245/255, blue: 245/255, alpha: 0.5)
     
     //设置底部工具栏文字颜色（默认状态和选中状态）
-    UITabBarItem.appearance().setTitleTextAttributes(NSDictionary(object:UIColor.black, forKey:NSForegroundColorAttributeName as NSCopying) as? [String : AnyObject], for:UIControlState());
-    UITabBarItem.appearance().setTitleTextAttributes(NSDictionary(object: getMainColor(), forKey:NSForegroundColorAttributeName as NSCopying) as? [String : AnyObject], for:UIControlState.selected)
+    UITabBarItem.appearance().setTitleTextAttributes(NSDictionary(object:UIColor.black, forKey: NSAttributedStringKey.foregroundColor as NSCopying) as? [NSAttributedStringKey : AnyObject], for:UIControlState());
+    UITabBarItem.appearance().setTitleTextAttributes(NSDictionary(object: getMainColor(), forKey: NSAttributedStringKey.foregroundColor as NSCopying) as? [NSAttributedStringKey : AnyObject], for:UIControlState.selected)
     
     //导航栏颜色
     UINavigationBar.appearance().barTintColor = UIColor(red: 28/255, green: 28/255, blue: 28/255, alpha: 1.0)
     UINavigationBar.appearance().tintColor = UIColor.white  //导航栏左右按钮文字颜色
-    UINavigationBar.appearance().titleTextAttributes = [NSFontAttributeName: pageTitleFont, NSForegroundColorAttributeName: UIColor.white] //导航栏title文字颜色
+    UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.font: pageTitleFont, NSAttributedStringKey.foregroundColor: UIColor.white] //导航栏title文字颜色
     
     self.setNeedsStatusBarAppearanceUpdate()
     }

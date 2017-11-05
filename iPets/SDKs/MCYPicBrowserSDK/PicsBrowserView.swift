@@ -250,7 +250,7 @@ class PicsBrowserView: UIControl, UIScrollViewDelegate{
     
     //长按图片
     fileprivate var bottomMenu = MyBottomMenuView()
-    func picMore(){
+    @objc func picMore(){
         if bottomMenu.isShowingMenu == false {
             bottomMenu = MyBottomMenuView()
             let addArray = ["分享","保存"]
@@ -259,7 +259,7 @@ class PicsBrowserView: UIControl, UIScrollViewDelegate{
     }
     
     //点击图片
-    func tapedPic(){
+    @objc func tapedPic(){
         self.mainScrollview.backgroundColor = UIColor.clear
         self.backgroundColor = UIColor.clear
         
@@ -293,7 +293,7 @@ class PicsBrowserView: UIControl, UIScrollViewDelegate{
     }
     
     //保存图片回调的函数
-    func image(_ image: UIImage, didFinishSavingWithError: NSError?,contextInfo: AnyObject){
+    @objc func image(_ image: UIImage, didFinishSavingWithError: NSError?,contextInfo: AnyObject){
         
         if didFinishSavingWithError != nil{
             ToastView().showToast("保存出错！")

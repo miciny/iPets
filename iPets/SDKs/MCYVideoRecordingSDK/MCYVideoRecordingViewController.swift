@@ -27,7 +27,7 @@ class MCYVideoRecordingViewController: UIViewController, AVCaptureFileOutputReco
     var headerView: UIView!
     
     //  音频输入设备
-    let audioDevice = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeAudio)
+    let audioDevice = AVCaptureDevice.default(for: AVMediaType.audio)
     //  将捕获到的视频输出到文件
     let fileOut = AVCaptureMovieFileOutput()
     
@@ -77,16 +77,16 @@ class MCYVideoRecordingViewController: UIViewController, AVCaptureFileOutputReco
     
     //  MARK: - Private Methods
     func setupAVFoundationSettings() {
-        camera = cameraWithPosition(AVCaptureDevicePosition.back)
+        camera = cameraWithPosition(AVCaptureDevice.Position.back)
         
         //  设置视频清晰度
-        captureSession.sessionPreset = AVCaptureSessionPreset640x480
+        captureSession.sessionPreset = AVCaptureSession.Preset.vga640x480
         
         //  添加视频、音频输入设备
-        if let videoInput = try? AVCaptureDeviceInput(device: self.camera) {
+        if let videoInput = try? AVCaptureDeviceInput(device: self.camera!) {
             self.captureSession.addInput(videoInput)
         }
-        if let audioInput = try? AVCaptureDeviceInput(device: self.audioDevice) {
+        if let audioInput = try? AVCaptureDeviceInput(device: self.audioDevice!) {
             self.captureSession.addInput(audioInput)
         }
         
@@ -95,9 +95,9 @@ class MCYVideoRecordingViewController: UIViewController, AVCaptureFileOutputReco
         
         //  使用 AVCaptureVideoPreviewLayer 可以将摄像头拍到的实时画面显示在 ViewController 上
         let videoLayer = AVCaptureVideoPreviewLayer(session: self.captureSession)
-        videoLayer?.frame = view.bounds
-        videoLayer?.videoGravity = AVLayerVideoGravityResizeAspectFill
-        view.layer.addSublayer(videoLayer!)
+        videoLayer.frame = view.bounds
+        videoLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
+        view.layer.addSublayer(videoLayer)
         
         previewLayer = videoLayer
         
@@ -106,9 +106,9 @@ class MCYVideoRecordingViewController: UIViewController, AVCaptureFileOutputReco
     }
     
     //  选择摄像头
-    func cameraWithPosition(_ position: AVCaptureDevicePosition) -> AVCaptureDevice? {
-        let devices = AVCaptureDevice.devices(withMediaType: AVMediaTypeVideo)
-        for item in devices as! [AVCaptureDevice] {
+    func cameraWithPosition(_ position: AVCaptureDevice.Position) -> AVCaptureDevice? {
+        let devices = AVCaptureDevice.devices(for: AVMediaType.video)
+        for item in devices {
             if item.position == position {
                 return item
             }
@@ -196,7 +196,7 @@ class MCYVideoRecordingViewController: UIViewController, AVCaptureFileOutputReco
     //  MARK: - UIButton Actions
     //  按钮点击事件
     //  点击开始录制视频
-    func onClickedStartButton(_ startButton: UIButton) {
+    @objc func onClickedStartButton(_ startButton: UIButton) {
         hiddenHeaderView(true)
         saveBtn.isHidden = true
         self.setMaskView()
@@ -219,7 +219,7 @@ class MCYVideoRecordingViewController: UIViewController, AVCaptureFileOutputReco
             let filePath: String? = "\(documentDirectory)/\(nameStr).mp4"
             let fileUrl: URL? = URL(fileURLWithPath: filePath!)
             //  启动视频编码输出
-            fileOut.startRecording(toOutputFileURL: fileUrl!, recordingDelegate: self)
+            fileOut.startRecording(to: fileUrl!, recordingDelegate: self)
             
             //  开始、结束按钮改变颜色
             startButton.backgroundColor = UIColor.lightGray
@@ -230,7 +230,7 @@ class MCYVideoRecordingViewController: UIViewController, AVCaptureFileOutputReco
     }
     
     //  点击停止按钮，停止了录像
-    func onClickedEndButton(_ endButton: UIButton) {
+    @objc func onClickedEndButton(_ endButton: UIButton) {
         hiddenHeaderView(false)
         
         //  关闭计时器
@@ -260,7 +260,7 @@ class MCYVideoRecordingViewController: UIViewController, AVCaptureFileOutputReco
      
      - parameter videoUrl: 保存链接
      */
-    func saveVideoToAlbum() {
+    @objc func saveVideoToAlbum() {
         
         var theSuccess = true
         
@@ -285,7 +285,7 @@ class MCYVideoRecordingViewController: UIViewController, AVCaptureFileOutputReco
 
     
     //  录制时间
-    func videoRecordingTotolTime() {
+    @objc func videoRecordingTotolTime() {
         secondCount += 1
         
         //  判断是否录制超时
@@ -317,12 +317,12 @@ class MCYVideoRecordingViewController: UIViewController, AVCaptureFileOutputReco
     }
     
     //  返回上一页
-    func backAction() {
+    @objc func backAction() {
         self.dismiss(animated: true, completion: nil)
     }
     
     //  调整摄像头
-    func changeCamera(_ cameraSideButton: UIButton) {
+    @objc func changeCamera(_ cameraSideButton: UIButton) {
         cameraSideButton.isSelected = !cameraSideButton.isSelected
         captureSession.stopRunning()
         
@@ -333,10 +333,10 @@ class MCYVideoRecordingViewController: UIViewController, AVCaptureFileOutputReco
             }
         }
         
-        changeCameraAnimate()
+        self.changeCameraAnimate()
         
         //  添加音频输出
-        if let audioInput = try? AVCaptureDeviceInput(device: self.audioDevice) {
+        if let audioInput = try? AVCaptureDeviceInput(device: self.audioDevice!) {
             self.captureSession.addInput(audioInput)
         }
         
@@ -356,6 +356,8 @@ class MCYVideoRecordingViewController: UIViewController, AVCaptureFileOutputReco
                 captureSession.addInput(input)
             }
         }
+        
+        captureSession.startRunning()
     }
     
     //  切换动画
@@ -370,20 +372,20 @@ class MCYVideoRecordingViewController: UIViewController, AVCaptureFileOutputReco
     }
     
     //  开启闪光灯
-    func switchFlashLight(_ flashButton: UIButton) {
-        if self.camera?.position == AVCaptureDevicePosition.front {
+    @objc func switchFlashLight(_ flashButton: UIButton) {
+        if self.camera?.position == AVCaptureDevice.Position.front {
             return
         }
         let camera = cameraWithPosition(.back)
-        if camera?.torchMode == AVCaptureTorchMode.off {
+        if camera?.torchMode == AVCaptureDevice.TorchMode.off {
             do {
                 try camera?.lockForConfiguration()
             } catch let error as NSError {
                 logger.info("开启闪光灯失败 ： \(error)")
             }
             
-            camera?.torchMode = AVCaptureTorchMode.on
-            camera?.flashMode = AVCaptureFlashMode.on
+            camera?.torchMode = AVCaptureDevice.TorchMode.on
+            camera?.flashMode = AVCaptureDevice.FlashMode.on
             camera?.unlockForConfiguration()
             
             flashButton.isSelected = true
@@ -394,8 +396,8 @@ class MCYVideoRecordingViewController: UIViewController, AVCaptureFileOutputReco
                 logger.info("关闭闪光灯失败： \(error)")
             }
             
-            camera?.torchMode = AVCaptureTorchMode.off
-            camera?.flashMode = AVCaptureFlashMode.off
+            camera?.torchMode = AVCaptureDevice.TorchMode.off
+            camera?.flashMode = AVCaptureDevice.FlashMode.off
             camera?.unlockForConfiguration()
             
             flashButton.isSelected = false
@@ -415,17 +417,17 @@ class MCYVideoRecordingViewController: UIViewController, AVCaptureFileOutputReco
         mask.addGestureRecognizer(tapGesture)
     }
     
-    func disMask(){
+    @objc func disMask(){
         UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent
         mask.removeFromSuperview()
     }
     
     //  MARK: - 录像代理方法
-    func capture(_ captureOutput: AVCaptureFileOutput!, didStartRecordingToOutputFileAt fileURL: URL!, fromConnections connections: [Any]!) {
+    func fileOutput(_ captureOutput: AVCaptureFileOutput, didStartRecordingTo fileURL: URL, from connections: [AVCaptureConnection]) {
         //  开始
     }
     
-    func capture(_ captureOutput: AVCaptureFileOutput!, didFinishRecordingToOutputFileAt outputFileURL: URL!, fromConnections connections: [Any]!, error: Error!) {
+    func fileOutput(_ captureOutput: AVCaptureFileOutput, didFinishRecordingTo outputFileURL: URL, from connections: [AVCaptureConnection], error: Error?) {
         //  结束
         self.videoUrl = outputFileURL
     }

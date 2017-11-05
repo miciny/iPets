@@ -140,7 +140,7 @@ class ContectorInfoViewController: UIViewController, UITableViewDelegate, UITabl
         return footerView
     }
     
-    func sendCircle(){
+    @objc func sendCircle(){
         let data = SaveDataModel()
         data.setUserData(key: "Circle", value: contectorNickName as Any)
         
@@ -154,7 +154,7 @@ class ContectorInfoViewController: UIViewController, UITableViewDelegate, UITabl
         ToastView().showToast("发送成功")
     }
     
-    func sendMsg(){
+    @objc func sendMsg(){
         //同步存储到聊天主界面的数据库
         var isExsit = false
         

@@ -320,13 +320,13 @@ extension ShowPicViewController{
     }
     
     // 点击图片，view消失,后续加动画
-    func dismissIntroView(){
+    @objc func dismissIntroView(){
         self.introView?.isHidden = !(self.introView?.isHidden)!
         self.backView?.isHidden = !(self.backView?.isHidden)!
     }
     
     //返回
-    func back(){
+    @objc func back(){
         self.navigationController?.popViewController(animated: true)
     }
     

@@ -12,7 +12,7 @@ import AVFoundation
 
 class RichScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate{
 
-    let device = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
+    let device = AVCaptureDevice.default(for: AVMediaType.video)
     let session = AVCaptureSession()
     var layer: AVCaptureVideoPreviewLayer?
     
@@ -67,13 +67,13 @@ class RichScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDe
     
     //初始化摄像头
     func setupCamera(){
-        self.session.sessionPreset = AVCaptureSessionPresetHigh
+        self.session.sessionPreset = AVCaptureSession.Preset.high
         var error : NSError?
         let input: AVCaptureDeviceInput!
         
         //获取权限等
         do {
-            input = try AVCaptureDeviceInput(device: device)
+            input = try AVCaptureDeviceInput(device: device!)
         } catch let error1 as NSError {
             error = error1
             input = nil
@@ -95,7 +95,7 @@ class RichScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDe
         }
         
         layer = AVCaptureVideoPreviewLayer(session: session)
-        layer!.videoGravity = AVLayerVideoGravityResizeAspectFill
+        layer!.videoGravity = AVLayerVideoGravity.resizeAspectFill
         //可以看到的镜头区域
         layer!.frame = CGRect(x: 0, y: 0, width: Width, height: Height)
         self.view.layer.insertSublayer(self.layer!, at: 0)
@@ -106,13 +106,13 @@ class RichScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDe
         output.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
         if session.canAddOutput(output) {
             session.addOutput(output)
-            output.metadataObjectTypes = [AVMetadataObjectTypeQRCode];
+            output.metadataObjectTypes = [AVMetadataObject.ObjectType.qr];
         }
         session.startRunning()
     }
     
     //扫描完成的代理方法
-    func captureOutput(_ captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [Any]!, from connection: AVCaptureConnection!) {
+    func metadataOutput(captureOutput: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
         
         var stringValue: String?
         

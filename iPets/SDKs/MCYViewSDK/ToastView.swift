@@ -21,9 +21,9 @@ class ToastView: NSObject{
     
     //根据文字大小和数量，返回一个size
     private func sizeWithString(_ string: NSString, font: UIFont) -> CGSize {
-        let dic:NSDictionary = NSDictionary(object: font, forKey: NSFontAttributeName as NSCopying)
+        let dic:NSDictionary = NSDictionary(object: font, forKey: NSAttributedStringKey.font as NSCopying)
         let options = NSStringDrawingOptions.truncatesLastVisibleLine
-        let rect:CGRect = string.boundingRect(with: frameSize, options:options, attributes: dic as? [String : AnyObject], context: nil)
+        let rect:CGRect = string.boundingRect(with: frameSize, options:options, attributes: dic as? [NSAttributedStringKey : AnyObject], context: nil)
         return rect.size
     }
     

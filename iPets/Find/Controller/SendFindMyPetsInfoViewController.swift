@@ -48,14 +48,14 @@ class SendFindMyPetsInfoViewController: UIViewController, UITableViewDelegate, U
     }
     
     //返回
-    func backToPrevious() {
+    @objc func backToPrevious() {
         if let vc = findPetsViewController{
             vc.refresh = true
         }
         self.dismiss(animated: true, completion: nil)
     }
     
-    func savePic(){
+    @objc func savePic(){
         timer.pauseTimer()
         //在列表页显示缩略图
         let asset = selectedModel[picIndex].asset!
@@ -74,7 +74,7 @@ class SendFindMyPetsInfoViewController: UIViewController, UITableViewDelegate, U
     }
 
     //发送
-    func sendFindMyPetsInfo(){
+    @objc func sendFindMyPetsInfo(){
         let waitView = WaitView()
         waitView.showWait("发布中")
         

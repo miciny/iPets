@@ -162,7 +162,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDe
     }
     
     //返回
-    func backToPrevious() {
+    @objc func backToPrevious() {
         self.dismiss(animated: false, completion: nil)
     }
     
@@ -299,7 +299,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDe
     }
     
     //点击了热门搜索
-    func tapedHot(_ sender: UITapGestureRecognizer){
+    @objc func tapedHot(_ sender: UITapGestureRecognizer){
         
         let label = sender.view as! UILabel
         let info = isExist(label.text!)

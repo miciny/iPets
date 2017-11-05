@@ -431,7 +431,7 @@ extension HandWrittingMainViewController {
 //上传
 extension HandWrittingMainViewController: UploadNumberSelectorViewDelegate{
     
-    func markUpload(){
+    @objc func markUpload(){
         if self.markFlag == false{
             self.markBtn?.title = "取消\(self.markNumber)"
             self.markFlag = true

@@ -20,7 +20,7 @@
 import UIKit
 import Alamofire
 import Kingfisher
-import ReachabilitySwift
+import Reachability
 
 //判断网络
 enum networkType{
@@ -57,9 +57,9 @@ class NetFuncs: NSObject {
         let reachability = Reachability()!
         
         //判断连接类型
-        if reachability.isReachableViaWiFi {
+        if reachability.connection == .wifi {
             return networkType.wifi
-        }else if reachability.isReachableViaWWAN {
+        }else if reachability.connection == .cellular {
             return networkType.cell
         }else {
             return networkType.nonet

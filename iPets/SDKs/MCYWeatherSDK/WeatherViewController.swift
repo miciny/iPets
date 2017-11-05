@@ -169,7 +169,7 @@ class WeatherViewController: UIViewController, UIScrollViewDelegate {
         vImg.image = img
     }
     
-    func back(){
+    @objc func back(){
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -451,7 +451,7 @@ class WeatherViewController: UIViewController, UIScrollViewDelegate {
         
     }
     
-    func addressClicked(){
+    @objc func addressClicked(){
         self.checkAddressCache()
     }
     

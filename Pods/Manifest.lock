@@ -1,51 +1,42 @@
 PODS:
-  - Alamofire (4.0.1)
-  - Cartography (1.1.0)
-  - Charts (3.0.2):
-    - Charts/Core (= 3.0.2)
-  - Charts/Core (3.0.2)
-  - Kingfisher (3.6.2)
+  - Alamofire (4.5.1)
+  - Cartography (3.0.0)
+  - Charts (3.0.4):
+    - Charts/Core (= 3.0.4)
+  - Charts/Core (3.0.4)
+  - Kingfisher (4.2.0)
   - MCYRefresher (1.0.6)
   - ObjcExceptionBridging (1.0.1):
     - ObjcExceptionBridging/ObjcExceptionBridging (= 1.0.1)
   - ObjcExceptionBridging/ObjcExceptionBridging (1.0.1)
-  - ReachabilitySwift (3)
-  - SwiftyJSON (3.1.4)
-  - XCGLogger (5.0.1):
-    - XCGLogger/Core (= 5.0.1)
-  - XCGLogger/Core (5.0.1):
+  - ReachabilitySwift (4.1.0)
+  - SwiftyJSON (4.0.0-alpha.1)
+  - XCGLogger (6.0.1):
+    - XCGLogger/Core (= 6.0.1)
+  - XCGLogger/Core (6.0.1):
     - ObjcExceptionBridging
 
 DEPENDENCIES:
-  - Alamofire (~> 4.0.1)
-  - Cartography (~> 1.1.0)
-  - Charts (~> 3.0.2)
-  - Kingfisher (~> 3.6.0)
+  - Alamofire (~> 4.5)
+  - Cartography (~> 3.0.0)
+  - Charts (~> 3.0.4)
+  - Kingfisher (~> 4.2)
   - MCYRefresher (~> 1.0.6)
-  - ReachabilitySwift (~> 3)
-  - SwiftyJSON (from `https://github.com/SwiftyJSON/SwiftyJSON.git`)
-  - XCGLogger (~> 5.0.1)
-
-EXTERNAL SOURCES:
-  SwiftyJSON:
-    :git: https://github.com/SwiftyJSON/SwiftyJSON.git
-
-CHECKOUT OPTIONS:
-  SwiftyJSON:
-    :commit: d932f6498b9acdd286e65ff6691c3dd3518b086e
-    :git: https://github.com/SwiftyJSON/SwiftyJSON.git
+  - ReachabilitySwift (~> 4.1.0)
+  - SwiftyJSON (~> 4.0.0-alpha.1)
+  - XCGLogger (~> 6.0.1)
 
 SPEC CHECKSUMS:
-  Alamofire: 7682d43245de14874acd142ec137b144aa1dd335
-  Cartography: 0538ccb4044acbbda2266335fc58cb4228794d90
-  Charts: 236d6ccdd0ce6feae151d89e829a7397381a21fd
-  Kingfisher: 2c94e72c6830622c71d06adf4ea024c37d316830
+  Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
+  Cartography: 105643267226a7ab58895b94b44727eb013e31ce
+  Charts: 0705898046257443f0afbbc3179f4b67507b6e48
+  Kingfisher: 9ee7e788d8ba07c3f21ce0d43f33cec310a4f781
   MCYRefresher: 82c09885ba7a18bcfa1c3ce2f5aa4a7d3b12e5f2
   ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
-  ReachabilitySwift: f5b9bb30a0777fac8f09ce8b067e32faeb29bb64
-  SwiftyJSON: 05cf0e98a950e2ba343735264f5a96b81e755d00
-  XCGLogger: 0b43697155d41e4a1b15fc776f319c2141646b09
+  ReachabilitySwift: 6849231cd4e06559f3b9ef4a97a0a0f96d41e09f
+  SwiftyJSON: dc88934f85fb50b263b1632b9cbad3402505783e
+  XCGLogger: b4ca980580108cfeaf221afe158f5d89c1be22e0
 
-PODFILE CHECKSUM: 1445223f7b39877502a19cecd7288a834bd10eb5
+PODFILE CHECKSUM: 15ef99a8d7099b831f8dd7958942650bf3b3ba59
 
-COCOAPODS: 1.3.0.beta.1
+COCOAPODS: 1.4.0.beta.2

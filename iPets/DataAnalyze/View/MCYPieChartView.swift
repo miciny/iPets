@@ -65,8 +65,8 @@ class MCYPieChartView: UIView {
         paragraphStyle.alignment = .center
         paragraphStyle.lineSpacing = 5
         
-        centerText.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyle, range: NSMakeRange(0, centerText.length))
-        centerText.addAttribute(NSFontAttributeName, value: periodsFont, range: NSMakeRange(0, length))
+        centerText.addAttribute(NSAttributedStringKey.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, centerText.length))
+        centerText.addAttribute(NSAttributedStringKey.font, value: periodsFont, range: NSMakeRange(0, length))
         
         pieChart.centerAttributedText = centerText
         

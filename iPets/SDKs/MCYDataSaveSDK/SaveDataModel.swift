@@ -192,7 +192,6 @@ class SaveDataModel: NSObject {
         let archiver = NSKeyedArchiver(forWritingWith: data)
         //将lists以对应Checklist关键字进行编码
         archiver.encode(findPetsCellModelData, forKey: "FindMyPetsDataArray")
-        
         //编码结束
         archiver.finishEncoding()
         

@@ -138,7 +138,7 @@ class NewsChannelView: UIView, UIScrollViewDelegate, newsPageChangedDelegate{
     }
     
     //点击按钮后，用代理通知newsroot页显示
-    func channelBtnClicked(_ sender: UIButton){
+    @objc func channelBtnClicked(_ sender: UIButton){
         let index = sender.tag
         
         UIView.animate(withDuration: 0.2, animations: {

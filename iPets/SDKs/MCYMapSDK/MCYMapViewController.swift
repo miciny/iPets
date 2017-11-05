@@ -109,7 +109,7 @@ class MCYMapViewController: UIViewController, MKMapViewDelegate, CLLocationManag
     }
     
     //设置地图上的大头针
-    func setLocation(){
+    @objc func setLocation(){
         guard latitude != nil else {
             ToastView().showToast("定位失败！")
             return

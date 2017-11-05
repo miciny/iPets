@@ -148,7 +148,7 @@ class ChatTableViewCell: UITableViewCell, MessageItemDelegate, AudioPlayerDelega
     }
 
 //========================================点击音频的处理理==================================
-    func tapVoice(){
+    @objc func tapVoice(){
         let plyer = AudioPlayer.shared
         if plyer.audioPath != nil && plyer.audioPath == msgItem.voicePath!{
             plyer.stopAudio()
@@ -173,7 +173,7 @@ class ChatTableViewCell: UITableViewCell, MessageItemDelegate, AudioPlayerDelega
         timer = nil
     }
     
-    func changeVoiceImage(){
+    @objc func changeVoiceImage(){
         if self.msgItem.voiceImageView?.tag == 1{
             self.msgItem.voiceImageView?.image = UIImage(named: "SenderVoiceNodePlaying01")
             self.msgItem.voiceImageView?.tag = 2
@@ -211,13 +211,13 @@ class ChatTableViewCell: UITableViewCell, MessageItemDelegate, AudioPlayerDelega
     
 
 //========================================头像点击事件==================================
-    func tapedIcon(){
+    @objc func tapedIcon(){
         self.cellDelegate?.pushToPersonInfoView(name: self.msgItem.user.nickname!)        //进入个人信息页
     }
     
     
 //========================================图片点击事件==================================
-    func tapedPic(_ sender: UITapGestureRecognizer){
+    @objc func tapedPic(_ sender: UITapGestureRecognizer){
         self.cellDelegate?.tapedPic()
         
         let wait = WaitView()

@@ -101,7 +101,7 @@ class ShowSinglePicView: UIView, UIScrollViewDelegate{
     }
     
     //点击图片，消失
-    func tapedPic(){
+    @objc func tapedPic(){
         self.backgroundColor = UIColor.clear
         self.mainView.backgroundColor = UIColor.clear
         //动画
@@ -115,7 +115,7 @@ class ShowSinglePicView: UIView, UIScrollViewDelegate{
     
     //弹出添加的actionView
     fileprivate var bottomMenu = MyBottomMenuView()
-    func picMore(){
+    @objc func picMore(){
         if bottomMenu.isShowingMenu == false {
             bottomMenu = MyBottomMenuView()
             let addArray = ["分享","保存"]
@@ -124,7 +124,7 @@ class ShowSinglePicView: UIView, UIScrollViewDelegate{
     }
     
     //保存图片回调的函数
-    func image(_ image: UIImage, didFinishSavingWithError: NSError?,contextInfo: AnyObject){
+    @objc func image(_ image: UIImage, didFinishSavingWithError: NSError?,contextInfo: AnyObject){
         
         if didFinishSavingWithError != nil{
             ToastView().showToast("保存出错！")

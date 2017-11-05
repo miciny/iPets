@@ -96,14 +96,14 @@ class SellBuyViewController: UIViewController, UIScrollViewDelegate, UICollectio
         self.navigationItem.titleView = titleView
     }
     
-    func addressButtonClicked(){
+    @objc func addressButtonClicked(){
         let map = MCYMapViewController()
         map.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(map, animated: true)
     }
     
     //点击右上角的添加按钮
-    func addButtonClicked(){
+    @objc func addButtonClicked(){
         if(addActionView?.superview == nil){
             addActionView = ActionMenuView(object: addArray, origin: CGPoint(x: Width, y: navigateBarHeight), target: self, showInView: self.view)
         }else{
@@ -179,7 +179,7 @@ class SellBuyViewController: UIViewController, UIScrollViewDelegate, UICollectio
     
 
     //长按排序
-    func handleLongGesture(_ gesture: UILongPressGestureRecognizer) {
+    @objc func handleLongGesture(_ gesture: UILongPressGestureRecognizer) {
         
         switch(gesture.state) {
             
@@ -395,7 +395,7 @@ extension SellBuyViewController: UICollectionViewDataSource {
 extension SellBuyViewController: UIViewControllerTransitioningDelegate, SearchViewDelegate{
     
     //进入搜索页
-    func searchButtonClicked(){
+    @objc func searchButtonClicked(){
         
         let searchPage = SearchViewController()
         searchPage.delegate = self

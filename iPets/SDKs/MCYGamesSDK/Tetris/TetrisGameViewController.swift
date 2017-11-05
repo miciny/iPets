@@ -97,7 +97,7 @@ class TetrisGameViewController: UIViewController, controllerViewDelegate, mainVi
     }
     
     //设置暂停的弹层
-    func setGamePause(){
+    @objc func setGamePause(){
         self.mainView?.pauseGame()
         if pauseView == nil{
             pauseView = PauseView(frame: self.view.frame, delegate: self)

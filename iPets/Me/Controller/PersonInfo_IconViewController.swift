@@ -53,7 +53,7 @@ class PersonInfo_IconViewController: UIViewController, UIImagePickerControllerDe
     }
     
     //右上角的点击事件
-    func addButtonClicked(){
+    @objc func addButtonClicked(){
         let bottomMenu = MyBottomMenuView()
         bottomMenu.showBottomMenu("", cancel: "取消", object: ["拍照","从手机相册选择"], eventFlag: 0, target: self)
     }

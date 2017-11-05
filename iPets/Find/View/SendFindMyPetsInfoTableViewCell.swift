@@ -29,7 +29,7 @@ class SendFindMyPetsInfoTableViewCell: UITableViewCell {
     }
     
     //点击处理
-    func selectedAddMorePic(){
+    @objc func selectedAddMorePic(){
         self.delegate?.addMorePic()
     }
     

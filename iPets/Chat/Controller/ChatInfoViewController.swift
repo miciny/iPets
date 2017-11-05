@@ -133,7 +133,7 @@ class ChatInfoViewController: UIViewController, UITableViewDelegate, UITableView
         return 15
     }
     
-    func switchChanged_Notice(){
+    @objc func switchChanged_Notice(){
         //聊天的设置数据保存
         let chatsData = SaveDataModel()
         var chatSettingData = chatsData.loadChatSettingDataFromTempDirectory()
@@ -158,7 +158,7 @@ class ChatInfoViewController: UIViewController, UITableViewDelegate, UITableView
 
     }
     
-    func switchChanged(){
+    @objc func switchChanged(){
         //聊天的设置数据保存
         let chatsData = SaveDataModel()
         var chatSettingData = chatsData.loadChatSettingDataFromTempDirectory()

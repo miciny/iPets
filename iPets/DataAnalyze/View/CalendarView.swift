@@ -282,7 +282,7 @@ class CalendarView: UIView{
         }
     }
     
-    func btnToToday_Click(){
+    @objc func btnToToday_Click(){
         
         var date = Date()
         var conpare = Int()
@@ -305,7 +305,7 @@ class CalendarView: UIView{
         AddMain()
     }
     
-    func btnLeft_Click(){
+    @objc func btnLeft_Click(){
         
         var date = Date()
         //得到年月的1号
@@ -324,7 +324,7 @@ class CalendarView: UIView{
         AddMain()
     }
     
-    func btnRight_Click(){
+    @objc func btnRight_Click(){
         
         var date = Date()
         //得到年月的1号
@@ -341,7 +341,7 @@ class CalendarView: UIView{
         AddMain()
     }
     
-    func btnyyyymmdd_Click(){
+    @objc func btnyyyymmdd_Click(){
         let pickerView = DatePickerView(view: self, target: self)
         pickerView.buttonYear = nowDate.currentYear
         pickerView.buttonMonth = nowDate.currentMonth
@@ -350,7 +350,7 @@ class CalendarView: UIView{
     }
     
     //点击处理
-    func selectedCheck(_ sender: UITapGestureRecognizer){
+    @objc func selectedCheck(_ sender: UITapGestureRecognizer){
         let btn = sender.view as! UILabel
         if(btn.text != nil){
             self.delegate?.itemClicked(btn.text! as String , yyyymm: (btnyyyymmdd.titleLabel?.text)! as String)
@@ -377,7 +377,7 @@ class CalendarView: UIView{
     
     
     //划动手势
-    func _handleSwipeGesture(_ sender: UISwipeGestureRecognizer){
+    @objc func _handleSwipeGesture(_ sender: UISwipeGestureRecognizer){
         //划动的方向
         let direction = sender.direction
         //判断是上下左右

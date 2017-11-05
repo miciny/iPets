@@ -75,7 +75,7 @@ class FindPetsViewController: UIViewController, UITableViewDataSource, UITableVi
         self.navigationItem.rightBarButtonItem = addItem
     }
     
-    func addButtonClicked(){
+    @objc func addButtonClicked(){
         self.removerMoreView()
         if(addActionView?.superview == nil){
             addActionView = ActionMenuView(object: addArray, origin: CGPoint(x: Width, y: navigateBarHeight), target: self, showInView: self.view)
@@ -273,7 +273,7 @@ class FindPetsViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     //more按钮
-    func moreFindPets(_ sender: UITapGestureRecognizer){
+    @objc func moreFindPets(_ sender: UITapGestureRecognizer){
         let moreImageView = sender.view!
         let cell = moreImageView.superview!
         
@@ -290,7 +290,7 @@ class FindPetsViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     //删除按钮
-    func deleteFindPets(_ sender: UIButton){
+    @objc func deleteFindPets(_ sender: UIButton){
         deledeIndex = sender.tag
         let deleteAlertView = UIAlertController(title: "您确定要删除吗？", message: nil, preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)

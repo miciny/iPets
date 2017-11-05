@@ -14,7 +14,7 @@ enum FindPetsDataFromType: String{
     case other = "other"
 }
 
-class FindPetsCellModel: NSObject {
+class FindPetsCellModel: NSObject, NSCoding{
     var name: String
     var nickname: String
     var text: String?
@@ -37,7 +37,7 @@ class FindPetsCellModel: NSObject {
     }
     
     //从nsobject解析回来
-    init(coder aDecoder: NSCoder!){
+    required init(coder aDecoder: NSCoder){
         self.name = aDecoder.decodeObject(forKey: "name") as! String
         self.text = aDecoder.decodeObject(forKey: "text") as? String
         self.picture = aDecoder.decodeObject(forKey: "picture") as? [String]
@@ -48,13 +48,15 @@ class FindPetsCellModel: NSObject {
     }
     
     //编码成object
-    func encodeWithCoder(_ aCoder: NSCoder!){
-        aCoder.encode(name, forKey:"name")
-        aCoder.encode(text, forKey:"text")
-        aCoder.encode(picture, forKey:"picture")
-        aCoder.encode(date, forKey:"date")
-        aCoder.encode(nickname, forKey:"nickname")
-        aCoder.encode(video, forKey:"video")
-        aCoder.encode(from, forKey:"from")
+    func encode(with aCoder: NSCoder){
+        
+        aCoder.encode(self.name, forKey:"name")
+        aCoder.encode(self.text, forKey:"text")
+        aCoder.encode(self.picture, forKey:"picture")
+        aCoder.encode(self.date, forKey:"date")
+        aCoder.encode(self.nickname, forKey:"nickname")
+        aCoder.encode(self.video, forKey:"video")
+        aCoder.encode(self.from, forKey:"from")
+        
     }
 }

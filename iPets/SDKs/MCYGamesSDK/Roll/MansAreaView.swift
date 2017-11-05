@@ -65,7 +65,7 @@ class MansAreaView: UIView {
     }
     
     //点击人头像事件
-    func tapMan(_ sender: UITapGestureRecognizer){
+    @objc func tapMan(_ sender: UITapGestureRecognizer){
         let view = sender.view as! UIImageView
         let tag = view.tag
         

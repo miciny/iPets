@@ -74,7 +74,7 @@ class HandWrittingMainView: UIView {
         outputTitleLabel.textAlignment = .center
         
         // Output
-        outputLabel.font = UIFont.systemFont(ofSize: 100, weight: UIFontWeightLight)
+        outputLabel.font = UIFont.systemFont(ofSize: 100, weight: UIFont.Weight.light)
         outputLabel.textAlignment = .center
         
         // Confidence

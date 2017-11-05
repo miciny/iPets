@@ -204,8 +204,10 @@
 		E18C41CE1EFCD06500AFF37C /* ChatInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18C41CD1EFCD06400AFF37C /* ChatInfoViewController.swift */; };
 		E18C41D01EFCD0D800AFF37C /* ChatInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18C41CF1EFCD0D800AFF37C /* ChatInfoTableViewCell.swift */; };
 		E18C41D21EFCD0F100AFF37C /* ChatInfoViewDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18C41D11EFCD0F100AFF37C /* ChatInfoViewDataModel.swift */; };
+		E1901DB01F52D6EE0054AD79 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1901DAF1F52D6EE0054AD79 /* LoginViewController.swift */; };
+		E1901DB21F52DB850054AD79 /* SettingNetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1901DB11F52DB850054AD79 /* SettingNetViewController.swift */; };
 		E1ADCFAB1F32CB00007B3095 /* UploadNumberSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1ADCFAA1F32CB00007B3095 /* UploadNumberSelectorView.swift */; };
-		E1ADCFAD1F32D536007B3095 /* neuralnet-mnist-trained in Resources */ = {isa = PBXBuildFile; fileRef = E1ADCFAC1F32D536007B3095 /* neuralnet-mnist-trained */; };
+		E1ADD0301F345C86007B3095 /* neuralnet-mnist-trained in Resources */ = {isa = PBXBuildFile; fileRef = E1ADD02F1F345C86007B3095 /* neuralnet-mnist-trained */; };
 		E1ADD75D1ED6CD29000BCBC4 /* MyTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1ADD75C1ED6CD29000BCBC4 /* MyTimer.swift */; };
 		E1ADD75F1EDFE899000BCBC4 /* Temp.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E1ADD75E1EDFE899000BCBC4 /* Temp.xcassets */; };
 		E1C2ED1B1EFD235100F2F3BB /* FindPetsTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1C2ED1A1EFD235100F2F3BB /* FindPetsTableHeaderView.swift */; };
@@ -495,8 +497,10 @@
 		E18C41CD1EFCD06400AFF37C /* ChatInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatInfoViewController.swift; sourceTree = "<group>"; };
 		E18C41CF1EFCD0D800AFF37C /* ChatInfoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatInfoTableViewCell.swift; sourceTree = "<group>"; };
 		E18C41D11EFCD0F100AFF37C /* ChatInfoViewDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatInfoViewDataModel.swift; sourceTree = "<group>"; };
+		E1901DAF1F52D6EE0054AD79 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		E1901DB11F52DB850054AD79 /* SettingNetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingNetViewController.swift; sourceTree = "<group>"; };
 		E1ADCFAA1F32CB00007B3095 /* UploadNumberSelectorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadNumberSelectorView.swift; sourceTree = "<group>"; };
-		E1ADCFAC1F32D536007B3095 /* neuralnet-mnist-trained */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "neuralnet-mnist-trained"; sourceTree = "<group>"; };
+		E1ADD02F1F345C86007B3095 /* neuralnet-mnist-trained */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "neuralnet-mnist-trained"; sourceTree = "<group>"; };
 		E1ADD75C1ED6CD29000BCBC4 /* MyTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyTimer.swift; sourceTree = "<group>"; };
 		E1ADD75E1EDFE899000BCBC4 /* Temp.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Temp.xcassets; sourceTree = "<group>"; };
 		E1C2ED1A1EFD235100F2F3BB /* FindPetsTableHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindPetsTableHeaderView.swift; sourceTree = "<group>"; };
@@ -668,7 +672,7 @@
 		E14197C91CA1A6BE00EDD443 /* iPets */ = {
 			isa = PBXGroup;
 			children = (
-				E1ADCFAC1F32D536007B3095 /* neuralnet-mnist-trained */,
+				E1ADD02F1F345C86007B3095 /* neuralnet-mnist-trained */,
 				E10B34DC1EEA9E0100D65C9F /* LocalNews.js */,
 				E1767A451F05EAB300225D9E /* ShopCarTestData.geojson */,
 				E1767A5E1F06471400225D9E /* DataAnalyze */,
@@ -707,6 +711,8 @@
 			children = (
 				E126FD0A1CFD6E7700DAFF84 /* AppDelegate.swift */,
 				E126FD0F1CFD6E7700DAFF84 /* TabbarViewController.swift */,
+				E1901DAF1F52D6EE0054AD79 /* LoginViewController.swift */,
+				E1901DB11F52DB850054AD79 /* SettingNetViewController.swift */,
 			);
 			name = TabControllers;
 			path = ../../../../Users/miciny/ToGitHub/iPets/iPets/TabController;
@@ -1609,13 +1615,13 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0830;
+				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = maocaiyuan;
 				TargetAttributes = {
 					E14197C61CA1A6BE00EDD443 = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = 4AB7FQ4W8L;
-						LastSwiftMigration = 0830;
+						LastSwiftMigration = 0900;
 					};
 				};
 			};
@@ -1681,7 +1687,7 @@
 				E10E44671CC62B3500D9992A /* Home.xcassets in Resources */,
 				E16322B21EF29E0A0022F40D /* 13.png in Resources */,
 				E17528C61ED4090B00269EDF /* Setting.xcassets in Resources */,
-				E1ADCFAD1F32D536007B3095 /* neuralnet-mnist-trained in Resources */,
+				E1ADD0301F345C86007B3095 /* neuralnet-mnist-trained in Resources */,
 				E16322AA1EF29E090022F40D /* 5.png in Resources */,
 				E10E44691CC62B3500D9992A /* Me.xcassets in Resources */,
 				E16322181EF2374D0022F40D /* day.jpeg in Resources */,
@@ -1728,9 +1734,28 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-iPets/Pods-iPets-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Cartography/Cartography.framework",
+				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
+				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
+				"${BUILT_PRODUCTS_DIR}/MCYRefresher/MCYRefresher.framework",
+				"${BUILT_PRODUCTS_DIR}/ObjcExceptionBridging/ObjcExceptionBridging.framework",
+				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/XCGLogger/XCGLogger.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Cartography.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MCYRefresher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjcExceptionBridging.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XCGLogger.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1743,13 +1768,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-iPets-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		63D6FA484313A2D2FF0184F0 /* [CP] Copy Pods Resources */ = {
@@ -1807,6 +1835,7 @@
 				E17528781ED4049900269EDF /* SettingTableViewCell.swift in Sources */,
 				E17528661ED4034D00269EDF /* SearchResultViewController.swift in Sources */,
 				E16322DD1EF3E2EE0022F40D /* MCYVideoRecordingViewController.swift in Sources */,
+				E1901DB21F52DB850054AD79 /* SettingNetViewController.swift in Sources */,
 				E18C41D21EFCD0F100AFF37C /* ChatInfoViewDataModel.swift in Sources */,
 				E1D3C84E1F0F7382003AAE3C /* PrizeAreaView.swift in Sources */,
 				E17528AC1ED406D000269EDF /* BubbleItem.swift in Sources */,
@@ -1886,6 +1915,7 @@
 				E144083B1EEFE28400C8E23B /* TetrisElementsModules.swift in Sources */,
 				E17528681ED4034D00269EDF /* SellBuyViewController.swift in Sources */,
 				E1F23ECF1F3079750019CFED /* Dataset.swift in Sources */,
+				E1901DB01F52D6EE0054AD79 /* LoginViewController.swift in Sources */,
 				E18C41AA1EF8B99A00AFF37C /* MusicPlayView.swift in Sources */,
 				E12A38B51EEA78BE00755C6C /* FindViewController.swift in Sources */,
 				E17528791ED4049900269EDF /* MeViewCell.swift in Sources */,
@@ -2003,14 +2033,20 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -2050,14 +2086,20 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -2097,7 +2139,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.maocaiyuan.personal.iPets;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -2116,7 +2159,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.maocaiyuan.personal.iPets;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};

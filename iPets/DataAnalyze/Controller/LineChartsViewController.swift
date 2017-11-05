@@ -159,7 +159,7 @@ class LineChartsViewController: UIViewController {
     
     
 //==============================日期========================
-    func setDateView(){
+    @objc func setDateView(){
         if calendar != nil{
             calendar?.removeFromSuperview()
             calendar = nil

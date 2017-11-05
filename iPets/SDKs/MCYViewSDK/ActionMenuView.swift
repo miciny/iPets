@@ -29,9 +29,9 @@ class ActionMenuView: UIView {
     
     //返回字体的size
     fileprivate func sizeWithString(_ string: String, font: UIFont) -> CGSize{
-        let dic = NSDictionary(object: font, forKey: NSFontAttributeName as NSCopying)
+        let dic = NSDictionary(object: font, forKey: NSAttributedStringKey.font as NSCopying)
         let options = NSStringDrawingOptions.truncatesLastVisibleLine
-        let rect:CGRect = string.boundingRect(with: frameSize, options:options, attributes: dic as? [String : AnyObject], context: nil)
+        let rect:CGRect = string.boundingRect(with: frameSize, options:options, attributes: dic as? [NSAttributedStringKey : AnyObject], context: nil)
         return rect.size
     }
     
@@ -202,7 +202,7 @@ class ActionMenuView: UIView {
     
     
     //隐藏
-    func hideView(){
+    @objc func hideView(){
         UIView.animate(withDuration: 0.2, animations: {
             () -> ()in
             self.alpha = 0

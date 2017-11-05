@@ -53,9 +53,9 @@ class MineCalculate: NSObject {
     
     //根据文字获得大小
     class func sizeWithText(_ text: NSString, font: UIFont, maxSize: CGSize) -> CGSize{
-        let attrs : NSDictionary = [NSFontAttributeName:font]
+        let attrs : NSDictionary = [NSAttributedStringKey.font:font]
         return text.boundingRect(with: maxSize, options: .usesLineFragmentOrigin,
-                                 attributes: attrs as? [String : AnyObject], context: nil).size
+                                 attributes: attrs as? [NSAttributedStringKey : AnyObject], context: nil).size
     }
     
     //判断字符串为数字

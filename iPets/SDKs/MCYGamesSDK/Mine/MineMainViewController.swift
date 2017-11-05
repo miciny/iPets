@@ -48,7 +48,7 @@ class MineMainViewController: UIViewController{
     }
     
     //重制
-    func resetAll(){
+    @objc func resetAll(){
         self.setMinePosition()  //设置雷的位置
         self.mineView?.removeFromSuperview()
         self.mineView = nil
@@ -58,7 +58,7 @@ class MineMainViewController: UIViewController{
     }
     
     //标记
-    func markMine(){
+    @objc func markMine(){
         if self.mineView?.markFlag == false{
             self.markBtn?.title = "取消标记"
             self.mineView?.markFlag = true
@@ -114,7 +114,7 @@ class MineMainViewController: UIViewController{
     }
     
     //按钮点击事件
-    func simpleRestart(){
+    @objc func simpleRestart(){
         self.viewCount = 10
         self.mineCount = 30
         simpleBtn.backgroundColor = UIColor.red
@@ -124,7 +124,7 @@ class MineMainViewController: UIViewController{
     }
     
     //按钮点击事件
-    func superiorRestart(){
+    @objc func superiorRestart(){
         self.viewCount = 19
         self.mineCount = 88
         simpleBtn.backgroundColor = UIColor.lightGray
@@ -134,7 +134,7 @@ class MineMainViewController: UIViewController{
     }
     
     //按钮点击事件
-    func diffcultRestart(){
+    @objc func diffcultRestart(){
         self.viewCount = 30
         self.mineCount = 155
         simpleBtn.backgroundColor = UIColor.lightGray

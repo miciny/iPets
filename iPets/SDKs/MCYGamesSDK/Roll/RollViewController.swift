@@ -45,7 +45,7 @@ class RollViewController: UIViewController {
     }
     
     //重制功能
-    func resetAll(){
+    @objc func resetAll(){
         self.realManArray?.removeAllObjects()
         self.selectedManArray?.removeAllObjects()
         self.prizeView = nil
@@ -70,7 +70,7 @@ class RollViewController: UIViewController {
     }
     
     //选人事件
-    func selectManEvent(){
+    @objc func selectManEvent(){
         self.realManArray!.removeAllObjects()
         self.setSelectBtnToDone()
         self.iconView!.selectManEvent()
@@ -85,7 +85,7 @@ class RollViewController: UIViewController {
     }
     
     //选人结束变成开始按钮
-    func selectDone(){
+    @objc func selectDone(){
         
         self.showPrizeArea()
         self.setUpMansIcon() //选完人结束后，需要重新显示区域
@@ -159,7 +159,7 @@ class RollViewController: UIViewController {
     }
     
     //循环选择头像
-    func forSelectedMan(){
+    @objc func forSelectedMan(){
         
         let count = self.realManArray!.count
         if count == 1 {  //只有一个时，就不能选择了

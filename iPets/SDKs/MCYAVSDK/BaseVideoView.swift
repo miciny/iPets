@@ -122,7 +122,7 @@ class BaseVideoView: UIView{
 //=====================================================================================================
     //点击事件
     // 单击后时无反应还是播放，未加载视频，未播放
-    func playOrNothing(){
+    @objc func playOrNothing(){
         
         self.delegate?.prepareToPlay()
         

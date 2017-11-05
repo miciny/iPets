@@ -144,7 +144,7 @@ class HeaderCycleView: UIView, UIScrollViewDelegate{
     }
     
     //处理图片点击事件
-    func handleTap(_ tap: UITapGestureRecognizer){
+    @objc func handleTap(_ tap: UITapGestureRecognizer){
         if let _ = self.delegate{
             if delegate!.responds(to: #selector(MCYAutoScrollViewDelegate.didSelectedIndex(_:))){
                 delegate!.didSelectedIndex!(currentIndex)
@@ -198,7 +198,7 @@ class HeaderCycleView: UIView, UIScrollViewDelegate{
         pageControl.currentPage = currentIndex
     }
     
-    func nextPage(){
+    @objc func nextPage(){
         UIView.animate(withDuration: 0.3, animations: { [unowned self] () -> Void in
             self.scrollView.setContentOffset(CGPoint(x: 2*self.viewWidth, y: 0), animated: false)
             }, completion: { [unowned self] (isFinish) -> Void in

@@ -53,7 +53,7 @@ class ImageCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    func tap() {
+    @objc func tap() {
         handleSelect?()
     }
     

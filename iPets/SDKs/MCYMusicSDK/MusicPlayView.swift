@@ -150,7 +150,7 @@ class MusicPlayView: UIView, AVAudioPlayerDelegate{
     
     ///
     /// 描述：点击播放
-    func onPlayButtonClicked(_ sender: UIButton) {
+    @objc func onPlayButtonClicked(_ sender: UIButton) {
         switch isPlaying{
         case 0:
             pauseMusic()
@@ -192,30 +192,30 @@ class MusicPlayView: UIView, AVAudioPlayerDelegate{
     
     ///
     /// 描述：播放前一首
-    func onPreviousButtonClicked(_ sender: UIButton) {
+    @objc func onPreviousButtonClicked(_ sender: UIButton) {
         // 暂不实现
     }
     
     ///
     /// 描述：播放下一首
-    func onNextButtonClicked(_ sender: UIButton) {
+    @objc func onNextButtonClicked(_ sender: UIButton) {
         // 暂不实现
     }
     ///
     /// 描述：播放列表
-    func onPlayListButtonClicked(_ sender: UIButton) {
+    @objc func onPlayListButtonClicked(_ sender: UIButton) {
         // 暂不实现
     }
     
     ///
     /// 描述：下载
-    func onDownloadButtonClicked(_ sender: UIButton) {
+    @objc func onDownloadButtonClicked(_ sender: UIButton) {
         // 暂不实现
     }
     
     ///
     /// 描述：收藏
-    func onCollectButtonClicked(_ sender: UIButton) {
+    @objc func onCollectButtonClicked(_ sender: UIButton) {
         // 暂不实现
     }
     
@@ -243,7 +243,7 @@ class MusicPlayView: UIView, AVAudioPlayerDelegate{
     
     ///
     /// 描述：更新播放进度
-    func updatePlaybackProgress() {
+    @objc func updatePlaybackProgress() {
         if self.audioPlayer.duration == 0.0 {
             progressSlider.value = 0.0
         } else {
@@ -270,7 +270,7 @@ class MusicPlayView: UIView, AVAudioPlayerDelegate{
     
     ///
     /// 描述：修改播放模式
-    func onPlayModeButtonClicked(_ sender: UIButton) {
+    @objc func onPlayModeButtonClicked(_ sender: UIButton) {
         var name = ""
         var title = ""
         switch (self.playbackMode) {

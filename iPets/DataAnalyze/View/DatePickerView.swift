@@ -96,12 +96,12 @@ class DatePickerView: UIView, UIPickerViewDataSource, UIPickerViewDelegate {
         // Do any additional setup after loading the view.
     }
     
-    func cancelButtonClicked(){
+    @objc func cancelButtonClicked(){
         self.removeFromSuperview()
     }
     
     //点击处理
-    func DoneButtonClicked(){
+    @objc func DoneButtonClicked(){
         self.removeFromSuperview()
         self.delegate?.doneClicked(selectedDateString)
     }

@@ -77,7 +77,7 @@ class MainChatListViewController: UIViewController, UITableViewDelegate, UITable
 //＊＊＊＊＊＊＊＊＊＊＊＊导航栏按钮功能＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊
     
     //左上角按钮，进入联系人页
-    func goToContectView(){
+    @objc func goToContectView(){
         
         let contectorsListVc = ContectorListViewController()
         contectorsListVc.hidesBottomBarWhenPushed = true
@@ -86,7 +86,7 @@ class MainChatListViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     //右上角添加按钮的事件
-    func addButtonClicked(){
+    @objc func addButtonClicked(){
         if(addActionView?.superview == nil){
             addActionView = ActionMenuView(object: addArray, origin: CGPoint(x: Width, y: navigateBarHeight), target: self, showInView: self.view)
         }else{

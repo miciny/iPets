@@ -115,7 +115,7 @@ func createQRForString(_ qrString: String?, qrImage: UIImage?) -> UIImage?{
         colorFilter!.setValue(CIColor(red: 0, green: 0, blue: 0), forKey: "inputColor0")
         colorFilter!.setValue(CIColor(red: 1, green: 1, blue: 1), forKey: "inputColor1")
         // 返回二维码image
-        let codeImage = UIImage(ciImage: colorFilter!.outputImage!.applying(CGAffineTransform(scaleX: 5, y: 5)))
+        let codeImage = UIImage(ciImage: colorFilter!.outputImage!.transformed(by: CGAffineTransform(scaleX: 5, y: 5)))
         
         // 通常,二维码都是定制的,中间都会放想要表达意思的图片
         if let iconImage = qrImage {
@@ -141,9 +141,9 @@ func createQRForString(_ qrString: String?, qrImage: UIImage?) -> UIImage?{
 
 //根据文字获得大小
 func sizeWithText(_ text: String, font: UIFont, maxSize: CGSize) -> CGSize{
-    let attrs : NSDictionary = [NSFontAttributeName:font]
+    let attrs : NSDictionary = [NSAttributedStringKey.font:font]
     return text.boundingRect(with: maxSize, options: .usesLineFragmentOrigin,
-                             attributes: attrs as? [String : AnyObject], context: nil).size
+                             attributes: attrs as? [NSAttributedStringKey : AnyObject], context: nil).size
 }
 
 //获得一个随机数
